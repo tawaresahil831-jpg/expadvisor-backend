@@ -14,8 +14,10 @@ def create_app():
 
     db.init_app(app)
 
-    # Import models so SQLAlchemy knows about them before creating tables
     from app.models import User
+
+    from app.routes.auth import auth_bp
+    app.register_blueprint(auth_bp)
 
     @app.route("/api/health")
     def health_check():
@@ -25,4 +27,3 @@ def create_app():
         }), 200
 
     return app
-
