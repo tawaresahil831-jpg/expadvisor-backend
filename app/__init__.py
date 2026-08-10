@@ -14,7 +14,7 @@ def create_app():
 
     db.init_app(app)
 
-    from app.models import User
+    from app.models import User, Experience
 
     from app.routes.auth import auth_bp
     app.register_blueprint(auth_bp)
