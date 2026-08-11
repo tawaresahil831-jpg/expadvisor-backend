@@ -19,6 +19,9 @@ def create_app():
     from app.routes.auth import auth_bp
     app.register_blueprint(auth_bp)
 
+    from app.routes.experiences import experiences_bp
+    app.register_blueprint(experiences_bp)
+
     @app.route("/api/health")
     def health_check():
         return jsonify({
