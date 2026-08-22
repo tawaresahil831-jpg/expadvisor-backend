@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from app.extensions import db
+from app.extensions import db, limiter
 from app.models import User
 from app.utils.auth_utils import generate_token, token_required
 from app.utils.validators import validate_length, validate_email
@@ -7,6 +7,7 @@ from app.utils.validators import validate_length, validate_email
 auth_bp = Blueprint("auth", __name__, url_prefix="/api/auth")
 
 @auth_bp.route("/register", methods=["POST"])
+@limiter.limit("3 per hour")
 def register():
     data = request.get_json(silent=True) or {}
     errors = {}
@@ -73,6 +74,7 @@ def register():
 
 
 @auth_bp.route("/login", methods=["POST"])
+@limiter.limit("5 per minute")
 def login():
     data = request.get_json(silent=True) or {}
 

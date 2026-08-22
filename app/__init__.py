@@ -1,7 +1,7 @@
 import os
 from flask import Flask, jsonify
 from app.config import Config
-from app.extensions import db
+from app.extensions import db, limiter
 
 def basedir_instance():
     return os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
@@ -13,6 +13,7 @@ def create_app():
     os.makedirs(os.path.join(basedir_instance(), "instance"), exist_ok=True)
 
     db.init_app(app)
+    limiter.init_app(app)
 
     from app.models import User, Experience, Comment, Like
 
