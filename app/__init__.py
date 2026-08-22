@@ -23,6 +23,9 @@ def create_app():
     from app.routes.experience import experience_bp
     app.register_blueprint(experience_bp)
 
+    from app.routes.upload import upload_bp
+    app.register_blueprint(upload_bp)
+
     from app.routes.comment import comment_bp
     app.register_blueprint(comment_bp)
 
