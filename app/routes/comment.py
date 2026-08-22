@@ -2,9 +2,9 @@ from flask import Blueprint, request, jsonify
 from app.extensions import db
 from app.models import Comment, Experience
 from app.utils.auth_utils import token_required
+from app.utils.validators import validate_length
 
 comment_bp = Blueprint("comment", __name__, url_prefix="/api")
-
 
 @comment_bp.route("/experiences/<int:experience_id>/comments", methods=["GET"])
 def get_comments(experience_id):
@@ -19,7 +19,6 @@ def get_comments(experience_id):
         "data": [c.to_dict() for c in comments]
     }), 200
 
-
 @comment_bp.route("/experiences/<int:experience_id>/comments", methods=["POST"])
 @token_required
 def add_comment(current_user, experience_id):
@@ -28,15 +27,24 @@ def add_comment(current_user, experience_id):
         return jsonify({"success": False, "message": "Experience not found"}), 404
 
     data = request.get_json(silent=True) or {}
-    text = (data.get("comment") or "").strip()
+    text = data.get("comment")
 
-    if not text:
-        return jsonify({"success": False, "message": "Comment text is required"}), 400
+    errors = {}
+    err = validate_length(text, 1, 1000, "Comment")
+    if err:
+        errors["comment"] = err
+
+    if errors:
+        return jsonify({
+            "success": False,
+            "message": "Validation failed",
+            "errors": errors
+        }), 400
 
     new_comment = Comment(
         experience_id=experience_id,
         user_id=current_user.user_id,
-        comment=text
+        comment=str(text).strip()
     )
     db.session.add(new_comment)
     db.session.commit()
@@ -46,7 +54,6 @@ def add_comment(current_user, experience_id):
         "message": "Comment added successfully",
         "data": new_comment.to_dict()
     }), 201
-
 
 @comment_bp.route("/comments/<int:comment_id>", methods=["DELETE"])
 @token_required
