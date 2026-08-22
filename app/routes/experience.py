@@ -1,4 +1,5 @@
 from flask import Blueprint, request, jsonify
+from sqlalchemy import or_
 from app.extensions import db
 from app.models import Experience
 from app.utils.auth_utils import token_required
@@ -8,11 +9,58 @@ experience_bp = Blueprint("experience", __name__, url_prefix="/api/experiences")
 
 @experience_bp.route("", methods=["GET"])
 def get_experiences():
-    experiences = Experience.query.order_by(Experience.created_at.desc()).all()
+    # Pagination args
+    try:
+        page = int(request.args.get("page", 1))
+        if page < 1:
+            page = 1
+    except ValueError:
+        page = 1
+
+    try:
+        per_page = int(request.args.get("per_page", 10))
+        if per_page < 1:
+            per_page = 10
+        if per_page > 50:
+            per_page = 50
+    except ValueError:
+        per_page = 10
+
+    # Filter args
+    category = request.args.get("category")
+    company = request.args.get("company")
+    search = request.args.get("search")
+
+    query = Experience.query
+
+    if category:
+        query = query.filter(Experience.category == category)
+    if company:
+        query = query.filter(Experience.company == company)
+    if search and search.strip():
+        search_term = f"%{search.strip()}%"
+        query = query.filter(
+            or_(
+                Experience.title.ilike(search_term),
+                Experience.content.ilike(search_term)
+            )
+        )
+
+    # Paginate
+    paginated_experiences = query.order_by(Experience.created_at.desc()).paginate(page=page, per_page=per_page, error_out=False)
+
     return jsonify({
         "success": True,
         "message": "Experiences fetched successfully",
-        "data": [exp.to_dict() for exp in experiences]
+        "data": [exp.to_dict() for exp in paginated_experiences.items],
+        "pagination": {
+            "page": paginated_experiences.page,
+            "per_page": paginated_experiences.per_page,
+            "total_items": paginated_experiences.total,
+            "total_pages": paginated_experiences.pages,
+            "has_next": paginated_experiences.has_next,
+            "has_prev": paginated_experiences.has_prev
+        }
     }), 200
 
 
