@@ -16,3 +16,4 @@ zipp==3.23.1
 Flask-Limiter
 supabase
 Werkzeug
+gunicorn
