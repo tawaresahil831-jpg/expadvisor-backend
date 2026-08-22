@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EXPadviser - Solve Queue</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+
+
+<script src="https://cdn.tailwindcss.com/"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        "on-primary-container": "#8590a6",
+        "surface-variant": "#d3e4fe",
+        "surface-container-highest": "#d3e4fe",
+        "on-error": "#ffffff",
+        "on-surface": "#0b1c30",
+        "on-surface-variant": "#45474c",
+        "inverse-primary": "#bcc7de",
+        "on-background": "#0b1c30",
+        "surface-container-high": "#dce9ff",
+        "on-tertiary-fixed": "#191c1e",
+        "outline": "#75777d",
+        "primary-fixed-dim": "#bcc7de",
+        "surface-container": "#e5eeff",
+        "on-tertiary": "#ffffff",
+        "surface-container-lowest": "#ffffff",
+        "on-secondary-container": "#fffbff",
+        "on-primary-fixed": "#111c2d",
+        "surface-bright": "#f8f9ff",
+        "surface": "#f8f9ff",
+        "error-container": "#ffdad6",
+        "inverse-on-surface": "#eaf1ff",
+        "tertiary": "#111516",
+        "outline-variant": "#c5c6cd",
+        "on-secondary-fixed-variant": "#2f2ebe",
+        "primary-container": "#1e293b",
+        "on-tertiary-fixed-variant": "#444749",
+        "on-error-container": "#93000a",
+        "secondary-container": "#6063ee",
+        "primary-fixed": "#d8e3fb",
+        "secondary-fixed": "#e1e0ff",
+        "surface-container-low": "#eff4ff",
+        "tertiary-fixed-dim": "#c4c7c9",
+        "primary": "#091426",
+        "on-secondary": "#ffffff",
+        "secondary": "#4648d4",
+        "on-tertiary-container": "#8d9092",
+        "surface-tint": "#545f73",
+        "on-secondary-fixed": "#07006c",
+        "on-primary-fixed-variant": "#3c475a",
+        "background": "#f8f9ff",
+        "inverse-surface": "#213145",
+        "tertiary-container": "#26292b",
+        "tertiary-fixed": "#e0e3e5",
+        "secondary-fixed-dim": "#c0c1ff",
+        "on-primary": "#ffffff",
+        "error": "#ba1a1a",
+        "surface-dim": "#cbdbf5"
+      },
+      borderRadius: {
+        DEFAULT: "0.25rem",
+        lg: "0.5rem",
+        xl: "0.75rem",
+        full: "9999px"
+      },
+      spacing: {
+        "margin-desktop": "40px",
+        "margin-mobile": "16px",
+        "gutter": "24px",
+        "base": "8px",
+        "container-max": "1280px"
+      },
+      fontFamily: {
+        "label-md": ["Inter"],
+        "body-md": ["Inter"],
+        "headline-md": ["Inter"],
+        "headline-lg-mobile": ["Inter"],
+        "body-lg": ["Inter"],
+        "headline-lg": ["Inter"],
+        "display-lg": ["Inter"],
+        "label-sm": ["Inter"]
+      },
+      fontSize: {
+        "label-md": ["14px", { lineHeight: "20px", letterSpacing: "0.01em", fontWeight: "500" }],
+        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+        "headline-md": ["24px", { lineHeight: "32px", fontWeight: "600" }],
+        "headline-lg-mobile": ["28px", { lineHeight: "36px", fontWeight: "600" }],
+        "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
+        "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "600" }],
+        "display-lg": ["48px", { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "700" }],
+        "label-sm": ["12px", { lineHeight: "16px", fontWeight: "600" }]
+      }
+    }
+  }
+}
+</script>
+
+<style>
+  html, body { margin: 0; padding: 0; }
+  body { overscroll-behavior: none; }
+  main > :first-child { margin-top: 0 !important; }
+  main > :last-child { margin-bottom: 0 !important; }
+  ::-webkit-scrollbar { display: none; }
+
+  .material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+  }
+</style>
+</head>
+
+<body class="bg-background font-body-md text-on-surface">
+
+
+<aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-low z-50 flex flex-col border-r border-outline-variant/30">
+  <div class="p-margin-desktop flex items-center gap-3 mb-4">
+    <img alt="PeerSolve Logo" class="h-8 w-auto object-contain"
+         src="https://lh3.googleusercontent.com/aida-public/AB6AXuAf9rkWXUB4RJag5d_U3VpL4hMaklcs6EMYB7aiZem83-Ryeni0QeK6SiWJYfL5gGahJnV3pldkkklRXQufNtSwlxIdoepxiKtPw_m-Ssu9AetFfKEb5OTkvusJgWQ1CZyVFX1gqRksXcVd2okIhQjdl-63uWSc7P9iRYBjKZ8UHSAxUhsOxiVvKvTmBUpnQmgAH5uoGrDGpM003qki8acBmCvI-dtyvgP9wRCg1EhnOXZhQuR4_KqGgbDJGJjulykqNaN-0dJS0QVKqEQ">
+    <span class="font-headline-md text-headline-md text-primary tracking-tight">EXPadviser</span>
+  </div>
+
+  <nav class="flex-1 px-4 flex flex-col gap-1">
+    <a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-label-md text-label-md" href="#">
+      <span class="material-symbols-outlined mr-3">dashboard</span>Dashboard
+    </a>
+    <a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-label-md text-label-md" href="#">
+      <span class="material-symbols-outlined mr-3">assignment</span>My Problems
+    </a>
+    <a aria-current="page" class="flex items-center px-4 py-3 rounded-xl transition-all font-label-md bg-secondary-container text-on-secondary-container" href="#">
+      <span class="material-symbols-outlined mr-3">queue_play_next</span>Solve Queue
+    </a>
+    <a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-label-md text-label-md" href="#">
+      <span class="material-symbols-outlined mr-3">person</span>My Profile
+    </a>
+  </nav>
+
+  <div class="px-8 py-8 mt-auto">
+    <div class="p-4 rounded-xl bg-surface-container text-center">
+      <p class="text-label-md font-label-md text-primary">Spring 2024</p>
+    </div>
+  </div>
+</aside>
+
+
+<div class="pl-72">
+
+
+  <header class="fixed top-0 left-72 right-0 h-16 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center px-margin-desktop justify-between">
+    <div class="flex-1 max-w-xl">
+      <div class="relative flex items-center bg-surface-container-high rounded-full px-4 py-2 ring-1 ring-outline-variant/20 focus-within:ring-secondary">
+        <span class="material-symbols-outlined text-on-surface-variant text-body-md">search</span>
+        <input class="bg-transparent border-none outline-none w-full px-3 text-body-md text-on-surface placeholder:text-on-surface-variant/60" placeholder="Search for problems..." type="text">
+      </div>
+    </div>
+
+    <div class="flex items-center gap-6">
+      <button class="relative p-2 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors">
+        <span class="material-symbols-outlined">notifications</span>
+        <span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+      </button>
+      <div class="flex items-center gap-3 pl-4 border-l border-outline-variant/40">
+        <div class="text-right hidden sm:block">
+          <p class="text-label-md font-label-md text-on-surface leading-tight">Alex Rivers</p>
+          <p class="text-label-sm font-label-sm text-on-surface-variant">Senior Mentor</p>
+        </div>
+        <img alt="Profile" class="w-9 h-9 rounded-full object-cover ring-2 ring-surface-variant"
+             src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdiQgYZHcs1i5qOIAd2Gz8LdgoSvQ6l9pvdU259XtTr3xzItG-ASIars6oHKk0pg8wSgW7QvR7MCXUnRfArSLjb31qE3UIZ1qentFczBi65HRSN7DfNCiVD_ibUEqEgvGT4SVe8x-As0GRBSksIpp7h1ia6hYtl41MhY6eBSnaMXov3JNFGrtqmOWK3fyZnDnIvXey0aQOo324g28QXnpBGIkYxrIJYYKkyubysvClLl1RU5xdqIhiDw">
+      </div>
+    </div>
+  </header>
+
+  
+  <main class="relative pt-16 bg-background min-h-screen">
+    <div class="flex flex-col w-full h-[calc(100vh-64px)] overflow-hidden">
+
+      
+      <div class="px-margin-desktop py-6 flex items-center justify-between shrink-0 bg-surface z-10 shadow-sm relative">
+        <div class="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent pointer-events-none"></div>
+        <div class="flex flex-col gap-2 relative z-10">
+          <div class="flex items-center gap-3">
+            <span class="px-2 py-1 bg-primary text-on-primary rounded font-label-sm text-label-sm uppercase tracking-wider">Computer Science</span>
+            <span class="px-2 py-1 bg-error-container text-on-error-container rounded font-label-sm text-label-sm flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-error animate-pulse"></span> Active Solving
+            </span>
+          </div>
+          <h1 class="font-headline-lg text-headline-lg text-on-surface">Optimization of Dijkstra's Algorithm in Python</h1>
+        </div>
+        <div class="flex items-center gap-4 relative z-10">
+          <div class="flex flex-col items-end mr-4">
+            <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Session Time</span>
+            <span class="font-headline-md text-headline-md text-primary font-mono" id="session-timer">00:45:12</span>
+          </div>
+          <button class="px-6 py-2.5 bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md rounded-lg transition-colors flex items-center gap-2">
+            <span class="material-symbols-outlined text-[18px]">save</span> Save Draft
+          </button>
+          <button class="px-6 py-2.5 bg-primary hover:bg-primary/90 text-on-primary font-label-md text-label-md rounded-lg transition-colors shadow-md flex items-center gap-2" id="submit-solution-btn">
+            <span class="material-symbols-outlined text-[18px]">send</span> Submit Solution
+          </button>
+        </div>
+      </div>
+
+      
+      <div class="flex flex-1 overflow-hidden">
+
+        
+        <div class="w-[30%] min-w-[320px] max-w-[450px] bg-surface-container-low overflow-y-auto overflow-x-hidden flex flex-col z-0 shadow-xl shadow-black/5 relative">
+          <div class="p-6 flex flex-col gap-8">
+
+            <div class="flex flex-col gap-4">
+              <div class="flex items-center gap-2 text-on-surface-variant mb-1">
+                <span class="material-symbols-outlined text-[20px]">help_center</span>
+                <h2 class="font-headline-md text-body-lg text-on-surface">Junior's Query</h2>
+              </div>
+              <div class="bg-surface p-5 rounded-xl shadow-sm text-on-surface font-body-md leading-relaxed relative">
+                <div class="absolute -left-2 top-6 w-0 h-0 border-t-[8px] border-t-transparent border-r-[8px] border-r-surface border-b-[8px] border-b-transparent"></div>
+                <p>"I'm trying to implement Dijkstra's for my algorithms assignment, but it's failing the time complexity tests for dense graphs. I used a standard list for the priority queue. How can I optimize this in Python without using external libraries?"</p>
+              </div>
+            </div>
+
+            <div class="flex flex-col gap-4">
+              <h2 class="font-headline-md text-body-lg text-on-surface flex items-center gap-2">
+                <span class="material-symbols-outlined text-[20px]">description</span> Detailed Description
+              </h2>
+              <div class="bg-surface rounded-xl shadow-sm overflow-hidden flex flex-col">
+                <div class="bg-surface-container px-4 py-2 flex items-center justify-between">
+                  <span class="font-label-sm text-label-sm text-on-surface-variant">student_code.py</span>
+                  <button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[16px]">content_copy</span></button>
+                </div>
+                <pre class="p-4 text-[13px] font-mono text-on-surface bg-surface-container-lowest overflow-x-auto whitespace-pre-wrap">def dijkstra(graph, start):
+    distances = {node: float('infinity') for node in graph}
+    distances[start] = 0
+    unvisited = list(graph.keys())
+    
+    while unvisited:
+        # This is where I think the bottleneck is
+        current_node = min(unvisited, key=lambda node: distances[node])
+        unvisited.remove(current_node)
+        
+        for neighbor, weight in graph[current_node].items():
+            new_distance = distances[current_node] + weight
+            if new_distance &lt; distances[neighbor]:
+                distances[neighbor] = new_distance
+                
+    return distances
+                     </pre>
+              </div>
+              <div class="bg-surface p-5 rounded-xl shadow-sm">
+                <p class="font-body-md text-on-surface mb-3">Mathematical context provided by student:</p>
+                <div class="bg-surface-container p-4 rounded-lg font-mono text-sm text-on-surface-variant flex items-center justify-center">
+                  <span class="italic">O(V²)</span> vs <span class="italic ml-2 font-bold text-primary">O((V + E) log V)</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex flex-col gap-4 mb-8">
+              <h2 class="font-headline-md text-body-lg text-on-surface flex items-center gap-2">
+                <span class="material-symbols-outlined text-[20px]">attachment</span> Attachments
+              </h2>
+              <div class="grid grid-cols-2 gap-3">
+                <div class="group relative rounded-lg overflow-hidden cursor-pointer shadow-sm aspect-video bg-surface-container flex items-center justify-center">
+                  <img class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
+                       src="https://lh3.googleusercontent.com/aida-public/AB6AXuBV-kFcXQ-s3IELLIiJJRaquwBfrRjZ7X5DWwNbcr2j_BNe4uYFV7dZ8SL8g67jNgG87Z0ekrNQqcdbal7-HVIdFnSxS9XIHGv5bTif6bdiyaLf7zkO94leMq3ppuaeUq44fQ1vjijgb7pr9chq9BlsAfOV4qNmx_uuFfs1zUmca266zmSH9wRLr_36FN_89zcQQ6-3INip6i8d2ruywbmFEazCYttwUL5FwqOhYEGqKFdfDG-y5xWgjA">
+                  <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+                  <span class="material-symbols-outlined text-white relative z-10 drop-shadow-md">visibility</span>
+                </div>
+                <div class="group relative rounded-lg overflow-hidden cursor-pointer shadow-sm aspect-video bg-surface-container flex items-center justify-center flex-col gap-1 hover:bg-surface-container-high transition-colors">
+                  <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors text-[24px]">description</span>
+                  <span class="font-label-sm text-label-sm text-on-surface-variant text-center px-2 truncate w-full">assignment_spec.pdf</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        
+        <div class="flex-1 bg-surface flex flex-col overflow-hidden relative z-10">
+          <div class="px-6 py-4 flex items-center justify-between border-b border-surface-variant/50 bg-surface">
+            <h2 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary">edit_square</span> Solution Workspace
+            </h2>
+            <div class="flex bg-surface-container rounded-lg p-1">
+              <button class="px-4 py-1.5 rounded-md bg-surface text-on-surface shadow-sm font-label-md text-label-md">Edit</button>
+              <button class="px-4 py-1.5 rounded-md text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors">Preview</button>
+            </div>
+          </div>
+
+          <div class="px-6 py-2 bg-surface-container-lowest flex items-center gap-2 overflow-x-auto shadow-sm relative z-20">
+            <button class="p-2 text-on-surface-variant hover:bg-surface-container rounded transition-colors"><span class="material-symbols-outlined text-[18px]">format_bold</span></button>
+            <button class="p-2 text-on-surface-variant hover:bg-surface-container rounded transition-colors"><span class="material-symbols-outlined text-[18px]">format_italic</span></button>
+            <button class="p-2 text-on-surface-variant hover:bg-surface-container rounded transition-colors"><span class="material-symbols-outlined text-[18px]">format_underlined</span></button>
+            <div class="w-[1px] h-4 bg-outline-variant/30 mx-1"></div>
+            <button class="p-2 text-on-surface-variant hover:bg-surface-container rounded transition-colors"><span class="material-symbols-outlined text-[18px]">format_list_bulleted</span></button>
+            <button class="p-2 text-on-surface-variant hover:bg-surface-container rounded transition-colors"><span class="material-symbols-outlined text-[18px]">format_list_numbered</span></button>
+            <div class="w-[1px] h-4 bg-outline-variant/30 mx-1"></div>
+            <button class="p-2 text-on-surface-variant hover:bg-surface-container rounded transition-colors"><span class="material-symbols-outlined text-[18px]">code</span></button>
+            <button class="p-2 text-on-surface-variant hover:bg-surface-container rounded transition-colors"><span class="material-symbols-outlined text-[18px]">functions</span></button>
+            <button class="p-2 text-on-surface-variant hover:bg-surface-container rounded transition-colors"><span class="material-symbols-outlined text-[18px]">image</span></button>
+          </div>
+
+          <div class="flex-1 overflow-y-auto p-6 flex flex-col gap-6 relative">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
+            <textarea class="w-full h-32 bg-transparent resize-none outline-none font-body-md text-on-surface placeholder:text-on-surface-variant/50" placeholder="Start typing your explanation here... Focus on the concepts before providing code."></textarea>
+            <div class="bg-surface-container rounded-xl overflow-hidden shadow-sm flex flex-col border border-outline-variant/20 focus-within:border-primary/50 transition-colors">
+              <div class="bg-surface-container-high px-4 py-2 flex items-center justify-between border-b border-outline-variant/20">
+                <span class="font-label-sm text-label-sm text-on-surface font-mono">optimized_solution.py</span>
+                <div class="flex gap-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-error"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-primary-fixed-dim"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-secondary-fixed"></span>
+                </div>
+              </div>
+              <textarea class="w-full h-64 p-4 bg-surface-container-lowest font-mono text-[14px] text-on-surface outline-none resize-none" placeholder="import heapq..." spellcheck="false"></textarea>
+            </div>
+            <textarea class="w-full h-32 bg-transparent resize-none outline-none font-body-md text-on-surface placeholder:text-on-surface-variant/50" placeholder="Add any concluding remarks, complexity analysis, or further reading..."></textarea>
+          </div>
+        </div>
+
+        
+        <div class="w-[320px] bg-surface-container-lowest flex flex-col z-20 shadow-[-4px_0_15px_rgba(0,0,0,0.03)] border-l border-outline-variant/20 overflow-hidden">
+
+          <div class="p-5 border-b border-surface-variant/50 bg-surface-bright flex flex-col items-center text-center relative overflow-hidden group cursor-pointer hover:bg-surface-container-low transition-colors">
+            <div class="absolute -right-4 -top-4 w-16 h-16 bg-secondary/10 rounded-full blur-xl group-hover:bg-secondary/20 transition-colors"></div>
+            <img alt="Junior Student" class="w-16 h-16 rounded-full object-cover mb-3 ring-4 ring-surface shadow-md" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg">
+            <h3 class="font-headline-md text-body-lg text-on-surface m-0 leading-tight">Sarah Jenkins</h3>
+            <p class="font-label-sm text-label-sm text-on-surface-variant mb-3">Sophomore • Data Structures</p>
+            <div class="w-full bg-surface-container rounded-lg p-3 flex flex-col gap-2 shadow-sm text-left">
+              <div class="flex justify-between items-center w-full">
+                <span class="font-label-sm text-label-sm text-on-surface-variant">Est. Difficulty</span>
+                <div class="flex gap-1">
+                  <span class="w-3 h-1 bg-primary rounded-full"></span>
+                  <span class="w-3 h-1 bg-primary rounded-full"></span>
+                  <span class="w-3 h-1 bg-primary/20 rounded-full"></span>
+                </div>
+              </div>
+              <div class="flex justify-between items-center w-full">
+                <span class="font-label-sm text-label-sm text-on-surface-variant">Previous Helps</span>
+                <span class="font-label-sm text-label-sm text-on-surface font-bold">12</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex-1 flex flex-col overflow-hidden bg-surface">
+            <div class="p-4 border-b border-surface-variant/50 flex justify-between items-center bg-surface-bright shadow-sm relative z-10">
+              <h3 class="font-headline-md text-body-lg text-on-surface flex items-center gap-2">
+                <span class="material-symbols-outlined text-secondary">forum</span> Quick Chat
+              </h3>
+              <span class="w-2 h-2 rounded-full bg-error animate-pulse"></span>
+            </div>
+
+            <div class="flex-1 overflow-y-auto p-4 flex flex-col gap-4 bg-surface-container-lowest/50" id="chat-container">
+              <div class="flex flex-col gap-1 items-start max-w-[85%]">
+                <div class="bg-surface-container px-3 py-2 rounded-2xl rounded-tl-sm text-on-surface font-body-md text-[14px] shadow-sm">
+                  Hi! Thanks for taking my question.
+                </div>
+                <span class="text-[10px] text-on-surface-variant ml-1 font-mono">10:42 AM</span>
+              </div>
+              <div class="flex flex-col gap-1 items-end self-end max-w-[85%]">
+                <div class="bg-secondary text-on-secondary px-3 py-2 rounded-2xl rounded-tr-sm font-body-md text-[14px] shadow-sm">
+                  No problem Sarah! I'm reviewing your code now. Have you learned about heaps yet?
+                </div>
+                <span class="text-[10px] text-on-surface-variant mr-1 font-mono">10:45 AM</span>
+              </div>
+              <div class="flex flex-col gap-1 items-start max-w-[85%]">
+                <div class="bg-surface-container px-3 py-2 rounded-2xl rounded-tl-sm text-on-surface font-body-md text-[14px] shadow-sm">
+                  Briefly in lecture, but I haven't implemented one.
+                </div>
+                <span class="text-[10px] text-on-surface-variant ml-1 font-mono">10:46 AM</span>
+              </div>
+            </div>
+
+            <div class="p-3 bg-surface-bright border-t border-surface-variant/50 flex items-center gap-2 relative z-10 shadow-[0_-2px_10px_rgba(0,0,0,0.02)]">
+              <input class="flex-1 bg-surface-container rounded-full px-4 py-2 outline-none text-body-md text-on-surface placeholder:text-on-surface-variant/60 focus:ring-1 focus:ring-secondary/50 transition-all" placeholder="Message Sarah..." type="text">
+              <button class="p-2 bg-secondary text-on-secondary rounded-full hover:bg-secondary/90 transition-colors shadow-sm flex items-center justify-center">
+                <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">send</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="p-5 bg-surface-bright border-t border-surface-variant/50 shadow-[0_-4px_15px_rgba(0,0,0,0.03)] z-20 flex flex-col gap-3">
+            <button class="w-full py-2.5 bg-surface rounded-lg border border-outline-variant/30 text-on-surface font-label-md text-label-md hover:bg-surface-container transition-colors flex items-center justify-center gap-2">
+              <span class="material-symbols-outlined text-[18px]">info</span> Request More Info
+            </button>
+            <div class="bg-surface-container-low p-3 rounded-lg border border-outline-variant/10 mt-2">
+              <h4 class="font-label-sm text-label-sm text-on-surface-variant mb-2 uppercase tracking-wider">Pre-Submit Checklist</h4>
+              <label class="flex items-center gap-3 py-1 cursor-pointer group">
+                <input class="w-4 h-4 rounded border-outline-variant text-primary focus:ring-primary accent-primary cursor-pointer" type="checkbox">
+                <span class="font-body-md text-[13px] text-on-surface group-hover:text-primary transition-colors">Correctness verified</span>
+              </label>
+              <label class="flex items-center gap-3 py-1 cursor-pointer group">
+                <input class="w-4 h-4 rounded border-outline-variant text-primary focus:ring-primary accent-primary cursor-pointer" type="checkbox">
+                <span class="font-body-md text-[13px] text-on-surface group-hover:text-primary transition-colors">Clear explanation provided</span>
+              </label>
+              <label class="flex items-center gap-3 py-1 cursor-pointer group">
+                <input class="w-4 h-4 rounded border-outline-variant text-primary focus:ring-primary accent-primary cursor-pointer" type="checkbox">
+                <span class="font-body-md text-[13px] text-on-surface group-hover:text-primary transition-colors">High educational value</span>
+              </label>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+  
+  const timerElement = document.getElementById('session-timer');
+  let time = 45 * 60 + 12; // Start at 45:12
+  setInterval(() => {
+    time++;
+    const hours = Math.floor(time / 3600);
+    const minutes = Math.floor((time % 3600) / 60);
+    const seconds = time % 60;
+    timerElement.textContent =
+      `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  }, 1000);
+
+  
+  const chatContainer = document.getElementById('chat-container');
+  chatContainer.scrollTop = chatContainer.scrollHeight;
+</script>
+
+</body>
+</html>
