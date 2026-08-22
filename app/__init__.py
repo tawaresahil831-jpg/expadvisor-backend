@@ -1,5 +1,6 @@
 import os
 from flask import Flask, jsonify
+from flask_cors import CORS
 from app.config import Config
 from app.extensions import db, limiter
 
@@ -14,6 +15,7 @@ def create_app():
 
     db.init_app(app)
     limiter.init_app(app)
+    CORS(app, resources={r"/api/*": {"origins": "*"}})
 
     from app.models import User, Experience, Comment, Like
 
