@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>EXPadviser · Community Dashboard</title>
 
     
@@ -70,8 +70,8 @@
                     spacing: {
                         "margin-desktop": "40px",
                         "margin-mobile": "16px",
-                        "gutter": "24px",
-                        "base": "8px",
+                        gutter: "24px",
+                        base: "8px",
                         "container-max": "1280px"
                     },
                     fontFamily: {
@@ -99,144 +99,35 @@
         }
     </script>
 
-    
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <!-- Google Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet" />
 
+    <!-- Base styles -->
     <style>
-        
-        html,
-        body {
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            overscroll-behavior: none;
-            background: #f8f9ff;
-            font-family: 'Inter', sans-serif;
-            color: #0b1c30;
-        }
-        main> :first-child {
-            margin-top: 0 !important;
-        }
-        main> :last-child {
-            margin-bottom: 0 !important;
+        /* ── reset & scrollbar ── */
+        @layer base {
+            html,
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            body {
+                overscroll-behavior: none;
+            }
+            main>:first-child {
+                margin-top: 0 !important;
+            }
+            main>:last-child {
+                margin-bottom: 0 !important;
+            }
         }
         ::-webkit-scrollbar {
             display: none;
         }
 
-        
-        .font-label-md {
-            font-family: 'Inter', sans-serif;
-            font-size: 14px;
-            font-weight: 500;
-            line-height: 20px;
-            letter-spacing: 0.01em;
-        }
-        .font-label-sm {
-            font-family: 'Inter', sans-serif;
-            font-size: 12px;
-            font-weight: 600;
-            line-height: 16px;
-        }
-        .font-body-md {
-            font-family: 'Inter', sans-serif;
-            font-size: 16px;
-            font-weight: 400;
-            line-height: 24px;
-        }
-        .font-body-lg {
-            font-family: 'Inter', sans-serif;
-            font-size: 18px;
-            font-weight: 400;
-            line-height: 28px;
-        }
-        .font-headline-md {
-            font-family: 'Inter', sans-serif;
-            font-size: 24px;
-            font-weight: 600;
-            line-height: 32px;
-        }
-        .font-headline-lg {
-            font-family: 'Inter', sans-serif;
-            font-size: 32px;
-            font-weight: 600;
-            line-height: 40px;
-            letter-spacing: -0.01em;
-        }
-        .font-display-lg {
-            font-family: 'Inter', sans-serif;
-            font-size: 48px;
-            font-weight: 700;
-            line-height: 56px;
-            letter-spacing: -0.02em;
-        }
-
-        .text-label-md {
-            font-size: 14px;
-            font-weight: 500;
-            line-height: 20px;
-            letter-spacing: 0.01em;
-        }
-        .text-label-sm {
-            font-size: 12px;
-            font-weight: 600;
-            line-height: 16px;
-        }
-        .text-body-md {
-            font-size: 16px;
-            font-weight: 400;
-            line-height: 24px;
-        }
-        .text-body-lg {
-            font-size: 18px;
-            font-weight: 400;
-            line-height: 28px;
-        }
-        .text-headline-md {
-            font-size: 24px;
-            font-weight: 600;
-            line-height: 32px;
-        }
-        .text-headline-lg {
-            font-size: 32px;
-            font-weight: 600;
-            line-height: 40px;
-            letter-spacing: -0.01em;
-        }
-        .text-display-lg {
-            font-size: 48px;
-            font-weight: 700;
-            line-height: 56px;
-            letter-spacing: -0.02em;
-        }
-
-        /* ===== Spacing ===== */
-        .px-margin-desktop {
-            padding-left: 40px;
-            padding-right: 40px;
-        }
-        .p-margin-desktop {
-            padding: 40px;
-        }
-        .max-w-container-max {
-            max-width: 1280px;
-        }
-        .pl-72 {
-            padding-left: 288px;
-        }
-        .gap-gutter {
-            gap: 24px;
-        }
-
-    
-        .bg-surface\/80 {
-            background: rgba(248, 249, 255, 0.8);
-        }
-
-        
+        /* ── small extra helpers ── */
         .line-clamp-1 {
             display: -webkit-box;
             -webkit-line-clamp: 1;
@@ -249,120 +140,726 @@
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
-
-        /* ===== Icon fill ===== */
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0;
-        }
-
-        /* ===== Transitions ===== */
-        .transition-transform {
-            transition: transform 0.2s;
-        }
-        .transition-colors {
-            transition: color 0.2s, background-color 0.2s;
-        }
-        .transition-shadow {
-            transition: box-shadow 0.2s;
-        }
-        .transition-all {
-            transition: all 0.25s ease;
-        }
-        .hover\:translate-x-1:hover {
-            transform: translateX(4px);
-        }
-        .hover\:scale-110:hover {
-            transform: scale(1.1);
-        }
-        .group:hover .group-hover\:translate-x-1 {
-            transform: translateX(4px);
-        }
-        .group:hover .group-hover\:scale-110 {
-            transform: scale(1.1);
-        }
-        .group:hover .group-hover\:translate-y-1 {
-            transform: translateY(-4px);
-        }
-        .group:hover .group-hover\:opacity-100 {
-            opacity: 1;
-        }
-        .group-hover\:text-surface-variant:hover {
-            color: #d3e4fe;
-        }
-        .hover\:bg-inverse-surface:hover {
-            background: #213145;
-        }
-
-        /* ===== Ring utilities ===== */
-        .ring-1 {
-            --tw-ring-offset-shadow: 0 0 #0000;
-            --tw-ring-shadow: 0 0 #0000;
-            box-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-        }
-        .ring-outline-variant\/20 {
-            --tw-ring-color: rgba(197, 198, 205, 0.2);
-        }
-        .ring-2 {
-            --tw-ring-offset-shadow: 0 0 #0000;
-            --tw-ring-shadow: 0 0 #0000;
-            box-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-        }
-        .ring-surface-variant {
-            --tw-ring-color: #d3e4fe;
-        }
-        .ring-4 {
-            --tw-ring-offset-shadow: 0 0 #0000;
-            --tw-ring-shadow: 0 0 #0000;
-            box-shadow: var(--tw-ring-inset) 0 0 0 calc(4px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-        }
-        .ring-surface {
-            --tw-ring-color: #f8f9ff;
-        }
-
-        /* ===== Blur ===== */
-        .blur-2xl {
-            filter: blur(40px);
-        }
-        .blur-3xl {
-            filter: blur(64px);
+        .tracking-tight {
+            letter-spacing: -0.02em;
         }
         .backdrop-blur-xl {
-            backdrop-filter: blur(24px);
-        }
-
-        /* ===== Misc ===== */
-        .tracking-wider {
-            letter-spacing: 0.1em;
-        }
-        .tracking-widest {
-            letter-spacing: 0.1em;
-        }
-        .uppercase {
-            text-transform: uppercase;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
         }
         .shadow-\[0_1px_8px_rgba\(0\2c 0\2c 0\2c 0\.04\)\] {
             box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
         }
+        .ring-1 {
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
+        }
+        .ring-outline-variant\/20 {
+            --tw-ring-color: rgba(197, 198, 205, 0.2);
+        }
+        .ring-secondary {
+            --tw-ring-color: #4648d4;
+        }
+        .ring-2 {
+            box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
+        }
+        .ring-surface-variant {
+            --tw-ring-color: #d3e4fe;
+        }
+        .border-outline-variant\/10 {
+            border-color: rgba(197, 198, 205, 0.1);
+        }
+        .border-outline-variant\/30 {
+            border-color: rgba(197, 198, 205, 0.3);
+        }
+        .border-outline-variant\/40 {
+            border-color: rgba(197, 198, 205, 0.4);
+        }
+        .border-secondary\/20 {
+            border-color: rgba(70, 72, 212, 0.2);
+        }
+        .bg-secondary\/5 {
+            background-color: rgba(70, 72, 212, 0.05);
+        }
+        .bg-secondary\/10 {
+            background-color: rgba(70, 72, 212, 0.10);
+        }
+        .bg-secondary\/20 {
+            background-color: rgba(70, 72, 212, 0.20);
+        }
+        .hover\:bg-secondary\/20:hover {
+            background-color: rgba(70, 72, 212, 0.20);
+        }
+        .bg-primary\/5 {
+            background-color: rgba(9, 20, 38, 0.05);
+        }
+        .bg-green-100 {
+            background-color: #dcfce7;
+        }
+        .text-green-700 {
+            color: #15803d;
+        }
+        .bg-blue-100 {
+            background-color: #dbeafe;
+        }
+        .text-blue-700 {
+            color: #1d4ed8;
+        }
         .border-dashed {
             border-style: dashed;
         }
-
-        /* ===== Before/after pseudo for timeline ===== */
-        .before\:content-\[\'\'\]::before {
-            content: '';
+        .border-outline-variant\/50 {
+            border-color: rgba(197, 198, 205, 0.5);
         }
-
-        /* ===== Responsive ===== */
-        @media (min-width: 640px) {
-            .sm\:block {
-                display: block;
-            }
-            .sm\:hidden {
-                display: none;
-            }
+        .text-\[10px\] {
+            font-size: 10px;
         }
-
-        /* fix for line-clamp in older browsers */
+        .text-\[20px\] {
+            font-size: 20px;
+        }
+        .text-\[24px\] {
+            font-size: 24px;
+        }
+        .text-\[32px\] {
+            font-size: 32px;
+        }
+        .focus-within\:ring-secondary:focus-within {
+            --tw-ring-color: #4648d4;
+        }
+        .group-hover\:scale-110:hover {
+            transform: scale(1.10);
+        }
+        .group-hover\:text-secondary:hover {
+            color: #4648d4;
+        }
+        .hover\:bg-inverse-surface:hover {
+            background-color: #213145;
+        }
+        .hover\:bg-surface-container:hover {
+            background-color: #e5eeff;
+        }
+        .hover\:bg-surface-container-high:hover {
+            background-color: #dce9ff;
+        }
+        .hover\:bg-surface-container-highest:hover {
+            background-color: #d3e4fe;
+        }
+        .hover\:bg-surface-container-low:hover {
+            background-color: #eff4ff;
+        }
+        .hover\:bg-secondary:hover {
+            background-color: #4648d4;
+        }
+        .hover\:text-secondary:hover {
+            color: #4648d4;
+        }
+        .hover\:text-on-secondary:hover {
+            color: #ffffff;
+        }
+        .hover\:text-on-surface:hover {
+            color: #0b1c30;
+        }
+        .hover\:shadow-md:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+        }
+        .hover\:shadow-xl:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        }
+        .hover\:underline:hover {
+            text-decoration: underline;
+        }
+        .transition-all {
+            transition: all 0.2s ease;
+        }
+        .transition-colors {
+            transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+        }
+        .transition-transform {
+            transition: transform 0.2s ease;
+        }
+        .transition-shadow {
+            transition: box-shadow 0.2s ease;
+        }
+        .duration-200 {
+            transition-duration: 200ms;
+        }
+        .ease-out {
+            transition-timing-function: ease-out;
+        }
+        .cursor-pointer {
+            cursor: pointer;
+        }
+        .z-0 {
+            z-index: 0;
+        }
+        .z-10 {
+            z-index: 10;
+        }
+        .z-40 {
+            z-index: 40;
+        }
+        .z-50 {
+            z-index: 50;
+        }
+        .relative {
+            position: relative;
+        }
+        .absolute {
+            position: absolute;
+        }
+        .fixed {
+            position: fixed;
+        }
+        .sticky {
+            position: sticky;
+        }
+        .top-0 {
+            top: 0;
+        }
+        .top-2 {
+            top: 0.5rem;
+        }
+        .left-0 {
+            left: 0;
+        }
+        .left-72 {
+            left: 18rem;
+        }
+        .right-0 {
+            right: 0;
+        }
+        .right-2 {
+            right: 0.5rem;
+        }
+        .-left-20 {
+            left: -5rem;
+        }
+        .-top-16 {
+            top: -4rem;
+        }
+        .mt-auto {
+            margin-top: auto;
+        }
+        .mb-1 {
+            margin-bottom: 0.25rem;
+        }
+        .mb-2 {
+            margin-bottom: 0.5rem;
+        }
+        .mb-4 {
+            margin-bottom: 1rem;
+        }
+        .mb-6 {
+            margin-bottom: 1.5rem;
+        }
+        .mb-8 {
+            margin-bottom: 2rem;
+        }
+        .mt-1 {
+            margin-top: 0.25rem;
+        }
+        .mt-2 {
+            margin-top: 0.5rem;
+        }
+        .mr-2 {
+            margin-right: 0.5rem;
+        }
+        .mr-3 {
+            margin-right: 0.75rem;
+        }
+        .ml-3 {
+            margin-left: 0.75rem;
+        }
+        .ml-4 {
+            margin-left: 1rem;
+        }
+        .mt-4 {
+            margin-top: 1rem;
+        }
+        .ml-auto {
+            margin-left: auto;
+        }
+        .gap-1 {
+            gap: 0.25rem;
+        }
+        .gap-1\.5 {
+            gap: 0.375rem;
+        }
+        .gap-2 {
+            gap: 0.5rem;
+        }
+        .gap-3 {
+            gap: 0.75rem;
+        }
+        .gap-4 {
+            gap: 1rem;
+        }
+        .gap-6 {
+            gap: 1.5rem;
+        }
+        .gap-8 {
+            gap: 2rem;
+        }
+        .gap-gutter {
+            gap: 24px;
+        }
+        .flex {
+            display: flex;
+        }
+        .flex-col {
+            flex-direction: column;
+        }
+        .flex-1 {
+            flex: 1 1 0%;
+        }
+        .flex-shrink-0 {
+            flex-shrink: 0;
+        }
+        .flex-wrap {
+            flex-wrap: wrap;
+        }
+        .items-center {
+            align-items: center;
+        }
+        .items-start {
+            align-items: flex-start;
+        }
+        .items-end {
+            align-items: flex-end;
+        }
+        .justify-between {
+            justify-content: space-between;
+        }
+        .justify-start {
+            justify-content: flex-start;
+        }
+        .justify-end {
+            justify-content: flex-end;
+        }
+        .justify-center {
+            justify-content: center;
+        }
+        .space-y-1>*+* {
+            margin-top: 0.25rem;
+        }
+        .space-y-2>*+* {
+            margin-top: 0.5rem;
+        }
+        .space-y-4>*+* {
+            margin-top: 1rem;
+        }
+        .space-y-6>*+* {
+            margin-top: 1.5rem;
+        }
+        .divide-y>*+* {
+            border-top-width: 1px;
+        }
+        .w-full {
+            width: 100%;
+        }
+        .w-2 {
+            width: 0.5rem;
+        }
+        .w-9 {
+            width: 2.25rem;
+        }
+        .w-10 {
+            width: 2.5rem;
+        }
+        .w-64 {
+            width: 16rem;
+        }
+        .w-72 {
+            width: 18rem;
+        }
+        .w-auto {
+            width: auto;
+        }
+        .max-w-2xl {
+            max-width: 42rem;
+        }
+        .max-w-xl {
+            max-width: 36rem;
+        }
+        .max-w-container-max {
+            max-width: 1280px;
+        }
+        .h-full {
+            height: 100%;
+        }
+        .h-2 {
+            height: 0.5rem;
+        }
+        .h-8 {
+            height: 2rem;
+        }
+        .h-9 {
+            height: 2.25rem;
+        }
+        .h-10 {
+            height: 2.5rem;
+        }
+        .h-16 {
+            height: 4rem;
+        }
+        .h-64 {
+            height: 16rem;
+        }
+        .min-h-screen {
+            min-height: 100vh;
+        }
+        .p-1 {
+            padding: 0.25rem;
+        }
+        .p-3 {
+            padding: 0.75rem;
+        }
+        .p-4 {
+            padding: 1rem;
+        }
+        .p-6 {
+            padding: 1.5rem;
+        }
+        .p-margin-desktop {
+            padding: 40px;
+        }
+        .px-2 {
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+        }
+        .px-2\.5 {
+            padding-left: 0.625rem;
+            padding-right: 0.625rem;
+        }
+        .px-3 {
+            padding-left: 0.75rem;
+            padding-right: 0.75rem;
+        }
+        .px-4 {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+        .px-6 {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+        .px-8 {
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+        .px-margin-desktop {
+            padding-left: 40px;
+            padding-right: 40px;
+        }
+        .py-0\.5 {
+            padding-top: 0.125rem;
+            padding-bottom: 0.125rem;
+        }
+        .py-1 {
+            padding-top: 0.25rem;
+            padding-bottom: 0.25rem;
+        }
+        .py-1\.5 {
+            padding-top: 0.375rem;
+            padding-bottom: 0.375rem;
+        }
+        .py-2 {
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+        .py-2\.5 {
+            padding-top: 0.625rem;
+            padding-bottom: 0.625rem;
+        }
+        .py-3 {
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+        }
+        .py-4 {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .py-8 {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+        .py-margin-desktop {
+            padding-top: 40px;
+            padding-bottom: 40px;
+        }
+        .pl-4 {
+            padding-left: 1rem;
+        }
+        .pl-72 {
+            padding-left: 18rem;
+        }
+        .pl-2 {
+            padding-left: 0.5rem;
+        }
+        .pr-2 {
+            padding-right: 0.5rem;
+        }
+        .pt-4 {
+            padding-top: 1rem;
+        }
+        .pt-16 {
+            padding-top: 4rem;
+        }
+        .pb-2 {
+            padding-bottom: 0.5rem;
+        }
+        .text-left {
+            text-align: left;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .text-right {
+            text-align: right;
+        }
+        .font-body-md {
+            font-family: "Inter", sans-serif;
+            font-size: 16px;
+            line-height: 24px;
+            font-weight: 400;
+        }
+        .font-label-md {
+            font-family: "Inter", sans-serif;
+            font-size: 14px;
+            line-height: 20px;
+            letter-spacing: 0.01em;
+            font-weight: 500;
+        }
+        .font-label-sm {
+            font-family: "Inter", sans-serif;
+            font-size: 12px;
+            line-height: 16px;
+            font-weight: 600;
+        }
+        .font-headline-md {
+            font-family: "Inter", sans-serif;
+            font-size: 24px;
+            line-height: 32px;
+            font-weight: 600;
+        }
+        .font-headline-lg {
+            font-family: "Inter", sans-serif;
+            font-size: 32px;
+            line-height: 40px;
+            letter-spacing: -0.01em;
+            font-weight: 600;
+        }
+        .font-display-lg {
+            font-family: "Inter", sans-serif;
+            font-size: 48px;
+            line-height: 56px;
+            letter-spacing: -0.02em;
+            font-weight: 700;
+        }
+        .font-body-lg {
+            font-family: "Inter", sans-serif;
+            font-size: 18px;
+            line-height: 28px;
+            font-weight: 400;
+        }
+        .font-bold {
+            font-weight: 700;
+        }
+        .font-semibold {
+            font-weight: 600;
+        }
+        .font-medium {
+            font-weight: 500;
+        }
+        .uppercase {
+            text-transform: uppercase;
+        }
+        .tracking-tight {
+            letter-spacing: -0.02em;
+        }
+        .text-on-surface {
+            color: #0b1c30;
+        }
+        .text-on-surface-variant {
+            color: #45474c;
+        }
+        .text-primary {
+            color: #091426;
+        }
+        .text-secondary {
+            color: #4648d4;
+        }
+        .text-on-secondary {
+            color: #ffffff;
+        }
+        .text-on-primary {
+            color: #ffffff;
+        }
+        .text-on-secondary-container {
+            color: #fffbff;
+        }
+        .text-surface {
+            color: #f8f9ff;
+        }
+        .bg-background {
+            background-color: #f8f9ff;
+        }
+        .bg-surface {
+            background-color: #f8f9ff;
+        }
+        .bg-surface\/80 {
+            background-color: rgba(248, 249, 255, 0.8);
+        }
+        .bg-surface-container {
+            background-color: #e5eeff;
+        }
+        .bg-surface-container-low {
+            background-color: #eff4ff;
+        }
+        .bg-surface-container-high {
+            background-color: #dce9ff;
+        }
+        .bg-secondary-container {
+            background-color: #6063ee;
+        }
+        .bg-secondary {
+            background-color: #4648d4;
+        }
+        .bg-primary {
+            background-color: #091426;
+        }
+        .bg-transparent {
+            background-color: transparent;
+        }
+        .bg-secondary\/10 {
+            background-color: rgba(70, 72, 212, 0.10);
+        }
+        .bg-secondary\/5 {
+            background-color: rgba(70, 72, 212, 0.05);
+        }
+        .bg-primary\/5 {
+            background-color: rgba(9, 20, 38, 0.05);
+        }
+        .bg-surface-container-highest {
+            background-color: #d3e4fe;
+        }
+        .bg-green-100 {
+            background-color: #dcfce7;
+        }
+        .bg-blue-100 {
+            background-color: #dbeafe;
+        }
+        .bg-surface-container-high {
+            background-color: #dce9ff;
+        }
+        .border {
+            border-width: 1px;
+        }
+        .border-2 {
+            border-width: 2px;
+        }
+        .border-t {
+            border-top-width: 1px;
+        }
+        .border-l {
+            border-left-width: 1px;
+        }
+        .border-r {
+            border-right-width: 1px;
+        }
+        .border-b {
+            border-bottom-width: 1px;
+        }
+        .border-none {
+            border: none;
+        }
+        .border-outline-variant\/30 {
+            border-color: rgba(197, 198, 205, 0.3);
+        }
+        .border-outline-variant\/10 {
+            border-color: rgba(197, 198, 205, 0.1);
+        }
+        .border-outline-variant\/40 {
+            border-color: rgba(197, 198, 205, 0.4);
+        }
+        .border-secondary\/20 {
+            border-color: rgba(70, 72, 212, 0.2);
+        }
+        .border-outline-variant\/50 {
+            border-color: rgba(197, 198, 205, 0.5);
+        }
+        .rounded {
+            border-radius: 0.25rem;
+        }
+        .rounded-full {
+            border-radius: 9999px;
+        }
+        .rounded-lg {
+            border-radius: 0.5rem;
+        }
+        .rounded-xl {
+            border-radius: 0.75rem;
+        }
+        .rounded-2xl {
+            border-radius: 1rem;
+        }
+        .rounded-md {
+            border-radius: 0.375rem;
+        }
+        .border-dashed {
+            border-style: dashed;
+        }
+        .outline-none {
+            outline: none;
+        }
+        .ring-1 {
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
+        }
+        .ring-2 {
+            box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
+        }
+        .ring-outline-variant\/20 {
+            --tw-ring-color: rgba(197, 198, 205, 0.2);
+        }
+        .ring-secondary {
+            --tw-ring-color: #4648d4;
+        }
+        .ring-surface-variant {
+            --tw-ring-color: #d3e4fe;
+        }
+        .shadow-sm {
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        }
+        .shadow-md {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+        }
+        .shadow-\[0_1px_8px_rgba\(0\2c 0\2c 0\2c 0\.04\)\] {
+            box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
+        }
+        .hover\:shadow-md:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+        }
+        .hover\:shadow-xl:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        }
+        .backdrop-blur-xl {
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+        .object-cover {
+            object-fit: cover;
+        }
+        .object-contain {
+            object-fit: contain;
+        }
+        .overflow-x-auto {
+            overflow-x: auto;
+        }
+        .overflow-y-auto {
+            overflow-y: auto;
+        }
+        .pointer-events-none {
+            pointer-events: none;
+        }
         .line-clamp-1 {
             display: -webkit-box;
             -webkit-line-clamp: 1;
@@ -375,293 +872,562 @@
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
+        .leading-tight {
+            line-height: 1.25;
+        }
+        .tracking-tight {
+            letter-spacing: -0.02em;
+        }
+        .cursor-pointer {
+            cursor: pointer;
+        }
+        .self-center {
+            align-self: center;
+        }
+        .shrink-0 {
+            flex-shrink: 0;
+        }
+        .z-0 {
+            z-index: 0;
+        }
+        .z-10 {
+            z-index: 10;
+        }
+        .z-40 {
+            z-index: 40;
+        }
+        .z-50 {
+            z-index: 50;
+        }
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+        .list-none {
+            list-style: none;
+        }
+        .appearance-none {
+            appearance: none;
+        }
+        select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2345474c' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.5rem center;
+            padding-right: 2rem;
+            background-size: 0.75rem;
+        }
+        select:focus {
+            outline: none;
+        }
+
+        @media (max-width: 768px) {
+            .pl-72 {
+                padding-left: 0;
+            }
+            .px-margin-desktop {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+            .p-margin-desktop {
+                padding: 16px;
+            }
+            .gap-gutter {
+                gap: 16px;
+            }
+            .fixed.left-0.top-0 {
+                display: none;
+            }
+            .fixed.top-0.left-72 {
+                left: 0;
+            }
+            .text-display-lg {
+                font-size: 32px;
+                line-height: 40px;
+            }
+            .grid-cols-2 {
+                grid-template-columns: 1fr 1fr;
+            }
+            .lg\:col-span-8 {
+                grid-column: span 12 / span 12;
+            }
+            .lg\:col-span-4 {
+                grid-column: span 12 / span 12;
+            }
+            .hidden.sm\:block {
+                display: none !important;
+            }
+            .flex-col.lg\:flex-row {
+                flex-direction: column;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .lg\:col-span-8 {
+                grid-column: span 8 / span 8;
+            }
+            .lg\:col-span-4 {
+                grid-column: span 4 / span 4;
+            }
+            .lg\:grid-cols-12 {
+                grid-template-columns: repeat(12, minmax(0, 1fr));
+            }
+            .sm\:block {
+                display: block;
+            }
+        }
     </style>
 </head>
 
-<body class="bg-background font-body-md text-on-surface" style="background:#f8f9ff; color:#0b1c30;">
+<body class="bg-background font-body-md text-on-surface">
 
-    <!-- ============================================================ -->
-    <!-- SIDEBAR (fixed)                                               -->
-    <!-- ============================================================ -->
-    <aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-low z-50 flex flex-col border-r border-outline-variant/30" style="background:#eff4ff; border-color:rgba(197,198,205,0.3);">
+    <!-- ====== SIDEBAR ====== -->
+    <aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-low z-50 flex flex-col border-r border-outline-variant/30">
         <div class="p-margin-desktop flex items-center gap-3 mb-4">
-            <img class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVCh3VemlU4Lj8c72RwYWG85_SeZiyQ4LIDJUqw71yEmE6eE_HLrnLXIliUgPSCIySiqReLakky_0QC3B2wqaU-_z9RWhtyFf13wGxPvaK7q43Mn_xzu4wJIZVavUQ2saOz-nqWyUcb5TwtGO44-mNf3Ko38kcxP6NxDpC-6UN0XtDifJe0GCeNg1gSlCPPpR75lSawaTlgIcDREDXBPL-ZCFH-M4SQCKGVead7RcLFXp-Gnrv4Xjm0Mx3LNsOnMd6Zc_FcGmSC09zbwY" alt="PeerSolve Logo">
-            <span class="font-headline-md text-headline-md text-primary tracking-tight" style="color:#091426;">EXPadviser</span>
+            <img alt="PeerSolve Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVCh3VemlU4Lj8c72RwYWG85_SeZiyQ4LIDJUqw71yEmE6eE_HLrnLXIliUgPSCIySiqReLakky_0QC3B2wqaU-_z9RWhtyFf13wGxPvaK7q43Mn_xzu4wJIZVavUQ2saOz-nqWyUcb5TwtGO44-mNf3Ko38kcxP6NxDpC-6UN0XtDifJe0GCeNg1gSlCPPpR75lSawaTlgIcDREDXBPL-ZCFH-M4SQCKGVead7RcLFXp-Gnrv4Xjm0Mx3LNsOnMd6Zc_FcGmSC09zbwY" />
+            <span class="font-headline-md text-headline-md text-primary tracking-tight">EXPadviser</span>
         </div>
 
         <nav class="flex-1 px-4 flex flex-col gap-1">
-            <a aria-current="page" class="flex items-center px-4 py-3 rounded-xl transition-all font-label-md bg-secondary-container text-on-secondary-container" data-path="dashboard" href="dashboard.html" style="background:#6063ee; color:#fffbff;">
+            <a aria-current="page" class="flex items-center px-4 py-3 rounded-xl transition-all font-label-md bg-secondary-container text-on-secondary-container" href="dashboard.html">
                 <span class="material-symbols-outlined mr-3">dashboard</span>Dashboard
             </a>
-            <a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-label-md text-label-md" data-path="my-problems" href="#" style="color:#45474c;">
+            <a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-label-md text-label-md" href="my_problems.html">
                 <span class="material-symbols-outlined mr-3">assignment</span>My Problems
             </a>
-            <a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-label-md text-label-md" data-path="solve-queue" href="solve_queue.html" style="color:#45474c;">
+            <a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-label-md text-label-md" href="solve.html">
                 <span class="material-symbols-outlined mr-3">queue_play_next</span>Solve Queue
             </a>
-            <a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-label-md text-label-md" data-path="my-profile" href="#" style="color:#45474c;">
+            <a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-label-md text-label-md" href="my_profile.html">
                 <span class="material-symbols-outlined mr-3">person</span>My Profile
-
             </a>
         </nav>
 
         <div class="px-8 py-8 mt-auto">
-            <div class="p-4 rounded-xl bg-surface-container text-center" style="background:#e5eeff;">
-                <p class="text-label-sm font-label-sm text-on-surface-variant" style="color:#45474c;">Academic Session</p>
-                <p class="text-label-md font-label-md text-primary" style="color:#091426;">Spring 2024</p>
+            <div class="p-4 rounded-xl bg-surface-container text-center">
+                <p class="text-label-sm font-label-sm text-on-surface-variant">Academic Session</p>
+                <p class="text-label-md font-label-md text-primary">2026-2027</p>
             </div>
         </div>
     </aside>
 
-    <!-- ============================================================ -->
-    <!-- MAIN CONTENT (offset by sidebar)                              -->
-    <!-- ============================================================ -->
+    <!-- ====== MAIN WRAPPER ====== -->
     <div class="pl-72">
 
-        <!-- ===== HEADER (fixed) ===== -->
-        <header class="fixed top-0 left-72 right-0 h-16 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center px-margin-desktop justify-between" style="background:rgba(248,249,255,0.8);">
-            <!-- search -->
+        <!-- ====== HEADER ====== -->
+        <header class="fixed top-0 left-72 right-0 h-16 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center px-margin-desktop justify-between">
             <div class="flex-1 max-w-xl">
-                <div class="relative flex items-center bg-surface-container-high rounded-full px-4 py-2 ring-1 ring-outline-variant/20 focus-within:ring-secondary" style="background:#dce9ff;">
-                    <span class="material-symbols-outlined text-on-surface-variant text-body-md" style="color:#45474c;">search</span>
-                    <input class="bg-transparent border-none outline-none w-full px-3 text-body-md text-on-surface placeholder:text-on-surface-variant/60" placeholder="Search for problems..." type="text" style="color:#0b1c30;">
+                <div class="relative flex items-center bg-surface-container-high rounded-full px-4 py-2 ring-1 ring-outline-variant/20 focus-within:ring-secondary">
+                    <span class="material-symbols-outlined text-on-surface-variant text-body-md">search</span>
+                    <input class="bg-transparent border-none outline-none w-full px-3 text-body-md text-on-surface placeholder:text-on-surface-variant/60" placeholder="Search for problems..." type="text" />
                 </div>
             </div>
-
-            <!-- right actions -->
             <div class="flex items-center gap-6">
-                <button class="relative p-2 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors" style="color:#45474c;">
+                <button class="relative p-2 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors">
                     <span class="material-symbols-outlined">notifications</span>
-                    <span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full" style="background:#ba1a1a;"></span>
+                    <span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
                 </button>
                 <div class="flex items-center gap-3 pl-4 border-l border-outline-variant/40">
                     <div class="text-right hidden sm:block">
-                        <p class="text-label-md font-label-md text-on-surface leading-tight" style="color:#0b1c30;">Alex Rivers</p>
-                        <p class="text-label-sm font-label-sm text-on-surface-variant" style="color:#45474c;">Senior Mentor</p>
+                        <p class="text-label-md font-label-md text-on-surface leading-tight">Alex Rivers</p>
+                        <p class="text-label-sm font-label-sm text-on-surface-variant">Senior Mentor</p>
                     </div>
-                    <img class="w-9 h-9 rounded-full object-cover ring-2 ring-surface-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdiQgYZHcs1i5qOIAd2Gz8LdgoSvQ6l9pvdU259XtTr3xzItG-ASIars6oHKk0pg8wSgW7QvR7MCXUnRfArSLjb31qE3UIZ1qentFczBi65HRSN7DfNCiVD_ibUEqEgvGT4SVe8x-As0GRBSksIpp7h1ia6hYtl41MhY6eBSnaMXov3JNFGrtqmOWK3fyZnDnIvXey0aQOo324g28QXnpBGIkYxrIJYYKkyubysvClLl1RU5xdqIhiDw" alt="Profile">
+                    <img alt="Profile" class="w-9 h-9 rounded-full object-cover ring-2 ring-surface-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdiQgYZHcs1i5qOIAd2Gz8LdgoSvQ6l9pvdU259XtTr3xzItG-ASIars6oHKk0pg8wSgW7QvR7MCXUnRfArSLjb31qE3UIZ1qentFczBi65HRSN7DfNCiVD_ibUEqEgvGT4SVe8x-As0GRBSksIpp7h1ia6hYtl41MhY6eBSnaMXov3JNFGrtqmOWK3fyZnDnIvXey0aQOo324g28QXnpBGIkYxrIJYYKkyubysvClLl1RU5xdqIhiDw" />
+                    <a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-label-md text-label-md" href="my_profile.html">
+                        <span class="material-symbols-outlined mr-3">person</span>My Profile
+                    </a>
                 </div>
             </div>
         </header>
 
-        <!-- ===== MAIN ===== -->
-        <main class="relative pt-16 bg-background min-h-screen" style="background:#f8f9ff;">
-
+        <!-- ====== MAIN CONTENT ====== -->
+        <main class="relative pt-16 bg-background min-h-screen">
             <div class="flex flex-col w-full px-margin-desktop py-8 gap-8 max-w-container-max mx-auto">
 
-                <!-- ===== HERO HEADER ===== -->
+                <!-- Hero -->
                 <header class="flex justify-between items-end mb-8 relative">
-                    <div class="absolute -top-16 -left-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl z-0 pointer-events-none" style="background:rgba(9,20,38,0.05);"></div>
+                    <div class="absolute -top-16 -left-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl z-0 pointer-events-none"></div>
                     <div class="z-10 relative space-y-2">
-                        <h1 class="font-display-lg text-display-lg text-on-surface" style="color:#0b1c30;">Community Dashboard</h1>
-                        <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl" style="color:#45474c;">Discover active problems, collaborate with peers, and sharpen your skills. Your expertise is needed.</p>
+                        <h1 class="font-display-lg text-display-lg text-on-surface">Community Dashboard</h1>
+                        <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Discover active problems, collaborate with peers, and sharpen your skills. Your expertise is needed.</p>
                     </div>
                     <div class="z-10 relative flex gap-4">
-                        <button class="flex items-center gap-2 bg-surface text-on-surface px-6 py-3 rounded-lg shadow-sm hover:shadow-md transition-shadow font-label-md text-label-md group" style="background:#f8f9ff; color:#0b1c30;">
-                            <span class="material-symbols-outlined text-secondary group-hover:scale-110 transition-transform" style="color:#4648d4;">add_circle</span>
+                        <button class="flex items-center gap-2 bg-surface text-on-surface px-6 py-3 rounded-lg shadow-sm hover:shadow-md transition-shadow font-label-md text-label-md group">
+                            <span class="material-symbols-outlined text-secondary group-hover:scale-110 transition-transform">add_circle</span>
                             Request Help
                         </button>
-                        <button class="flex items-center gap-2 bg-primary text-on-primary px-6 py-3 rounded-lg shadow-md hover:bg-inverse-surface transition-colors font-label-md text-label-md" style="background:#091426; color:#ffffff;">
+                        <button class="flex items-center gap-2 bg-primary text-on-primary px-6 py-3 rounded-lg shadow-md hover:bg-inverse-surface transition-colors font-label-md text-label-md">
                             <span class="material-symbols-outlined">bolt</span>
                             Quick Solve
                         </button>
                     </div>
                 </header>
 
-                <!-- ===== GRID: Feed + Sidebar ===== -->
+                <!-- Grid -->
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
 
-                    <!-- ===== LEFT COLUMN: Active Feed ===== -->
+                    <!-- ====== MAIN COLUMN ====== -->
                     <section class="lg:col-span-8 flex flex-col gap-6">
 
-                        <!-- Feed header -->
-                        <div class="flex items-center justify-between mb-2">
-                            <h2 class="font-headline-lg text-headline-lg text-on-surface flex items-center gap-3" style="color:#0b1c30;">
-                                <span class="material-symbols-outlined text-secondary text-[32px]" style="font-variation-settings:'FILL' 1; color:#4648d4;">stream</span>
-                                Active Feed
-                            </h2>
-                            <div class="flex gap-2 bg-surface-container-low p-1 rounded-lg" style="background:#eff4ff;">
-                                <button class="px-4 py-1.5 rounded-md bg-surface text-on-surface shadow-sm font-label-md text-label-md" style="background:#f8f9ff; color:#0b1c30;">All</button>
-                                <button class="px-4 py-1.5 rounded-md text-on-surface-variant hover:text-on-surface transition-colors font-label-md text-label-md" style="color:#45474c;">Comp Sci</button>
-                                <button class="px-4 py-1.5 rounded-md text-on-surface-variant hover:text-on-surface transition-colors font-label-md text-label-md" style="color:#45474c;">Math</button>
+                        <!-- Section header -->
+                        <div class="flex flex-col gap-4 mb-6">
+                            <div class="flex items-center justify-between">
+                                <div class="space-y-1">
+                                    <h2 class="font-headline-lg text-headline-lg text-on-surface flex items-center gap-3">
+                                        <span class="material-symbols-outlined text-secondary text-[32px]" style="font-variation-settings:'FILL'1;">forum</span>
+                                        Community Queries
+                                    </h2>
+                                    <p class="font-body-md text-on-surface-variant">Ask questions, share knowledge, and learn from the EXP Adviser community.</p>
+                                </div>
+                                <div class="flex gap-3">
+                                    <button class="bg-primary text-on-primary px-6 py-2.5 rounded-lg font-label-md hover:bg-inverse-surface transition-colors">Ask a Query</button>
+                                    <button class="bg-surface text-on-surface border border-outline-variant/30 px-6 py-2.5 rounded-lg font-label-md hover:bg-surface-container-low transition-colors">View All Queries</button>
+                                </div>
                             </div>
                         </div>
 
-                        <!-- Problem Card 1: Computer Science -->
-                        <article class="bg-surface rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group" style="background:#f8f9ff;">
-                            <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-secondary/10 to-transparent rounded-bl-full pointer-events-none" style="background:linear-gradient(to bottom right, rgba(70,72,212,0.1), transparent);"></div>
-                            <div class="flex justify-between items-start mb-4 relative z-10">
-                                <div class="flex gap-2">
-                                    <span class="px-2.5 py-1 rounded-md bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm tracking-wider uppercase" style="background:#dce9ff; color:#45474c;">Computer Science</span>
-                                    <span class="px-2.5 py-1 rounded-md bg-error-container text-on-error-container font-label-sm text-label-sm flex items-center gap-1" style="background:#ffdad6; color:#93000a;">
-                                        <span class="material-symbols-outlined text-[14px]">local_fire_department</span> High Priority
-                                    </span>
-                                </div>
-                                <span class="text-on-surface-variant font-label-sm text-label-sm" style="color:#45474c;">12m ago</span>
+                        <!-- Search + filters -->
+                        <div class="flex flex-col gap-4 mb-2">
+                            <div class="relative flex items-center bg-surface-container-low rounded-xl px-4 py-3 ring-1 ring-outline-variant/20 focus-within:ring-secondary">
+                                <span class="material-symbols-outlined text-on-surface-variant">search</span>
+                                <input class="bg-transparent border-none outline-none w-full px-3 text-body-md text-on-surface placeholder:text-on-surface-variant/60" placeholder="Search queries..." type="text" />
                             </div>
-                            <h3 class="font-headline-md text-headline-md text-on-surface mb-2 relative z-10" style="color:#0b1c30;">Optimizing Dijkstra's Algorithm in Python</h3>
-                            <p class="font-body-md text-body-md text-on-surface-variant mb-6 relative z-10 line-clamp-2" style="color:#45474c;">I'm hitting a Time Limit Exceeded error on test case 45 on LeetCode. My current implementation uses a standard priority queue but seems to degrade on dense graphs. Can someone review my graph adjacency list setup?</p>
-                            <div class="flex items-center justify-between mt-auto relative z-10 pt-4 border-t border-outline-variant/20">
-                                <div class="flex items-center gap-3">
-                                    <div class="flex -space-x-2">
-                                        <img class="w-8 h-8 rounded-full border-2 border-surface object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLFzFjODL3yU4nmxiqZ9WVSQBiUSu-xDmdzg6hgDyt612pcphAkyF0T5I8Lw_JFbns37aDh_b-LMw7ZrixhpEMFQf0Fz2D7AoPYHUcTGAsIg_koL0Z6mnu67BpummeW0ge6YKlaz0DQjTaHKf1levBC13RiGFJoqTyY9uzWD8KLZt3fre0Rbr4Nfpp9gdmMCxP1sdiOjxPfL6pBIN3UwtNBtdiHuPV30Zby6UMwfvzRaq2Ek1r-BI6Gw" alt="mentor avatar" style="border-color:#f8f9ff;">
-                                        <div class="w-8 h-8 rounded-full bg-surface-container-highest border-2 border-surface flex items-center justify-center font-label-sm text-label-sm text-on-surface-variant" style="background:#d3e4fe; border-color:#f8f9ff; color:#45474c;">+2</div>
-                                    </div>
-                                    <span class="font-label-sm text-label-sm text-on-surface-variant" style="color:#45474c;">3 Mentors Active</span>
+                            <div class="flex items-center justify-between overflow-x-auto pb-2 gap-4">
+                                <div class="flex gap-2 shrink-0">
+                                    <span class="text-label-sm text-on-surface-variant self-center mr-2">Category:</span>
+                                    <button class="px-4 py-1.5 rounded-full bg-secondary text-on-secondary font-label-sm">All</button>
+                                    <button class="px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm hover:bg-surface-container-highest">Tech</button>
+                                    <button class="px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm hover:bg-surface-container-highest">Career</button>
+                                    <button class="px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm hover:bg-surface-container-highest">Design</button>
                                 </div>
-                                <button class="text-secondary font-label-md text-label-md hover:text-on-secondary-fixed flex items-center gap-1 group-hover:translate-x-1 transition-transform" style="color:#4648d4;">
-                                    Solve Now <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
-                                </button>
+                                <div class="flex gap-2 shrink-0">
+                                    <span class="text-label-sm text-on-surface-variant self-center mr-2">Status:</span>
+                                    <button class="px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm">Open</button>
+                                    <button class="px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm">Answered</button>
+                                </div>
+                                <select class="bg-transparent border-none outline-none text-label-sm text-on-surface font-label-sm cursor-pointer">
+                                    <option>Latest</option>
+                                    <option>Most Popular</option>
+                                    <option>Most Answers</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- ---- Query Card 1 (Open) ---- -->
+                        <article class="bg-surface rounded-2xl p-6 shadow-sm border border-outline-variant/10 hover:shadow-md transition-all flex flex-col gap-4">
+                            <div class="flex justify-between items-start">
+                                <div class="flex items-center gap-3">
+                                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLFzFjODL3yU4nmxiqZ9WVSQBiUSu-xDmdzg6hgDyt612pcphAkyF0T5I8Lw_JFbns37aDh_b-LMw7ZrixhpEMFQf0Fz2D7AoPYHUcTGAsIg_koL0Z6mnu67BpummeW0ge6YKlaz0DQjTaHKf1levBC13RiGFJoqTyY9uzWD8KLZt3fre0Rbr4Nfpp9gdmMCxP1sdiOjxPfL6pBIN3UwtNBtdiHuPV30Zby6UMwfvzRaq2Ek1r-BI6Gw" class="w-10 h-10 rounded-full object-cover" />
+                                    <div class="flex flex-col">
+                                        <div class="flex items-center gap-2">
+                                            <span class="font-label-md text-on-surface">Sarah Chen</span>
+                                            <span class="px-2 py-0.5 rounded bg-secondary/10 text-secondary text-[10px] font-bold uppercase">Senior</span>
+                                        </div>
+                                        <span class="text-label-sm text-on-surface-variant">15m ago</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="px-2.5 py-1 rounded-md bg-green-100 text-green-700 font-label-sm flex items-center gap-1">🟢 Open</span>
+                                    <button class="p-1 hover:bg-surface-container rounded-full transition-colors"><span class="material-symbols-outlined">more_vert</span></button>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="font-headline-md text-headline-md text-on-surface mb-2 hover:text-secondary cursor-pointer transition-colors">Which programming language should I learn for web development in 2024?</h3>
+                                <p class="font-body-md text-on-surface-variant line-clamp-2">I'm starting my journey into web development and I'm overwhelmed by the choices. Should I stick with JavaScript or explore alternatives like Go or Rust for the backend?</p>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2.5 py-1 rounded-md bg-surface-container-high text-on-surface-variant font-label-sm">Tech</span>
+                                <span class="px-2.5 py-1 rounded-md border border-outline-variant/30 text-on-surface-variant font-label-sm">#javascript</span>
+                                <span class="px-2.5 py-1 rounded-md border border-outline-variant/30 text-on-surface-variant font-label-sm">#webdev</span>
+                            </div>
+                            <div class="flex items-center justify-between pt-4 border-t border-outline-variant/10">
+                                <div class="flex items-center gap-6">
+                                    <button class="flex items-center gap-1.5 text-on-surface-variant hover:text-secondary transition-colors">
+                                        <span class="material-symbols-outlined text-[20px]">thumb_up</span>
+                                        <span class="text-label-md">24</span>
+                                    </button>
+                                    <button class="flex items-center gap-1.5 text-on-surface-variant hover:text-secondary transition-colors">
+                                        <span class="material-symbols-outlined text-[20px]">chat_bubble</span>
+                                        <span class="text-label-md">8</span>
+                                    </button>
+                                    <button class="text-on-surface-variant hover:text-secondary transition-colors">
+                                        <span class="material-symbols-outlined text-[20px]">bookmark</span>
+                                    </button>
+                                </div>
+                                <div class="flex gap-3">
+                                    <button class="text-secondary font-label-md hover:underline">View Query</button>
+                                    <button class="bg-secondary/10 text-secondary px-4 py-1.5 rounded-lg font-label-md hover:bg-secondary/20 transition-colors">Answer</button>
+                                </div>
                             </div>
                         </article>
 
-                        <!-- Problem Card 2: Mathematics -->
-                        <article class="bg-surface rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group" style="background:#f8f9ff;">
-                            <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-tertiary/5 to-transparent rounded-bl-full pointer-events-none" style="background:linear-gradient(to bottom right, rgba(17,21,22,0.05), transparent);"></div>
-                            <div class="flex justify-between items-start mb-4 relative z-10">
-                                <div class="flex gap-2">
-                                    <span class="px-2.5 py-1 rounded-md bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm tracking-wider uppercase" style="background:#dce9ff; color:#45474c;">Mathematics</span>
-                                    <span class="px-2.5 py-1 rounded-md bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm" style="background:#d3e4fe; color:#45474c;">Medium</span>
+                        <!-- ---- Query Card 2 (Resolved) ---- -->
+                        <article class="bg-surface rounded-2xl p-6 shadow-sm border-2 border-secondary/20 bg-secondary/5 hover:shadow-md transition-all flex flex-col gap-4">
+                            <div class="flex justify-between items-start">
+                                <div class="flex items-center gap-3">
+                                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6wsxKAoOgqgHMoMGQd4ZMiQpDcS4Pn7NX6RLO9PSmRQtpnwTDnN-NEtrhsxGR3M0r1JvvXJ_XOmtGQ-mZ34cLqgir7tqVML8eGwNzG7fXgNpvTS1OcrRQ6i7Yu_HEI1DVyjW85un4C6Ya2Fei5vz3XvUmFqdrDP9BuFAV94uBsUp1v3zh_07cslh6q9bhD83o1miKXFlu6PN9yxxAscqDLZfx-5T7c9vYm0sEDIPm5KLM8TsJg_f3hg" class="w-10 h-10 rounded-full object-cover" />
+                                    <div class="flex flex-col">
+                                        <div class="flex items-center gap-2">
+                                            <span class="font-label-md text-on-surface">Marcus Thorne</span>
+                                            <span class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface-variant text-[10px] font-bold uppercase">Junior</span>
+                                        </div>
+                                        <span class="text-label-sm text-on-surface-variant">2h ago</span>
+                                    </div>
                                 </div>
-                                <span class="text-on-surface-variant font-label-sm text-label-sm" style="color:#45474c;">1h ago</span>
+                                <div class="flex items-center gap-2">
+                                    <span class="px-2.5 py-1 rounded-md bg-blue-100 text-blue-700 font-label-sm flex items-center gap-1">✅ Resolved</span>
+                                    <button class="p-1 hover:bg-surface-container rounded-full transition-colors"><span class="material-symbols-outlined">more_vert</span></button>
+                                </div>
                             </div>
-                            <div class="flex gap-6 relative z-10">
+                            <div>
+                                <h3 class="font-headline-md text-headline-md text-on-surface mb-2">How to handle state management in large React apps?</h3>
+                                <p class="font-body-md text-on-surface-variant line-clamp-2">I'm working on a complex dashboard and prop drilling is becoming a nightmare. Is Redux still the go-to or should I look at Context API or Zustand?</p>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2.5 py-1 rounded-md bg-surface-container-high text-on-surface-variant font-label-sm">Tech</span>
+                                <span class="px-2.5 py-1 rounded-md border border-outline-variant/30 text-on-surface-variant font-label-sm">#react</span>
+                                <span class="px-2.5 py-1 rounded-md border border-outline-variant/30 text-on-surface-variant font-label-sm">#frontend</span>
+                            </div>
+                            <div class="mt-2 p-4 bg-surface rounded-xl border border-secondary/20 flex gap-3 items-start">
+                                <span class="material-symbols-outlined text-secondary">check_circle</span>
                                 <div class="flex-1">
-                                    <h3 class="font-headline-md text-headline-md text-on-surface mb-2" style="color:#0b1c30;">Multivariable Calculus: Stokes' Theorem Application</h3>
-                                    <p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-2" style="color:#45474c;">Having trouble setting up the boundary curve parametrization for a surface integral. The surface is the part of the paraboloid z = x^2 + y^2 lying below the plane z = 4.</p>
-                                </div>
-                                <div class="hidden sm:block w-32 h-24 rounded-lg bg-surface-container overflow-hidden flex-shrink-0 relative" style="background:#e5eeff;">
-                                    <img class="w-full h-full object-cover opacity-80 mix-blend-multiply" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYqG0smURK7IRf9LWkvz3lRvQjEe3Ae8gxF04509R8jg8ZPGj_sYhlJvTdv1oEP0mZPjf_1TUTI49RNqS8gggl1CKXrAZo_KxctCrgyVcbqo-YI-oJ6SDF1NrmsrLXW3qH9I1Sa2okGgZBVJGPrtsTA8m0PUBTKErBDtIp-7VN3RUBSp0JPGMg-KEJzWf3vpgbhhRkAB-kr7hBZx8ECcOY-r7zaCtVbAzARc1hKC78rtSUBab-2f3azw" alt="paraboloid sketch">
+                                    <p class="text-label-sm text-secondary font-bold mb-1">Accepted Answer</p>
+                                    <p class="text-body-md text-on-surface line-clamp-1">Zustand is highly recommended for its simplicity and performance in 2024...</p>
                                 </div>
                             </div>
-                            <div class="flex items-center justify-between mt-auto relative z-10 pt-4 border-t border-outline-variant/20">
+                            <div class="flex items-center justify-between pt-4 border-t border-outline-variant/10">
+                                <div class="flex items-center gap-6">
+                                    <button class="flex items-center gap-1.5 text-on-surface-variant hover:text-secondary transition-colors">
+                                        <span class="material-symbols-outlined text-[20px]">thumb_up</span>
+                                        <span class="text-label-md">42</span>
+                                    </button>
+                                    <button class="flex items-center gap-1.5 text-on-surface-variant hover:text-secondary transition-colors">
+                                        <span class="material-symbols-outlined text-[20px]">chat_bubble</span>
+                                        <span class="text-label-md">15</span>
+                                    </button>
+                                    <button class="text-on-surface-variant hover:text-secondary transition-colors">
+                                        <span class="material-symbols-outlined text-[20px]">bookmark</span>
+                                    </button>
+                                </div>
+                                <div class="flex gap-3">
+                                    <button class="text-secondary font-label-md hover:underline">View Query</button>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- ---- Query Card 3 (Open) ---- -->
+                        <article class="bg-surface rounded-2xl p-6 shadow-sm border border-outline-variant/10 hover:shadow-md transition-all flex flex-col gap-4">
+                            <div class="flex justify-between items-start">
                                 <div class="flex items-center gap-3">
-                                    <div class="flex -space-x-2">
-                                        <img class="w-8 h-8 rounded-full border-2 border-surface object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6wsxKAoOgqgHMoMGQd4ZMiQpDcS4Pn7NX6RLO9PSmRQtpnwTDnN-NEtrhsxGR3M0r1JvvXJ_XOmtGQ-mZ34cLqgir7tqVML8eGwNzG7fXgNpvTS1OcrRQ6i7Yu_HEI1DVyjW85un4C6Ya2Fei5vz3XvUmFqdrDP9BuFAV94uBsUp1v3zh_07cslh6q9bhD83o1miKXFlu6PN9yxxAscqDLZfx-5T7c9vYm0sEDIPm5KLM8TsJg_f3hg" alt="mentor avatar" style="border-color:#f8f9ff;">
+                                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLFzFjODL3yU4nmxiqZ9WVSQBiUSu-xDmdzg6hgDyt612pcphAkyF0T5I8Lw_JFbns37aDh_b-LMw7ZrixhpEMFQf0Fz2D7AoPYHUcTGAsIg_koL0Z6mnu67BpummeW0ge6YKlaz0DQjTaHKf1levBC13RiGFJoqTyY9uzWD8KLZt3fre0Rbr4Nfpp9gdmMCxP1sdiOjxPfL6pBIN3UwtNBtdiHuPV30Zby6UMwfvzRaq2Ek1r-BI6Gw" class="w-10 h-10 rounded-full object-cover" />
+                                    <div class="flex flex-col">
+                                        <div class="flex items-center gap-2">
+                                            <span class="font-label-md text-on-surface">Sarah Chen</span>
+                                            <span class="px-2 py-0.5 rounded bg-secondary/10 text-secondary text-[10px] font-bold uppercase">Senior</span>
+                                        </div>
+                                        <span class="text-label-sm text-on-surface-variant">15m ago</span>
                                     </div>
-                                    <span class="font-label-sm text-label-sm text-on-surface-variant" style="color:#45474c;">1 Mentor Active</span>
                                 </div>
-                                <button class="text-secondary font-label-md text-label-md hover:text-on-secondary-fixed flex items-center gap-1 group-hover:translate-x-1 transition-transform" style="color:#4648d4;">
-                                    Solve Now <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
-                                </button>
+                                <div class="flex items-center gap-2">
+                                    <span class="px-2.5 py-1 rounded-md bg-green-100 text-green-700 font-label-sm flex items-center gap-1">🟢 Open</span>
+                                    <button class="p-1 hover:bg-surface-container rounded-full transition-colors"><span class="material-symbols-outlined">more_vert</span></button>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="font-headline-md text-headline-md text-on-surface mb-2 hover:text-secondary cursor-pointer transition-colors">Which programming language should I learn for web development in 2024?</h3>
+                                <p class="font-body-md text-on-surface-variant line-clamp-2">I'm starting my journey into web development and I'm overwhelmed by the choices. Should I stick with JavaScript or explore alternatives like Go or Rust for the backend?</p>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2.5 py-1 rounded-md bg-surface-container-high text-on-surface-variant font-label-sm">Tech</span>
+                                <span class="px-2.5 py-1 rounded-md border border-outline-variant/30 text-on-surface-variant font-label-sm">#javascript</span>
+                                <span class="px-2.5 py-1 rounded-md border border-outline-variant/30 text-on-surface-variant font-label-sm">#webdev</span>
+                            </div>
+                            <div class="flex items-center justify-between pt-4 border-t border-outline-variant/10">
+                                <div class="flex items-center gap-6">
+                                    <button class="flex items-center gap-1.5 text-on-surface-variant hover:text-secondary transition-colors">
+                                        <span class="material-symbols-outlined text-[20px]">thumb_up</span>
+                                        <span class="text-label-md">24</span>
+                                    </button>
+                                    <button class="flex items-center gap-1.5 text-on-surface-variant hover:text-secondary transition-colors">
+                                        <span class="material-symbols-outlined text-[20px]">chat_bubble</span>
+                                        <span class="text-label-md">8</span>
+                                    </button>
+                                    <button class="text-on-surface-variant hover:text-secondary transition-colors">
+                                        <span class="material-symbols-outlined text-[20px]">bookmark</span>
+                                    </button>
+                                </div>
+                                <div class="flex gap-3">
+                                    <button class="text-secondary font-label-md hover:underline">View Query</button>
+                                    <button class="bg-secondary/10 text-secondary px-4 py-1.5 rounded-lg font-label-md hover:bg-secondary/20 transition-colors">Answer</button>
+                                </div>
                             </div>
                         </article>
 
-                        <!-- Problem Card 3: Physics -->
-                        <article class="bg-surface rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group" style="background:#f8f9ff;">
-                            <div class="flex justify-between items-start mb-4 relative z-10">
-                                <div class="flex gap-2">
-                                    <span class="px-2.5 py-1 rounded-md bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm tracking-wider uppercase" style="background:#dce9ff; color:#45474c;">Physics</span>
-                                    <span class="px-2.5 py-1 rounded-md bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm" style="background:#d3e4fe; color:#45474c;">Hard</span>
-                                </div>
-                                <span class="text-on-surface-variant font-label-sm text-label-sm" style="color:#45474c;">3h ago</span>
-                            </div>
-                            <h3 class="font-headline-md text-headline-md text-on-surface mb-2 relative z-10" style="color:#0b1c30;">Quantum Mechanics: Perturbation Theory</h3>
-                            <p class="font-body-md text-body-md text-on-surface-variant mb-6 relative z-10 line-clamp-2" style="color:#45474c;">Need clarification on applying first-order time-independent perturbation theory to a harmonic oscillator with an added anharmonic term (cx^4). I keep messing up the integration of the raising/lowering operators.</p>
-                            <div class="flex items-center justify-between mt-auto relative z-10 pt-4 border-t border-outline-variant/20">
+                        
+                        <article class="bg-surface rounded-2xl p-6 shadow-sm border-2 border-secondary/20 bg-secondary/5 hover:shadow-md transition-all flex flex-col gap-4">
+                            <div class="flex justify-between items-start">
                                 <div class="flex items-center gap-3">
-                                    <span class="font-label-sm text-label-sm text-on-surface-variant italic" style="color:#45474c;">Waiting for mentors...</span>
+                                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6wsxKAoOgqgHMoMGQd4ZMiQpDcS4Pn7NX6RLO9PSmRQtpnwTDnN-NEtrhsxGR3M0r1JvvXJ_XOmtGQ-mZ34cLqgir7tqVML8eGwNzG7fXgNpvTS1OcrRQ6i7Yu_HEI1DVyjW85un4C6Ya2Fei5vz3XvUmFqdrDP9BuFAV94uBsUp1v3zh_07cslh6q9bhD83o1miKXFlu6PN9yxxAscqDLZfx-5T7c9vYm0sEDIPm5KLM8TsJg_f3hg" class="w-10 h-10 rounded-full object-cover" />
+                                    <div class="flex flex-col">
+                                        <div class="flex items-center gap-2">
+                                            <span class="font-label-md text-on-surface">Marcus Thorne</span>
+                                            <span class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface-variant text-[10px] font-bold uppercase">Junior</span>
+                                        </div>
+                                        <span class="text-label-sm text-on-surface-variant">2h ago</span>
+                                    </div>
                                 </div>
-                                <button class="text-secondary font-label-md text-label-md hover:text-on-secondary-fixed flex items-center gap-1 group-hover:translate-x-1 transition-transform" style="color:#4648d4;">
-                                    Solve Now <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
-                                </button>
+                                <div class="flex items-center gap-2">
+                                    <span class="px-2.5 py-1 rounded-md bg-blue-100 text-blue-700 font-label-sm flex items-center gap-1">✅ Resolved</span>
+                                    <button class="p-1 hover:bg-surface-container rounded-full transition-colors"><span class="material-symbols-outlined">more_vert</span></button>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="font-headline-md text-headline-md text-on-surface mb-2">How to handle state management in large React apps?</h3>
+                                <p class="font-body-md text-on-surface-variant line-clamp-2">I'm working on a complex dashboard and prop drilling is becoming a nightmare. Is Redux still the go-to or should I look at Context API or Zustand?</p>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2.5 py-1 rounded-md bg-surface-container-high text-on-surface-variant font-label-sm">Tech</span>
+                                <span class="px-2.5 py-1 rounded-md border border-outline-variant/30 text-on-surface-variant font-label-sm">#react</span>
+                                <span class="px-2.5 py-1 rounded-md border border-outline-variant/30 text-on-surface-variant font-label-sm">#frontend</span>
+                            </div>
+                            <div class="mt-2 p-4 bg-surface rounded-xl border border-secondary/20 flex gap-3 items-start">
+                                <span class="material-symbols-outlined text-secondary">check_circle</span>
+                                <div class="flex-1">
+                                    <p class="text-label-sm text-secondary font-bold mb-1">Accepted Answer</p>
+                                    <p class="text-body-md text-on-surface line-clamp-1">Zustand is highly recommended for its simplicity and performance in 2024...</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between pt-4 border-t border-outline-variant/10">
+                                <div class="flex items-center gap-6">
+                                    <button class="flex items-center gap-1.5 text-on-surface-variant hover:text-secondary transition-colors">
+                                        <span class="material-symbols-outlined text-[20px]">thumb_up</span>
+                                        <span class="text-label-md">42</span>
+                                    </button>
+                                    <button class="flex items-center gap-1.5 text-on-surface-variant hover:text-secondary transition-colors">
+                                        <span class="material-symbols-outlined text-[20px]">chat_bubble</span>
+                                        <span class="text-label-md">15</span>
+                                    </button>
+                                    <button class="text-on-surface-variant hover:text-secondary transition-colors">
+                                        <span class="material-symbols-outlined text-[20px]">bookmark</span>
+                                    </button>
+                                </div>
+                                <div class="flex gap-3">
+                                    <button class="text-secondary font-label-md hover:underline">View Query</button>
+                                </div>
                             </div>
                         </article>
 
-                        <!-- Load More -->
-                        <button class="w-full py-4 text-center text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low rounded-xl transition-colors border border-dashed border-outline-variant/50" style="color:#45474c; border-color:rgba(197,198,205,0.5);">
+                        <!-- ---- Load More ---- -->
+                        <button class="w-full py-4 text-center text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low rounded-xl transition-colors border border-dashed border-outline-variant/50">
                             Load More Problems
                         </button>
 
                     </section>
 
-                    <!-- ===== RIGHT COLUMN: Sidebar ===== -->
+                    <!-- ====== SIDEBAR (right) ====== -->
                     <aside class="lg:col-span-4 flex flex-col gap-6">
 
-                        <!-- Quick Solve Radar -->
-                        <div class="bg-primary text-on-primary rounded-2xl p-6 shadow-lg relative overflow-hidden" style="background:#091426; color:#ffffff;">
-                            <div class="absolute -right-8 -bottom-8 w-40 h-40 bg-on-primary/10 rounded-full blur-2xl pointer-events-none" style="background:rgba(255,255,255,0.1);"></div>
-                            <h3 class="font-headline-md text-headline-md mb-2 flex items-center gap-2" style="color:#ffffff;">
-                                <span class="material-symbols-outlined">radar</span>
-                                Quick Solve Radar
-                            </h3>
-                            <p class="font-body-md text-body-md text-on-primary/80 mb-6" style="color:rgba(255,255,255,0.8);">High-priority problems matching your senior expertise.</p>
-                            <div class="space-y-4 relative z-10">
-                                <div class="bg-on-primary/10 rounded-xl p-4 hover:bg-on-primary/20 transition-colors cursor-pointer group" style="background:rgba(255,255,255,0.1);">
-                                    <div class="flex justify-between items-start mb-2">
-                                        <span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-error/20 text-[#ffb4ab]" style="background:rgba(186,26,26,0.2); color:#ffb4ab;">Urgent</span>
-                                        <span class="font-label-sm text-label-sm text-on-primary/60" style="color:rgba(255,255,255,0.6);">5m</span>
-                                    </div>
-                                    <h4 class="font-label-md text-label-md mb-1 group-hover:text-[#ffb4ab] transition-colors" style="color:#ffffff;">Deadlock in Java Concurrency</h4>
-                                    <p class="font-body-md text-body-md text-on-primary/70 text-sm line-clamp-1" style="color:rgba(255,255,255,0.7);">Final project due tomorrow, thread dump attached.</p>
+                        <!-- Stats -->
+                        <div class="bg-surface rounded-2xl p-6 shadow-sm border border-outline-variant/10">
+                            <h3 class="font-headline-md text-headline-md text-on-surface mb-4">Community Stats</h3>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="p-3 bg-surface-container-low rounded-xl">
+                                    <p class="text-display-lg text-[24px] font-bold text-primary">0</p>
+                                    <p class="text-label-sm text-on-surface-variant">Total Queries</p>
                                 </div>
-                                <div class="bg-on-primary/10 rounded-xl p-4 hover:bg-on-primary/20 transition-colors cursor-pointer group" style="background:rgba(255,255,255,0.1);">
-                                    <div class="flex justify-between items-start mb-2">
-                                        <span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-on-primary/20 text-on-primary" style="background:rgba(255,255,255,0.2); color:#ffffff;">Bounty: 50pt</span>
-                                        <span class="font-label-sm text-label-sm text-on-primary/60" style="color:rgba(255,255,255,0.6);">22m</span>
-                                    </div>
-                                    <h4 class="font-label-md text-label-md mb-1 group-hover:text-surface-variant transition-colors" style="color:#ffffff;">React useEffect infinite loop</h4>
-                                    <p class="font-body-md text-body-md text-on-primary/70 text-sm line-clamp-1" style="color:rgba(255,255,255,0.7);">Dependencies are correct but still looping.</p>
+                                <div class="p-3 bg-surface-container-low rounded-xl">
+                                    <p class="text-display-lg text-[24px] font-bold text-secondary">0</p>
+                                    <p class="text-label-sm text-on-surface-variant">Answered</p>
+                                </div>
+                                <div class="p-3 bg-surface-container-low rounded-xl">
+                                    <p class="text-display-lg text-[24px] font-bold text-primary">0</p>
+                                    <p class="text-label-sm text-on-surface-variant">Members</p>
+                                </div>
+                                <div class="p-3 bg-surface-container-low rounded-xl">
+                                    <p class="text-display-lg text-[24px] font-bold text-secondary">0</p>
+                                    <p class="text-label-sm text-on-surface-variant">Contributors</p>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Recent Activity -->
-                        <div class="bg-surface rounded-2xl p-6 shadow-sm border border-outline-variant/10" style="background:#f8f9ff; border-color:rgba(197,198,205,0.1);">
-                            <h3 class="font-headline-md text-headline-md text-on-surface mb-6 flex items-center gap-2" style="color:#0b1c30;">
-                                <span class="material-symbols-outlined text-tertiary" style="color:#111516;">history</span>
-                                Recent Activity
+                        <!-- Trending Topics -->
+                        <div class="bg-surface rounded-2xl p-6 shadow-sm border border-outline-variant/10">
+                            <h3 class="font-headline-md text-headline-md text-on-surface mb-4 flex items-center gap-2">
+                                <span class="material-symbols-outlined text-secondary">trending_up</span>Trending Topics
                             </h3>
-                            <div class="relative pl-4 before:content-[''] before:absolute before:left-1.5 before:top-2 before:bottom-2 before:w-[2px] before:bg-surface-container-high space-y-6" style="background:transparent;">
-                                <div class="relative pl-6">
-                                    <div class="absolute left-[-11px] top-1 w-6 h-6 rounded-full bg-secondary/10 flex items-center justify-center ring-4 ring-surface" style="background:rgba(70,72,212,0.1); --tw-ring-color:#f8f9ff;">
-                                        <div class="w-2 h-2 rounded-full bg-secondary" style="background:#4648d4;"></div>
+                            <div class="flex flex-wrap gap-2">
+                                <button class="px-3 py-1.5 rounded-lg bg-surface-container-high text-on-surface hover:bg-secondary hover:text-on-secondary transition-all text-label-md">#reactjs</button>
+                                <button class="px-3 py-1.5 rounded-lg bg-surface-container-high text-on-surface hover:bg-secondary hover:text-on-secondary transition-all text-label-md">#career_advice</button>
+                                <button class="px-3 py-1.5 rounded-lg bg-surface-container-high text-on-surface hover:bg-secondary hover:text-on-secondary transition-all text-label-md">#python</button>
+                                <button class="px-3 py-1.5 rounded-lg bg-surface-container-high text-on-surface hover:bg-secondary hover:text-on-secondary transition-all text-label-md">#interview_prep</button>
+                                <button class="px-3 py-1.5 rounded-lg bg-surface-container-high text-on-surface hover:bg-secondary hover:text-on-secondary transition-all text-label-md">#ui_design</button>
+                            </div>
+                        </div>
+
+                        <!-- Top Contributors -->
+                        <div class="bg-surface rounded-2xl p-6 shadow-sm border border-outline-variant/10">
+                            <h3 class="font-headline-md text-headline-md text-on-surface mb-6 flex items-center gap-2">
+                                <span class="material-symbols-outlined text-secondary">military_tech</span>Top Contributors
+                            </h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVCh3VemlU4Lj8c72RwYWG85_SeZiyQ4LIDJUqw71yEmE6eE_HLrnLXIliUgPSCIySiqReLakky_0QC3B2wqaU-_z9RWhtyFf13wGxPvaK7q43Mn_xzu4wJIZVavUQ2saOz-nqWyUcb5TwtGO44-mNf3Ko38kcxP6NxDpC-6UN0XtDifJe0GCeNg1gSlCPPpR75lSawaTlgIcDREDXBPL-ZCFH-M4SQCKGVead7RcLFXp-Gnrv4Xjm0Mx3LNsOnMd6Zc_FcGmSC09zbwY" class="w-10 h-10 rounded-full object-cover" />
+                                        <div class="flex flex-col">
+                                            <span class="font-label-md text-on-surface">Alex Rivers</span>
+                                            <span class="text-label-sm text-on-surface-variant">142 helpful answers</span>
+                                        </div>
                                     </div>
-                                    <p class="font-body-md text-body-md text-on-surface" style="color:#0b1c30;">You solved <span class="font-label-md" style="font-weight:500;">Data Structures: BST Balancing</span></p>
-                                    <p class="font-label-sm text-label-sm text-on-surface-variant mt-1" style="color:#45474c;">2 hours ago • +15 Rep</p>
+                                    <span class="px-2 py-0.5 rounded bg-secondary text-on-secondary text-[10px] font-bold">EXPERT</span>
                                 </div>
-                                <div class="relative pl-6">
-                                    <div class="absolute left-[-11px] top-1 w-6 h-6 rounded-full bg-surface-container-high flex items-center justify-center ring-4 ring-surface" style="background:#dce9ff; --tw-ring-color:#f8f9ff;">
-                                        <div class="w-2 h-2 rounded-full bg-outline" style="background:#75777d;"></div>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLFzFjODL3yU4nmxiqZ9WVSQBiUSu-xDmdzg6hgDyt612pcphAkyF0T5I8Lw_JFbns37aDh_b-LMw7ZrixhpEMFQf0Fz2D7AoPYHUcTGAsIg_koL0Z6mnu67BpummeW0ge6YKlaz0DQjTaHKf1levBC13RiGFJoqTyY9uzWD8KLZt3fre0Rbr4Nfpp9gdmMCxP1sdiOjxPfL6pBIN3UwtNBtdiHuPV30Zby6UMwfvzRaq2Ek1r-BI6Gw" class="w-10 h-10 rounded-full object-cover" />
+                                        <div class="flex flex-col">
+                                            <span class="font-label-md text-on-surface">Sarah Chen</span>
+                                            <span class="text-label-sm text-on-surface-variant">98 helpful answers</span>
+                                        </div>
                                     </div>
-                                    <p class="font-body-md text-body-md text-on-surface" style="color:#0b1c30;">Commented on <span class="font-label-md" style="font-weight:500;">Linear Algebra Proof</span></p>
-                                    <p class="font-label-sm text-label-sm text-on-surface-variant mt-1" style="color:#45474c;">Yesterday</p>
-                                </div>
-                                <div class="relative pl-6">
-                                    <div class="absolute left-[-11px] top-1 w-6 h-6 rounded-full bg-surface-container-high flex items-center justify-center ring-4 ring-surface" style="background:#dce9ff; --tw-ring-color:#f8f9ff;">
-                                        <div class="w-2 h-2 rounded-full bg-outline" style="background:#75777d;"></div>
-                                    </div>
-                                    <p class="font-body-md text-body-md text-on-surface" style="color:#0b1c30;">Requested help with <span class="font-label-md" style="font-weight:500;">Database Normalization</span></p>
-                                    <p class="font-label-sm text-label-sm text-on-surface-variant mt-1" style="color:#45474c;">3 days ago • Resolved</p>
+                                    <span class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface-variant text-[10px] font-bold">PRO</span>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Top Mentor Card -->
-                        <div class="bg-surface rounded-2xl p-6 shadow-sm border border-outline-variant/10 text-center relative overflow-hidden group hover:shadow-md transition-shadow cursor-pointer" style="background:#f8f9ff; border-color:rgba(197,198,205,0.1);">
-                            <div class="absolute inset-0 bg-gradient-to-t from-surface-container-high to-transparent opacity-0 group-hover:opacity-100 transition-opacity" style="background:linear-gradient(to top, #dce9ff, transparent);"></div>
-                            <div class="relative z-10 flex flex-col items-center">
-                                <div class="w-16 h-16 bg-surface-container rounded-full flex items-center justify-center mb-4 group-hover:-translate-y-1 transition-transform" style="background:#e5eeff;">
-                                    <span class="material-symbols-outlined text-[32px] text-secondary" style="color:#4648d4;">workspace_premium</span>
-                                </div>
-                                <h4 class="font-headline-md text-headline-md text-on-surface mb-1" style="color:#0b1c30;">Top Mentor this week</h4>
-                                <p class="font-body-md text-body-md text-on-surface-variant mb-4" style="color:#45474c;">You are in the top 5% of resolvers!</p>
-                                <div class="w-full h-2 bg-surface-container rounded-full overflow-hidden" style="background:#e5eeff;">
-                                    <div class="h-full bg-secondary w-[85%] rounded-full" style="background:#4648d4; width:85%;"></div>
-                                </div>
-                                <p class="font-label-sm text-label-sm text-on-surface-variant mt-2 text-right w-full" style="color:#45474c;">150/200 pts to next rank</p>
+                        <!-- Popular Queries -->
+                        <div class="bg-surface rounded-2xl p-6 shadow-sm border border-outline-variant/10">
+                            <h3 class="font-headline-md text-headline-md text-on-surface mb-4 flex items-center gap-2">
+                                <span class="material-symbols-outlined text-secondary">star</span>Popular Queries
+                            </h3>
+                            <div class="space-y-4">
+                                <a href="#" class="block group">
+                                    <p class="text-label-md text-on-surface group-hover:text-secondary transition-colors line-clamp-2">Best resources for learning System Design from scratch?</p>
+                                    <p class="text-label-sm text-on-surface-variant mt-1">24 answers • 156 upvotes</p>
+                                </a>
+                                <a href="#" class="block group">
+                                    <p class="text-label-md text-on-surface group-hover:text-secondary transition-colors line-clamp-2">How to negotiate salary for a remote role?</p>
+                                    <p class="text-label-sm text-on-surface-variant mt-1">18 answers • 89 upvotes</p>
+                                </a>
+                                <a href="#" class="block group">
+                                    <p class="text-label-md text-on-surface group-hover:text-secondary transition-colors line-clamp-2">Tailwind vs Styled Components in 2024?</p>
+                                    <p class="text-label-sm text-on-surface-variant mt-1">32 answers • 210 upvotes</p>
+                                </a>
                             </div>
                         </div>
 
                     </aside>
 
-                </div>
+                </div><!-- /grid -->
 
-            </div>
-
+            </div><!-- /container -->
         </main>
 
-    </div>
+    </div><!-- /pl-72 -->
 
 </body>
 </html>

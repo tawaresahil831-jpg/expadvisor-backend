@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>EXPadviser · My Profile</title>
+
+    <!-- Tailwind + custom config -->
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "on-primary-container": "#8590a6",
+                        "surface-variant": "#d3e4fe",
+                        "surface-container-highest": "#d3e4fe",
+                        "on-error": "#ffffff",
+                        "on-surface": "#0b1c30",
+                        "on-surface-variant": "#45474c",
+                        "inverse-primary": "#bcc7de",
+                        "on-background": "#0b1c30",
+                        "surface-container-high": "#dce9ff",
+                        "on-tertiary-fixed": "#191c1e",
+                        "outline": "#75777d",
+                        "primary-fixed-dim": "#bcc7de",
+                        "surface-container": "#e5eeff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#fffbff",
+                        "on-primary-fixed": "#111c2d",
+                        "surface-bright": "#f8f9ff",
+                        "surface": "#f8f9ff",
+                        "error-container": "#ffdad6",
+                        "inverse-on-surface": "#eaf1ff",
+                        "tertiary": "#111516",
+                        "outline-variant": "#c5c6cd",
+                        "on-secondary-fixed-variant": "#2f2ebe",
+                        "primary-container": "#1e293b",
+                        "on-tertiary-fixed-variant": "#444749",
+                        "on-error-container": "#93000a",
+                        "secondary-container": "#6063ee",
+                        "primary-fixed": "#d8e3fb",
+                        "secondary-fixed": "#e1e0ff",
+                        "surface-container-low": "#eff4ff",
+                        "tertiary-fixed-dim": "#c4c7c9",
+                        "primary": "#091426",
+                        "on-secondary": "#ffffff",
+                        "secondary": "#4648d4",
+                        "on-tertiary-container": "#8d9092",
+                        "surface-tint": "#545f73",
+                        "on-secondary-fixed": "#07006c",
+                        "on-primary-fixed-variant": "#3c475a",
+                        "background": "#f8f9ff",
+                        "inverse-surface": "#213145",
+                        "tertiary-container": "#26292b",
+                        "tertiary-fixed": "#e0e3e5",
+                        "secondary-fixed-dim": "#c0c1ff",
+                        "on-primary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "surface-dim": "#cbdbf5"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        full: "9999px"
+                    },
+                    spacing: {
+                        "margin-desktop": "40px",
+                        "margin-mobile": "16px",
+                        gutter: "24px",
+                        base: "8px",
+                        "container-max": "1280px"
+                    },
+                    fontFamily: {
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "label-sm": ["Inter"]
+                    },
+                    fontSize: {
+                        "label-md": ["14px", { lineHeight: "20px", letterSpacing: "0.01em", fontWeight: "500" }],
+                        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+                        "headline-md": ["24px", { lineHeight: "32px", fontWeight: "600" }],
+                        "headline-lg-mobile": ["28px", { lineHeight: "36px", fontWeight: "600" }],
+                        "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
+                        "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "600" }],
+                        "display-lg": ["48px", { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "label-sm": ["12px", { lineHeight: "16px", fontWeight: "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet" />
+
+    <style>
+        /* ── reset & scrollbar ── */
+        @layer base {
+            html,
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            body {
+                overscroll-behavior: none;
+            }
+            main>:first-child {
+                margin-top: 0 !important;
+            }
+            main>:last-child {
+                margin-bottom: 0 !important;
+            }
+        }
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* ── utilities ── */
+        .line-clamp-1 {
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .tracking-tight {
+            letter-spacing: -0.02em;
+        }
+        .backdrop-blur-xl {
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+        .shadow-\[0_1px_8px_rgba\(0\2c 0\2c 0\2c 0\.04\)\] {
+            box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
+        }
+        .ring-1 {
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
+        }
+        .ring-outline-variant\/20 {
+            --tw-ring-color: rgba(197, 198, 205, 0.2);
+        }
+        .ring-secondary {
+            --tw-ring-color: #4648d4;
+        }
+        .ring-2 {
+            box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
+        }
+        .ring-surface-variant {
+            --tw-ring-color: #d3e4fe;
+        }
+        .border-outline-variant\/10 {
+            border-color: rgba(197, 198, 205, 0.1);
+        }
+        .border-outline-variant\/30 {
+            border-color: rgba(197, 198, 205, 0.3);
+        }
+        .border-outline-variant\/40 {
+            border-color: rgba(197, 198, 205, 0.4);
+        }
+        .bg-secondary\/10 {
+            background-color: rgba(70, 72, 212, 0.10);
+        }
+        .bg-primary\/5 {
+            background-color: rgba(9, 20, 38, 0.05);
+        }
+        .bg-primary\/10 {
+            background-color: rgba(9, 20, 38, 0.10);
+        }
+        .bg-primary-fixed {
+            background-color: #d8e3fb;
+        }
+        .bg-primary-fixed\/50 {
+            background-color: rgba(216, 227, 251, 0.5);
+        }
+        .bg-secondary-fixed {
+            background-color: #e1e0ff;
+        }
+        .bg-tertiary-fixed {
+            background-color: #e0e3e5;
+        }
+        .text-on-primary-fixed {
+            color: #111c2d;
+        }
+        .text-on-secondary-fixed {
+            color: #07006c;
+        }
+        .text-on-tertiary-fixed {
+            color: #191c1e;
+        }
+        .text-on-error-container {
+            color: #93000a;
+        }
+        .bg-error-container {
+            background-color: #ffdad6;
+        }
+        .bg-tertiary-container {
+            background-color: #26292b;
+        }
+        .text-on-tertiary-container {
+            color: #8d9092;
+        }
+        .text-\[14px\] {
+            font-size: 14px;
+        }
+        .text-\[16px\] {
+            font-size: 16px;
+        }
+        .text-\[18px\] {
+            font-size: 18px;
+        }
+        .text-\[20px\] {
+            font-size: 20px;
+        }
+        .focus-within\:ring-secondary:focus-within {
+            --tw-ring-color: #4648d4;
+        }
+        .group-hover\:scale-105:hover {
+            transform: scale(1.05);
+        }
+        .group-hover\:text-primary:hover {
+            color: #091426;
+        }
+        .hover\:bg-inverse-surface:hover {
+            background-color: #213145;
+        }
+        .hover\:bg-surface-container:hover {
+            background-color: #e5eeff;
+        }
+        .hover\:bg-surface-container-high:hover {
+            background-color: #dce9ff;
+        }
+        .hover\:bg-surface-container-highest:hover {
+            background-color: #d3e4fe;
+        }
+        .hover\:bg-surface-container-low:hover {
+            background-color: #eff4ff;
+        }
+        .hover\:text-secondary:hover {
+            color: #4648d4;
+        }
+        .hover\:text-on-secondary:hover {
+            color: #ffffff;
+        }
+        .hover\:text-on-surface:hover {
+            color: #0b1c30;
+        }
+        .hover\:shadow-md:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+        }
+        .hover\:shadow-xl:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        }
+        .hover\:underline:hover {
+            text-decoration: underline;
+        }
+        .hover\:-translate-y-1:hover {
+            transform: translateY(-4px);
+        }
+        .transition-all {
+            transition: all 0.2s ease;
+        }
+        .transition-colors {
+            transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+        }
+        .transition-transform {
+            transition: transform 0.2s ease;
+        }
+        .transition-shadow {
+            transition: box-shadow 0.2s ease;
+        }
+        .duration-200 {
+            transition-duration: 200ms;
+        }
+        .duration-300 {
+            transition-duration: 300ms;
+        }
+        .duration-500 {
+            transition-duration: 500ms;
+        }
+        .ease-out {
+            transition-timing-function: ease-out;
+        }
+        .cursor-pointer {
+            cursor: pointer;
+        }
+        .cursor-default {
+            cursor: default;
+        }
+        .z-0 {
+            z-index: 0;
+        }
+        .z-10 {
+            z-index: 10;
+        }
+        .z-40 {
+            z-index: 40;
+        }
+        .z-50 {
+            z-index: 50;
+        }
+        .relative {
+            position: relative;
+        }
+        .absolute {
+            position: absolute;
+        }
+        .fixed {
+            position: fixed;
+        }
+        .sticky {
+            position: sticky;
+        }
+        .top-0 {
+            top: 0;
+        }
+        .top-2 {
+            top: 0.5rem;
+        }
+        .left-0 {
+            left: 0;
+        }
+        .left-72 {
+            left: 18rem;
+        }
+        .right-0 {
+            right: 0;
+        }
+        .right-2 {
+            right: 0.5rem;
+        }
+        .-inset-2 {
+            inset: -0.5rem;
+        }
+        .inset-0 {
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+        .mt-auto {
+            margin-top: auto;
+        }
+        .mb-1 {
+            margin-bottom: 0.25rem;
+        }
+        .mb-2 {
+            margin-bottom: 0.5rem;
+        }
+        .mb-4 {
+            margin-bottom: 1rem;
+        }
+        .mb-6 {
+            margin-bottom: 1.5rem;
+        }
+        .mb-8 {
+            margin-bottom: 2rem;
+        }
+        .mt-1 {
+            margin-top: 0.25rem;
+        }
+        .mt-2 {
+            margin-top: 0.5rem;
+        }
+        .mt-4 {
+            margin-top: 1rem;
+        }
+        .mt-8 {
+            margin-top: 2rem;
+        }
+        .mr-2 {
+            margin-right: 0.5rem;
+        }
+        .mr-3 {
+            margin-right: 0.75rem;
+        }
+        .ml-auto {
+            margin-left: auto;
+        }
+        .gap-1 {
+            gap: 0.25rem;
+        }
+        .gap-1\.5 {
+            gap: 0.375rem;
+        }
+        .gap-2 {
+            gap: 0.5rem;
+        }
+        .gap-3 {
+            gap: 0.75rem;
+        }
+        .gap-4 {
+            gap: 1rem;
+        }
+        .gap-6 {
+            gap: 1.5rem;
+        }
+        .gap-8 {
+            gap: 2rem;
+        }
+        .gap-gutter {
+            gap: 24px;
+        }
+        .flex {
+            display: flex;
+        }
+        .flex-col {
+            flex-direction: column;
+        }
+        .flex-1 {
+            flex: 1 1 0%;
+        }
+        .flex-shrink-0 {
+            flex-shrink: 0;
+        }
+        .flex-wrap {
+            flex-wrap: wrap;
+        }
+        .items-center {
+            align-items: center;
+        }
+        .items-start {
+            align-items: flex-start;
+        }
+        .items-end {
+            align-items: flex-end;
+        }
+        .justify-between {
+            justify-content: space-between;
+        }
+        .justify-start {
+            justify-content: flex-start;
+        }
+        .justify-end {
+            justify-content: flex-end;
+        }
+        .justify-center {
+            justify-content: center;
+        }
+        .space-y-1>*+* {
+            margin-top: 0.25rem;
+        }
+        .space-y-2>*+* {
+            margin-top: 0.5rem;
+        }
+        .space-y-4>*+* {
+            margin-top: 1rem;
+        }
+        .w-full {
+            width: 100%;
+        }
+        .w-2 {
+            width: 0.5rem;
+        }
+        .w-3 {
+            width: 0.75rem;
+        }
+        .w-5 {
+            width: 1.25rem;
+        }
+        .w-8 {
+            width: 2rem;
+        }
+        .w-9 {
+            width: 2.25rem;
+        }
+        .w-10 {
+            width: 2.5rem;
+        }
+        .w-14 {
+            width: 3.5rem;
+        }
+        .w-32 {
+            width: 8rem;
+        }
+        .w-48 {
+            width: 12rem;
+        }
+        .w-64 {
+            width: 16rem;
+        }
+        .w-72 {
+            width: 18rem;
+        }
+        .w-auto {
+            width: auto;
+        }
+        .w-\[1px\] {
+            width: 1px;
+        }
+        .min-w-\[700px\] {
+            min-width: 700px;
+        }
+        .max-w-2xl {
+            max-width: 42rem;
+        }
+        .max-w-xl {
+            max-width: 36rem;
+        }
+        .max-w-lg {
+            max-width: 32rem;
+        }
+        .max-w-container-max {
+            max-width: 1280px;
+        }
+        .h-full {
+            height: 100%;
+        }
+        .h-2 {
+            height: 0.5rem;
+        }
+        .h-3 {
+            height: 0.75rem;
+        }
+        .h-5 {
+            height: 1.25rem;
+        }
+        .h-6 {
+            height: 1.5rem;
+        }
+        .h-8 {
+            height: 2rem;
+        }
+        .h-9 {
+            height: 2.25rem;
+        }
+        .h-10 {
+            height: 2.5rem;
+        }
+        .h-14 {
+            height: 3.5rem;
+        }
+        .h-16 {
+            height: 4rem;
+        }
+        .h-32 {
+            height: 8rem;
+        }
+        .h-\[1px\] {
+            height: 1px;
+        }
+        .min-h-screen {
+            min-height: 100vh;
+        }
+        .p-1 {
+            padding: 0.25rem;
+        }
+        .p-2 {
+            padding: 0.5rem;
+        }
+        .p-2\.5 {
+            padding: 0.625rem;
+        }
+        .p-3 {
+            padding: 0.75rem;
+        }
+        .p-4 {
+            padding: 1rem;
+        }
+        .p-6 {
+            padding: 1.5rem;
+        }
+        .p-8 {
+            padding: 2rem;
+        }
+        .p-margin-desktop {
+            padding: 40px;
+        }
+        .px-2 {
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+        }
+        .px-2\.5 {
+            padding-left: 0.625rem;
+            padding-right: 0.625rem;
+        }
+        .px-3 {
+            padding-left: 0.75rem;
+            padding-right: 0.75rem;
+        }
+        .px-4 {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+        .px-6 {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+        .px-8 {
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+        .px-margin-desktop {
+            padding-left: 40px;
+            padding-right: 40px;
+        }
+        .py-0\.5 {
+            padding-top: 0.125rem;
+            padding-bottom: 0.125rem;
+        }
+        .py-1 {
+            padding-top: 0.25rem;
+            padding-bottom: 0.25rem;
+        }
+        .py-1\.5 {
+            padding-top: 0.375rem;
+            padding-bottom: 0.375rem;
+        }
+        .py-2 {
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+        .py-2\.5 {
+            padding-top: 0.625rem;
+            padding-bottom: 0.625rem;
+        }
+        .py-3 {
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+        }
+        .py-4 {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .py-8 {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+        .pl-4 {
+            padding-left: 1rem;
+        }
+        .pl-72 {
+            padding-left: 18rem;
+        }
+        .pr-4 {
+            padding-right: 1rem;
+        }
+        .pt-4 {
+            padding-top: 1rem;
+        }
+        .pt-16 {
+            padding-top: 4rem;
+        }
+        .pb-2 {
+            padding-bottom: 0.5rem;
+        }
+        .text-left {
+            text-align: left;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .text-right {
+            text-align: right;
+        }
+        .font-body-md {
+            font-family: "Inter", sans-serif;
+            font-size: 16px;
+            line-height: 24px;
+            font-weight: 400;
+        }
+        .font-label-md {
+            font-family: "Inter", sans-serif;
+            font-size: 14px;
+            line-height: 20px;
+            letter-spacing: 0.01em;
+            font-weight: 500;
+        }
+        .font-label-sm {
+            font-family: "Inter", sans-serif;
+            font-size: 12px;
+            line-height: 16px;
+            font-weight: 600;
+        }
+        .font-headline-md {
+            font-family: "Inter", sans-serif;
+            font-size: 24px;
+            line-height: 32px;
+            font-weight: 600;
+        }
+        .font-headline-lg {
+            font-family: "Inter", sans-serif;
+            font-size: 32px;
+            line-height: 40px;
+            letter-spacing: -0.01em;
+            font-weight: 600;
+        }
+        .font-display-lg {
+            font-family: "Inter", sans-serif;
+            font-size: 48px;
+            line-height: 56px;
+            letter-spacing: -0.02em;
+            font-weight: 700;
+        }
+        .font-body-lg {
+            font-family: "Inter", sans-serif;
+            font-size: 18px;
+            line-height: 28px;
+            font-weight: 400;
+        }
+        .font-bold {
+            font-weight: 700;
+        }
+        .font-semibold {
+            font-weight: 600;
+        }
+        .font-medium {
+            font-weight: 500;
+        }
+        .uppercase {
+            text-transform: uppercase;
+        }
+        .tracking-tight {
+            letter-spacing: -0.02em;
+        }
+        .tracking-widest {
+            letter-spacing: 0.1em;
+        }
+        .tracking-wider {
+            letter-spacing: 0.05em;
+        }
+        .text-on-surface {
+            color: #0b1c30;
+        }
+        .text-on-surface-variant {
+            color: #45474c;
+        }
+        .text-primary {
+            color: #091426;
+        }
+        .text-secondary {
+            color: #4648d4;
+        }
+        .text-on-secondary {
+            color: #ffffff;
+        }
+        .text-on-primary {
+            color: #ffffff;
+        }
+        .text-on-secondary-container {
+            color: #fffbff;
+        }
+        .text-on-error-container {
+            color: #93000a;
+        }
+        .text-error {
+            color: #ba1a1a;
+        }
+        .text-surface {
+            color: #f8f9ff;
+        }
+        .bg-background {
+            background-color: #f8f9ff;
+        }
+        .bg-surface {
+            background-color: #f8f9ff;
+        }
+        .bg-surface\/80 {
+            background-color: rgba(248, 249, 255, 0.8);
+        }
+        .bg-surface-container {
+            background-color: #e5eeff;
+        }
+        .bg-surface-container-low {
+            background-color: #eff4ff;
+        }
+        .bg-surface-container-high {
+            background-color: #dce9ff;
+        }
+        .bg-surface-container-lowest {
+            background-color: #ffffff;
+        }
+        .bg-secondary-container {
+            background-color: #6063ee;
+        }
+        .bg-secondary {
+            background-color: #4648d4;
+        }
+        .bg-primary {
+            background-color: #091426;
+        }
+        .bg-transparent {
+            background-color: transparent;
+        }
+        .bg-secondary\/10 {
+            background-color: rgba(70, 72, 212, 0.10);
+        }
+        .bg-primary\/5 {
+            background-color: rgba(9, 20, 38, 0.05);
+        }
+        .bg-primary\/10 {
+            background-color: rgba(9, 20, 38, 0.10);
+        }
+        .bg-primary\/20 {
+            background-color: rgba(9, 20, 38, 0.20);
+        }
+        .bg-primary\/40 {
+            background-color: rgba(9, 20, 38, 0.40);
+        }
+        .bg-primary\/70 {
+            background-color: rgba(9, 20, 38, 0.70);
+        }
+        .bg-primary-fixed {
+            background-color: #d8e3fb;
+        }
+        .bg-primary-fixed\/50 {
+            background-color: rgba(216, 227, 251, 0.5);
+        }
+        .bg-secondary-fixed {
+            background-color: #e1e0ff;
+        }
+        .bg-tertiary-fixed {
+            background-color: #e0e3e5;
+        }
+        .bg-surface-container-highest {
+            background-color: #d3e4fe;
+        }
+        .bg-surface-variant {
+            background-color: #d3e4fe;
+        }
+        .bg-error-container {
+            background-color: #ffdad6;
+        }
+        .bg-tertiary-container {
+            background-color: #26292b;
+        }
+        .border {
+            border-width: 1px;
+        }
+        .border-2 {
+            border-width: 2px;
+        }
+        .border-t {
+            border-top-width: 1px;
+        }
+        .border-l {
+            border-left-width: 1px;
+        }
+        .border-r {
+            border-right-width: 1px;
+        }
+        .border-b {
+            border-bottom-width: 1px;
+        }
+        .border-none {
+            border: none;
+        }
+        .border-outline-variant\/30 {
+            border-color: rgba(197, 198, 205, 0.3);
+        }
+        .border-outline-variant\/10 {
+            border-color: rgba(197, 198, 205, 0.1);
+        }
+        .border-outline-variant\/40 {
+            border-color: rgba(197, 198, 205, 0.4);
+        }
+        .border-secondary\/20 {
+            border-color: rgba(70, 72, 212, 0.2);
+        }
+        .border-outline-variant {
+            border-color: #c5c6cd;
+        }
+        .rounded {
+            border-radius: 0.25rem;
+        }
+        .rounded-full {
+            border-radius: 9999px;
+        }
+        .rounded-lg {
+            border-radius: 0.5rem;
+        }
+        .rounded-xl {
+            border-radius: 0.75rem;
+        }
+        .rounded-2xl {
+            border-radius: 1rem;
+        }
+        .rounded-3xl {
+            border-radius: 1.5rem;
+        }
+        .rounded-md {
+            border-radius: 0.375rem;
+        }
+        .rounded-sm {
+            border-radius: 0.125rem;
+        }
+        .outline-none {
+            outline: none;
+        }
+        .ring-1 {
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
+        }
+        .ring-2 {
+            box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
+        }
+        .ring-outline-variant\/20 {
+            --tw-ring-color: rgba(197, 198, 205, 0.2);
+        }
+        .ring-secondary {
+            --tw-ring-color: #4648d4;
+        }
+        .ring-surface-variant {
+            --tw-ring-color: #d3e4fe;
+        }
+        .shadow-sm {
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        }
+        .shadow-md {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+        }
+        .shadow-lg {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        }
+        .shadow-\[0_1px_8px_rgba\(0\2c 0\2c 0\2c 0\.04\)\] {
+            box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
+        }
+        .shadow-primary\/20 {
+            box-shadow: 0 4px 12px rgba(9, 20, 38, 0.20);
+        }
+        .shadow-secondary\/20 {
+            box-shadow: 0 4px 12px rgba(70, 72, 212, 0.20);
+        }
+        .hover\:shadow-md:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+        }
+        .hover\:shadow-xl:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        }
+        .backdrop-blur-xl {
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+        .object-cover {
+            object-fit: cover;
+        }
+        .object-contain {
+            object-fit: contain;
+        }
+        .overflow-hidden {
+            overflow: hidden;
+        }
+        .overflow-x-auto {
+            overflow-x: auto;
+        }
+        .pointer-events-none {
+            pointer-events: none;
+        }
+        .line-clamp-1 {
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .leading-none {
+            line-height: 1;
+        }
+        .leading-relaxed {
+            line-height: 1.625;
+        }
+        .leading-tight {
+            line-height: 1.25;
+        }
+        .tracking-tight {
+            letter-spacing: -0.02em;
+        }
+        .cursor-pointer {
+            cursor: pointer;
+        }
+        .cursor-default {
+            cursor: default;
+        }
+        .self-center {
+            align-self: center;
+        }
+        .shrink-0 {
+            flex-shrink: 0;
+        }
+        .z-0 {
+            z-index: 0;
+        }
+        .z-10 {
+            z-index: 10;
+        }
+        .z-40 {
+            z-index: 40;
+        }
+        .z-50 {
+            z-index: 50;
+        }
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+        .list-none {
+            list-style: none;
+        }
+        .appearance-none {
+            appearance: none;
+        }
+        .blur-3xl {
+            filter: blur(64px);
+        }
+        .blur-2xl {
+            filter: blur(40px);
+        }
+        .blur-md {
+            filter: blur(12px);
+        }
+        .opacity-0 {
+            opacity: 0;
+        }
+        .opacity-100 {
+            opacity: 1;
+        }
+        .opacity-5 {
+            opacity: 0.05;
+        }
+        .opacity-10 {
+            opacity: 0.10;
+        }
+        .opacity-20 {
+            opacity: 0.20;
+        }
+        .opacity-40 {
+            opacity: 0.40;
+        }
+        .opacity-50 {
+            opacity: 0.50;
+        }
+        .opacity-70 {
+            opacity: 0.70;
+        }
+        .group-hover\:opacity-100:hover {
+            opacity: 1;
+        }
+        .group-hover\:opacity-40:hover {
+            opacity: 0.40;
+        }
+        .group-hover\:scale-105:hover {
+            transform: scale(1.05);
+        }
+        .hover\:bg-surface-container:hover {
+            background-color: #e5eeff;
+        }
+        .hover\:bg-surface-container-high:hover {
+            background-color: #dce9ff;
+        }
+        .hover\:bg-surface-container-highest:hover {
+            background-color: #d3e4fe;
+        }
+        .hover\:bg-inverse-surface:hover {
+            background-color: #213145;
+        }
+        .hover\:text-primary:hover {
+            color: #091426;
+        }
+        .hover\:text-secondary:hover {
+            color: #4648d4;
+        }
+        .hover\:underline:hover {
+            text-decoration: underline;
+        }
+        .hover\:shadow-md:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+        }
+        .hover\:-translate-y-1:hover {
+            transform: translateY(-4px);
+        }
+        .transition-all {
+            transition: all 0.2s ease;
+        }
+        .transition-colors {
+            transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+        }
+        .transition-transform {
+            transition: transform 0.2s ease;
+        }
+        .transition-shadow {
+            transition: box-shadow 0.2s ease;
+        }
+        .transition-opacity {
+            transition: opacity 0.3s ease;
+        }
+        .duration-200 {
+            transition-duration: 200ms;
+        }
+        .duration-300 {
+            transition-duration: 300ms;
+        }
+        .duration-500 {
+            transition-duration: 500ms;
+        }
+        .stroke-2 {
+            stroke-width: 2px;
+        }
+        .stroke-primary {
+            stroke: #091426;
+        }
+        .hover\:stroke-primary:hover {
+            stroke: #091426;
+        }
+        select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2345474c' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.5rem center;
+            padding-right: 2rem;
+            background-size: 0.75rem;
+        }
+        select:focus {
+            outline: none;
+        }
+
+        @media (max-width: 768px) {
+            .pl-72 {
+                padding-left: 0;
+            }
+            .px-margin-desktop {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+            .p-margin-desktop {
+                padding: 16px;
+            }
+            .gap-gutter {
+                gap: 16px;
+            }
+            .fixed.left-0.top-0 {
+                display: none;
+            }
+            .fixed.top-0.left-72 {
+                left: 0;
+            }
+            .text-display-lg {
+                font-size: 32px;
+                line-height: 40px;
+            }
+            .grid-cols-2 {
+                grid-template-columns: 1fr 1fr;
+            }
+            .lg\:col-span-4 {
+                grid-column: span 12 / span 12;
+            }
+            .lg\:col-span-8 {
+                grid-column: span 12 / span 12;
+            }
+            .hidden.sm\:block {
+                display: none !important;
+            }
+            .hidden.sm\:flex {
+                display: none !important;
+            }
+            .flex-col.lg\:flex-row {
+                flex-direction: column;
+            }
+            .w-32 {
+                width: 6rem;
+            }
+            .h-32 {
+                height: 6rem;
+            }
+            .min-w-\[700px\] {
+                min-width: auto;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .lg\:col-span-4 {
+                grid-column: span 4 / span 4;
+            }
+            .lg\:col-span-8 {
+                grid-column: span 8 / span 8;
+            }
+            .lg\:grid-cols-12 {
+                grid-template-columns: repeat(12, minmax(0, 1fr));
+            }
+            .sm\:block {
+                display: block;
+            }
+            .sm\:flex {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-background font-body-md text-on-surface">
+
+    <!-- ====== SIDEBAR ====== -->
+    <aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-low z-50 flex flex-col border-r border-outline-variant/30">
+        <div class="p-margin-desktop flex items-center gap-3 mb-4">
+            <img alt="PeerSolve Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuACZwoeuAADBlK9-wogZgOTJIVtQtToQRyMwf5n8_tk41oRca2OH1tW32gdJCOj3lG4G2yA2TeXAVvwvMcxJiH9RF5KyDaG8tpDYq_uJdm67aE3d8asTTJQwKTKxXIO7dtOYAkFlRVyjswUBAHe79WOYQzihjiNDgCr2NwiOgj7OJtvgs19ml0mbc67KxFT3-xW5isvB4CxA3DHQJmE6dOLTTpPn9S2yM3jYZpb1B7qjhNnhZ7ZRX_K8MkDVb8D1-pYNXQIZRVvSl91gxA" />
+            <span class="font-headline-md text-headline-md text-primary tracking-tight">EXPadviser</span>
+        </div>
+
+        <nav class="flex-1 px-4 flex flex-col gap-1">
+            <a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-label-md text-label-md" href="dashboard.html">
+                <span class="material-symbols-outlined mr-3">dashboard</span>Dashboard
+            </a>
+            <a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-label-md text-label-md" href="my_problems.html">
+                <span class="material-symbols-outlined mr-3">assignment</span>My Problems
+            </a>
+            <a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-label-md text-label-md" href="solve.html">
+                <span class="material-symbols-outlined mr-3">queue_play_next</span>Solve Queue
+            </a>
+            <a aria-current="page" class="flex items-center px-4 py-3 rounded-xl transition-all font-label-md bg-secondary-container text-on-secondary-container" href="my_profile.html">
+                <span class="material-symbols-outlined mr-3">person</span>My Profile
+            </a>
+        </nav>
+
+        <div class="px-8 py-8 mt-auto">
+            <div class="p-4 rounded-xl bg-surface-container text-center">
+                <p class="text-label-sm font-label-sm text-on-surface-variant">Academic Session</p>
+                <p class="text-label-md font-label-md text-primary">Spring 2024</p>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ====== MAIN WRAPPER ====== -->
+    <div class="pl-72">
+
+        <!-- ====== HEADER ====== -->
+        <header class="fixed top-0 left-72 right-0 h-16 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center px-margin-desktop justify-between">
+            <div class="flex-1 max-w-xl">
+                <div class="relative flex items-center bg-surface-container-high rounded-full px-4 py-2 ring-1 ring-outline-variant/20 focus-within:ring-secondary">
+                    <span class="material-symbols-outlined text-on-surface-variant text-body-md">search</span>
+                    <input class="bg-transparent border-none outline-none w-full px-3 text-body-md text-on-surface placeholder:text-on-surface-variant/60" placeholder="Search for problems..." type="text" />
+                </div>
+            </div>
+            <div class="flex items-center gap-6">
+                <button class="relative p-2 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors">
+                    <span class="material-symbols-outlined">notifications</span>
+                    <span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+                </button>
+                <div class="flex items-center gap-3 pl-4 border-l border-outline-variant/40">
+                    <div class="text-right hidden sm:block">
+                        <p class="text-label-md font-label-md text-on-surface leading-tight">Alex Rivers</p>
+                        <p class="text-label-sm font-label-sm text-on-surface-variant">Senior Mentor</p>
+                    </div>
+                    <img alt="Profile" class="w-9 h-9 rounded-full object-cover ring-2 ring-surface-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdiQgYZHcs1i5qOIAd2Gz8LdgoSvQ6l9pvdU259XtTr3xzItG-ASIars6oHKk0pg8wSgW7QvR7MCXUnRfArSLjb31qE3UIZ1qentFczBi65HRSN7DfNCiVD_ibUEqEgvGT4SVe8x-As0GRBSksIpp7h1ia6hYtl41MhY6eBSnaMXov3JNFGrtqmOWK3fyZnDnIvXey0aQOo324g28QXnpBGIkYxrIJYYKkyubysvClLl1RU5xdqIhiDw" />
+                </div>
+            </div>
+        </header>
+
+        <!-- ====== MAIN CONTENT ====== -->
+        <main class="relative pt-16 bg-background min-h-screen">
+            <div class="flex flex-col w-full px-margin-desktop py-8 gap-8 max-w-container-max mx-auto">
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+
+                    <!-- ====== LEFT SIDEBAR: PROFILE IDENTITY ====== -->
+                    <aside class="col-span-1 lg:col-span-4 flex flex-col gap-6">
+
+                        <!-- Profile Card -->
+                        <div class="bg-surface-container rounded-2xl p-6 shadow-sm flex flex-col items-center text-center relative overflow-hidden group">
+                            <div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div class="relative w-32 h-32 mb-4">
+                                <img alt="Profile Photo" class="w-full h-full object-cover rounded-full shadow-md z-10 relative" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdiQgYZHcs1i5qOIAd2Gz8LdgoSvQ6l9pvdU259XtTr3xzItG-ASIars6oHKk0pg8wSgW7QvR7MCXUnRfArSLjb31qE3UIZ1qentFczBi65HRSN7DfNCiVD_ibUEqEgvGT4SVe8x-As0GRBSksIpp7h1ia6hYtl41MhY6eBSnaMXov3JNFGrtqmOWK3fyZnDnIvXey0aQOo324g28QXnpBGIkYxrIJYYKkyubysvClLl1RU5xdqIhiDw" />
+                                <div class="absolute -inset-2 bg-gradient-to-tr from-primary to-secondary rounded-full opacity-20 blur-md z-0 group-hover:opacity-40 transition-opacity duration-500"></div>
+                            </div>
+                            <h1 class="font-headline-md text-headline-md text-on-surface mb-1 relative z-10">Jordan Rivera</h1>
+                            <p class="font-label-md text-label-md text-primary bg-primary-fixed/50 px-3 py-1 rounded-full uppercase tracking-wider mb-4 relative z-10">Senior Student</p>
+                            <p class="font-body-md text-body-md text-on-surface-variant mb-6 text-sm relative z-10">Computer Science major passionate about algorithmic problem solving and mentoring junior peers. Specializing in discrete mathematics and data structures.</p>
+                            <div class="flex gap-2 w-full relative z-10">
+                                <button class="flex-1 bg-primary text-on-primary font-label-md text-label-md py-2.5 rounded-lg shadow-sm hover:shadow-md transition-all flex items-center justify-center gap-2">
+                                    <span class="material-symbols-outlined text-sm">message</span>
+                                    Message
+                                </button>
+                                <button class="bg-surface-container-high text-on-surface p-2.5 rounded-lg hover:bg-surface-container-highest transition-colors flex items-center justify-center shadow-sm">
+                                    <span class="material-symbols-outlined text-sm">more_horiz</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Badges & Achievements -->
+                        <div class="bg-surface-container rounded-2xl p-6 shadow-sm flex flex-col gap-4">
+                            <h3 class="font-headline-md text-label-md text-on-surface uppercase tracking-widest border-b border-outline-variant/30 pb-2">Achievements</h3>
+                            <div class="flex flex-wrap gap-3">
+                                <div class="flex items-center gap-2 bg-surface-container-high rounded-xl p-2 pr-4 shadow-sm hover:-translate-y-1 transition-transform cursor-default">
+                                    <div class="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center text-secondary">
+                                        <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+                                    </div>
+                                    <span class="font-label-md text-label-sm text-on-surface">Top Solver '24</span>
+                                </div>
+                                <div class="flex items-center gap-2 bg-surface-container-high rounded-xl p-2 pr-4 shadow-sm hover:-translate-y-1 transition-transform cursor-default">
+                                    <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                                        <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">psychology</span>
+                                    </div>
+                                    <span class="font-label-md text-label-sm text-on-surface">Master Mentor</span>
+                                </div>
+                                <div class="flex items-center gap-2 bg-surface-container-high rounded-xl p-2 pr-4 shadow-sm hover:-translate-y-1 transition-transform cursor-default">
+                                    <div class="w-8 h-8 rounded-full bg-error-container text-on-error-container flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+                                    </div>
+                                    <span class="font-label-md text-label-sm text-on-surface">100+ Streak</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Stats Overview -->
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-surface-container rounded-2xl p-4 shadow-sm text-center flex flex-col items-center justify-center">
+                                <span class="font-display-lg text-headline-lg text-primary">342</span>
+                                <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide mt-1">Problems Solved</span>
+                            </div>
+                            <div class="bg-surface-container rounded-2xl p-4 shadow-sm text-center flex flex-col items-center justify-center">
+                                <span class="font-display-lg text-headline-lg text-secondary">89</span>
+                                <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide mt-1">Peers Helped</span>
+                            </div>
+                        </div>
+
+                    </aside>
+
+                    <!-- ====== RIGHT MAIN: PORTFOLIO & ACTIVITY ====== -->
+                    <main class="col-span-1 lg:col-span-8 flex flex-col gap-8">
+
+                        <!-- Contribution Graph -->
+                        <section class="bg-surface-container rounded-2xl p-6 shadow-sm">
+                            <div class="flex items-center justify-between mb-6">
+                                <h2 class="font-headline-md text-headline-md text-on-surface">Activity Graph</h2>
+                                <div class="flex items-center gap-4 text-label-sm font-label-md text-on-surface-variant">
+                                    <span>Less</span>
+                                    <div class="flex gap-1">
+                                        <div class="w-3 h-3 rounded-sm bg-surface-container-high"></div>
+                                        <div class="w-3 h-3 rounded-sm bg-primary/20"></div>
+                                        <div class="w-3 h-3 rounded-sm bg-primary/40"></div>
+                                        <div class="w-3 h-3 rounded-sm bg-primary/70"></div>
+                                        <div class="w-3 h-3 rounded-sm bg-primary"></div>
+                                    </div>
+                                    <span>More</span>
+                                </div>
+                            </div>
+                            <div class="w-full overflow-x-auto pb-2">
+                                <div class="min-w-[700px]">
+                                    <svg fill="none" height="110" id="contribution-graph" viewBox="0 0 700 110" width="100%" xmlns="http://www.w3.org/2000/svg">
+                                        <!-- will be populated by JS -->
+                                    </svg>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Recent Solutions -->
+                        <section class="bg-surface-container rounded-2xl p-6 shadow-sm flex-1 flex flex-col">
+                            <div class="flex items-center justify-between mb-6">
+                                <h2 class="font-headline-md text-headline-md text-on-surface">Recent Solutions</h2>
+                                <button class="text-primary font-label-md text-label-md hover:underline flex items-center gap-1">
+                                    View All
+                                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                                </button>
+                            </div>
+                            <div class="flex flex-col gap-3">
+
+                                <!-- Item 1 -->
+                                <div class="bg-surface rounded-xl p-4 flex items-center justify-between group hover:shadow-md transition-shadow">
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-10 h-10 rounded-lg bg-primary-fixed text-on-primary-fixed flex items-center justify-center group-hover:scale-105 transition-transform">
+                                            <span class="material-symbols-outlined">functions</span>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-headline-md text-body-lg text-on-surface">Advanced Graph Traversal Algorithms</h4>
+                                            <div class="flex items-center gap-3 mt-1">
+                                                <span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container-high px-2 py-0.5 rounded-md">Data Structures</span>
+                                                <span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">schedule</span>2 days ago</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="hidden sm:flex items-center gap-2 text-primary font-label-md text-label-sm">
+                                        <span class="material-symbols-outlined text-sm">visibility</span>
+                                        View Detail
+                                    </div>
+                                </div>
+
+                                <!-- Item 2 -->
+                                <div class="bg-surface rounded-xl p-4 flex items-center justify-between group hover:shadow-md transition-shadow">
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-10 h-10 rounded-lg bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center group-hover:scale-105 transition-transform">
+                                            <span class="material-symbols-outlined">data_object</span>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-headline-md text-body-lg text-on-surface">Optimizing Dynamic Programming Solutions</h4>
+                                            <div class="flex items-center gap-3 mt-1">
+                                                <span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container-high px-2 py-0.5 rounded-md">Algorithms</span>
+                                                <span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">schedule</span>5 days ago</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="hidden sm:flex items-center gap-2 text-primary font-label-md text-label-sm">
+                                        <span class="material-symbols-outlined text-sm">visibility</span>
+                                        View Detail
+                                    </div>
+                                </div>
+
+                                <!-- Item 3 -->
+                                <div class="bg-surface rounded-xl p-4 flex items-center justify-between group hover:shadow-md transition-shadow">
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-10 h-10 rounded-lg bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center group-hover:scale-105 transition-transform">
+                                            <span class="material-symbols-outlined">database</span>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-headline-md text-body-lg text-on-surface">Complex SQL Query Optimization</h4>
+                                            <div class="flex items-center gap-3 mt-1">
+                                                <span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container-high px-2 py-0.5 rounded-md">Databases</span>
+                                                <span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">schedule</span>1 week ago</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="hidden sm:flex items-center gap-2 text-primary font-label-md text-label-sm">
+                                        <span class="material-symbols-outlined text-sm">visibility</span>
+                                        View Detail
+                                    </div>
+                                </div>
+
+                            </div>
+                        </section>
+
+                    </main>
+
+                </div>
+
+            </div>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    var svg = document.getElementById('contribution-graph');
+                    var cols = 52;
+                    var rows = 7;
+                    var cellSize = 11;
+                    var cellGap = 3;
+                    var intensityColors = [
+                        '#dce9ff', // 0 - lightest
+                        '#bcc7de', // 1
+                        '#8590a6', // 2
+                        '#545f73', // 3
+                        '#091426' // 4 - darkest
+                    ];
+                    var content = '';
+                    for (var i = 0; i < cols; i++) {
+                        content += '<g transform="translate(' + (i * (cellSize + cellGap)) + ', 0)">';
+                        for (var j = 0; j < rows; j++) {
+                            var intensity = Math.floor(Math.random() * 5);
+                            // bias toward lighter values for realism
+                            if (Math.random() > 0.65) {
+                                intensity = 0;
+                            } else {
+                                intensity = Math.floor(Math.random() * (intensityColors.length - 1)) + 1;
+                            }
+                            content += '<rect y="' + (j * (cellSize + cellGap)) + '" width="' + cellSize + '" height="' +
+                                cellSize + '" rx="2" fill="' + intensityColors[intensity] +
+                                '" class="hover:stroke-primary stroke-2 transition-all cursor-pointer" />';
+                        }
+                        content += '</g>';
+                    }
+                    svg.innerHTML = content;
+                });
+            </script>
+
+        </main>
+
+    </div>
+
+</body>
+</html>
