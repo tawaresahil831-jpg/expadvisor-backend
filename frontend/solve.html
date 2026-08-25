@@ -1244,7 +1244,7 @@
                 </button>
                 <div class="flex items-center gap-3 pl-4 border-l border-outline-variant/40">
                     <div class="text-right hidden sm:block">
-                        <p class="text-label-md font-label-md text-on-surface leading-tight">Alex Rivers</p>
+                        <p class="text-label-md font-label-md text-on-surface leading-tight user-name-display">Alex Rivers</p>
                         <p class="text-label-sm font-label-sm text-on-surface-variant">Senior Mentor</p>
                     </div>
                     <img alt="Profile" class="w-9 h-9 rounded-full object-cover ring-2 ring-surface-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdiQgYZHcs1i5qOIAd2Gz8LdgoSvQ6l9pvdU259XtTr3xzItG-ASIars6oHKk0pg8wSgW7QvR7MCXUnRfArSLjb31qE3UIZ1qentFczBi65HRSN7DfNCiVD_ibUEqEgvGT4SVe8x-As0GRBSksIpp7h1ia6hYtl41MhY6eBSnaMXov3JNFGrtqmOWK3fyZnDnIvXey0aQOo324g28QXnpBGIkYxrIJYYKkyubysvClLl1RU5xdqIhiDw" />
@@ -1308,93 +1308,7 @@
                         <!-- Problem List -->
                         <div class="flex flex-col gap-4" id="problem-list">
 
-                            <!-- Problem Card 1 - Urgent -->
-                            <div class="bg-surface rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow group relative overflow-hidden">
-                                <div class="absolute left-0 top-0 bottom-0 w-1 bg-error"></div>
-                                <div class="flex flex-col lg:flex-row gap-6">
-                                    <div class="flex-1 flex flex-col gap-3">
-                                        <div class="flex items-center gap-3 flex-wrap">
-                                            <span class="bg-error-container text-on-error-container text-label-sm font-label-sm px-3 py-1 rounded-full flex items-center gap-1">
-                                                <span class="material-symbols-outlined text-[14px]">local_fire_department</span> Urgent
-                                            </span>
-                                            <span class="bg-surface-container-high text-on-surface text-label-sm font-label-sm px-3 py-1 rounded-full">CS401 - Data Structures</span>
-                                            <span class="bg-surface-container-high text-on-surface text-label-sm font-label-sm px-3 py-1 rounded-full">Graph Theory</span>
-                                        </div>
-                                        <h3 class="text-headline-md font-headline-md text-on-surface mt-1 group-hover:text-primary transition-colors cursor-pointer">Binary Search Tree Insertion Causing Duplicate Node Issues</h3>
-                                        <p class="text-body-md font-body-md text-on-surface-variant line-clamp-2">“I've implemented Binary Search Tree insertion, but duplicate values are causing unexpected behavior and incorrect node placement. I'm not sure whether to ignore duplicates, store a count, or handle them using a separate subtree.”</p>
-                                        <div class="flex items-center gap-4 mt-auto pt-4">
-                                            <div class="flex items-center gap-2">
-                                                <img class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAd18Ug6N2cQXPHAhcgS6wjRLihI1hg8dkeDj43hgbVQ81UwokoOI1B1becujQFJvgfr-i-rUT05auVg27fYgOqSubyuW-9-tkYITwQceNaLoSGrt0PrlxZR1eiwFL9gWcngBnLq2-DJIOPPBB4RXIN-Hqv9_Kd8weEm-uNpmor7_rZUiBvBttrac7fXcfIM_kPiMhxXpbQIkL1aajXYk07H8IQOLFxQRd_ld7cyFaMKllZ5QJ7grtT8w" />
-                                                <div class="flex flex-col">
-                                                    <span class="text-label-sm font-label-sm text-on-surface">User@dyp</span>
-                                                    <span class="text-[10px] font-label-sm text-on-surface-variant uppercase tracking-wider">Rep: 120 • Junior</span>
-                                                </div>
-                                            </div>
-                                            <div class="h-8 w-[1px] bg-outline-variant/30"></div>
-                                            <div class="flex items-center gap-1 text-on-surface-variant">
-                                                <span class="material-symbols-outlined text-[16px]">schedule</span>
-                                                <span class="text-label-sm font-label-sm">Posted 1h ago</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="flex flex-row lg:flex-col items-center lg:items-end justify-between lg:justify-center gap-4 shrink-0 lg:w-48 bg-surface-container-lowest p-4 rounded-xl">
-                                        <div class="text-center lg:text-right">
-                                            <span class="block text-headline-md font-headline-md text-secondary">0</span>
-                                            <span class="block text-label-sm font-label-sm text-on-surface-variant">Points Bounty</span>
-                                        </div>
-                                        <button class="w-full bg-primary hover:bg-inverse-surface text-on-primary font-label-md text-label-md py-3 px-6 rounded-xl transition-all shadow-sm shadow-primary/20 hover:shadow-md flex items-center justify-center gap-2">
-                                            Solve <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Problem Card 2 - Advanced -->
-                            <div class="bg-surface rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow group relative overflow-hidden">
-                                <div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary"></div>
-                                <div class="flex flex-col lg:flex-row gap-6">
-                                    <div class="flex-1 flex flex-col gap-3">
-                                        <div class="flex items-center gap-3 flex-wrap">
-                                            <span class="bg-secondary-container text-on-secondary-container text-label-sm font-label-sm px-3 py-1 rounded-full flex items-center gap-1">
-                                                <span class="material-symbols-outlined text-[14px]">psychology</span> Advanced
-                                            </span>
-                                            <span class="bg-surface-container-high text-on-surface text-label-sm font-label-sm px-3 py-1 rounded-full">PHY302 - Quantum Mechanics</span>
-                                            <span class="bg-surface-container-high text-on-surface text-label-sm font-label-sm px-3 py-1 rounded-full">Wave Functions</span>
-                                        </div>
-                                        <h3 class="text-headline-md font-headline-md text-on-surface mt-1 group-hover:text-primary transition-colors cursor-pointer">Normalization of a piecewise wave function</h3>
-                                        <p class="text-body-md font-body-md text-on-surface-variant line-clamp-2">Struggling with Problem Set 3, Q4. When normalizing a wave function that is non-zero only between x=0 and x=L, my integral over the probability density is yielding an imaginary component. Can someone check my limits of integration?</p>
-                                        <div class="flex items-center gap-4 mt-auto pt-4">
-                                            <div class="flex items-center gap-2">
-                                                <div class="w-8 h-8 rounded-full bg-tertiary-container flex items-center justify-center text-on-tertiary-container text-label-sm font-label-sm">
-                                                    SJ
-                                                </div>
-                                                <div class="flex flex-col">
-                                                    <span class="text-label-sm font-label-sm text-on-surface">User@ABC</span>
-                                                    <span class="text-[10px] font-label-sm text-on-surface-variant uppercase tracking-wider">Rep: 450 • Senior</span>
-                                                </div>
-                                            </div>
-                                            <div class="h-8 w-[1px] bg-outline-variant/30"></div>
-                                            <div class="flex items-center gap-1 text-on-surface-variant">
-                                                <span class="material-symbols-outlined text-[16px]">schedule</span>
-                                                <span class="text-label-sm font-label-sm">Posted 3h ago</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="flex flex-row lg:flex-col items-center lg:items-end justify-between lg:justify-center gap-4 shrink-0 lg:w-48 bg-surface-container-lowest p-4 rounded-xl">
-                                        <div class="text-center lg:text-right">
-                                            <span class="block text-headline-md font-headline-md text-secondary"><br /></span>
-                                            <span class="block text-label-sm font-label-sm text-on-surface-variant">Points Bounty</span>
-                                        </div>
-                                        <button class="w-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md py-3 px-6 rounded-xl transition-all shadow-sm flex items-center justify-center gap-2">
-                                            View <span class="material-symbols-outlined text-[18px]">visibility</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <!-- Load More -->
+                            <!-- Load More -->
                         <div class="mt-8 flex justify-center">
                             <button class="px-6 py-3 rounded-full bg-surface-container-low text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors flex items-center gap-2">
                                 Load More Problems <span class="material-symbols-outlined text-[20px]">refresh</span>
@@ -1532,6 +1446,179 @@
         </main>
 
     </div>
+
+<script src="js/api.js?v=2"></script>
+<script>
+  requireAuth();
+  populateUserProfile();
+</script>
+
+        <!-- Detail Modal -->
+        <dialog id="detailModal" class="p-8 rounded-2xl backdrop:bg-black/50 shadow-2xl bg-surface border border-outline-variant/30 w-full max-w-2xl" style="background:#f8f9ff;">
+            <div class="flex justify-between items-start mb-4">
+                <h3 id="detailTitle" class="text-headline-md text-on-surface font-bold" style="color:#0b1c30;">Loading...</h3>
+                <button onclick="document.getElementById('detailModal').close()" class="p-2 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            
+            <div class="mb-6">
+                <div class="flex gap-2 mb-4" id="detailTags">
+                </div>
+                <p id="detailDescription" class="text-body-lg text-on-surface-variant whitespace-pre-wrap leading-relaxed" style="color:#45474c;">...</p>
+            </div>
+            
+            <hr class="border-outline-variant/30 my-6">
+            
+            <h4 class="text-title-md font-semibold text-on-surface mb-4" style="color:#0b1c30;">Answers & Comments</h4>
+            <div id="detailComments" class="flex flex-col gap-4 max-h-64 overflow-y-auto mb-6 pr-2">
+                <p class="text-center text-on-surface-variant text-sm py-4">Loading comments...</p>
+            </div>
+            
+            <form id="commentForm" class="flex gap-3">
+                <input type="text" id="commentInput" placeholder="Add your answer..." required class="flex-1 px-4 py-3 rounded-xl bg-surface border border-outline-variant/50 text-body-md text-on-surface focus:outline-none focus:border-secondary focus:ring-2 focus:ring-secondary/50">
+                <button type="submit" id="submitCommentBtn" class="px-6 py-2 rounded-lg bg-secondary text-on-secondary hover:bg-secondary-container transition-colors shadow-sm" style="background:#4648d4; color:#ffffff;">Post Answer</button>
+            </form>
+        </dialog>
+
+<script>
+    let currentDetailExpId = null;
+
+    async function loadSolveProblems() {
+        const container = document.getElementById('problem-list');
+        container.innerHTML = '<p class="text-center py-4">Loading Open Problems...</p>';
+        
+        const response = await apiRequest('/experiences');
+        
+        if (response.status === 200 && response.data.success) {
+            let expList = response.data.data;
+            // Filter: Only open problems (e.g. 0 comments)
+            expList = expList.filter(e => e.comments_count === 0);
+            
+            if (expList.length === 0) {
+                container.innerHTML = '<p class="text-center py-4">No open problems found. Great job community!</p>';
+                return;
+            }
+            
+            container.innerHTML = expList.map(exp => `
+                <div class="bg-surface rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow group relative overflow-hidden">
+                    <div class="absolute left-0 top-0 bottom-0 w-1 bg-error"></div>
+                    <div class="flex flex-col lg:flex-row gap-6">
+                        <div class="flex-1 flex flex-col gap-3">
+                            <div class="flex items-center gap-3 flex-wrap">
+                                <span class="bg-surface-container-high text-on-surface text-label-sm font-label-sm px-3 py-1 rounded-full">${exp.category || 'General'}</span>
+                                <span class="bg-surface-container-high text-on-surface text-label-sm font-label-sm px-3 py-1 rounded-full">${exp.company || 'Company'}</span>
+                            </div>
+                            <h3 onclick="openExperienceDetail(${exp.experience_id})" class="text-headline-md font-headline-md text-on-surface mt-1 group-hover:text-primary transition-colors cursor-pointer">${exp.title}</h3>
+                            <p class="text-body-md font-body-md text-on-surface-variant line-clamp-2">${exp.content}</p>
+                            <div class="flex items-center gap-4 mt-auto pt-4">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center text-secondary font-bold">
+                                        ${(exp.author_name || 'U')[0].toUpperCase()}
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <span class="text-label-sm font-label-sm text-on-surface">${exp.author_name || 'Unknown'}</span>
+                                        <span class="text-[10px] font-label-sm text-on-surface-variant uppercase tracking-wider">${exp.semester || 'All'}</span>
+                                    </div>
+                                </div>
+                                <div class="h-8 w-[1px] bg-outline-variant/30"></div>
+                                <div class="flex items-center gap-1 text-on-surface-variant">
+                                    <span class="material-symbols-outlined text-[16px]">schedule</span>
+                                    <span class="text-label-sm font-label-sm">${new Date(exp.created_at).toLocaleDateString()}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex flex-row lg:flex-col items-center lg:items-end justify-between lg:justify-center gap-4 shrink-0 lg:w-48 bg-surface-container-lowest p-4 rounded-xl">
+                            <div class="text-center lg:text-right">
+                                <span class="block text-headline-md font-headline-md text-secondary">50</span>
+                                <span class="block text-label-sm font-label-sm text-on-surface-variant">Points Bounty</span>
+                            </div>
+                            <button onclick="openExperienceDetail(${exp.experience_id})" class="w-full bg-primary hover:bg-inverse-surface text-on-primary font-label-md text-label-md py-3 px-6 rounded-xl transition-all shadow-sm shadow-primary/20 hover:shadow-md flex items-center justify-center gap-2">
+                                Solve <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        } else {
+            container.innerHTML = '<p class="text-error text-center py-4">Failed to load problems.</p>';
+        }
+    }
+
+    async function openExperienceDetail(id) {
+        currentDetailExpId = id;
+        const modal = document.getElementById('detailModal');
+        
+        document.getElementById('detailTitle').textContent = 'Loading...';
+        document.getElementById('detailDescription').textContent = '...';
+        document.getElementById('detailTags').innerHTML = '';
+        document.getElementById('detailComments').innerHTML = '<p class="text-center text-on-surface-variant text-sm py-4">Loading comments...</p>';
+        document.getElementById('commentInput').value = '';
+        
+        modal.showModal();
+        
+        const response = await apiRequest(`/experiences/${id}`);
+        if (response.status === 200 && response.data.success) {
+            const exp = response.data.data;
+            document.getElementById('detailTitle').textContent = exp.title;
+            document.getElementById('detailDescription').textContent = exp.content;
+            
+            document.getElementById('detailTags').innerHTML = `
+                <span class="px-2.5 py-1 rounded-md bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm tracking-wider uppercase">${exp.category || 'General'}</span>
+            `;
+            
+            renderComments(exp.comments || []);
+        }
+    }
+    
+    function renderComments(comments) {
+        const container = document.getElementById('detailComments');
+        if (comments.length === 0) {
+            container.innerHTML = '<p class="text-center text-on-surface-variant text-sm py-4">No answers yet. Be the first!</p>';
+            return;
+        }
+        
+        container.innerHTML = comments.map(c => `
+            <div class="bg-surface-container-low p-4 rounded-xl border border-outline-variant/20">
+                <div class="flex justify-between items-center mb-1">
+                    <span class="font-label-md text-on-surface" style="font-weight:600;">${c.author_name || 'User'}</span>
+                    <span class="text-[11px] text-on-surface-variant">${new Date(c.created_at).toLocaleDateString()}</span>
+                </div>
+                <p class="text-body-sm text-on-surface-variant">${c.content}</p>
+            </div>
+        `).join('');
+    }
+    
+    document.getElementById('commentForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (!currentDetailExpId) return;
+        
+        const content = document.getElementById('commentInput').value.trim();
+        if (!content) return;
+        
+        const btn = document.getElementById('submitCommentBtn');
+        btn.disabled = true;
+        btn.textContent = 'Posting...';
+        
+        const response = await apiRequest(`/experiences/${currentDetailExpId}/comments`, {
+            method: 'POST',
+            body: { comment: content }
+        });
+        
+        if (response.status === 201 && response.data.success) {
+            document.getElementById('commentInput').value = '';
+            openExperienceDetail(currentDetailExpId);
+            loadSolveProblems(); // Refresh the list since we answered it!
+        } else {
+            alert(response.data.message || 'Failed to post comment');
+        }
+        
+        btn.disabled = false;
+        btn.textContent = 'Post Answer';
+    });
+
+    document.addEventListener('DOMContentLoaded', loadSolveProblems);
+</script>
 
 </body>
 </html>

@@ -151,7 +151,8 @@ tailwind.config = {
           <p class="font-body-md text-body-md text-on-surface-variant">Sign in to continue to EXPadviser!!</p>
         </div>
 
-        <form class="space-y-gutter w-full">
+        <div id="errorMessage" class="text-error font-label-md hidden mb-4"></div>
+        <form id="loginForm" class="space-y-gutter w-full">
           <div class="flex flex-col gap-base">
             <label class="font-label-md text-label-md text-on-surface" for="email">Email Address</label>
             <input class="w-full bg-surface-container-lowest text-on-surface font-body-md text-body-md px-4 py-3 rounded-DEFAULT shadow-sm focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-opacity-50 transition-shadow"
@@ -163,8 +164,13 @@ tailwind.config = {
               <label class="font-label-md text-label-md text-on-surface" for="password">Password</label>
               <a class="font-label-sm text-label-sm text-secondary hover:text-on-secondary-fixed-variant transition-colors" href="forgot_pass.html">Forgot Password?</a>
             </div>
-            <input class="w-full bg-surface-container-lowest text-on-surface font-body-md text-body-md px-4 py-3 rounded-DEFAULT shadow-sm focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-opacity-50 transition-shadow"
-                   id="password" placeholder="••••••••" required type="password">
+            <div class="relative">
+              <input class="w-full bg-surface-container-lowest text-on-surface font-body-md text-body-md px-4 py-3 pr-12 rounded-DEFAULT shadow-sm focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-opacity-50 transition-shadow"
+                     id="password" placeholder="••••••••" required type="password">
+              <button type="button" id="togglePasswordBtn" class="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-on-surface transition-colors flex items-center justify-center">
+                <span class="material-symbols-outlined text-[20px]" id="togglePasswordIcon">visibility</span>
+              </button>
+            </div>
           </div>
 
           <button class="w-full bg-secondary text-on-secondary font-label-md text-label-md py-3 rounded-lg shadow-md hover:shadow-lg transition-shadow flex items-center justify-center gap-2" type="submit">
@@ -181,7 +187,7 @@ tailwind.config = {
         </div>
 
         <div class="mt-gutter space-y-base w-full">
-          <button class="w-full bg-surface-container-lowest text-on-surface font-label-md text-label-md py-3 rounded-DEFAULT shadow-sm hover:shadow-md transition-shadow flex items-center justify-center gap-3">
+          <button id="googleBtn" type="button" class="w-full bg-surface-container-lowest text-on-surface font-label-md text-label-md py-3 rounded-DEFAULT shadow-sm hover:shadow-md transition-shadow flex items-center justify-center gap-3">
             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
               <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
@@ -190,10 +196,7 @@ tailwind.config = {
             </svg>
             Google
           </button>
-          <button class="w-full bg-surface-container-lowest text-on-surface font-label-md text-label-md py-3 rounded-DEFAULT shadow-sm hover:shadow-md transition-shadow flex items-center justify-center gap-3">
-            <span class="material-symbols-outlined text-[20px] text-primary">school</span>
-            University SSO
-          </button>
+
         </div>
 
         <div class="mt-margin-desktop text-center">
@@ -207,5 +210,84 @@ tailwind.config = {
 
   </div>
 </main>
+
+<script src="js/api.js?v=2"></script>
+<script>
+  if (getToken()) window.location.href = 'dashboard.html';
+
+  document.getElementById('googleBtn').addEventListener('click', async () => {
+    const errorMsg = document.getElementById('errorMessage');
+    errorMsg.classList.add('hidden');
+    
+    const email = prompt('Enter your Google email address:');
+    if (!email || !email.trim()) return;
+    
+    let response = await apiRequest('/auth/login', {
+        method: 'POST',
+        body: { email: email.trim(), password: 'google_sso_' + email.trim() }
+    });
+    
+    if (response.status !== 200) {
+        const name = prompt('First time? Enter your name:');
+        if (!name || !name.trim()) return;
+        
+        response = await apiRequest('/auth/register', {
+            method: 'POST',
+            body: { name: name.trim(), email: email.trim(), password: 'google_sso_' + email.trim() }
+        });
+    }
+    
+    if (response.status === 200 || response.status === 201) {
+        setToken(response.data.data.token);
+        window.location.href = 'dashboard.html';
+    } else {
+        errorMsg.textContent = 'Google Sign In failed: ' + (response.data ? response.data.message : 'Unknown error');
+        errorMsg.classList.remove('hidden');
+    }
+  });
+
+  
+  const toggleBtn = document.getElementById('togglePasswordBtn');
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      const pwdInput = document.getElementById('password');
+      const pwdIcon = document.getElementById('togglePasswordIcon');
+      if (pwdInput.type === 'password') {
+        pwdInput.type = 'text';
+        pwdIcon.textContent = 'visibility_off';
+      } else {
+        pwdInput.type = 'password';
+        pwdIcon.textContent = 'visibility';
+      }
+    });
+  }
+
+  document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const errorMsg = document.getElementById('errorMessage');
+    const submitBtn = e.target.querySelector('button[type="submit"]');
+    
+    errorMsg.classList.add('hidden');
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = `<span>Signing In...</span>`;
+    
+    const response = await apiRequest('/auth/login', {
+      method: 'POST',
+      body: { email, password }
+    });
+    
+    if (response.status === 200 && response.data.success) {
+      setToken(response.data.data.token);
+      window.location.href = 'dashboard.html';
+    } else {
+      errorMsg.textContent = response.data.message || 'Login failed. Please try again.';
+      errorMsg.classList.remove('hidden');
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = `<span>Sign In</span>`;
+    }
+  });
+</script>
 </body>
 </html>

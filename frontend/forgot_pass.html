@@ -754,7 +754,8 @@
                         </p>
                     </div>
 
-                    <form class="flex flex-col gap-6" id="resetForm" onsubmit="event.preventDefault(); handleResetSubmit();">
+                    <div id="statusMessage" class="hidden mb-6 p-4 rounded-lg"></div>
+                    <form class="flex flex-col gap-6" id="resetForm">
                         <div class="flex flex-col gap-2 group">
                             <label class="font-label-sm text-label-sm text-on-surface-variant ml-1 transition-colors group-focus-within:text-primary" for="email">Email Address</label>
                             <div class="relative">
@@ -856,5 +857,45 @@
         <div class="max-w-7xl mx-auto px-margin-desktop text-center text-on-surface-variant font-label-sm text-label-sm">© 2024 EXP Adviser. Empowering academic growth through precise guidance.</div>
     </footer>
 
+
+<script src="js/api.js?v=2"></script>
+<script>
+    document.getElementById('resetForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('email').value;
+        const btn = e.target.querySelector('button[type="submit"]');
+        const statusMsg = document.getElementById('statusMessage');
+        
+        btn.disabled = true;
+        btn.innerHTML = `<span>Sending...</span><span class="material-symbols-outlined text-[18px] animate-spin">refresh</span>`;
+        statusMsg.classList.add('hidden');
+        
+        try {
+            const response = await apiRequest('/auth/forgot-password', {
+                method: 'POST',
+                body: { email }
+            });
+            
+            if (response.status === 200) {
+                const devLink = response.data.dev_link;
+                statusMsg.innerHTML = `
+                    <div class="mb-2">If an account exists for ${email}, a reset code has been sent.</div>
+                    ${devLink ? `<a href="${devLink}" class="inline-block mt-2 px-4 py-2 bg-primary text-on-primary rounded-lg text-sm hover:bg-primary/90 transition-colors">Presentation Shortcut: Click to Reset</a>` : ''}
+                `;
+                statusMsg.className = 'font-label-md mb-6 p-4 rounded-lg bg-surface-container-high text-on-surface border border-outline-variant/30 text-center block';
+            } else {
+                statusMsg.textContent = response.data ? response.data.message : 'An error occurred';
+                statusMsg.className = 'font-label-md mb-6 p-4 rounded-lg bg-error-container text-on-error-container border border-error/30 text-center block';
+            }
+        } catch (error) {
+            statusMsg.textContent = 'Network error occurred';
+            statusMsg.className = 'font-label-md mb-6 p-4 rounded-lg bg-error-container text-on-error-container border border-error/30 text-center block';
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = `<span>Send Recovery Link</span>`;
+            document.getElementById('email').value = '';
+        }
+    });
+</script>
 </body>
 </html>

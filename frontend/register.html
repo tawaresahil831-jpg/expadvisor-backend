@@ -541,11 +541,11 @@
 
                     <!-- Social Sign-in Buttons -->
                     <div class="flex flex-col sm:flex-row gap-4 mb-8">
-                        <button class="flex-1 flex items-center justify-center gap-3 py-3 px-4 rounded-xl bg-surface hover:bg-surface-container transition-colors border border-outline-variant/40 shadow-sm text-label-md text-on-surface" style="background:#f8f9ff; color:#0b1c30; border-color:rgba(197,198,205,0.4);">
+                        <button id="googleBtn" type="button" class="flex-1 flex items-center justify-center gap-3 py-3 px-4 rounded-xl bg-surface hover:bg-surface-container transition-colors border border-outline-variant/40 shadow-sm text-label-md text-on-surface" style="background:#f8f9ff; color:#0b1c30; border-color:rgba(197,198,205,0.4);">
                             <img class="w-5 h-5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqVuR1Yh-dCSXwljz9bHqFiYmMwxLn7WkI_znO2m1Iz730hmNOW5UiYcDI-vGrEeyUDD1I_bf0Qxdir2IIGQm-NNH4Nrn_5MLBZuOBbQjkkez8NIDc-65dpn_4OsYXY9gYKO88vesLQaiKeynVnLij6kvf05TkEN7f1G-ESCKhlJfARehm-rh3EBJsemkhEiRK6M5H7qtCdjUZDtiwof2mw4SJJT0BVQE8zQZAgkL7cx9s9tvDLeffZQ" alt="Google">
                             Continue with Google
                         </button>
-                        <button class="flex-1 flex items-center justify-center gap-3 py-3 px-4 rounded-xl bg-surface hover:bg-surface-container transition-colors border border-outline-variant/40 shadow-sm text-label-md text-on-surface" style="background:#f8f9ff; color:#0b1c30; border-color:rgba(197,198,205,0.4);">
+                        <button id="googleBtn" type="button" class="flex-1 flex items-center justify-center gap-3 py-3 px-4 rounded-xl bg-surface hover:bg-surface-container transition-colors border border-outline-variant/40 shadow-sm text-label-md text-on-surface" style="background:#f8f9ff; color:#0b1c30; border-color:rgba(197,198,205,0.4);">
                             <img class="w-5 h-5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKzKQl_MQfZmxGNGJx6TEmHDNHKw9zb950_Yu3TFJYWm_kc4JYKfPT_bMxqaw3VN6g6eLonuG2VsmkXCJIm7InFbwdkRyLSsrjujVyDJ_ljnvrrfSfr4GIh-QNaBIvsZ43tbzoSOj9wUtSfIdAllLDrgE3mrYtoSc9rrJQgei4oL0bYmZbNnwc-yK6xq8sZz_p7raG3ks0qQnQ6pMH-joa_xLMt_alSns8x-1azcMsvSaL78JaE5TuHg" alt="Microsoft">
                             Continue with Microsoft
                         </button>
@@ -559,7 +559,8 @@
                     </div>
 
                     <!-- Form -->
-                    <form class="flex flex-col gap-6">
+                    <div id="errorMessage" class="hidden mb-4 p-4 text-error bg-error/10 border border-error/20 rounded-xl text-center font-label-md"></div>
+                    <form id="registerForm" class="flex flex-col gap-6">
 
                         <!-- Row: Full Name + Username -->
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -572,7 +573,7 @@
                             <div class="flex flex-col gap-1.5">
                                 <label class="text-label-sm text-on-surface" style="color:#0b1c30;">Username</label>
                                 <div class="relative">
-                                    <input class="w-full px-4 py-3 rounded-xl bg-error-container/20 border border-error text-body-md text-on-surface focus:outline-none focus:border-error focus:ring-4 focus:ring-error/10 transition-all pr-10" style="background:rgba(255,218,214,0.2); border-color:#ba1a1a; color:#0b1c30;" type="text" value="XYZ">
+                                    <input class="w-full px-4 py-3 rounded-xl bg-error-container/20 border border-error text-body-md text-on-surface focus:outline-none focus:border-error focus:ring-4 focus:ring-error/10 transition-all pr-10" style="background:rgba(255,218,214,0.2); border-color:#ba1a1a; color:#0b1c30;" type="text" id="username" value="XYZ">
                                     <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-error text-[20px]" style="color:#ba1a1a;">error</span>
                                 </div>
                                 <span class="text-label-sm text-error mt-0.5" style="color:#ba1a1a;"> </span>
@@ -585,7 +586,7 @@
                             <div class="flex flex-col gap-1.5">
                                 <label class="text-label-sm text-on-surface" style="color:#0b1c30;">Email ID</label>
                                 <div class="relative">
-                                    <input class="w-full px-4 py-3 rounded-xl bg-surface border border-outline-variant/50 text-body-md text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-secondary focus:ring-4 focus:ring-secondary/10 transition-all pl-10" style="background:#f8f9ff; border-color:rgba(197,198,205,0.5); color:#0b1c30;" placeholder="Enter your email address" type="email">
+                                    <input class="w-full px-4 py-3 rounded-xl bg-surface border border-outline-variant/50 text-body-md text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-secondary focus:ring-4 focus:ring-secondary/10 transition-all pl-10" style="background:#f8f9ff; border-color:rgba(197,198,205,0.5); color:#0b1c30;" placeholder="Enter your email address" type="email" id="email">
                                     <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant/50 text-[20px]" style="color:rgba(69,71,76,0.5);">mail</span>
                                 </div>
                             </div>
@@ -609,7 +610,7 @@
                             <div class="flex flex-col gap-1.5">
                                 <label class="text-label-sm text-on-surface" style="color:#0b1c30;">Set Password</label>
                                 <div class="relative">
-                                    <input class="w-full px-4 py-3 rounded-xl bg-surface border border-outline-variant/50 text-body-md text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-secondary focus:ring-4 focus:ring-secondary/10 transition-all pr-10" style="background:#f8f9ff; border-color:rgba(197,198,205,0.5); color:#0b1c30;" placeholder="Enter password" type="password" value="pass123">
+                                    <input class="w-full px-4 py-3 rounded-xl bg-surface border border-outline-variant/50 text-body-md text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-secondary focus:ring-4 focus:ring-secondary/10 transition-all pr-10" style="background:#f8f9ff; border-color:rgba(197,198,205,0.5); color:#0b1c30;" placeholder="Enter password" type="password" id="password" value="pass123">
                                     <button class="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary transition-colors" type="button" style="color:#45474c;">
                                         <span class="material-symbols-outlined text-[20px]">visibility</span>
                                     </button>
@@ -628,7 +629,7 @@
                             <div class="flex flex-col gap-1.5">
                                 <label class="text-label-sm text-on-surface" style="color:#0b1c30;">Confirm Password</label>
                                 <div class="relative">
-                                    <input class="w-full px-4 py-3 rounded-xl bg-surface border border-outline-variant/50 text-body-md text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-secondary focus:ring-4 focus:ring-secondary/10 transition-all pr-10" style="background:#f8f9ff; border-color:rgba(197,198,205,0.5); color:#0b1c30;" placeholder="Re-enter password" type="password">
+                                    <input class="w-full px-4 py-3 rounded-xl bg-surface border border-outline-variant/50 text-body-md text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-secondary focus:ring-4 focus:ring-secondary/10 transition-all pr-10" style="background:#f8f9ff; border-color:rgba(197,198,205,0.5); color:#0b1c30;" placeholder="Re-enter password" type="password" id="confirmPassword">
                                     <button class="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary transition-colors" type="button" style="color:#45474c;">
                                         <span class="material-symbols-outlined text-[20px]">visibility_off</span>
                                     </button>
@@ -694,20 +695,20 @@
                         
                         <div class="flex flex-col gap-2">
                             <label class="text-label-sm text-on-surface" style="color:#0b1c30;">Skills / Interests</label>
-                            <div class="flex flex-wrap gap-2">
-                                <button class="px-3 py-1.5 rounded-lg border border-secondary bg-secondary/10 text-secondary text-label-sm hover:bg-secondary/20 transition-colors flex items-center gap-1" type="button" style="border-color:#4648d4; background:rgba(70,72,212,0.1); color:#4648d4;">
+                            <div id="skillsContainer" class="flex flex-wrap gap-2">
+                                <button class="skill-btn px-3 py-1.5 rounded-lg border border-secondary bg-secondary/10 text-secondary text-label-sm hover:bg-secondary/20 transition-colors flex items-center gap-1" type="button" style="border-color:#4648d4; background:rgba(70,72,212,0.1); color:#4648d4;">
                                     Computer Science <span class="material-symbols-outlined text-[14px]">close</span>
                                 </button>
-                                <button class="px-3 py-1.5 rounded-lg border border-outline-variant bg-surface text-on-surface-variant text-label-sm hover:bg-surface-container transition-colors" type="button" style="border-color:rgba(197,198,205,0.5); background:#f8f9ff; color:#45474c;">
+                                <button class="skill-btn px-3 py-1.5 rounded-lg border border-outline-variant bg-surface text-on-surface-variant text-label-sm hover:bg-surface-container transition-colors" type="button" style="border-color:rgba(197,198,205,0.5); background:#f8f9ff; color:#45474c;">
                                     Mathematics
                                 </button>
-                                <button class="px-3 py-1.5 rounded-lg border border-outline-variant bg-surface text-on-surface-variant text-label-sm hover:bg-surface-container transition-colors" type="button" style="border-color:rgba(197,198,205,0.5); background:#f8f9ff; color:#45474c;">
+                                <button class="skill-btn px-3 py-1.5 rounded-lg border border-outline-variant bg-surface text-on-surface-variant text-label-sm hover:bg-surface-container transition-colors" type="button" style="border-color:rgba(197,198,205,0.5); background:#f8f9ff; color:#45474c;">
                                     Physics
                                 </button>
-                                <button class="px-3 py-1.5 rounded-lg border border-outline-variant bg-surface text-on-surface-variant text-label-sm hover:bg-surface-container transition-colors" type="button" style="border-color:rgba(197,198,205,0.5); background:#f8f9ff; color:#45474c;">
+                                <button class="skill-btn px-3 py-1.5 rounded-lg border border-outline-variant bg-surface text-on-surface-variant text-label-sm hover:bg-surface-container transition-colors" type="button" style="border-color:rgba(197,198,205,0.5); background:#f8f9ff; color:#45474c;">
                                     Design
                                 </button>
-                                <button class="px-3 py-1.5 rounded-lg border border-dashed border-outline-variant bg-surface text-on-surface-variant text-label-sm hover:bg-surface-container transition-colors flex items-center gap-1" type="button" style="border-color:rgba(197,198,205,0.5); background:#f8f9ff; color:#45474c;">
+                                <button id="addSkillBtn" class="px-3 py-1.5 rounded-lg border border-dashed border-outline-variant bg-surface text-on-surface-variant text-label-sm hover:bg-surface-container transition-colors flex items-center gap-1" type="button" style="border-color:rgba(197,198,205,0.5); background:#f8f9ff; color:#45474c;">
                                     <span class="material-symbols-outlined text-[16px]">add</span> Add more
                                 </button>
                             </div>
@@ -762,5 +763,102 @@
         </div>
     </footer>
 
+
+<script src="js/api.js?v=2"></script>
+<script>
+  if (getToken()) window.location.href = 'dashboard.html';
+
+  document.getElementById('googleBtn').addEventListener('click', async () => {
+    const errorMsg = document.getElementById('errorMessage');
+    errorMsg.classList.add('hidden');
+    const email = prompt('Enter your Google email address:');
+    if (!email || !email.trim()) return;
+    const name = prompt('Enter your name:');
+    if (!name || !name.trim()) return;
+    let response = await apiRequest('/auth/login', { method: 'POST', body: { email: email.trim(), password: 'google_sso_' + email.trim() } });
+    if (response.status !== 200) {
+        response = await apiRequest('/auth/register', { method: 'POST', body: { name: name.trim(), email: email.trim(), password: 'google_sso_' + email.trim() } });
+    }
+    if (response.status === 200 || response.status === 201) {
+        setToken(response.data.data.token);
+        window.location.href = 'dashboard.html';
+    } else {
+        errorMsg.textContent = 'Google Sign In failed.';
+        errorMsg.classList.remove('hidden');
+    }
+  });
+
+  document.getElementById('registerForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const username = document.getElementById('username').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+    const errorMsg = document.getElementById('errorMessage');
+    const submitBtn = e.target.querySelector('button[type="submit"]');
+    
+    errorMsg.classList.add('hidden');
+    if (password !== confirmPassword) {
+        errorMsg.textContent = 'Passwords do not match.';
+        errorMsg.classList.remove('hidden');
+        return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = `<span>Creating Account...</span>`;
+    
+    const response = await apiRequest('/auth/register', { method: 'POST', body: { name: username, email, password } });
+    if (response.status === 201 && response.data.success) {
+      setToken(response.data.data.token);
+      window.location.href = 'dashboard.html';
+    } else {
+      errorMsg.textContent = response.data.message || 'Registration failed.';
+      errorMsg.classList.remove('hidden');
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = `Create Account`;
+    }
+  });
+
+  const skillsContainer = document.getElementById('skillsContainer');
+  const addSkillBtn = document.getElementById('addSkillBtn');
+
+  function toggleSkillBtn(btn) {
+      const isActive = btn.classList.contains('bg-secondary/10');
+      if (isActive) {
+          btn.className = 'skill-btn px-3 py-1.5 rounded-lg border border-outline-variant bg-surface text-on-surface-variant text-label-sm hover:bg-surface-container transition-colors';
+          btn.style = 'border-color:rgba(197,198,205,0.5); background:#f8f9ff; color:#45474c;';
+          const icon = btn.querySelector('.material-symbols-outlined');
+          if (icon) icon.remove();
+      } else {
+          btn.className = 'skill-btn px-3 py-1.5 rounded-lg border border-secondary bg-secondary/10 text-secondary text-label-sm hover:bg-secondary/20 transition-colors flex items-center gap-1';
+          btn.style = 'border-color:#4648d4; background:rgba(70,72,212,0.1); color:#4648d4;';
+          if (!btn.querySelector('.material-symbols-outlined')) {
+              btn.innerHTML += ` <span class="material-symbols-outlined text-[14px]">close</span>`;
+          }
+      }
+  }
+
+  if (skillsContainer) {
+      skillsContainer.addEventListener('click', (e) => {
+          const btn = e.target.closest('.skill-btn');
+          if (btn) toggleSkillBtn(btn);
+      });
+  }
+
+  if (addSkillBtn) {
+      addSkillBtn.addEventListener('click', () => {
+          const newSkill = prompt('Enter a new skill or interest:');
+          if (newSkill && newSkill.trim()) {
+              const btn = document.createElement('button');
+              btn.type = 'button';
+              btn.textContent = newSkill.trim();
+              btn.className = 'skill-btn px-3 py-1.5 rounded-lg border border-outline-variant bg-surface text-on-surface-variant text-label-sm hover:bg-surface-container transition-colors';
+              btn.style = 'border-color:rgba(197,198,205,0.5); background:#f8f9ff; color:#45474c;';
+              skillsContainer.insertBefore(btn, addSkillBtn);
+              toggleSkillBtn(btn);
+          }
+      });
+  }
+</script>
 </body>
 </html>
