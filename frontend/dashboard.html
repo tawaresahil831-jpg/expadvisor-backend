@@ -1835,30 +1835,48 @@
         btn.disabled = true;
         btn.textContent = 'Submitting...';
 
-        const formData = new FormData();
-        formData.append('title', document.getElementById('expTitle').value);
-        formData.append('company', document.getElementById('expCompany').value);
-        formData.append('category', document.getElementById('expCategory').value);
-        formData.append('semester', document.getElementById('expDifficulty').value);
-        formData.append('content', document.getElementById('expDetails').value);
-        
-        const fileInput = document.getElementById('expFile');
-        if (fileInput.files.length > 0) {
-            formData.append('file', fileInput.files[0]);
-        }
+        const requestBody = {
+            title: document.getElementById('expTitle').value,
+            company: document.getElementById('expCompany').value,
+            category: document.getElementById('expCategory').value,
+            semester: document.getElementById('expDifficulty').value,
+            content: document.getElementById('expDetails').value
+        };
 
         const response = await apiRequest('/experiences', {
             method: 'POST',
-            body: formData,
-            isFormData: true
+            body: requestBody
         });
 
         if (response.status === 201 && response.data.success) {
+            const expId = response.data.data.experience_id;
+            
+            const fileInput = document.getElementById('expFile');
+            if (fileInput.files.length > 0) {
+                const formData = new FormData();
+                formData.append('file', fileInput.files[0]);
+                
+                btn.textContent = 'Uploading file...';
+                const uploadRes = await apiRequest(`/experiences/${expId}/upload`, {
+                    method: 'POST',
+                    body: formData,
+                    isFormData: true
+                });
+                
+                if (uploadRes.status !== 200 || !uploadRes.data.success) {
+                    alert('Experience created, but file upload failed: ' + (uploadRes.data.message || ''));
+                }
+            }
+
             document.getElementById('createModal').close();
             e.target.reset();
             loadExperiences();
         } else {
-            alert(response.data.message || 'Failed to create experience');
+            let errorMsg = response.data.message || 'Failed to create experience';
+            if (response.data.errors) {
+                errorMsg += '\n' + Object.values(response.data.errors).join('\n');
+            }
+            alert(errorMsg);
         }
 
         btn.disabled = false;
