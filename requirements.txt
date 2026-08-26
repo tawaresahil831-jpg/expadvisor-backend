@@ -14,7 +14,7 @@ typing_extensions==4.16.0
 Werkzeug==3.1.8
 zipp==3.23.1
 Flask-Limiter
-supabase
+supabase==2.10.0
 Werkzeug
 gunicorn
 Flask-CORS
