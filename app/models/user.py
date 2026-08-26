@@ -15,6 +15,8 @@ class User(db.Model):
     year = db.Column(db.Integer)
     role = db.Column(db.String(20), nullable=False, default="student")
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    reset_token = db.Column(db.String(100), unique=True, nullable=True)
+    reset_token_expiry = db.Column(db.DateTime, nullable=True)
 
     def set_password(self, plain_password):
         """Hashes and stores the password. Never save plain text."""

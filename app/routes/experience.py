@@ -62,6 +62,12 @@ def get_experience(experience_id):
     experience = Experience.query.get(experience_id)
     if not experience:
         return jsonify({"success": False, "message": "Experience not found"}), 404
+        
+    # Increment views
+    if experience.views is None:
+        experience.views = 0
+    experience.views += 1
+    db.session.commit()
     return jsonify({"success": True, "message": "Experience fetched successfully", "data": experience.to_dict()}), 200
 
 @experience_bp.route("", methods=["POST"])

@@ -14,6 +14,7 @@ class Experience(db.Model):
     semester = db.Column(db.String(20))
     tags = db.Column(db.String(255))
     file_url = db.Column(db.String(300))
+    views = db.Column(db.Integer, default=0)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
@@ -31,6 +32,7 @@ class Experience(db.Model):
             "semester": self.semester,
             "tags": self.tags,
             "file_url": self.file_url,
+            "views": self.views,
             "created_at": self.created_at.isoformat() if self.created_at else None,
             "updated_at": self.updated_at.isoformat() if self.updated_at else None
         }
