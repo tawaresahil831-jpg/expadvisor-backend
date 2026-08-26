@@ -22,7 +22,14 @@ class Experience(db.Model):
     author = db.relationship("User", backref="experiences")
 
     def to_dict(self):
+        accepted_answer = None
+        for c in self.comments:
+            if getattr(c, 'is_accepted', False):
+                accepted_answer = c.comment
+                break
+
         return {
+            "accepted_answer": accepted_answer,
             "experience_id": self.experience_id,
             "title": self.title,
             "content": self.content,
