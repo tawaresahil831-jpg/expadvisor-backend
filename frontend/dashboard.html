@@ -1319,11 +1319,11 @@
                 // Remove active styling from all
                 catBtns.forEach(b => {
                     b.classList.remove('bg-secondary', 'text-on-secondary', 'shadow-sm');
-                    b.classList.add('bg-surface', 'text-on-surface-variant', 'border', 'border-outline-variant/30');
+                    b.classList.add('bg-surface-container-high', 'text-on-surface-variant', 'hover:bg-surface-container-highest');
                 });
                 // Add active styling to clicked
                 const target = e.currentTarget;
-                target.classList.remove('bg-surface', 'text-on-surface-variant', 'border', 'border-outline-variant/30');
+                target.classList.remove('bg-surface-container-high', 'text-on-surface-variant', 'hover:bg-surface-container-highest');
                 target.classList.add('bg-secondary', 'text-on-secondary', 'shadow-sm');
                 
                 // Set currentCategory and reload
@@ -1405,11 +1405,12 @@
             // Deselect all categories
             catBtns.forEach(b => {
                 b.classList.remove('bg-secondary', 'text-on-secondary', 'shadow-sm');
-                b.classList.add('bg-surface', 'text-on-surface-variant', 'border', 'border-outline-variant/30');
+                b.classList.add('bg-surface-container-high', 'text-on-surface-variant', 'hover:bg-surface-container-highest');
             });
             currentCategory = '';
-            loadExperiences();
         }
+        currentPage = 1;
+        loadExperiences();
     }
 
     async function loadExperiences(append = false) {

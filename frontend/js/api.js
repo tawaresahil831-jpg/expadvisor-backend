@@ -82,6 +82,15 @@ async function populateUserProfile() {
         if (user.avatar_url) {
             const avatarEls = document.querySelectorAll('img[alt="Profile"]');
             avatarEls.forEach(el => el.src = user.avatar_url);
+        } else {
+            const avatarEls = document.querySelectorAll('img[alt="Profile"]');
+            avatarEls.forEach(el => {
+                const initial = (user.name || 'U').charAt(0).toUpperCase();
+                const div = document.createElement('div');
+                div.className = 'w-9 h-9 rounded-full bg-secondary/20 flex items-center justify-center text-secondary font-bold ring-2 ring-surface-variant';
+                div.textContent = initial;
+                el.parentNode.replaceChild(div, el);
+            });
         }
         
         return user;
