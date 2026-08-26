@@ -47,4 +47,8 @@ def create_app():
             "message": "ExpAdvisor backend is running"
         }), 200
 
+    
+    from .routes.notification import notification_bp
+    app.register_blueprint(notification_bp)
+    
     return app

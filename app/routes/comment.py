@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from app.extensions import db
-from app.models import Comment, Experience
+from app.models import Comment, Experience, Notification
 from app.utils.auth_utils import token_required
 from app.utils.validators import validate_length
 
@@ -47,6 +47,17 @@ def add_comment(current_user, experience_id):
         comment=str(text).strip()
     )
     db.session.add(new_comment)
+    
+    # Create notification if someone else commented
+    if experience.author_id != current_user.user_id:
+        notif = Notification(
+            user_id=experience.author_id,
+            actor_id=current_user.user_id,
+            experience_id=experience.experience_id,
+            message=f"{current_user.name} commented on your post."
+        )
+        db.session.add(notif)
+        
     db.session.commit()
 
     return jsonify({
