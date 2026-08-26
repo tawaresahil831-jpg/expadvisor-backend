@@ -18,3 +18,5 @@ supabase==2.10.0
 Werkzeug
 gunicorn
 Flask-CORS
+google-auth
+requests
