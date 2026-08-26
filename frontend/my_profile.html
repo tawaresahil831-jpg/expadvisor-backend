@@ -1285,16 +1285,13 @@
                                 <img alt="Profile Photo" class="w-full h-full object-cover rounded-full shadow-md z-10 relative" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdiQgYZHcs1i5qOIAd2Gz8LdgoSvQ6l9pvdU259XtTr3xzItG-ASIars6oHKk0pg8wSgW7QvR7MCXUnRfArSLjb31qE3UIZ1qentFczBi65HRSN7DfNCiVD_ibUEqEgvGT4SVe8x-As0GRBSksIpp7h1ia6hYtl41MhY6eBSnaMXov3JNFGrtqmOWK3fyZnDnIvXey0aQOo324g28QXnpBGIkYxrIJYYKkyubysvClLl1RU5xdqIhiDw" />
                                 <div class="absolute -inset-2 bg-gradient-to-tr from-primary to-secondary rounded-full opacity-20 blur-md z-0 group-hover:opacity-40 transition-opacity duration-500"></div>
                             </div>
-                            <h1 class="font-headline-md text-headline-md text-on-surface mb-1 relative z-10 user-name-display">Jordan Rivera</h1>
-                            <p class="font-label-md text-label-md text-primary bg-primary-fixed/50 px-3 py-1 rounded-full uppercase tracking-wider mb-4 relative z-10 user-role-display">Senior Student</p>
-                            <p class="font-body-md text-body-md text-on-surface-variant mb-6 text-sm relative z-10">Computer Science major passionate about algorithmic problem solving and mentoring junior peers. Specializing in discrete mathematics and data structures.</p>
+                            <h1 id="profile-name" class="font-headline-md text-headline-md text-on-surface mb-1 relative z-10 user-name-display">Loading...</h1>
+                            <p id="profile-role" class="font-label-md text-label-md text-primary bg-primary-fixed/50 px-3 py-1 rounded-full uppercase tracking-wider mb-4 relative z-10 user-role-display">Loading...</p>
+                            <p id="profile-bio" class="font-body-md text-body-md text-on-surface-variant mb-6 text-sm relative z-10">Loading bio...</p>
                             <div class="flex gap-2 w-full relative z-10">
-                                <button class="flex-1 bg-primary text-on-primary font-label-md text-label-md py-2.5 rounded-lg shadow-sm hover:shadow-md transition-all flex items-center justify-center gap-2">
-                                    <span class="material-symbols-outlined text-sm">message</span>
-                                    Message
-                                </button>
-                                <button class="bg-surface-container-high text-on-surface p-2.5 rounded-lg hover:bg-surface-container-highest transition-colors flex items-center justify-center shadow-sm">
-                                    <span class="material-symbols-outlined text-sm">more_horiz</span>
+                                <button id="edit-bio-btn" class="flex-1 bg-primary text-on-primary font-label-md text-label-md py-2.5 rounded-lg shadow-sm hover:shadow-md transition-all flex items-center justify-center gap-2">
+                                    <span class="material-symbols-outlined text-sm">edit</span>
+                                    Edit Bio
                                 </button>
                             </div>
                         </div>
@@ -1302,36 +1299,19 @@
                         <!-- Badges & Achievements -->
                         <div class="bg-surface-container rounded-2xl p-6 shadow-sm flex flex-col gap-4">
                             <h3 class="font-headline-md text-label-md text-on-surface uppercase tracking-widest border-b border-outline-variant/30 pb-2">Achievements</h3>
-                            <div class="flex flex-wrap gap-3">
-                                <div class="flex items-center gap-2 bg-surface-container-high rounded-xl p-2 pr-4 shadow-sm hover:-translate-y-1 transition-transform cursor-default">
-                                    <div class="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center text-secondary">
-                                        <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
-                                    </div>
-                                    <span class="font-label-md text-label-sm text-on-surface">Top Solver '24</span>
-                                </div>
-                                <div class="flex items-center gap-2 bg-surface-container-high rounded-xl p-2 pr-4 shadow-sm hover:-translate-y-1 transition-transform cursor-default">
-                                    <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                                        <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">psychology</span>
-                                    </div>
-                                    <span class="font-label-md text-label-sm text-on-surface">Master Mentor</span>
-                                </div>
-                                <div class="flex items-center gap-2 bg-surface-container-high rounded-xl p-2 pr-4 shadow-sm hover:-translate-y-1 transition-transform cursor-default">
-                                    <div class="w-8 h-8 rounded-full bg-error-container text-on-error-container flex items-center justify-center">
-                                        <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
-                                    </div>
-                                    <span class="font-label-md text-label-sm text-on-surface">100+ Streak</span>
-                                </div>
+                            <div id="achievements-container" class="flex flex-wrap gap-3">
+                                <!-- Dynamic Achievements -->
                             </div>
                         </div>
 
                         <!-- Stats Overview -->
                         <div class="grid grid-cols-2 gap-4">
                             <div class="bg-surface-container rounded-2xl p-4 shadow-sm text-center flex flex-col items-center justify-center">
-                                <span class="font-display-lg text-headline-lg text-primary">342</span>
+                                <span id="stats-solved" class="font-display-lg text-headline-lg text-primary">0</span>
                                 <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide mt-1">Problems Solved</span>
                             </div>
                             <div class="bg-surface-container rounded-2xl p-4 shadow-sm text-center flex flex-col items-center justify-center">
-                                <span class="font-display-lg text-headline-lg text-secondary">89</span>
+                                <span id="stats-helped" class="font-display-lg text-headline-lg text-secondary">0</span>
                                 <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide mt-1">Peers Helped</span>
                             </div>
                         </div>
@@ -1366,16 +1346,16 @@
                             </div>
                         </section>
 
-                        <!-- Recent Solutions -->
+                        <!-- Recent Activity -->
                         <section class="bg-surface-container rounded-2xl p-6 shadow-sm flex-1 flex flex-col">
                             <div class="flex items-center justify-between mb-6">
-                                <h2 class="font-headline-md text-headline-md text-on-surface">Recent Solutions</h2>
+                                <h2 class="font-headline-md text-headline-md text-on-surface">Recent Activity</h2>
                                 <button class="text-primary font-label-md text-label-md hover:underline flex items-center gap-1">
                                     View All
                                     <span class="material-symbols-outlined text-sm">arrow_forward</span>
                                 </button>
                             </div>
-                            <div id="recent-solutions-list" class="flex flex-col gap-3"></div>
+                            <div id="recent-activity-list" class="flex flex-col gap-3"></div>
                         </section>
 
                     </main>
@@ -1429,21 +1409,59 @@
   populateUserProfile();
 </script>
 
+
 <script>
-    async function loadRecentSolutions() {
-        const container = document.getElementById('recent-solutions-list');
+    let currentUserId = null;
+
+    async function loadProfileData() {
+        const userRes = await apiRequest('/auth/me');
+        if (userRes.status !== 200) {
+            window.location.href = "login.html";
+            return;
+        }
+        currentUserId = userRes.data.data.id;
+        
+        // Fetch full profile stats
+        const profileRes = await apiRequest(`/users/${currentUserId}`);
+        if (profileRes.status === 200 && profileRes.data.success) {
+            const data = profileRes.data.data;
+            document.getElementById('profile-name').textContent = data.name || 'Student';
+            document.getElementById('profile-role').textContent = data.role ? data.role.toUpperCase() : 'STUDENT';
+            document.getElementById('profile-bio').textContent = data.bio || 'Add a bio to let others know about your academic journey.';
+            
+            // Set Stats
+            document.getElementById('stats-solved').textContent = data.stats.problems_solved || 0;
+            document.getElementById('stats-helped').textContent = data.stats.peers_helped || 0;
+            
+            // Set Achievements
+            const achievementsContainer = document.getElementById('achievements-container');
+            if (data.achievements && data.achievements.length > 0) {
+                achievementsContainer.innerHTML = data.achievements.map(ach => `
+                    <div class="flex items-center gap-2 bg-surface-container-high rounded-xl p-2 pr-4 shadow-sm hover:-translate-y-1 transition-transform cursor-default">
+                        <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                            <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+                        </div>
+                        <span class="font-label-md text-label-sm text-on-surface">${ach}</span>
+                    </div>
+                `).join('');
+            } else {
+                achievementsContainer.innerHTML = '<p class="text-on-surface-variant text-sm">Post experiences or leave comments to earn achievements!</p>';
+            }
+        }
+        
+        loadRecentActivity();
+    }
+    
+    async function loadRecentActivity() {
+        const container = document.getElementById('recent-activity-list');
         if (!container) return;
         
+        if (!currentUserId) return;
         container.innerHTML = '<p class="text-center py-4 text-on-surface-variant">Loading recent activity...</p>';
         
-        const userRes = await apiRequest('/auth/me');
-        if (userRes.status !== 200) return;
-        const currentUserId = userRes.data.data.id;
-
-        const response = await apiRequest('/experiences');
+        const response = await apiRequest(`/experiences?author_id=${currentUserId}`);
         if (response.status === 200 && response.data.success) {
-            let allList = response.data.data;
-            const myActivities = allList.filter(e => e.author_id === currentUserId).slice(0, 5); // Take top 5
+            const myActivities = response.data.data.slice(0, 5); // Take top 5
             
             if (myActivities.length === 0) {
                 container.innerHTML = '<p class="text-center py-4 text-on-surface-variant">No recent activity.</p>';
@@ -1462,18 +1480,80 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="dashboard.html" class="hidden sm:flex items-center gap-2 text-primary font-label-md text-label-sm hover:underline">
-                            <span class="material-symbols-outlined text-sm">visibility</span>
-                            View Detail
-                        </a>
                     </div>
                 `).join('');
             }
         }
     }
     
-    document.addEventListener('DOMContentLoaded', loadRecentSolutions);
+    document.addEventListener('DOMContentLoaded', () => {
+        loadProfileData();
+        
+        // Modal Logic
+        const modal = document.getElementById('edit-bio-modal');
+        const editBtn = document.getElementById('edit-bio-btn');
+        const closeBtn = document.getElementById('close-bio-modal');
+        const saveBtn = document.getElementById('save-bio-btn');
+        const bioInput = document.getElementById('edit-bio-input');
+        
+        if (editBtn) {
+            editBtn.addEventListener('click', () => {
+                const currentBio = document.getElementById('profile-bio').textContent;
+                bioInput.value = currentBio === 'Add a bio to let others know about your academic journey.' ? '' : currentBio;
+                modal.classList.remove('hidden');
+            });
+        }
+        
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => {
+                modal.classList.add('hidden');
+            });
+        }
+        
+        if (saveBtn) {
+            saveBtn.addEventListener('click', async () => {
+                const newBio = bioInput.value;
+                const origText = saveBtn.textContent;
+                saveBtn.textContent = 'Saving...';
+                saveBtn.disabled = true;
+                
+                const res = await apiRequest('/users/me', {
+                    method: 'PUT',
+                    body: { bio: newBio }
+                });
+                
+                if (res.status === 200 && res.data.success) {
+                    document.getElementById('profile-bio').textContent = res.data.data.bio || 'Add a bio to let others know about your academic journey.';
+                    modal.classList.add('hidden');
+                } else {
+                    alert(res.data.message || 'Failed to update bio');
+                }
+                
+                saveBtn.textContent = origText;
+                saveBtn.disabled = false;
+            });
+        }
+    });
 </script>
+
+
+
+<!-- Edit Bio Modal -->
+<div id="edit-bio-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-scrim/40 backdrop-blur-sm p-4">
+    <div class="bg-surface-container-high rounded-[28px] p-6 max-w-md w-full shadow-elevation-3 relative">
+        <h3 class="font-headline-sm text-headline-sm text-on-surface mb-4">Edit Profile</h3>
+        <div class="flex flex-col gap-4">
+            <div class="flex flex-col gap-1.5">
+                <label class="text-label-sm text-on-surface">Bio</label>
+                <textarea id="edit-bio-input" class="w-full px-4 py-3 rounded-xl bg-surface border border-outline-variant/50 text-body-md text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-secondary focus:ring-2 focus:ring-secondary/50 transition-all min-h-[100px]" placeholder="Tell us about yourself..."></textarea>
+            </div>
+            <div class="flex justify-end gap-2 mt-4">
+                <button type="button" id="close-bio-modal" class="px-6 py-2.5 rounded-full text-primary font-label-md hover:bg-primary/10 transition-colors">Cancel</button>
+                <button type="button" id="save-bio-btn" class="px-6 py-2.5 rounded-full bg-primary text-on-primary font-label-md shadow-sm hover:shadow-md transition-shadow">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
