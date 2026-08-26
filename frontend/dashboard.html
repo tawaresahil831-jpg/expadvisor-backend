@@ -1710,6 +1710,10 @@
                                 <span class="material-symbols-outlined text-[20px]">chat_bubble</span>
                                 <span class="text-label-md">${exp.comments_count || 0}</span>
                             </button>
+                            <div class="flex items-center gap-1.5 text-on-surface-variant" title="Views">
+                                <span class="material-symbols-outlined text-[20px]">visibility</span>
+                                <span class="text-label-md">${exp.views || 0}</span>
+                            </div>
                             ${exp.file_url ? `
                             <a href="${exp.file_url}" target="_blank" class="flex items-center gap-1.5 text-on-surface-variant hover:text-secondary transition-colors" title="Attachment">
                                 <span class="material-symbols-outlined text-[20px]">attachment</span>
