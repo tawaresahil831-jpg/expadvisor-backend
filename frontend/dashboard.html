@@ -1640,6 +1640,7 @@
                         </div>
                         <div class="flex items-center gap-2">
                             ${exp.author_id === currentUserId ? `
+                                <button onclick="editExperience(${exp.experience_id})" class="p-1 text-on-surface-variant hover:text-secondary hover:bg-secondary/10 rounded-full transition-colors" title="Edit"><span class="material-symbols-outlined text-[18px]">edit</span></button>
                                 <button onclick="deleteExperience(${exp.experience_id})" class="p-1 text-on-surface-variant hover:text-error hover:bg-error/10 rounded-full transition-colors" title="Delete"><span class="material-symbols-outlined text-[18px]">delete</span></button>
                             ` : ''}
                         </div>
@@ -1813,7 +1814,7 @@
             body: { comment: content }
         });
         
-        if (response.status === 201 && response.data.success) {
+        if ((response.status === 201 || response.status === 200) && response.data.success) {
             document.getElementById('commentInput').value = '';
             openExperienceDetail(currentDetailExpId);
         } else {
@@ -1822,6 +1823,36 @@
         
         btn.disabled = false;
         btn.textContent = 'Post';
+    });
+
+    
+    let currentEditExpId = null;
+
+    async function editExperience(id) {
+        // Fetch details
+        const res = await apiRequest(`/experiences/${id}`);
+        if (res.status === 200 && res.data.success) {
+            const exp = res.data.data;
+            document.getElementById('expTitle').value = exp.title;
+            document.getElementById('expCompany').value = exp.company || '';
+            document.getElementById('expCategory').value = exp.category || 'General';
+            document.getElementById('expDifficulty').value = exp.semester || 'All';
+            document.getElementById('expDetails').value = exp.content || '';
+            
+            currentEditExpId = id;
+            document.querySelector('#createModal h3').textContent = 'Edit Experience';
+            const modal = document.getElementById('createModal');
+            if (modal) modal.showModal();
+        } else {
+            alert('Failed to load experience details.');
+        }
+    }
+
+    // Reset currentEditExpId when modal closes (e.g. Cancel button)
+    document.querySelector('#createModal button[onclick="document.getElementById(\'createModal\').close()"]').addEventListener('click', () => {
+        currentEditExpId = null;
+        document.querySelector('#createModal h3').textContent = 'Ask a Query';
+        document.getElementById('createExpForm').reset();
     });
 
     document.getElementById('createExpForm').addEventListener('submit', async (e) => {
@@ -1838,12 +1869,20 @@
             content: document.getElementById('expDetails').value
         };
 
-        const response = await apiRequest('/experiences', {
-            method: 'POST',
+        
+        let endpoint = '/experiences';
+        let reqMethod = 'POST';
+        if (currentEditExpId) {
+            endpoint = `/experiences/${currentEditExpId}`;
+            reqMethod = 'PUT';
+        }
+
+        const response = await apiRequest(endpoint, {
+            method: reqMethod,
             body: requestBody
         });
 
-        if (response.status === 201 && response.data.success) {
+        if ((response.status === 201 || response.status === 200) && response.data.success) {
             const expId = response.data.data.experience_id;
             
             const fileInput = document.getElementById('expFile');
@@ -1865,6 +1904,8 @@
 
             document.getElementById('createModal').close();
             e.target.reset();
+            currentEditExpId = null;
+            document.querySelector('#createModal h3').textContent = 'Ask a Query';
             loadExperiences();
         } else {
             let errorMsg = response.data.message || 'Failed to create experience';
