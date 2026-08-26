@@ -1170,7 +1170,7 @@
                         <div id="feedContainer" class="flex flex-col gap-6">
                         </div>
                         <!-- ---- Load More ---- -->
-                        <button class="w-full py-4 text-center text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low rounded-xl transition-colors border border-dashed border-outline-variant/50">
+                        <button id="loadMoreBtn" onclick="loadMoreExperiences()" class="hidden w-full py-4 text-center text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low rounded-xl transition-colors border border-dashed border-outline-variant/50">
                             Load More Problems
                         </button>
 
@@ -1411,12 +1411,15 @@
         }
     }
 
-    async function loadExperiences() {
+    async function loadExperiences(append = false) {
         const container = document.getElementById('feedContainer');
-        container.innerHTML = '<p class="text-center py-4">Loading...</p>';
+        if (!append) {
+            container.innerHTML = '<p class="text-center py-4">Loading...</p>';
+        }
         
         let endpoint = '/experiences';
         const params = [];
+        params.push(`page=${currentPage}`);
         if (currentSearch) params.push(`search=${encodeURIComponent(currentSearch)}`);
         if (currentCategory) params.push(`category=${encodeURIComponent(currentCategory)}`);
         if (params.length) endpoint += '?' + params.join('&');
@@ -1443,12 +1446,13 @@
                 expList = expList.filter(e => e.is_resolved);
             }
 
-            if (expList.length === 0) {
+            if (expList.length === 0 && !append) {
                 container.innerHTML = '<p class="text-center py-4">No experiences found.</p>';
+                document.getElementById('loadMoreBtn').classList.add('hidden');
                 return;
             }
-            
-            container.innerHTML = expList.map(exp => `
+
+            const html = expList.map(exp => `
                 <article class="bg-surface rounded-2xl p-6 shadow-sm border border-outline-variant/10 hover:shadow-md transition-all flex flex-col gap-4">
                     <div class="flex justify-between items-start">
                         <div class="flex items-center gap-3">
