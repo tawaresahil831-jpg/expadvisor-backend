@@ -1718,7 +1718,13 @@
                 document.getElementById('detailAttachmentLink').href = exp.file_url;
             }
             
-            renderComments(exp.comments || []);
+                        // Fetch comments separately since they aren't included in the experience object
+            const commentsRes = await apiRequest(`/experiences/${id}/comments`);
+            let comments = [];
+            if (commentsRes.status === 200 && commentsRes.data.success) {
+                comments = commentsRes.data.data;
+            }
+            renderComments(comments);
         }
     }
     
@@ -1732,10 +1738,10 @@
         container.innerHTML = comments.map(c => `
             <div class="bg-surface-container-low p-4 rounded-xl border border-outline-variant/20">
                 <div class="flex justify-between items-center mb-1">
-                    <span class="font-label-md text-on-surface" style="font-weight:600;">${c.author_name || 'User'}</span>
+                    <span class="font-label-md text-on-surface" style="font-weight:600;">${c.user_name || 'User'}</span>
                     <span class="text-[11px] text-on-surface-variant">${new Date(c.created_at).toLocaleDateString()}</span>
                 </div>
-                <p class="text-body-sm text-on-surface-variant">${c.content}</p>
+                <p class="text-body-sm text-on-surface-variant">${c.comment}</p>
             </div>
         `).join('');
     }
