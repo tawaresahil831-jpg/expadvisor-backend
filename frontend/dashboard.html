@@ -1328,6 +1328,7 @@
                 
                 // Set currentCategory and reload
                 currentCategory = target.textContent.trim() === 'All' ? '' : target.textContent.trim();
+                currentPage = 1;
                 loadExperiences();
             });
         });
@@ -1373,8 +1374,8 @@
 
     let currentSearch = '';
     let currentCategory = '';
-    let currentStatus = '';
-
+    let currentStatus = 'Open';
+    let currentPage = 1;
 
     
     function formatHashtags(text) {
@@ -1799,6 +1800,7 @@
         clearTimeout(searchTimeout);
         searchTimeout = setTimeout(() => {
             currentSearch = e.target.value.trim();
+            currentPage = 1;
             loadExperiences();
         }, 400);
     });
