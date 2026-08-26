@@ -1378,7 +1378,7 @@
 
         <nav class="flex-1 px-4 flex flex-col gap-1">
             <div class="px-4 py-2 mt-4 mb-1">
-                <p class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Student</p>
+                <p class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider user-role-display">Student</p>
             </div>
             <a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-label-md text-label-md" href="dashboard.html">
                 <span class="material-symbols-outlined mr-3">dashboard</span>Dashboard
@@ -1404,7 +1404,7 @@
         <div class="px-8 py-8 mt-auto">
             <div class="p-4 rounded-xl bg-surface-container text-center">
                 <p class="text-label-sm font-label-sm text-on-surface-variant">Academic Session</p>
-                <p class="text-label-md font-label-md text-primary">Spring 2024</p>
+                <p class="text-label-md font-label-md text-primary">2026-2027</p>
             </div>
         </div>
     </aside>
@@ -1462,10 +1462,10 @@
                     <div class="w-full flex flex-col gap-6" id="problem-tabs-container">
                         <div class="flex items-center gap-2 p-1 bg-surface-container-low rounded-xl w-fit">
                             <button class="px-6 py-2 rounded-lg font-label-md text-label-md transition-all tab-btn active bg-primary text-on-primary shadow-sm" data-tab="asked">
-                                Asked (4)
+                                <span id="asked-count">Asked (0)</span>
                             </button>
                             <button class="px-6 py-2 rounded-lg font-label-md text-label-md transition-all tab-btn text-on-surface-variant hover:bg-surface-variant/50" data-tab="solved">
-                                Solved (12)
+                                <span id="solved-count">Solved (0)</span>
                             </button>
                         </div>
 
@@ -1675,6 +1675,10 @@
             
             // "Solved" = queries created by the user that have comments (resolved)
             const solvedList = askedList.filter(e => e.comments_count > 0);
+            
+            
+            document.getElementById('asked-count').textContent = `Asked (${askedList.length})`;
+            document.getElementById('solved-count').textContent = `Solved (${solvedList.length})`;
             
             if (askedList.length === 0) {
                 askedContainer.innerHTML = '<p class="col-span-3 text-center py-4 text-on-surface-variant">You haven\'t asked any questions yet.</p>';

@@ -1395,69 +1395,7 @@
                             </div>
                         </div>
 
-                        <!-- Trending Topics -->
-                        <div class="bg-surface rounded-2xl p-6 shadow-sm border border-outline-variant/10">
-                            <h3 class="font-headline-md text-headline-md text-on-surface mb-4 flex items-center gap-2">
-                                <span class="material-symbols-outlined text-secondary">trending_up</span>Trending Topics
-                            </h3>
-                            <div class="flex flex-wrap gap-2">
-                                <button class="px-3 py-1.5 rounded-lg bg-surface-container-high text-on-surface hover:bg-secondary hover:text-on-secondary transition-all text-label-md">#reactjs</button>
-                                <button class="px-3 py-1.5 rounded-lg bg-surface-container-high text-on-surface hover:bg-secondary hover:text-on-secondary transition-all text-label-md">#career_advice</button>
-                                <button class="px-3 py-1.5 rounded-lg bg-surface-container-high text-on-surface hover:bg-secondary hover:text-on-secondary transition-all text-label-md">#python</button>
-                                <button class="px-3 py-1.5 rounded-lg bg-surface-container-high text-on-surface hover:bg-secondary hover:text-on-secondary transition-all text-label-md">#interview_prep</button>
-                                <button class="px-3 py-1.5 rounded-lg bg-surface-container-high text-on-surface hover:bg-secondary hover:text-on-secondary transition-all text-label-md">#ui_design</button>
-                            </div>
-                        </div>
-
-                        <!-- Top Contributors -->
-                        <div class="bg-surface rounded-2xl p-6 shadow-sm border border-outline-variant/10">
-                            <h3 class="font-headline-md text-headline-md text-on-surface mb-6 flex items-center gap-2">
-                                <span class="material-symbols-outlined text-secondary">military_tech</span>Top Contributors
-                            </h3>
-                            <div class="space-y-4">
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center gap-3">
-                                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVCh3VemlU4Lj8c72RwYWG85_SeZiyQ4LIDJUqw71yEmE6eE_HLrnLXIliUgPSCIySiqReLakky_0QC3B2wqaU-_z9RWhtyFf13wGxPvaK7q43Mn_xzu4wJIZVavUQ2saOz-nqWyUcb5TwtGO44-mNf3Ko38kcxP6NxDpC-6UN0XtDifJe0GCeNg1gSlCPPpR75lSawaTlgIcDREDXBPL-ZCFH-M4SQCKGVead7RcLFXp-Gnrv4Xjm0Mx3LNsOnMd6Zc_FcGmSC09zbwY" class="w-10 h-10 rounded-full object-cover" />
-                                        <div class="flex flex-col">
-                                            <span class="font-label-md text-on-surface user-name-display">Alex Rivers</span>
-                                            <span class="text-label-sm text-on-surface-variant">142 helpful answers</span>
-                                        </div>
-                                    </div>
-                                    <span class="px-2 py-0.5 rounded bg-secondary text-on-secondary text-[10px] font-bold">EXPERT</span>
-                                </div>
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center gap-3">
-                                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLFzFjODL3yU4nmxiqZ9WVSQBiUSu-xDmdzg6hgDyt612pcphAkyF0T5I8Lw_JFbns37aDh_b-LMw7ZrixhpEMFQf0Fz2D7AoPYHUcTGAsIg_koL0Z6mnu67BpummeW0ge6YKlaz0DQjTaHKf1levBC13RiGFJoqTyY9uzWD8KLZt3fre0Rbr4Nfpp9gdmMCxP1sdiOjxPfL6pBIN3UwtNBtdiHuPV30Zby6UMwfvzRaq2Ek1r-BI6Gw" class="w-10 h-10 rounded-full object-cover" />
-                                        <div class="flex flex-col">
-                                            <span class="font-label-md text-on-surface">Sarah Chen</span>
-                                            <span class="text-label-sm text-on-surface-variant">98 helpful answers</span>
-                                        </div>
-                                    </div>
-                                    <span class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface-variant text-[10px] font-bold">PRO</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Popular Queries -->
-                        <div class="bg-surface rounded-2xl p-6 shadow-sm border border-outline-variant/10">
-                            <h3 class="font-headline-md text-headline-md text-on-surface mb-4 flex items-center gap-2">
-                                <span class="material-symbols-outlined text-secondary">star</span>Popular Queries
-                            </h3>
-                            <div class="space-y-4">
-                                <a href="#" class="block group">
-                                    <p class="text-label-md text-on-surface group-hover:text-secondary transition-colors line-clamp-2">Best resources for learning System Design from scratch?</p>
-                                    <p class="text-label-sm text-on-surface-variant mt-1">24 answers • 156 upvotes</p>
-                                </a>
-                                <a href="#" class="block group">
-                                    <p class="text-label-md text-on-surface group-hover:text-secondary transition-colors line-clamp-2">How to negotiate salary for a remote role?</p>
-                                    <p class="text-label-sm text-on-surface-variant mt-1">18 answers • 89 upvotes</p>
-                                </a>
-                                <a href="#" class="block group">
-                                    <p class="text-label-md text-on-surface group-hover:text-secondary transition-colors line-clamp-2">Tailwind vs Styled Components in 2024?</p>
-                                    <p class="text-label-sm text-on-surface-variant mt-1">32 answers • 210 upvotes</p>
-                                </a>
-                            </div>
-                        </div>
+                        <!-- Right Sidebar widgets removed as requested -->
 
                     </aside>
 
@@ -1815,7 +1753,7 @@
         
         const response = await apiRequest(`/experiences/${currentDetailExpId}/comments`, {
             method: 'POST',
-            body: { content }
+            body: { comment: content }
         });
         
         if (response.status === 201 && response.data.success) {
