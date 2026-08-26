@@ -10,6 +10,7 @@ class Comment(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"), nullable=False)
     comment = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    is_accepted = db.Column(db.Boolean, default=False)
 
     user = db.relationship("User", backref="comments")
     experience = db.relationship("Experience", backref="comments")
@@ -21,5 +22,6 @@ class Comment(db.Model):
             "user_id": self.user_id,
             "user_name": self.user.name if self.user else None,
             "comment": self.comment,
-            "created_at": self.created_at.isoformat() if self.created_at else None
+            "created_at": self.created_at.isoformat() if self.created_at else None,
+            "is_accepted": self.is_accepted
         }

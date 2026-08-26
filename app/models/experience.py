@@ -15,6 +15,7 @@ class Experience(db.Model):
     tags = db.Column(db.String(255))
     file_url = db.Column(db.String(300))
     views = db.Column(db.Integer, default=0)
+    is_resolved = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
@@ -33,6 +34,7 @@ class Experience(db.Model):
             "tags": self.tags,
             "file_url": self.file_url,
             "views": self.views,
+            "is_resolved": self.is_resolved,
             "created_at": self.created_at.isoformat() if self.created_at else None,
             "updated_at": self.updated_at.isoformat() if self.updated_at else None
         }
