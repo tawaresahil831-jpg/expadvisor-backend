@@ -1,4 +1,4 @@
-const API_BASE = "https://expadvisordyp.onrender.com/api";
+const API_BASE = "https://expadvisor.onrender.com/api";
 
 function getToken() {
     return localStorage.getItem("expadvisor_token");
