@@ -763,17 +763,7 @@
   if (getToken()) window.location.href = 'dashboard.html';
 
   
-    if (response.status !== 200) {
-        response = await apiRequest('/auth/register', { method: 'POST', body: { name: name.trim(), email: email.trim(), password: 'google_sso_' + email.trim() } });
-    }
-    if (response.status === 200 || response.status === 201) {
-        setToken(response.data.data.token);
-        window.location.href = 'dashboard.html';
-    } else {
-        errorMsg.textContent = 'Google Sign In failed.';
-        errorMsg.classList.remove('hidden');
-    }
-  });
+
 
   document.getElementById('registerForm').addEventListener('submit', async (e) => {
     e.preventDefault();
