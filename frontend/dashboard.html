@@ -1517,9 +1517,29 @@
                     </div>
                 </article>
             `).join('');
+            
+            if (append) {
+                container.insertAdjacentHTML('beforeend', html);
+            } else {
+                container.innerHTML = html;
+            }
+
+            // Handle Load More button visibility
+            const loadMoreBtn = document.getElementById('loadMoreBtn');
+            if (response.data.pagination && currentPage < response.data.pagination.total_pages) {
+                loadMoreBtn.classList.remove('hidden');
+            } else if (loadMoreBtn) {
+                loadMoreBtn.classList.add('hidden');
+            }
+
         } else {
-            container.innerHTML = '<p class="text-error text-center py-4">Failed to load experiences.</p>';
+            if (!append) container.innerHTML = '<p class="text-error text-center py-4">Failed to load experiences.</p>';
         }
+    }
+
+    function loadMoreExperiences() {
+        currentPage++;
+        loadExperiences(true);
     }
 
     async function likeExperience(id, btn) {
