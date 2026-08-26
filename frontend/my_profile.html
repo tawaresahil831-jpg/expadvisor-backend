@@ -1222,7 +1222,7 @@
 
         <nav class="flex-1 px-4 flex flex-col gap-1">
             <div class="px-4 py-2 mt-4 mb-1">
-                <p class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider user-role-display">Student</p>
+                
             </div>
 
             <a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-label-md text-label-md" href="dashboard.html">
@@ -1235,7 +1235,12 @@
             <a aria-current="page" class="flex items-center px-4 py-3 rounded-xl transition-all font-label-md bg-secondary-container text-on-secondary-container" href="my_profile.html">
                 <span class="material-symbols-outlined mr-3">person</span>My Profile
             </a>
-        </nav>
+        
+            <a class="flex items-center px-4 py-3 rounded-xl text-error hover:bg-error/10 hover:text-error transition-all font-label-md text-label-md mt-auto" href="#" onclick="logout(); return false;">
+                <span class="material-symbols-outlined text-[20px] mr-3">logout</span>
+                Logout
+            </a>
+</nav>
 
         <div class="px-8 py-8 mt-auto">
             <div class="p-4 rounded-xl bg-surface-container text-center">
@@ -1295,12 +1300,10 @@
                 <div class="flex items-center gap-3 pl-4 border-l border-outline-variant/40">
                     <div class="text-right hidden sm:block">
                         <p class="text-label-md font-label-md text-on-surface leading-tight user-name-display">Alex Rivers</p>
-                        <p class="text-label-sm font-label-sm text-on-surface-variant user-role-display">Senior Mentor</p>
+                        
                     </div>
                     <img alt="Profile" class="w-9 h-9 rounded-full object-cover ring-2 ring-surface-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdiQgYZHcs1i5qOIAd2Gz8LdgoSvQ6l9pvdU259XtTr3xzItG-ASIars6oHKk0pg8wSgW7QvR7MCXUnRfArSLjb31qE3UIZ1qentFczBi65HRSN7DfNCiVD_ibUEqEgvGT4SVe8x-As0GRBSksIpp7h1ia6hYtl41MhY6eBSnaMXov3JNFGrtqmOWK3fyZnDnIvXey0aQOo324g28QXnpBGIkYxrIJYYKkyubysvClLl1RU5xdqIhiDw" />
-                    <a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-label-md text-label-md" href="my_profile.html">
-                        <span class="material-symbols-outlined mr-3">person</span>My Profile
-                    </a>
+                    
                 </div>
             </div>
         </header>
