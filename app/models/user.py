@@ -16,6 +16,7 @@ class User(db.Model):
     role = db.Column(db.String(20), nullable=False, default="student")
     bio = db.Column(db.Text, nullable=True)
     skills = db.Column(db.Text, nullable=True)
+    avatar_url = db.Column(db.String(300), nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     reset_token = db.Column(db.String(100), unique=True, nullable=True)
     reset_token_expiry = db.Column(db.DateTime, nullable=True)
@@ -40,5 +41,6 @@ class User(db.Model):
             "role": self.role,
             "bio": self.bio,
             "skills": self.skills,
+            "avatar_url": self.avatar_url,
             "created_at": self.created_at.isoformat() if self.created_at else None
         }

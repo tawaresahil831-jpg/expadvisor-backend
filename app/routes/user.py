@@ -71,3 +71,30 @@ def update_my_profile(current_user):
         "message": "Profile updated successfully",
         "data": current_user.to_dict()
     }), 200
+
+@user_bp.route("/<int:user_id>/activity", methods=["GET"])
+def get_user_activity(user_id):
+    user = User.query.get(user_id)
+    if not user:
+        return jsonify({"success": False, "message": "User not found"}), 404
+        
+    experiences = Experience.query.filter_by(author_id=user_id).all()
+    comments = Comment.query.filter_by(user_id=user_id).all()
+    
+    activity_map = {}
+    
+    for exp in experiences:
+        if exp.created_at:
+            date_str = exp.created_at.strftime("%Y-%m-%d")
+            activity_map[date_str] = activity_map.get(date_str, 0) + 1
+            
+    for c in comments:
+        if c.created_at:
+            date_str = c.created_at.strftime("%Y-%m-%d")
+            activity_map[date_str] = activity_map.get(date_str, 0) + 1
+            
+    return jsonify({
+        "success": True,
+        "message": "Activity fetched",
+        "data": activity_map
+    }), 200
