@@ -1095,15 +1095,25 @@
                         <h1 class="font-display-lg text-display-lg text-on-surface">Community Dashboard</h1>
                         <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Discover active problems, collaborate with peers, and sharpen your skills. Your expertise is needed.</p>
                     </div>
-                    <div class="z-10 relative flex gap-4">
-                        <button onclick="document.getElementById('createModal').showModal()" class="flex items-center gap-2 bg-surface text-on-surface px-6 py-3 rounded-lg shadow-sm hover:shadow-md transition-shadow font-label-md text-label-md group">
-                            <span class="material-symbols-outlined text-secondary group-hover:scale-110 transition-transform">add_circle</span>
-                            Request Help
-                        </button>
-                        <button onclick="window.location.href='solve.html'" class="flex items-center gap-2 bg-primary text-on-primary px-6 py-3 rounded-lg shadow-md hover:bg-inverse-surface transition-colors font-label-md text-label-md">
-                            <span class="material-symbols-outlined">bolt</span>
-                            Quick Solve
-                        </button>
+                    <div class="z-10 relative bg-surface-container-high rounded-xl p-4 shadow-sm border border-outline-variant/20 max-w-sm ml-auto animate-fade-in-up">
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center gap-2 text-error">
+                                <span class="material-symbols-outlined text-[18px]">local_fire_department</span>
+                                <span class="font-label-md text-label-sm font-bold uppercase tracking-wider">Trending Now</span>
+                            </div>
+                            <span class="px-2 py-0.5 rounded bg-primary/10 text-primary text-[10px] font-bold uppercase">Web Dev</span>
+                        </div>
+                        <h3 class="font-headline-sm text-headline-sm text-on-surface mb-3">How to optimize React rendering performance?</h3>
+                        <div class="flex items-center justify-between">
+                            <div class="flex -space-x-2">
+                                <img src="https://i.pravatar.cc/100?img=1" class="w-6 h-6 rounded-full border-2 border-surface">
+                                <img src="https://i.pravatar.cc/100?img=2" class="w-6 h-6 rounded-full border-2 border-surface">
+                                <img src="https://i.pravatar.cc/100?img=3" class="w-6 h-6 rounded-full border-2 border-surface">
+                            </div>
+                            <button class="text-primary font-label-md text-label-sm hover:underline flex items-center gap-1">
+                                Join Discussion <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+                            </button>
+                        </div>
                     </div>
                 </header>
 
