@@ -1578,14 +1578,7 @@
     let currentSearch = '';
     let currentCategory = '';
     let currentStatus = '';
-    let currentUserId = null;
 
-    (async () => {
-        const res = await apiRequest('/auth/me');
-        if (res.status === 200 && res.data.success) {
-            currentUserId = res.data.data.user_id;
-        }
-    })();
 
     async function loadExperiences() {
         const container = document.getElementById('feedContainer');
