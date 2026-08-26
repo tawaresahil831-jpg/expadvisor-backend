@@ -1149,10 +1149,10 @@
                             <div class="flex items-center justify-between overflow-x-auto pb-2 gap-4">
                                 <div class="flex gap-2 shrink-0">
                                     <span class="text-label-sm text-on-surface-variant self-center mr-2">Category:</span>
-                                    <button class="px-4 py-1.5 rounded-full bg-secondary text-on-secondary font-label-sm">All</button>
-                                    <button class="px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm hover:bg-surface-container-highest">Tech</button>
-                                    <button class="px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm hover:bg-surface-container-highest">Career</button>
-                                    <button class="px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm hover:bg-surface-container-highest">Design</button>
+                                    <button class="px-4 py-1.5 rounded-full bg-secondary text-on-secondary font-label-sm filter-cat-btn">All</button>
+                                    <button class="px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm hover:bg-surface-container-highest filter-cat-btn">Tech</button>
+                                    <button class="px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm hover:bg-surface-container-highest filter-cat-btn">Career</button>
+                                    <button class="px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm hover:bg-surface-container-highest filter-cat-btn">Design</button>
                                 </div>
                                 <div class="flex gap-2 shrink-0">
                                     <span class="text-label-sm text-on-surface-variant self-center mr-2">Status:</span>
@@ -1580,6 +1580,41 @@
     let currentStatus = '';
 
 
+    
+    function formatHashtags(text) {
+        if (!text) return '';
+        // Escape HTML to prevent XSS before parsing hashtags
+        const escaped = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+        return escaped.replace(/#(\w+)/g, '<span class="text-secondary font-semibold hover:underline cursor-pointer" onclick="event.stopPropagation(); setHashtagSearch(\'$1\')">#$1</span>');
+    }
+
+    function setHashtagSearch(tag) {
+        currentSearch = tag;
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput) searchInput.value = currentSearch;
+        
+        // Also try to match a category button if it's an exact match
+        const catBtns = document.querySelectorAll('.filter-cat-btn');
+        let matched = false;
+        catBtns.forEach(b => {
+            if (b.textContent.trim().toLowerCase() === tag.toLowerCase()) {
+                b.click(); // This will trigger the category filter
+                matched = true;
+            }
+        });
+        
+        // If it's not a category, just use the search filter
+        if (!matched) {
+            // Deselect all categories
+            catBtns.forEach(b => {
+                b.classList.remove('bg-secondary', 'text-on-secondary', 'shadow-sm');
+                b.classList.add('bg-surface', 'text-on-surface-variant', 'border', 'border-outline-variant/30');
+            });
+            currentCategory = '';
+            loadExperiences();
+        }
+    }
+
     async function loadExperiences() {
         const container = document.getElementById('feedContainer');
         container.innerHTML = '<p class="text-center py-4">Loading...</p>';
@@ -1639,8 +1674,8 @@
                         </div>
                     </div>
                     <div>
-                        <h3 onclick="openExperienceDetail(${exp.experience_id})" class="font-headline-md text-headline-md text-on-surface mb-2 hover:text-secondary cursor-pointer transition-colors">${exp.title}</h3>
-                        <p onclick="openExperienceDetail(${exp.experience_id})" class="font-body-md text-on-surface-variant line-clamp-2 cursor-pointer">${exp.content}</p>
+                        <h3 onclick="openExperienceDetail(${exp.experience_id})" class="font-headline-md text-headline-md text-on-surface mb-2 hover:text-secondary cursor-pointer transition-colors">${formatHashtags(exp.title)}</h3>
+                        <p onclick="openExperienceDetail(${exp.experience_id})" class="font-body-md text-on-surface-variant line-clamp-2 cursor-pointer">${formatHashtags(exp.content)}</p>
                     </div>
                     <div class="flex flex-wrap gap-2">
                         <span class="px-2.5 py-1 rounded-md bg-surface-container-high text-on-surface-variant font-label-sm">${exp.category || 'General'}</span>
@@ -1714,8 +1749,8 @@
         const response = await apiRequest(`/experiences/${id}`);
         if (response.status === 200 && response.data.success) {
             const exp = response.data.data;
-            document.getElementById('detailTitle').textContent = exp.title;
-            document.getElementById('detailDescription').textContent = exp.content;
+            document.getElementById('detailTitle').innerHTML = formatHashtags(exp.title);
+            document.getElementById('detailDescription').innerHTML = formatHashtags(exp.content);
             
             document.getElementById('detailTags').innerHTML = `
                 <span class="px-2.5 py-1 rounded-md bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm tracking-wider uppercase">${exp.category || 'General'}</span>
