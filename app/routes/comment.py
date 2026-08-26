@@ -70,3 +70,29 @@ def delete_comment(current_user, comment_id):
     db.session.commit()
 
     return jsonify({"success": True, "message": "Comment deleted successfully"}), 200
+
+@comment_bp.route("/comments/<int:comment_id>", methods=["PUT"])
+@token_required
+def update_comment(current_user, comment_id):
+    comment_obj = Comment.query.get(comment_id)
+
+    if not comment_obj:
+        return jsonify({"success": False, "message": "Comment not found"}), 404
+
+    if comment_obj.user_id != current_user.user_id:
+        return jsonify({"success": False, "message": "You are not allowed to edit this comment"}), 403
+
+    data = request.get_json(silent=True) or {}
+    text = data.get("comment")
+    
+    if not text:
+        return jsonify({"success": False, "message": "Validation failed", "errors": {"comment": "Comment cannot be empty"}}), 400
+
+    err = validate_length(text, 1, 1000, "Comment")
+    if err:
+        return jsonify({"success": False, "message": "Validation failed", "errors": {"comment": err}}), 400
+
+    comment_obj.comment = str(text).strip()
+    db.session.commit()
+
+    return jsonify({"success": True, "message": "Comment updated successfully", "data": comment_obj.to_dict()}), 200
