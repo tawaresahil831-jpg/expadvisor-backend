@@ -712,7 +712,7 @@
                         <div class="mt-4">
                             <label class="flex items-start gap-3 cursor-pointer group">
                                 <div class="relative flex items-center justify-center mt-0.5">
-                                    <input class="peer sr-only" type="checkbox">
+                                    <input id="termsCheckbox" class="peer sr-only" type="checkbox">
                                     <div class="w-5 h-5 rounded border-2 border-outline-variant peer-checked:bg-secondary peer-checked:border-secondary transition-colors group-hover:border-secondary" style="border-color:rgba(197,198,205,0.5);"></div>
                                     <span class="material-symbols-outlined absolute text-white text-[16px] opacity-0 peer-checked:opacity-100 pointer-events-none transition-opacity" style="font-variation-settings:'FILL' 1; color:#ffffff;">check</span>
                                 </div>
@@ -777,6 +777,13 @@
     errorMsg.classList.add('hidden');
     if (password !== confirmPassword) {
         errorMsg.textContent = 'Passwords do not match.';
+        errorMsg.classList.remove('hidden');
+        return;
+    }
+    
+    const termsChecked = document.getElementById('termsCheckbox').checked;
+    if (!termsChecked) {
+        errorMsg.textContent = 'You must agree to the Terms & Conditions and Privacy Policy.';
         errorMsg.classList.remove('hidden');
         return;
     }
