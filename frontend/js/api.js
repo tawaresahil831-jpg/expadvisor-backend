@@ -76,9 +76,13 @@ async function populateUserProfile() {
         
         nameEls.forEach(el => el.textContent = user.name || 'User');
         
-        // Format role (e.g., 'student' -> 'Student', 'mentor' -> 'Mentor')
         const formattedRole = user.role ? user.role.charAt(0).toUpperCase() + user.role.slice(1) : 'Student';
         roleEls.forEach(el => el.textContent = formattedRole);
+        
+        if (user.avatar_url) {
+            const avatarEls = document.querySelectorAll('img[alt="Profile"]');
+            avatarEls.forEach(el => el.src = user.avatar_url);
+        }
         
         return user;
     }
