@@ -541,14 +541,12 @@
 
                     <!-- Social Sign-in Buttons -->
                     <div class="flex flex-col sm:flex-row gap-4 mb-8">
-                        <button id="googleBtn" type="button" class="flex-1 flex items-center justify-center gap-3 py-3 px-4 rounded-xl bg-surface hover:bg-surface-container transition-colors border border-outline-variant/40 shadow-sm text-label-md text-on-surface" style="background:#f8f9ff; color:#0b1c30; border-color:rgba(197,198,205,0.4);">
-                            <img class="w-5 h-5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqVuR1Yh-dCSXwljz9bHqFiYmMwxLn7WkI_znO2m1Iz730hmNOW5UiYcDI-vGrEeyUDD1I_bf0Qxdir2IIGQm-NNH4Nrn_5MLBZuOBbQjkkez8NIDc-65dpn_4OsYXY9gYKO88vesLQaiKeynVnLij6kvf05TkEN7f1G-ESCKhlJfARehm-rh3EBJsemkhEiRK6M5H7qtCdjUZDtiwof2mw4SJJT0BVQE8zQZAgkL7cx9s9tvDLeffZQ" alt="Google">
-                            Continue with Google
-                        </button>
-                        <button id="googleBtn" type="button" class="flex-1 flex items-center justify-center gap-3 py-3 px-4 rounded-xl bg-surface hover:bg-surface-container transition-colors border border-outline-variant/40 shadow-sm text-label-md text-on-surface" style="background:#f8f9ff; color:#0b1c30; border-color:rgba(197,198,205,0.4);">
-                            <img class="w-5 h-5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKzKQl_MQfZmxGNGJx6TEmHDNHKw9zb950_Yu3TFJYWm_kc4JYKfPT_bMxqaw3VN6g6eLonuG2VsmkXCJIm7InFbwdkRyLSsrjujVyDJ_ljnvrrfSfr4GIh-QNaBIvsZ43tbzoSOj9wUtSfIdAllLDrgE3mrYtoSc9rrJQgei4oL0bYmZbNnwc-yK6xq8sZz_p7raG3ks0qQnQ6pMH-joa_xLMt_alSns8x-1azcMsvSaL78JaE5TuHg" alt="Microsoft">
-                            Continue with Microsoft
-                        </button>
+                        
+        <div id="googleBtnContainer" class="w-full flex justify-center mt-2"></div>
+
+                        
+        <div id="googleBtnContainer" class="w-full flex justify-center mt-2"></div>
+
                     </div>
 
                     <!-- Divider -->
@@ -768,14 +766,7 @@
 <script>
   if (getToken()) window.location.href = 'dashboard.html';
 
-  document.getElementById('googleBtn').addEventListener('click', async () => {
-    const errorMsg = document.getElementById('errorMessage');
-    errorMsg.classList.add('hidden');
-    const email = prompt('Enter your Google email address:');
-    if (!email || !email.trim()) return;
-    const name = prompt('Enter your name:');
-    if (!name || !name.trim()) return;
-    let response = await apiRequest('/auth/login', { method: 'POST', body: { email: email.trim(), password: 'google_sso_' + email.trim() } });
+  
     if (response.status !== 200) {
         response = await apiRequest('/auth/register', { method: 'POST', body: { name: name.trim(), email: email.trim(), password: 'google_sso_' + email.trim() } });
     }
@@ -860,5 +851,52 @@
       });
   }
 </script>
+
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script>
+  function handleGoogleLogin(response) {
+    const errorMsg = document.getElementById('errorMessage');
+    if(errorMsg) errorMsg.classList.add('hidden');
+    
+    apiRequest('/auth/google', {
+        method: 'POST',
+        body: { credential: response.credential }
+    }).then(res => {
+        if (res.status === 200 || res.status === 201) {
+            setToken(res.data.data.token);
+            window.location.href = 'dashboard.html';
+        } else {
+            if(errorMsg) {
+                errorMsg.textContent = 'Google Sign In failed: ' + (res.data ? res.data.message : 'Unknown error');
+                errorMsg.classList.remove('hidden');
+            } else {
+                alert('Google Sign In failed');
+            }
+        }
+    }).catch(err => {
+        console.error(err);
+        if(errorMsg) {
+            errorMsg.textContent = 'Network error during Google Sign In';
+            errorMsg.classList.remove('hidden');
+        }
+    });
+  }
+
+  window.addEventListener('load', function () {
+    google.accounts.id.initialize({
+      client_id: "264177546521-l4f6okrlas9sk890h9elaj17ce6ok5h7.apps.googleusercontent.com",
+      callback: handleGoogleLogin
+    });
+    
+    const btnContainer = document.getElementById("googleBtnContainer");
+    if(btnContainer) {
+        google.accounts.id.renderButton(
+          btnContainer,
+          { theme: "outline", size: "large", width: 400 }  
+        );
+    }
+  });
+</script>
+
 </body>
 </html>
