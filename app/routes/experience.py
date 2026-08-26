@@ -25,8 +25,15 @@ def get_experiences():
     category = request.args.get("category")
     company = request.args.get("company")
     search = request.args.get("search")
+    author_id = request.args.get("author_id")
 
     query = Experience.query
+
+    if author_id:
+        try:
+            query = query.filter(Experience.author_id == int(author_id))
+        except ValueError:
+            pass
 
     if category:
         query = query.filter(Experience.category == category)

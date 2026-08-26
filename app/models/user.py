@@ -14,6 +14,8 @@ class User(db.Model):
     branch = db.Column(db.String(100))
     year = db.Column(db.Integer)
     role = db.Column(db.String(20), nullable=False, default="student")
+    bio = db.Column(db.Text, nullable=True)
+    skills = db.Column(db.Text, nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     reset_token = db.Column(db.String(100), unique=True, nullable=True)
     reset_token_expiry = db.Column(db.DateTime, nullable=True)
@@ -36,5 +38,7 @@ class User(db.Model):
             "branch": self.branch,
             "year": self.year,
             "role": self.role,
+            "bio": self.bio,
+            "skills": self.skills,
             "created_at": self.created_at.isoformat() if self.created_at else None
         }
