@@ -1681,6 +1681,15 @@
                         <span class="px-2.5 py-1 rounded-md bg-surface-container-high text-on-surface-variant font-label-sm">${exp.category || 'General'}</span>
                         <span class="px-2.5 py-1 rounded-md border border-outline-variant/30 text-on-surface-variant font-label-sm">${exp.company || 'Company'}</span>
                     </div>
+                    ${exp.accepted_answer ? `
+                    <div class="mt-2 p-4 bg-surface rounded-xl border border-secondary/20 flex gap-3 items-start" onclick="openExperienceDetail(${exp.experience_id}); event.stopPropagation();" style="cursor: pointer;">
+                        <span class="material-symbols-outlined text-secondary">check_circle</span>
+                        <div class="flex-1">
+                            <p class="text-label-sm text-secondary font-bold mb-1">Accepted Answer</p>
+                            <p class="text-body-md text-on-surface line-clamp-1">${exp.accepted_answer}</p>
+                        </div>
+                    </div>
+                    ` : ''}
                     <div class="flex items-center justify-between pt-4 border-t border-outline-variant/10">
                         <div class="flex items-center gap-6">
                             <button onclick="likeExperience(${exp.experience_id}, this)" class="flex items-center gap-1.5 text-on-surface-variant hover:text-secondary transition-colors">
