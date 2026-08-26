@@ -789,7 +789,12 @@
       setToken(response.data.data.token);
       window.location.href = 'dashboard.html';
     } else {
-      errorMsg.textContent = response.data.message || 'Registration failed.';
+      let finalMessage = response.data.message || 'Registration failed.';
+      if (response.data.errors) {
+        const errorDetails = Object.values(response.data.errors).join(', ');
+        finalMessage += ' (' + errorDetails + ')';
+      }
+      errorMsg.textContent = finalMessage;
       errorMsg.classList.remove('hidden');
       submitBtn.disabled = false;
       submitBtn.innerHTML = `Create Account`;
