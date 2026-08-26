@@ -89,3 +89,25 @@ function logout() {
     removeToken();
     window.location.href = 'login.html';
 }
+
+// Global UI Bindings
+document.addEventListener('DOMContentLoaded', () => {
+    // Notification Dropdown Logic
+    const notifBtn = document.getElementById('notificationBtn');
+    const notifDropdown = document.getElementById('notificationDropdown');
+    if (notifBtn && notifDropdown) {
+        // Prevent multiple bindings if already bound elsewhere
+        if (!notifBtn.dataset.bound) {
+            notifBtn.dataset.bound = 'true';
+            notifBtn.addEventListener('click', (e) => {
+                notifDropdown.classList.toggle('hidden');
+                e.stopPropagation();
+            });
+            document.addEventListener('click', (e) => {
+                if (!notifDropdown.contains(e.target) && e.target !== notifBtn) {
+                    notifDropdown.classList.add('hidden');
+                }
+            });
+        }
+    }
+});

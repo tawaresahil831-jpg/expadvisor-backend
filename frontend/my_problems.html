@@ -1393,12 +1393,7 @@
                 <span class="material-symbols-outlined mr-3">person</span>My Profile
             </a>
 
-            <div class="px-4 py-2 mt-6 mb-1 border-t border-outline-variant/20 pt-6">
-                <p class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Administrative</p>
-            </div>
-            <a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-label-md text-label-md" href="#">
-                <span class="material-symbols-outlined mr-3">admin_panel_settings</span>Admin Dashboard
-            </a>
+            
         </nav>
 
         <div class="px-8 py-8 mt-auto">
@@ -1414,23 +1409,57 @@
 
         <!-- ====== HEADER ====== -->
         <header class="fixed top-0 left-72 right-0 h-16 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center px-margin-desktop justify-between">
-            <div class="flex-1 max-w-2xl">
-                <div class="relative flex items-center bg-surface-container-highest/50 rounded-full px-6 py-2.5 ring-1 ring-outline-variant/30 focus-within:ring-2 focus-within:ring-secondary focus-within:bg-surface-container-highest transition-all">
-                    <span class="material-symbols-outlined text-on-surface-variant text-body-lg">search</span>
-                    <input class="bg-transparent border-none outline-none w-full px-4 text-body-md text-on-surface placeholder:text-on-surface-variant/60" placeholder="Search for problems, mentors, or topics..." type="text" />
+            <div class="flex-1 max-w-xl">
+                <div class="relative flex items-center bg-surface-container-high rounded-full px-4 py-2 ring-1 ring-outline-variant/20 focus-within:ring-secondary">
+                    <span class="material-symbols-outlined text-on-surface-variant text-body-md">search</span>
+                    <input class="bg-transparent border-none outline-none w-full px-3 text-body-md text-on-surface placeholder:text-on-surface-variant/60" placeholder="Search for problems..." type="text" />
                 </div>
             </div>
             <div class="flex items-center gap-6">
-                <button class="relative p-2 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors">
+                <div class="relative">
+                <button id="notificationBtn" class="relative p-2 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors focus:outline-none">
                     <span class="material-symbols-outlined">notifications</span>
                     <span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
                 </button>
+                <div id="notificationDropdown" class="hidden absolute right-0 mt-2 w-80 bg-surface-container-lowest rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-outline-variant/30 z-50 overflow-hidden">
+                    <div class="p-4 border-b border-outline-variant/30 flex justify-between items-center bg-surface">
+                        <h3 class="font-headline-md text-label-md text-primary font-semibold">Notifications</h3>
+                        <span class="text-label-sm text-secondary cursor-pointer hover:underline">Mark all as read</span>
+                    </div>
+                    <div class="max-h-64 overflow-y-auto">
+                        <div class="p-4 border-b border-outline-variant/20 hover:bg-surface-container/50 transition-colors cursor-pointer flex gap-3 items-start">
+                            <div class="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-secondary text-[16px]">forum</span>
+                            </div>
+                            <div>
+                                <p class="text-label-md text-on-surface mb-1"><span class="font-semibold">Sarah</span> commented on your query</p>
+                                <p class="text-label-sm text-on-surface-variant">2 hours ago</p>
+                            </div>
+                        </div>
+                        <div class="p-4 hover:bg-surface-container/50 transition-colors cursor-pointer flex gap-3 items-start opacity-70">
+                            <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[16px]">check_circle</span>
+                            </div>
+                            <div>
+                                <p class="text-label-md text-on-surface mb-1">Your query was resolved</p>
+                                <p class="text-label-sm text-on-surface-variant">Yesterday</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-3 text-center border-t border-outline-variant/30 bg-surface/50 hover:bg-surface transition-colors cursor-pointer text-secondary font-label-md text-label-sm">
+                        View all notifications
+                    </div>
+                </div>
+            </div>
                 <div class="flex items-center gap-3 pl-4 border-l border-outline-variant/40">
                     <div class="text-right hidden sm:block">
                         <p class="text-label-md font-label-md text-on-surface leading-tight user-name-display">Alex Rivers</p>
-                        <p class="text-label-sm font-label-sm text-on-surface-variant">Senior Admin</p>
+                        <p class="text-label-sm font-label-sm text-on-surface-variant">Senior Mentor</p>
                     </div>
                     <img alt="Profile" class="w-9 h-9 rounded-full object-cover ring-2 ring-surface-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdiQgYZHcs1i5qOIAd2Gz8LdgoSvQ6l9pvdU259XtTr3xzItG-ASIars6oHKk0pg8wSgW7QvR7MCXUnRfArSLjb31qE3UIZ1qentFczBi65HRSN7DfNCiVD_ibUEqEgvGT4SVe8x-As0GRBSksIpp7h1ia6hYtl41MhY6eBSnaMXov3JNFGrtqmOWK3fyZnDnIvXey0aQOo324g28QXnpBGIkYxrIJYYKkyubysvClLl1RU5xdqIhiDw" />
+                    <a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-label-md text-label-md" href="my_profile.html">
+                        <span class="material-symbols-outlined mr-3">person</span>My Profile
+                    </a>
                 </div>
             </div>
         </header>
