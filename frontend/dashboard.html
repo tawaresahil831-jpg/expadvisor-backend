@@ -1590,7 +1590,7 @@
         const response = await apiRequest(endpoint);
         
         if (response.status === 200 && response.data.success) {
-            const expList = response.data.data;
+            let expList = response.data.data;
             
             // Update stats
             const total = expList.length;

@@ -1694,7 +1694,7 @@
         // Get current user ID
         const userRes = await apiRequest('/auth/me');
         if (userRes.status !== 200) return;
-        const currentUserId = userRes.data.data.id;
+        const currentUserId = userRes.data.data.user_id || userRes.data.data.id;
 
         const response = await apiRequest('/experiences');
         

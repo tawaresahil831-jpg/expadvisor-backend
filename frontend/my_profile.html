@@ -1483,7 +1483,7 @@
             window.location.href = "login.html";
             return;
         }
-        currentUserId = userRes.data.data.id;
+        currentUserId = userRes.data.data.user_id || userRes.data.data.id;
         
         // Fetch full profile stats
         const profileRes = await apiRequest(`/users/${currentUserId}`);
@@ -1491,12 +1491,11 @@
             const data = profileRes.data.data;
             document.getElementById('profile-name').textContent = data.name || 'Student';
             document.getElementById('profile-role').textContent = data.role ? data.role.toUpperCase() : 'STUDENT';
-            document.getElementById('profile-bio').textContent = data.bio
+            document.getElementById('profile-bio').textContent = data.bio || 'Add a bio to let others know about your academic journey.';
             if (data.avatar_url) {
                 const img = document.getElementById('profileAvatarImg');
                 if (img) img.src = data.avatar_url;
             }
- || 'Add a bio to let others know about your academic journey.';
             
             // Set Stats
             document.getElementById('stats-solved').textContent = data.stats.problems_solved || 0;
