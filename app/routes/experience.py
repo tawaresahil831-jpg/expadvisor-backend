@@ -55,18 +55,47 @@ def get_experiences():
         except ValueError:
             pass
 
+    STANDARD_CATEGORIES = ['project', 'course', 'internship', 'placement', 'tech', 'career', 'design']
+
     if category and category.strip():
-        query = query.filter(Experience.category.ilike(category.strip()))
+        cat_clean = category.strip().lower()
+        if cat_clean == 'other':
+            query = query.filter(
+                or_(
+                    Experience.category.ilike('other'),
+                    Experience.category.is_(None),
+                    Experience.category.like('#%'),
+                    ~db.func.lower(Experience.category).in_(STANDARD_CATEGORIES)
+                )
+            )
+        else:
+            clean_name = cat_clean.lstrip('#')
+            query = query.filter(
+                or_(
+                    Experience.category.ilike(cat_clean),
+                    Experience.category.ilike(clean_name),
+                    Experience.category.ilike(f"#{clean_name}")
+                )
+            )
     if company:
         query = query.filter(Experience.company == company)
     if search and search.strip():
-        search_term = f"%{search.strip()}%"
-        query = query.filter(
-            or_(
-                Experience.title.ilike(search_term),
-                Experience.content.ilike(search_term)
-            )
-        )
+        raw_term = search.strip()
+        clean_term = raw_term.lstrip('#')
+        search_patterns = [f"%{raw_term}%"]
+        if clean_term and clean_term != raw_term:
+            search_patterns.append(f"%{clean_term}%")
+
+        search_filters = []
+        for pat in search_patterns:
+            search_filters.extend([
+                Experience.title.ilike(pat),
+                Experience.content.ilike(pat),
+                Experience.category.ilike(pat),
+                Experience.tags.ilike(pat),
+                Experience.company.ilike(pat)
+            ])
+        query = query.filter(or_(*search_filters))
 
     paginated_experiences = query.order_by(Experience.created_at.desc()).paginate(page=page, per_page=per_page, error_out=False)
 
