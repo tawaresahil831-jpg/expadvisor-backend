@@ -27,7 +27,7 @@ def add_comment(current_user, experience_id):
         return jsonify({"success": False, "message": "Experience not found"}), 404
 
     data = request.get_json(silent=True) or {}
-    text = data.get("comment")
+    text = data.get("comment") or data.get("content")
 
     errors = {}
     err = validate_length(text, 1, 1000, "Comment")
@@ -94,7 +94,7 @@ def update_comment(current_user, comment_id):
         return jsonify({"success": False, "message": "You are not allowed to edit this comment"}), 403
 
     data = request.get_json(silent=True) or {}
-    text = data.get("comment")
+    text = data.get("comment") or data.get("content")
     
     if not text:
         return jsonify({"success": False, "message": "Validation failed", "errors": {"comment": "Comment cannot be empty"}}), 400

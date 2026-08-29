@@ -16,12 +16,15 @@ class Comment(db.Model):
     experience = db.relationship("Experience", backref="comments")
 
     def to_dict(self):
+        name = self.user.name if self.user else None
         return {
             "comment_id": self.comment_id,
             "experience_id": self.experience_id,
             "user_id": self.user_id,
-            "user_name": self.user.name if self.user else None,
+            "user_name": name,
+            "author_name": name,
             "comment": self.comment,
+            "content": self.comment,
             "created_at": self.created_at.isoformat() if self.created_at else None,
             "is_accepted": self.is_accepted
         }
