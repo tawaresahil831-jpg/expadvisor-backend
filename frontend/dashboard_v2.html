@@ -792,7 +792,11 @@
                 loadCommunityStats();
                 loadTrendingQuery();
             } else {
-                alert(res.data.message || 'Failed to post query');
+                let errorMsg = res.data.message || 'Failed to post query';
+                if (res.data.errors) {
+                    errorMsg += ':\n• ' + Object.values(res.data.errors).join('\n• ');
+                }
+                alert(errorMsg);
             }
             btn.disabled = false;
             btn.textContent = 'Post Query';
