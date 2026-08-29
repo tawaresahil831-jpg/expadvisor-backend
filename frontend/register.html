@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>EXPadviser · Create Account</title>
 
-    
+
     <script src="https://cdn.tailwindcss.com">
     </script>
     <script id="tailwind-config">
@@ -100,29 +101,33 @@
         }
     </script>
 
-    
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet">
 
     <style>
-        
         html,
         body {
             margin: 0;
             padding: 0;
         }
+
         body {
             overscroll-behavior: none;
             background: #f8f9ff;
             font-family: 'Inter', sans-serif;
             color: #0b1c30;
         }
+
         main> :first-child {
             margin-top: 0 !important;
         }
+
         main> :last-child {
             margin-bottom: 0 !important;
         }
+
         ::-webkit-scrollbar {
             display: none;
         }
@@ -135,30 +140,35 @@
             line-height: 20px;
             letter-spacing: 0.01em;
         }
+
         .font-label-sm {
             font-family: 'Inter', sans-serif;
             font-size: 12px;
             font-weight: 600;
             line-height: 16px;
         }
+
         .font-body-md {
             font-family: 'Inter', sans-serif;
             font-size: 16px;
             font-weight: 400;
             line-height: 24px;
         }
+
         .font-body-lg {
             font-family: 'Inter', sans-serif;
             font-size: 18px;
             font-weight: 400;
             line-height: 28px;
         }
+
         .font-headline-md {
             font-family: 'Inter', sans-serif;
             font-size: 24px;
             font-weight: 600;
             line-height: 32px;
         }
+
         .font-headline-lg {
             font-family: 'Inter', sans-serif;
             font-size: 32px;
@@ -166,6 +176,7 @@
             line-height: 40px;
             letter-spacing: -0.01em;
         }
+
         .font-display-lg {
             font-family: 'Inter', sans-serif;
             font-size: 48px;
@@ -173,38 +184,45 @@
             line-height: 56px;
             letter-spacing: -0.02em;
         }
+
         .text-label-md {
             font-size: 14px;
             font-weight: 500;
             line-height: 20px;
             letter-spacing: 0.01em;
         }
+
         .text-label-sm {
             font-size: 12px;
             font-weight: 600;
             line-height: 16px;
         }
+
         .text-body-md {
             font-size: 16px;
             font-weight: 400;
             line-height: 24px;
         }
+
         .text-body-lg {
             font-size: 18px;
             font-weight: 400;
             line-height: 28px;
         }
+
         .text-headline-md {
             font-size: 24px;
             font-weight: 600;
             line-height: 32px;
         }
+
         .text-headline-lg {
             font-size: 32px;
             font-weight: 600;
             line-height: 40px;
             letter-spacing: -0.01em;
         }
+
         .text-display-lg {
             font-size: 48px;
             font-weight: 700;
@@ -217,19 +235,24 @@
             padding-left: 40px;
             padding-right: 40px;
         }
+
         .px-margin-mobile {
             padding-left: 16px;
             padding-right: 16px;
         }
+
         .p-margin-desktop {
             padding: 40px;
         }
+
         .max-w-container-max {
             max-width: 1280px;
         }
+
         .gap-gutter {
             gap: 24px;
         }
+
         .gap-base {
             gap: 8px;
         }
@@ -238,15 +261,19 @@
         .bg-surface\/80 {
             background: rgba(248, 249, 255, 0.8);
         }
+
         .bg-surface\/40 {
             background: rgba(248, 249, 255, 0.4);
         }
+
         .bg-surface-container-lowest\/80 {
             background: rgba(255, 255, 255, 0.8);
         }
+
         .backdrop-blur-xl {
             backdrop-filter: blur(24px);
         }
+
         .backdrop-blur-sm {
             backdrop-filter: blur(8px);
         }
@@ -260,30 +287,39 @@
         .transition-transform {
             transition: transform 0.2s;
         }
+
         .transition-colors {
             transition: color 0.2s, background-color 0.2s, border-color 0.2s;
         }
+
         .transition-shadow {
             transition: box-shadow 0.2s;
         }
+
         .transition-all {
             transition: all 0.25s ease;
         }
+
         .hover\:-translate-y-0\.5:hover {
             transform: translateY(-2px);
         }
+
         .hover\:scale-110:hover {
             transform: scale(1.1);
         }
+
         .active\:scale-\[0\.98\]:active {
             transform: scale(0.98);
         }
+
         .peer:checked~.peer-checked\:bg-secondary {
             background: #4648d4;
         }
+
         .peer:checked~.peer-checked\:border-secondary {
             border-color: #4648d4;
         }
+
         .peer:checked~.peer-checked\:opacity-100 {
             opacity: 1;
         }
@@ -294,32 +330,41 @@
             --tw-ring-shadow: 0 0 #0000;
             box-shadow: var(--tw-ring-inset) 0 0 0 calc(4px + var(--tw-ring-offset-width)) var(--tw-ring-color);
         }
+
         .ring-secondary\/10 {
             --tw-ring-color: rgba(70, 72, 212, 0.1);
         }
+
         .ring-secondary\/30 {
             --tw-ring-color: rgba(70, 72, 212, 0.3);
         }
+
         .ring-error\/10 {
             --tw-ring-color: rgba(186, 26, 26, 0.1);
         }
+
         .focus\:ring-4:focus {
             --tw-ring-offset-shadow: 0 0 #0000;
             --tw-ring-shadow: 0 0 #0000;
             box-shadow: var(--tw-ring-inset) 0 0 0 calc(4px + var(--tw-ring-offset-width)) var(--tw-ring-color);
         }
+
         .focus\:ring-secondary\/10:focus {
             --tw-ring-color: rgba(70, 72, 212, 0.1);
         }
+
         .focus\:ring-secondary\/30:focus {
             --tw-ring-color: rgba(70, 72, 212, 0.3);
         }
+
         .focus\:ring-error\/10:focus {
             --tw-ring-color: rgba(186, 26, 26, 0.1);
         }
+
         .focus\:border-secondary:focus {
             border-color: #4648d4;
         }
+
         .focus\:border-error:focus {
             border-color: #ba1a1a;
         }
@@ -328,21 +373,27 @@
         .border-outline-variant\/40 {
             border-color: rgba(197, 198, 205, 0.4);
         }
+
         .border-outline-variant\/50 {
             border-color: rgba(197, 198, 205, 0.5);
         }
+
         .border-outline-variant\/30 {
             border-color: rgba(197, 198, 205, 0.3);
         }
+
         .border-white\/10 {
             border-color: rgba(255, 255, 255, 0.1);
         }
+
         .border-error {
             border-color: #ba1a1a;
         }
+
         .border-secondary {
             border-color: #4648d4;
         }
+
         .border-dashed {
             border-style: dashed;
         }
@@ -351,6 +402,7 @@
         .blur-3xl {
             filter: blur(64px);
         }
+
         .blur-2xl {
             filter: blur(40px);
         }
@@ -359,9 +411,11 @@
         .shadow-\[0_1px_8px_rgba\(0\2c 0\2c 0\2c 0\.04\)\] {
             box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
         }
+
         .shadow-\[0_8px_32px_rgba\(0\2c 0\2c 0\2c 0\.04\)\] {
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
         }
+
         .drop-shadow-xl {
             filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.08));
         }
@@ -370,12 +424,15 @@
         .tracking-wider {
             letter-spacing: 0.1em;
         }
+
         .tracking-widest {
             letter-spacing: 0.1em;
         }
+
         .uppercase {
             text-transform: uppercase;
         }
+
         .sr-only {
             position: absolute;
             width: 1px;
@@ -387,25 +444,31 @@
             white-space: nowrap;
             border: 0;
         }
+
         .pointer-events-none {
             pointer-events: none;
         }
+
         .appearance-none {
             appearance: none;
             -webkit-appearance: none;
         }
+
         .line-clamp-2 {
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
+
         .mix-blend-multiply {
             mix-blend-mode: multiply;
         }
+
         .select-none {
             user-select: none;
         }
+
         .overflow-y-auto {
             overflow-y: auto;
         }
@@ -415,15 +478,19 @@
             .sm\:block {
                 display: block;
             }
+
             .sm\:hidden {
                 display: none;
             }
+
             .sm\:p-10 {
                 padding: 40px;
             }
+
             .sm\:grid-cols-2 {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
             }
+
             .sm\:flex-row {
                 flex-direction: row;
             }
@@ -433,23 +500,29 @@
             .lg\:flex {
                 display: flex;
             }
+
             .lg\:hidden {
                 display: none;
             }
+
             .lg\:w-1\/2 {
                 width: 50%;
             }
+
             .lg\:flex-row {
                 flex-direction: row;
             }
+
             .lg\:px-margin-desktop {
                 padding-left: 40px;
                 padding-right: 40px;
             }
+
             .lg\:px-12 {
                 padding-left: 48px;
                 padding-right: 48px;
             }
+
             .lg\:gap-gutter {
                 gap: 24px;
             }
@@ -469,20 +542,28 @@
     <!-- ============================================================ -->
     <!-- HEADER (fixed)                                                -->
     <!-- ============================================================ -->
-    <header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]" style="background:rgba(248,249,255,0.8);">
-        <div class="h-16 max-w-container-max mx-auto px-margin-mobile lg:px-margin-desktop flex items-center justify-between">
+    <header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"
+        style="background:rgba(248,249,255,0.8);">
+        <div
+            class="h-16 max-w-container-max mx-auto px-margin-mobile lg:px-margin-desktop flex items-center justify-between">
             <!-- Logo -->
             <div class="flex items-center gap-3">
-                <img class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCejsZEw_6KhdC2p5NH-lGPJ22OgddUXOP-B9Id48bT_js4NtBCOQ7C15IzNxK6tQgO88OtzrpVPDta_4yjNr_0uM6xXyiHD-Pd3_pfpTuhUrmvnuvUXhShbS-8JSOm9EuinnPJf74T35D_8UsOUkvD3lQzOpfPbNYdOJfpE9iG_fu0T69FofVkzSet1WIOCVG62xykoffpL_FUA5qAp9gNs66MHeBgPhrKl-TjMrP9lUad_PRgq2RSRfgeTlVfiAIPS73ZTvEGyBhmsxc" alt="PeerSolve logo">
+                <img class="h-8 w-auto object-contain"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCejsZEw_6KhdC2p5NH-lGPJ22OgddUXOP-B9Id48bT_js4NtBCOQ7C15IzNxK6tQgO88OtzrpVPDta_4yjNr_0uM6xXyiHD-Pd3_pfpTuhUrmvnuvUXhShbS-8JSOm9EuinnPJf74T35D_8UsOUkvD3lQzOpfPbNYdOJfpE9iG_fu0T69FofVkzSet1WIOCVG62xykoffpL_FUA5qAp9gNs66MHeBgPhrKl-TjMrP9lUad_PRgq2RSRfgeTlVfiAIPS73ZTvEGyBhmsxc"
+                    alt="PeerSolve logo">
                 <span class="text-headline-md font-headline-md text-primary" style="color:#091426;">EXPadviser</span>
             </div>
 
             <!-- Nav -->
             <nav class="flex items-center gap-base lg:gap-gutter" data-active-classes="text-secondary font-bold">
-                <a class="text-label-md font-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="landing" href="#" style="color:#45474c;">Home</a>
-                <a class="text-label-md font-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="login" href="#" style="color:#45474c;">Login</a>
-                <div class="ml-4 w-8 h-8 rounded-full bg-primary flex items-center justify-center" style="background:#091426;">
-                    <span class="material-symbols-outlined text-on-primary text-[18px]" style="color:#ffffff;">person</span>
+                <a class="text-label-md font-label-md text-on-surface-variant hover:text-on-surface transition-colors"
+                    data-path="landing" href="#" style="color:#45474c;">Home</a>
+                <a class="text-label-md font-label-md text-on-surface-variant hover:text-on-surface transition-colors"
+                    data-path="login" href="#" style="color:#45474c;">Login</a>
+                <div class="ml-4 w-8 h-8 rounded-full bg-primary flex items-center justify-center"
+                    style="background:#091426;">
+                    <span class="material-symbols-outlined text-on-primary text-[18px]"
+                        style="color:#ffffff;">person</span>
                 </div>
             </nav>
         </div>
@@ -496,68 +577,89 @@
         <div class="flex flex-col w-full min-h-[calc(100vh-64px)] lg:flex-row bg-surface" style="background:#f8f9ff;">
 
             <!-- ===== LEFT COLUMN: Hero ===== -->
-            <div class="hidden lg:flex w-1/2 flex-col justify-center items-center relative overflow-hidden bg-gradient-to-br from-surface-variant/30 via-primary-fixed/20 to-surface-container pb-12" style="background:linear-gradient(to bottom right, rgba(211,228,254,0.3), rgba(216,227,251,0.2), #e5eeff);">
+            <div class="hidden lg:flex w-1/2 flex-col justify-center items-center relative overflow-hidden bg-gradient-to-br from-surface-variant/30 via-primary-fixed/20 to-surface-container pb-12"
+                style="background:linear-gradient(to bottom right, rgba(211,228,254,0.3), rgba(216,227,251,0.2), #e5eeff);">
                 <!-- Decorative blobs -->
                 <div class="absolute inset-0 z-0">
-                    <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" style="background:rgba(9,20,38,0.05);"></div>
-                    <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-secondary/5 rounded-full blur-3xl" style="background:rgba(70,72,212,0.05);"></div>
+                    <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl"
+                        style="background:rgba(9,20,38,0.05);"></div>
+                    <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-secondary/5 rounded-full blur-3xl"
+                        style="background:rgba(70,72,212,0.05);"></div>
                 </div>
 
                 <div class="relative z-10 w-full max-w-lg px-12 text-center flex flex-col items-center">
                     <!-- Illustration -->
-                    <img class="w-full h-auto object-contain drop-shadow-xl mb-12 mix-blend-multiply" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJ-ZA5lDBn5-XER3xmCT0JZs5mb0XhLHGr8Pje887zZEOW5X3qqsNo7j3FHF2LX_vTqCNkTynRMfi_w_jkRyaGT6K0Q38iZBiOS-bnf9Zkl-WeagljTCUkowgo3bn6VVEtHNKz18EUy1JXT3kTO07lErG7rH5vCR0HFimQ_hirUm7k8PDd0tR45dz05EfHgbWaDeF-pS8aWzE8FR-0Cef1jJnRPaLok3icc0o18newyoMHAwzVg-BzHDvkwVt1HK5sv5Do9GSJGkIb5AI" alt="Students and mentors collaborating">
+                    <img class="w-full h-auto object-contain drop-shadow-xl mb-12 mix-blend-multiply"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJ-ZA5lDBn5-XER3xmCT0JZs5mb0XhLHGr8Pje887zZEOW5X3qqsNo7j3FHF2LX_vTqCNkTynRMfi_w_jkRyaGT6K0Q38iZBiOS-bnf9Zkl-WeagljTCUkowgo3bn6VVEtHNKz18EUy1JXT3kTO07lErG7rH5vCR0HFimQ_hirUm7k8PDd0tR45dz05EfHgbWaDeF-pS8aWzE8FR-0Cef1jJnRPaLok3icc0o18newyoMHAwzVg-BzHDvkwVt1HK5sv5Do9GSJGkIb5AI"
+                        alt="Students and mentors collaborating">
 
-                    <h1 class="text-display-lg text-primary mb-4" style="color:#091426;">Your Questions. Their Experience. Your Future.</h1>
+                    <h1 class="text-display-lg text-primary mb-4" style="color:#091426;">Your Questions. Their
+                        Experience. Your Future.</h1>
                     <p class="text-body-lg text-on-surface-variant leading-relaxed max-w-md" style="color:#45474c;">
-                        Join the definitive academic ecosystem where peer problem-solving and structured mentorship accelerate your learning journey.
+                        Join the definitive academic ecosystem where peer problem-solving and structured mentorship
+                        accelerate your learning journey.
                     </p>
 
                     <!-- Stats -->
                     <div class="mt-12 grid grid-cols-2 gap-8 w-full">
-                        <div class="flex flex-col items-center p-6 bg-surface/40 backdrop-blur-sm rounded-xl shadow-sm" style="background:rgba(248,249,255,0.4);">
-                            <span class="material-symbols-outlined text-secondary text-[32px] mb-2" style="font-variation-settings:'FILL' 1; color:#4648d4;">groups</span>
+                        <div class="flex flex-col items-center p-6 bg-surface/40 backdrop-blur-sm rounded-xl shadow-sm"
+                            style="background:rgba(248,249,255,0.4);">
+                            <span class="material-symbols-outlined text-secondary text-[32px] mb-2"
+                                style="font-variation-settings:'FILL' 1; color:#4648d4;">groups</span>
                             <span class="text-headline-md text-primary" style="color:#091426;">0</span>
-                            <span class="text-label-sm text-on-surface-variant uppercase tracking-wider mt-1" style="color:#45474c;">Active EXP's</span>
+                            <span class="text-label-sm text-on-surface-variant uppercase tracking-wider mt-1"
+                                style="color:#45474c;">Active EXP's</span>
                         </div>
-                        <div class="flex flex-col items-center p-6 bg-surface/40 backdrop-blur-sm rounded-xl shadow-sm" style="background:rgba(248,249,255,0.4);">
-                            <span class="material-symbols-outlined text-secondary text-[32px] mb-2" style="font-variation-settings:'FILL' 1; color:#4648d4;">school</span>
+                        <div class="flex flex-col items-center p-6 bg-surface/40 backdrop-blur-sm rounded-xl shadow-sm"
+                            style="background:rgba(248,249,255,0.4);">
+                            <span class="material-symbols-outlined text-secondary text-[32px] mb-2"
+                                style="font-variation-settings:'FILL' 1; color:#4648d4;">school</span>
                             <span class="text-headline-md text-primary" style="color:#091426;">0</span>
-                            <span class="text-label-sm text-on-surface-variant uppercase tracking-wider mt-1" style="color:#45474c;">Expert Mentors</span>
+                            <span class="text-label-sm text-on-surface-variant uppercase tracking-wider mt-1"
+                                style="color:#45474c;">Expert Mentors</span>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- ===== RIGHT COLUMN: Registration Form ===== -->
-            <div class="w-full lg:w-1/2 flex justify-center py-12 px-margin-mobile lg:px-12 xl:px-24 bg-surface relative z-10 overflow-y-auto" style="background:#f8f9ff;">
+            <div class="w-full lg:w-1/2 flex justify-center py-12 px-margin-mobile lg:px-12 xl:px-24 bg-surface relative z-10 overflow-y-auto"
+                style="background:#f8f9ff;">
 
-                <div class="w-full max-w-xl bg-surface-container-lowest/80 backdrop-blur-xl rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.04)] p-8 sm:p-10 border border-outline-variant/30" style="background:rgba(255,255,255,0.8); border-color:rgba(197,198,205,0.3);">
+                <div class="w-full max-w-xl bg-surface-container-lowest/80 backdrop-blur-xl rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.04)] p-8 sm:p-10 border border-outline-variant/30"
+                    style="background:rgba(255,255,255,0.8); border-color:rgba(197,198,205,0.3);">
 
                     <!-- Header -->
                     <div class="mb-8">
                         <h2 class="text-headline-lg text-primary mb-2" style="color:#091426;">Create Your Account</h2>
-                        <p class="text-body-md text-on-surface-variant" style="color:#45474c;">Join EXPadviser and connect with experienced mentors.</p>
+                        <p class="text-body-md text-on-surface-variant" style="color:#45474c;">Join EXPadviser and
+                            connect with experienced mentors.</p>
                     </div>
 
                     <!-- Social Sign-in Buttons -->
                     <div class="flex flex-col sm:flex-row gap-4 mb-8">
-                        
-        <div id="googleBtnContainer" class="w-full flex justify-center mt-2"></div>
 
-                        
-        <div id="googleBtnContainer" class="w-full flex justify-center mt-2"></div>
+                        <div id="googleBtnContainer" class="w-full flex justify-center mt-2"></div>
+
+
+                        <div id="googleBtnContainer" class="w-full flex justify-center mt-2"></div>
 
                     </div>
 
                     <!-- Divider -->
                     <div class="relative flex items-center py-5 mb-6">
-                        <div class="flex-grow border-t border-outline-variant/40" style="border-color:rgba(197,198,205,0.4);"></div>
-                        <span class="flex-shrink-0 mx-4 text-label-sm text-on-surface-variant uppercase tracking-wider" style="color:#45474c;">or register with email</span>
-                        <div class="flex-grow border-t border-outline-variant/40" style="border-color:rgba(197,198,205,0.4);"></div>
+                        <div class="flex-grow border-t border-outline-variant/40"
+                            style="border-color:rgba(197,198,205,0.4);"></div>
+                        <span class="flex-shrink-0 mx-4 text-label-sm text-on-surface-variant uppercase tracking-wider"
+                            style="color:#45474c;">or register with email</span>
+                        <div class="flex-grow border-t border-outline-variant/40"
+                            style="border-color:rgba(197,198,205,0.4);"></div>
                     </div>
 
                     <!-- Form -->
-                    <div id="errorMessage" class="hidden mb-4 p-4 text-error bg-error/10 border border-error/20 rounded-xl text-center font-label-md"></div>
+                    <div id="errorMessage"
+                        class="hidden mb-4 p-4 text-error bg-error/10 border border-error/20 rounded-xl text-center font-label-md">
+                    </div>
                     <form id="registerForm" class="flex flex-col gap-6">
 
                         <!-- Row: Full Name + Username -->
@@ -565,12 +667,18 @@
                             <!-- Full Name -->
                             <div class="flex flex-col gap-1.5">
                                 <label class="text-label-sm text-on-surface" style="color:#0b1c30;">Full Name</label>
-                                <input class="w-full px-4 py-3 rounded-xl bg-surface border border-outline-variant/50 text-body-md text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-secondary focus:ring-4 focus:ring-secondary/10 transition-all" style="background:#f8f9ff; border-color:rgba(197,198,205,0.5); color:#0b1c30;" placeholder="Enter your full name" type="text">
+                                <input
+                                    class="w-full px-4 py-3 rounded-xl bg-surface border border-outline-variant/50 text-body-md text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-secondary focus:ring-4 focus:ring-secondary/10 transition-all"
+                                    style="background:#f8f9ff; border-color:rgba(197,198,205,0.5); color:#0b1c30;"
+                                    placeholder="Enter your full name" type="text">
                             </div>
                             <!-- Username -->
                             <div class="flex flex-col gap-1.5">
                                 <label class="text-label-sm text-on-surface" style="color:#0b1c30;">Username</label>
-                                <input class="w-full px-4 py-3 rounded-xl bg-surface border border-outline-variant/50 text-body-md text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-secondary focus:ring-4 focus:ring-secondary/10 transition-all" style="background:#f8f9ff; border-color:rgba(197,198,205,0.5); color:#0b1c30;" placeholder="Enter your username" type="text" id="username">
+                                <input
+                                    class="w-full px-4 py-3 rounded-xl bg-surface border border-outline-variant/50 text-body-md text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-secondary focus:ring-4 focus:ring-secondary/10 transition-all"
+                                    style="background:#f8f9ff; border-color:rgba(197,198,205,0.5); color:#0b1c30;"
+                                    placeholder="Enter your username" type="text" id="username">
                             </div>
                         </div>
 
@@ -580,150 +688,227 @@
                             <div class="flex flex-col gap-1.5">
                                 <label class="text-label-sm text-on-surface" style="color:#0b1c30;">Email ID</label>
                                 <div class="relative">
-                                    <input class="w-full px-4 py-3 rounded-xl bg-surface border border-outline-variant/50 text-body-md text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-secondary focus:ring-4 focus:ring-secondary/10 transition-all pl-10" style="background:#f8f9ff; border-color:rgba(197,198,205,0.5); color:#0b1c30;" placeholder="Enter your email address" type="email" id="email">
-                                    <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant/50 text-[20px]" style="color:rgba(69,71,76,0.5);">mail</span>
+                                    <input
+                                        class="w-full px-4 py-3 rounded-xl bg-surface border border-outline-variant/50 text-body-md text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-secondary focus:ring-4 focus:ring-secondary/10 transition-all pl-10"
+                                        style="background:#f8f9ff; border-color:rgba(197,198,205,0.5); color:#0b1c30;"
+                                        placeholder="Enter your email address" type="email" id="email">
+                                    <span
+                                        class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant/50 text-[20px]"
+                                        style="color:rgba(69,71,76,0.5);">mail</span>
                                 </div>
                             </div>
-                            
+
                             <div class="flex flex-col gap-1.5">
-                                <label class="text-label-sm text-on-surface" style="color:#0b1c30;">Mobile Number</label>
+                                <label class="text-label-sm text-on-surface" style="color:#0b1c30;">Mobile
+                                    Number</label>
                                 <div class="relative flex">
-                                    <select disabled class="px-3 py-3 rounded-l-xl bg-surface border border-r-0 border-outline-variant/50 text-body-md text-on-surface focus:outline-none focus:border-secondary focus:ring-4 focus:ring-secondary/10 transition-all appearance-none" style="background:#f8f9ff; border-color:rgba(197,198,205,0.5); color:#0b1c30;">
+                                    <select disabled
+                                        class="px-3 py-3 rounded-l-xl bg-surface border border-r-0 border-outline-variant/50 text-body-md text-on-surface focus:outline-none focus:border-secondary focus:ring-4 focus:ring-secondary/10 transition-all appearance-none"
+                                        style="background:#f8f9ff; border-color:rgba(197,198,205,0.5); color:#0b1c30;">
                                         <option selected>+91</option>
                                     </select>
-                                    <input class="w-full px-4 py-3 rounded-r-xl bg-surface border border-outline-variant/50 text-body-md text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-secondary focus:ring-4 focus:ring-secondary/10 transition-all" style="background:#f8f9ff; border-color:rgba(197,198,205,0.5); color:#0b1c30;" placeholder="Enter your mobile number" type="tel" maxlength="10" pattern="[0-9]{10}" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                                    <input
+                                        class="w-full px-4 py-3 rounded-r-xl bg-surface border border-outline-variant/50 text-body-md text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-secondary focus:ring-4 focus:ring-secondary/10 transition-all"
+                                        style="background:#f8f9ff; border-color:rgba(197,198,205,0.5); color:#0b1c30;"
+                                        placeholder="Enter your mobile number" type="tel" maxlength="10"
+                                        pattern="[0-9]{10}" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                                 </div>
                             </div>
                         </div>
 
-                    
+
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        
+
                             <div class="flex flex-col gap-1.5">
                                 <label class="text-label-sm text-on-surface" style="color:#0b1c30;">Set Password</label>
                                 <div class="relative">
-                                    <input class="w-full px-4 py-3 rounded-xl bg-surface border border-outline-variant/50 text-body-md text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-secondary focus:ring-4 focus:ring-secondary/10 transition-all pr-10" style="background:#f8f9ff; border-color:rgba(197,198,205,0.5); color:#0b1c30;" placeholder="Enter password" type="password" id="password">
-                                    <button id="togglePassword" class="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary transition-colors" type="button" style="color:#45474c;"><span class="material-symbols-outlined text-[20px]" id="togglePasswordIcon">visibility</span></button>
+                                    <input
+                                        class="w-full px-4 py-3 rounded-xl bg-surface border border-outline-variant/50 text-body-md text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-secondary focus:ring-4 focus:ring-secondary/10 transition-all pr-10"
+                                        style="background:#f8f9ff; border-color:rgba(197,198,205,0.5); color:#0b1c30;"
+                                        placeholder="Enter password" type="password" id="password">
+                                    <button id="togglePassword"
+                                        class="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary transition-colors"
+                                        type="button" style="color:#45474c;"><span
+                                            class="material-symbols-outlined text-[20px]"
+                                            id="togglePasswordIcon">visibility</span></button>
                                 </div>
-                                
+
                                 <div class="flex items-center gap-2 mt-1">
                                     <div class="flex gap-1 flex-1 h-1.5">
-                                        <div class="h-full bg-secondary rounded-full flex-1" style="background:#4648d4;"></div>
-                                        <div class="h-full bg-secondary rounded-full flex-1" style="background:#4648d4;"></div>
-                                        <div class="h-full bg-surface-variant rounded-full flex-1" style="background:#d3e4fe;"></div>
+                                        <div class="h-full bg-secondary rounded-full flex-1"
+                                            style="background:#4648d4;"></div>
+                                        <div class="h-full bg-secondary rounded-full flex-1"
+                                            style="background:#4648d4;"></div>
+                                        <div class="h-full bg-surface-variant rounded-full flex-1"
+                                            style="background:#d3e4fe;"></div>
                                     </div>
-                                    <span class="text-[10px] font-medium text-secondary uppercase tracking-wide" style="color:#4648d4;">Medium</span>
+                                    <span class="text-[10px] font-medium text-secondary uppercase tracking-wide"
+                                        style="color:#4648d4;">Medium</span>
                                 </div>
                             </div>
-                            
+
                             <div class="flex flex-col gap-1.5">
-                                <label class="text-label-sm text-on-surface" style="color:#0b1c30;">Confirm Password</label>
+                                <label class="text-label-sm text-on-surface" style="color:#0b1c30;">Confirm
+                                    Password</label>
                                 <div class="relative">
-                                    <input class="w-full px-4 py-3 rounded-xl bg-surface border border-outline-variant/50 text-body-md text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-secondary focus:ring-4 focus:ring-secondary/10 transition-all pr-10" style="background:#f8f9ff; border-color:rgba(197,198,205,0.5); color:#0b1c30;" placeholder="Re-enter password" type="password" id="confirmPassword">
-                                    <button id="toggleConfirmPassword" class="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary transition-colors" type="button" style="color:#45474c;"><span class="material-symbols-outlined text-[20px]" id="toggleConfirmPasswordIcon">visibility_off</span></button>
+                                    <input
+                                        class="w-full px-4 py-3 rounded-xl bg-surface border border-outline-variant/50 text-body-md text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-secondary focus:ring-4 focus:ring-secondary/10 transition-all pr-10"
+                                        style="background:#f8f9ff; border-color:rgba(197,198,205,0.5); color:#0b1c30;"
+                                        placeholder="Re-enter password" type="password" id="confirmPassword">
+                                    <button id="toggleConfirmPassword"
+                                        class="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary transition-colors"
+                                        type="button" style="color:#45474c;"><span
+                                            class="material-symbols-outlined text-[20px]"
+                                            id="toggleConfirmPasswordIcon">visibility_off</span></button>
                                 </div>
                             </div>
                         </div>
 
-                        
-                        <div class="p-5 rounded-xl bg-surface-container-low border border-outline-variant/30 flex flex-col gap-5" style="background:#eff4ff; border-color:rgba(197,198,205,0.3);">
+
+                        <div class="p-5 rounded-xl bg-surface-container-low border border-outline-variant/30 flex flex-col gap-5"
+                            style="background:#eff4ff; border-color:rgba(197,198,205,0.3);">
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                                
+
                                 <div class="flex flex-col gap-1.5">
-                                    <label class="text-label-sm text-on-surface" style="color:#0b1c30;">User Type / Role</label>
+                                    <label class="text-label-sm text-on-surface" style="color:#0b1c30;">User Type /
+                                        Role</label>
                                     <div class="relative">
-                                        <select class="w-full px-4 py-3 rounded-xl bg-surface border border-outline-variant/50 text-body-md text-on-surface focus:outline-none focus:border-secondary focus:ring-4 focus:ring-secondary/10 transition-all appearance-none cursor-pointer" style="background:#f8f9ff; border-color:rgba(197,198,205,0.5); color:#0b1c30;">
+                                        <select
+                                            class="w-full px-4 py-3 rounded-xl bg-surface border border-outline-variant/50 text-body-md text-on-surface focus:outline-none focus:border-secondary focus:ring-4 focus:ring-secondary/10 transition-all appearance-none cursor-pointer"
+                                            style="background:#f8f9ff; border-color:rgba(197,198,205,0.5); color:#0b1c30;">
                                             <option disabled selected value="">Select Role</option>
                                             <option>Junior</option>
                                             <option>Sophomore</option>
                                             <option>User</option>
                                             <option>Adviser</option>
                                         </select>
-                                        <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none" style="color:#45474c;">expand_more</span>
+                                        <span
+                                            class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none"
+                                            style="color:#45474c;">expand_more</span>
                                     </div>
                                 </div>
-                                
+
                                 <div class="flex flex-col gap-1.5">
-                                    <label class="text-label-sm text-on-surface" style="color:#0b1c30;">Year of Study</label>
+                                    <label class="text-label-sm text-on-surface" style="color:#0b1c30;">Year of
+                                        Study</label>
                                     <div class="relative">
-                                        <select class="w-full px-4 py-3 rounded-xl bg-surface border border-outline-variant/50 text-body-md text-on-surface focus:outline-none focus:border-secondary focus:ring-4 focus:ring-secondary/10 transition-all appearance-none cursor-pointer" style="background:#f8f9ff; border-color:rgba(197,198,205,0.5); color:#0b1c30;">
+                                        <select
+                                            class="w-full px-4 py-3 rounded-xl bg-surface border border-outline-variant/50 text-body-md text-on-surface focus:outline-none focus:border-secondary focus:ring-4 focus:ring-secondary/10 transition-all appearance-none cursor-pointer"
+                                            style="background:#f8f9ff; border-color:rgba(197,198,205,0.5); color:#0b1c30;">
                                             <option disabled selected value="">Select Year</option>
                                             <option>1st Year</option>
                                             <option>2nd Year</option>
                                             <option>3rd Year</option>
                                             <option>4th Year</option>
                                         </select>
-                                        <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none" style="color:#45474c;">expand_more</span>
+                                        <span
+                                            class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none"
+                                            style="color:#45474c;">expand_more</span>
                                     </div>
                                 </div>
                             </div>
 
-                            
+
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                                 <div class="flex flex-col gap-1.5">
-                                    <label class="text-label-sm text-on-surface" style="color:#0b1c30;">College / Institution</label>
-                                    <input class="w-full px-4 py-3 rounded-xl bg-surface border border-outline-variant/50 text-body-md text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-secondary focus:ring-4 focus:ring-secondary/10 transition-all" style="background:#f8f9ff; border-color:rgba(197,198,205,0.5); color:#0b1c30;" placeholder="Enter your college or institution" type="text">
+                                    <label class="text-label-sm text-on-surface" style="color:#0b1c30;">College /
+                                        Institution</label>
+                                    <input
+                                        class="w-full px-4 py-3 rounded-xl bg-surface border border-outline-variant/50 text-body-md text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-secondary focus:ring-4 focus:ring-secondary/10 transition-all"
+                                        style="background:#f8f9ff; border-color:rgba(197,198,205,0.5); color:#0b1c30;"
+                                        placeholder="Enter your college or institution" type="text">
                                 </div>
                                 <div class="flex flex-col gap-1.5">
-                                    <label class="text-label-sm text-on-surface" style="color:#0b1c30;">Course / Department</label>
+                                    <label class="text-label-sm text-on-surface" style="color:#0b1c30;">Course /
+                                        Department</label>
                                     <div class="relative">
-                                        <select class="w-full px-4 py-3 rounded-xl bg-surface border border-outline-variant/50 text-body-md text-on-surface focus:outline-none focus:border-secondary focus:ring-4 focus:ring-secondary/10 transition-all appearance-none cursor-pointer" style="background:#f8f9ff; border-color:rgba(197,198,205,0.5); color:#0b1c30;">
+                                        <select
+                                            class="w-full px-4 py-3 rounded-xl bg-surface border border-outline-variant/50 text-body-md text-on-surface focus:outline-none focus:border-secondary focus:ring-4 focus:ring-secondary/10 transition-all appearance-none cursor-pointer"
+                                            style="background:#f8f9ff; border-color:rgba(197,198,205,0.5); color:#0b1c30;">
                                             <option disabled selected value="">Select course</option>
                                             <option>Computer Science</option>
                                             <option>Electrical Engineering</option>
                                             <option>Mechanical Engineering</option>
                                             <option>Business Admin</option>
                                         </select>
-                                        <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none" style="color:#45474c;">expand_more</span>
+                                        <span
+                                            class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none"
+                                            style="color:#45474c;">expand_more</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        
+
                         <div class="flex flex-col gap-2">
-                            <label class="text-label-sm text-on-surface" style="color:#0b1c30;">Skills / Interests</label>
+                            <label class="text-label-sm text-on-surface" style="color:#0b1c30;">Skills /
+                                Interests</label>
                             <div id="skillsContainer" class="flex flex-wrap gap-2">
-                                <button class="skill-btn px-3 py-1.5 rounded-lg border border-secondary bg-secondary/10 text-secondary text-label-sm hover:bg-secondary/20 transition-colors flex items-center gap-1" type="button" style="border-color:#4648d4; background:rgba(70,72,212,0.1); color:#4648d4;">
+                                <button
+                                    class="skill-btn px-3 py-1.5 rounded-lg border border-secondary bg-secondary/10 text-secondary text-label-sm hover:bg-secondary/20 transition-colors flex items-center gap-1"
+                                    type="button"
+                                    style="border-color:#4648d4; background:rgba(70,72,212,0.1); color:#4648d4;">
                                     Computer Science <span class="material-symbols-outlined text-[14px]">close</span>
                                 </button>
-                                <button class="skill-btn px-3 py-1.5 rounded-lg border border-outline-variant bg-surface text-on-surface-variant text-label-sm hover:bg-surface-container transition-colors" type="button" style="border-color:rgba(197,198,205,0.5); background:#f8f9ff; color:#45474c;">
+                                <button
+                                    class="skill-btn px-3 py-1.5 rounded-lg border border-outline-variant bg-surface text-on-surface-variant text-label-sm hover:bg-surface-container transition-colors"
+                                    type="button"
+                                    style="border-color:rgba(197,198,205,0.5); background:#f8f9ff; color:#45474c;">
                                     Mathematics
                                 </button>
-                                <button class="skill-btn px-3 py-1.5 rounded-lg border border-outline-variant bg-surface text-on-surface-variant text-label-sm hover:bg-surface-container transition-colors" type="button" style="border-color:rgba(197,198,205,0.5); background:#f8f9ff; color:#45474c;">
+                                <button
+                                    class="skill-btn px-3 py-1.5 rounded-lg border border-outline-variant bg-surface text-on-surface-variant text-label-sm hover:bg-surface-container transition-colors"
+                                    type="button"
+                                    style="border-color:rgba(197,198,205,0.5); background:#f8f9ff; color:#45474c;">
                                     Physics
                                 </button>
-                                <button class="skill-btn px-3 py-1.5 rounded-lg border border-outline-variant bg-surface text-on-surface-variant text-label-sm hover:bg-surface-container transition-colors" type="button" style="border-color:rgba(197,198,205,0.5); background:#f8f9ff; color:#45474c;">
+                                <button
+                                    class="skill-btn px-3 py-1.5 rounded-lg border border-outline-variant bg-surface text-on-surface-variant text-label-sm hover:bg-surface-container transition-colors"
+                                    type="button"
+                                    style="border-color:rgba(197,198,205,0.5); background:#f8f9ff; color:#45474c;">
                                     Design
                                 </button>
-                                <button id="addSkillBtn" class="px-3 py-1.5 rounded-lg border border-dashed border-outline-variant bg-surface text-on-surface-variant text-label-sm hover:bg-surface-container transition-colors flex items-center gap-1" type="button" style="border-color:rgba(197,198,205,0.5); background:#f8f9ff; color:#45474c;">
+                                <button id="addSkillBtn"
+                                    class="px-3 py-1.5 rounded-lg border border-dashed border-outline-variant bg-surface text-on-surface-variant text-label-sm hover:bg-surface-container transition-colors flex items-center gap-1"
+                                    type="button"
+                                    style="border-color:rgba(197,198,205,0.5); background:#f8f9ff; color:#45474c;">
                                     <span class="material-symbols-outlined text-[16px]">add</span> Add more
                                 </button>
                             </div>
                         </div>
 
-                        
+
                         <div class="mt-4">
                             <label class="flex items-start gap-3 cursor-pointer group">
                                 <div class="relative flex items-center justify-center mt-0.5">
                                     <input id="termsCheckbox" class="peer sr-only" type="checkbox">
-                                    <div class="w-5 h-5 rounded border-2 border-outline-variant peer-checked:bg-secondary peer-checked:border-secondary transition-colors group-hover:border-secondary" style="border-color:rgba(197,198,205,0.5);"></div>
-                                    <span class="material-symbols-outlined absolute text-white text-[16px] opacity-0 peer-checked:opacity-100 pointer-events-none transition-opacity" style="font-variation-settings:'FILL' 1; color:#ffffff;">check</span>
+                                    <div class="w-5 h-5 rounded border-2 border-outline-variant peer-checked:bg-secondary peer-checked:border-secondary transition-colors group-hover:border-secondary"
+                                        style="border-color:rgba(197,198,205,0.5);"></div>
+                                    <span
+                                        class="material-symbols-outlined absolute text-white text-[16px] opacity-0 peer-checked:opacity-100 pointer-events-none transition-opacity"
+                                        style="font-variation-settings:'FILL' 1; color:#ffffff;">check</span>
                                 </div>
                                 <span class="text-body-md text-on-surface-variant select-none" style="color:#45474c;">
-                                    I agree to the <a class="text-secondary hover:underline font-medium" href="#" style="color:#4648d4;">Terms &amp; Conditions</a> and <a class="text-secondary hover:underline font-medium" href="#" style="color:#4648d4;">Privacy Policy</a>.
+                                    I agree to the <a class="text-secondary hover:underline font-medium" href="#"
+                                        style="color:#4648d4;">Terms &amp; Conditions</a> and <a
+                                        class="text-secondary hover:underline font-medium" href="#"
+                                        style="color:#4648d4;">Privacy Policy</a>.
                                 </span>
                             </label>
                         </div>
 
-                        <button class="w-full mt-2 py-4 rounded-xl bg-secondary text-on-secondary text-headline-md font-medium shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all focus:outline-none focus:ring-4 focus:ring-secondary/30 active:scale-[0.98] border border-white/10" type="submit" style="background:#4648d4; color:#ffffff; border-color:rgba(255,255,255,0.1);">
+                        <button
+                            class="w-full mt-2 py-4 rounded-xl bg-secondary text-on-secondary text-headline-md font-medium shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all focus:outline-none focus:ring-4 focus:ring-secondary/30 active:scale-[0.98] border border-white/10"
+                            type="submit"
+                            style="background:#4648d4; color:#ffffff; border-color:rgba(255,255,255,0.1);">
                             Create Account
                         </button>
 
-                        
+
                         <div class="text-center mt-6">
                             <p class="text-body-md text-on-surface-variant" style="color:#45474c;">
-                                Already have an account? <a class="text-secondary font-headline-md hover:underline" href="login.html" style="color:#4648d4;">Sign In</a>
+                                Already have an account? <a class="text-secondary font-headline-md hover:underline"
+                                    href="login.html" style="color:#4648d4;">Sign In</a>
                             </p>
                         </div>
 
@@ -737,185 +922,189 @@
 
     </main>
 
-    
+
     <footer class="w-full bg-surface-container-low py-12 mt-auto" style="background:#eff4ff;">
-        <div class="max-w-container-max mx-auto px-margin-mobile lg:px-margin-desktop border-t border-outline-variant pt-8" style="border-color:rgba(197,198,205,0.3);">
+        <div class="max-w-container-max mx-auto px-margin-mobile lg:px-margin-desktop border-t border-outline-variant pt-8"
+            style="border-color:rgba(197,198,205,0.3);">
             <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-                <div class="flex items-center gap-2 text-primary font-headline-md" style="color:#091426;">EXPadviser</div>
+                <div class="flex items-center gap-2 text-primary font-headline-md" style="color:#091426;">EXPadviser
+                </div>
                 <p class="text-label-sm font-label-sm text-on-surface-variant" style="color:#45474c;">© .</p>
                 <div class="flex gap-6">
-                    <a class="text-label-sm text-on-surface-variant hover:text-secondary" href="#" style="color:#45474c;">Privacy Policy</a>
-                    <a class="text-label-sm text-on-surface-variant hover:text-secondary" href="#" style="color:#45474c;">Terms of Service</a>
+                    <a class="text-label-sm text-on-surface-variant hover:text-secondary" href="#"
+                        style="color:#45474c;">Privacy Policy</a>
+                    <a class="text-label-sm text-on-surface-variant hover:text-secondary" href="#"
+                        style="color:#45474c;">Terms of Service</a>
                 </div>
             </div>
         </div>
     </footer>
 
 
-<script src="js/api.js?v=2"></script>
-<script>
-  if (getToken()) window.location.href = 'dashboard.html';
-
-  
+    <script src="js/api.js?v=2"></script>
+    <script>
+        if (getToken()) window.location.href = 'dashboard.html';
 
 
-  document.getElementById('registerForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const username = document.getElementById('username').value;
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    const confirmPassword = document.getElementById('confirmPassword').value;
-    const errorMsg = document.getElementById('errorMessage');
-    const submitBtn = e.target.querySelector('button[type="submit"]');
-    
-    errorMsg.classList.add('hidden');
-    if (password !== confirmPassword) {
-        errorMsg.textContent = 'Passwords do not match.';
-        errorMsg.classList.remove('hidden');
-        return;
-    }
-    
-    const termsChecked = document.getElementById('termsCheckbox').checked;
-    if (!termsChecked) {
-        errorMsg.textContent = 'You must agree to the Terms & Conditions and Privacy Policy.';
-        errorMsg.classList.remove('hidden');
-        return;
-    }
 
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = `<span>Creating Account...</span>`;
-    
-    const response = await apiRequest('/auth/register', { method: 'POST', body: { name: username, email, password } });
-    if (response.status === 201 && response.data.success) {
-      setToken(response.data.data.token);
-      window.location.href = 'dashboard.html';
-    } else {
-      let finalMessage = response.data.message || 'Registration failed.';
-      if (response.data.errors) {
-        const errorDetails = Object.values(response.data.errors).join(', ');
-        finalMessage += ' (' + errorDetails + ')';
-      }
-      errorMsg.textContent = finalMessage;
-      errorMsg.classList.remove('hidden');
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = `Create Account`;
-    }
-  });
 
-  const skillsContainer = document.getElementById('skillsContainer');
-  const addSkillBtn = document.getElementById('addSkillBtn');
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const errorMsg = document.getElementById('errorMessage');
+            const submitBtn = e.target.querySelector('button[type="submit"]');
 
-  function toggleSkillBtn(btn) {
-      const isActive = btn.classList.contains('bg-secondary/10');
-      if (isActive) {
-          btn.className = 'skill-btn px-3 py-1.5 rounded-lg border border-outline-variant bg-surface text-on-surface-variant text-label-sm hover:bg-surface-container transition-colors';
-          btn.style = 'border-color:rgba(197,198,205,0.5); background:#f8f9ff; color:#45474c;';
-          const icon = btn.querySelector('.material-symbols-outlined');
-          if (icon) icon.remove();
-      } else {
-          btn.className = 'skill-btn px-3 py-1.5 rounded-lg border border-secondary bg-secondary/10 text-secondary text-label-sm hover:bg-secondary/20 transition-colors flex items-center gap-1';
-          btn.style = 'border-color:#4648d4; background:rgba(70,72,212,0.1); color:#4648d4;';
-          if (!btn.querySelector('.material-symbols-outlined')) {
-              btn.innerHTML += ` <span class="material-symbols-outlined text-[14px]">close</span>`;
-          }
-      }
-  }
-
-  if (skillsContainer) {
-      skillsContainer.addEventListener('click', (e) => {
-          const btn = e.target.closest('.skill-btn');
-          if (btn) toggleSkillBtn(btn);
-      });
-  }
-
-  if (addSkillBtn) {
-      addSkillBtn.addEventListener('click', () => {
-          const newSkill = prompt('Enter a new skill or interest:');
-          if (newSkill && newSkill.trim()) {
-              const btn = document.createElement('button');
-              btn.type = 'button';
-              btn.textContent = newSkill.trim();
-              btn.className = 'skill-btn px-3 py-1.5 rounded-lg border border-outline-variant bg-surface text-on-surface-variant text-label-sm hover:bg-surface-container transition-colors';
-              btn.style = 'border-color:rgba(197,198,205,0.5); background:#f8f9ff; color:#45474c;';
-              skillsContainer.insertBefore(btn, addSkillBtn);
-              toggleSkillBtn(btn);
-          }
-      });
-  }
-</script>
-
-<script src="https://accounts.google.com/gsi/client" async defer></script>
-<script>
-  function handleGoogleLogin(response) {
-    const errorMsg = document.getElementById('errorMessage');
-    if(errorMsg) errorMsg.classList.add('hidden');
-    
-    apiRequest('/auth/google', {
-        method: 'POST',
-        body: { credential: response.credential }
-    }).then(res => {
-        if (res.status === 200 || res.status === 201) {
-            setToken(res.data.data.token);
-            window.location.href = 'dashboard.html';
-        } else {
-            if(errorMsg) {
-                errorMsg.textContent = 'Google Sign In failed: ' + (res.data ? res.data.message : 'Unknown error');
+            errorMsg.classList.add('hidden');
+            if (password !== confirmPassword) {
+                errorMsg.textContent = 'Passwords do not match.';
                 errorMsg.classList.remove('hidden');
+                return;
+            }
+
+            const termsChecked = document.getElementById('termsCheckbox').checked;
+            if (!termsChecked) {
+                errorMsg.textContent = 'You must agree to the Terms & Conditions and Privacy Policy.';
+                errorMsg.classList.remove('hidden');
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<span>Creating Account...</span>`;
+
+            const response = await apiRequest('/auth/register', { method: 'POST', body: { name: username, email, password } });
+            if (response.status === 201 && response.data.success) {
+                setToken(response.data.data.token);
+                window.location.href = 'dashboard.html';
             } else {
-                alert('Google Sign In failed');
+                let finalMessage = response.data.message || 'Registration failed.';
+                if (response.data.errors) {
+                    const errorDetails = Object.values(response.data.errors).join(', ');
+                    finalMessage += ' (' + errorDetails + ')';
+                }
+                errorMsg.textContent = finalMessage;
+                errorMsg.classList.remove('hidden');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = `Create Account`;
+            }
+        });
+
+        const skillsContainer = document.getElementById('skillsContainer');
+        const addSkillBtn = document.getElementById('addSkillBtn');
+
+        function toggleSkillBtn(btn) {
+            const isActive = btn.classList.contains('bg-secondary/10');
+            if (isActive) {
+                btn.className = 'skill-btn px-3 py-1.5 rounded-lg border border-outline-variant bg-surface text-on-surface-variant text-label-sm hover:bg-surface-container transition-colors';
+                btn.style = 'border-color:rgba(197,198,205,0.5); background:#f8f9ff; color:#45474c;';
+                const icon = btn.querySelector('.material-symbols-outlined');
+                if (icon) icon.remove();
+            } else {
+                btn.className = 'skill-btn px-3 py-1.5 rounded-lg border border-secondary bg-secondary/10 text-secondary text-label-sm hover:bg-secondary/20 transition-colors flex items-center gap-1';
+                btn.style = 'border-color:#4648d4; background:rgba(70,72,212,0.1); color:#4648d4;';
+                if (!btn.querySelector('.material-symbols-outlined')) {
+                    btn.innerHTML += ` <span class="material-symbols-outlined text-[14px]">close</span>`;
+                }
             }
         }
-    }).catch(err => {
-        console.error(err);
-        if(errorMsg) {
-            errorMsg.textContent = 'Network error during Google Sign In';
-            errorMsg.classList.remove('hidden');
+
+        if (skillsContainer) {
+            skillsContainer.addEventListener('click', (e) => {
+                const btn = e.target.closest('.skill-btn');
+                if (btn) toggleSkillBtn(btn);
+            });
         }
-    });
-  }
 
-  window.addEventListener('load', function () {
-    google.accounts.id.initialize({
-      client_id: "264177546521-l4f6okrlas9sk890h9elaj17ce6ok5h7.apps.googleusercontent.com",
-      callback: handleGoogleLogin
-    });
-    
-    const btnContainer = document.getElementById("googleBtnContainer");
-    if(btnContainer) {
-        google.accounts.id.renderButton(
-          btnContainer,
-          { theme: "outline", size: "large", width: 400 }  
-        );
-    }
-  });
-</script>
+        if (addSkillBtn) {
+            addSkillBtn.addEventListener('click', () => {
+                const newSkill = prompt('Enter a new skill or interest:');
+                if (newSkill && newSkill.trim()) {
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.textContent = newSkill.trim();
+                    btn.className = 'skill-btn px-3 py-1.5 rounded-lg border border-outline-variant bg-surface text-on-surface-variant text-label-sm hover:bg-surface-container transition-colors';
+                    btn.style = 'border-color:rgba(197,198,205,0.5); background:#f8f9ff; color:#45474c;';
+                    skillsContainer.insertBefore(btn, addSkillBtn);
+                    toggleSkillBtn(btn);
+                }
+            });
+        }
+    </script>
+
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script>
+        function handleGoogleLogin(response) {
+            const errorMsg = document.getElementById('errorMessage');
+            if (errorMsg) errorMsg.classList.add('hidden');
+
+            apiRequest('/auth/google', {
+                method: 'POST',
+                body: { credential: response.credential }
+            }).then(res => {
+                if (res.status === 200 || res.status === 201) {
+                    setToken(res.data.data.token);
+                    window.location.href = 'dashboard.html';
+                } else {
+                    if (errorMsg) {
+                        errorMsg.textContent = 'Google Sign In failed: ' + (res.data ? res.data.message : 'Unknown error');
+                        errorMsg.classList.remove('hidden');
+                    } else {
+                        alert('Google Sign In failed');
+                    }
+                }
+            }).catch(err => {
+                console.error(err);
+                if (errorMsg) {
+                    errorMsg.textContent = 'Network error during Google Sign In';
+                    errorMsg.classList.remove('hidden');
+                }
+            });
+        }
+
+        window.addEventListener('load', function () {
+            google.accounts.id.initialize({
+                client_id: "264177546521-l4f6okrlas9sk890h9elaj17ce6ok5h7.apps.googleusercontent.com",
+                callback: handleGoogleLogin
+            });
+
+            const btnContainer = document.getElementById("googleBtnContainer");
+            if (btnContainer) {
+                google.accounts.id.renderButton(
+                    btnContainer,
+                    { theme: "outline", size: "large", width: 400 }
+                );
+            }
+        });
+    </script>
 
 
-<script>
-  document.getElementById('togglePassword').addEventListener('click', function() {
-    const pwdInput = document.getElementById('password');
-    const pwdIcon = document.getElementById('togglePasswordIcon');
-    if (pwdInput.type === 'password') {
-      pwdInput.type = 'text';
-      pwdIcon.textContent = 'visibility_off';
-    } else {
-      pwdInput.type = 'password';
-      pwdIcon.textContent = 'visibility';
-    }
-  });
+    <script>
+        document.getElementById('togglePassword').addEventListener('click', function () {
+            const pwdInput = document.getElementById('password');
+            const pwdIcon = document.getElementById('togglePasswordIcon');
+            if (pwdInput.type === 'password') {
+                pwdInput.type = 'text';
+                pwdIcon.textContent = 'visibility_off';
+            } else {
+                pwdInput.type = 'password';
+                pwdIcon.textContent = 'visibility';
+            }
+        });
 
-  document.getElementById('toggleConfirmPassword').addEventListener('click', function() {
-    const pwdInput = document.getElementById('confirmPassword');
-    const pwdIcon = document.getElementById('toggleConfirmPasswordIcon');
-    if (pwdInput.type === 'password') {
-      pwdInput.type = 'text';
-      pwdIcon.textContent = 'visibility';
-    } else {
-      pwdInput.type = 'password';
-      pwdIcon.textContent = 'visibility_off';
-    }
-  });
-</script>
+        document.getElementById('toggleConfirmPassword').addEventListener('click', function () {
+            const pwdInput = document.getElementById('confirmPassword');
+            const pwdIcon = document.getElementById('toggleConfirmPasswordIcon');
+            if (pwdInput.type === 'password') {
+                pwdInput.type = 'text';
+                pwdIcon.textContent = 'visibility';
+            } else {
+                pwdInput.type = 'password';
+                pwdIcon.textContent = 'visibility_off';
+            }
+        });
+    </script>
 </body>
 
 </html>
