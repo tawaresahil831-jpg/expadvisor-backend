@@ -314,16 +314,19 @@
                     </div>
                 </div>
 
-                <!-- Stat 4: Badges -->
-                <div class="group relative bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center justify-between cursor-pointer hover:border-violet-200 hover:shadow-md transition-all"
-                     title="Scale: Milestones achieved across community participation, solutions, and peer mentoring.">
+                <!-- Stat 4: Badges (Clickable to view full achievements) -->
+                <div onclick="switchTab('badges')" class="group relative bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center justify-between cursor-pointer hover:border-violet-300 hover:shadow-md transition-all"
+                     title="Click to view all 8 community badges and achievement rewards!">
                     <div class="flex items-center gap-3.5">
                         <div class="w-11 h-11 rounded-xl bg-violet-50 text-violet-600 flex items-center justify-center shrink-0">
                             <span class="material-symbols-outlined text-[22px]">military_tech</span>
                         </div>
                         <div>
                             <div id="stat-badges" class="text-xl font-bold text-slate-900 leading-none">0</div>
-                            <div class="text-xs text-slate-500 font-medium mt-1">Badges</div>
+                            <div class="text-xs text-slate-500 font-medium mt-1 flex items-center gap-1">
+                                <span>Badges</span>
+                                <span class="text-[10px] text-violet-600 font-bold bg-violet-50 px-1.5 py-0.2 rounded">View</span>
+                            </div>
                         </div>
                     </div>
                     <span class="material-symbols-outlined text-[16px] text-slate-300 group-hover:text-violet-500 transition-colors">info</span>
@@ -332,13 +335,13 @@
                     <div class="hidden group-hover:block absolute bottom-full right-0 mb-2 w-64 p-3 bg-slate-900 text-white text-xs rounded-xl shadow-2xl z-50 pointer-events-none border border-slate-700 animate-fadeIn">
                         <div class="font-bold text-violet-400 text-[10px] uppercase tracking-wider mb-1 flex items-center gap-1">
                             <span class="material-symbols-outlined text-[13px]">military_tech</span>
-                            Badge Milestone Tiers
+                            Badge Milestone Tiers (Click to View)
                         </div>
                         <ul class="text-slate-300 text-[11px] space-y-1 pl-3.5 list-disc leading-relaxed">
-                            <li><strong>First Post:</strong> Post 1st question</li>
-                            <li><strong>Helper:</strong> Answer 1+ questions</li>
+                            <li><strong>First Question:</strong> Post 1st question</li>
+                            <li><strong>Community Helper:</strong> Answer 1+ questions</li>
                             <li><strong>Master Mentor:</strong> Answer 10+ questions</li>
-                            <li><strong>Top Solver:</strong> Accepted verified solution</li>
+                            <li><strong>Verified Solver:</strong> Accepted solution</li>
                         </ul>
                     </div>
                 </div>
@@ -351,12 +354,16 @@
                 <section class="lg:col-span-8 bg-white rounded-2xl border border-slate-200/70 p-6 shadow-sm space-y-5">
                     
                     <!-- Tabs Header -->
-                    <div class="flex items-center gap-2 border-b border-slate-100 pb-3">
+                    <div class="flex items-center gap-2 border-b border-slate-100 pb-3 flex-wrap">
                         <button id="tabBtnQueries" onclick="switchTab('queries')" class="profile-tab-btn px-4 py-1.5 rounded-full text-xs font-bold bg-blue-600 text-white shadow-sm transition-all">
                             My Queries
                         </button>
                         <button id="tabBtnAnswers" onclick="switchTab('answers')" class="profile-tab-btn px-4 py-1.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">
                             My Answers
+                        </button>
+                        <button id="tabBtnBadges" onclick="switchTab('badges')" class="profile-tab-btn px-4 py-1.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all flex items-center gap-1.5">
+                            <span class="material-symbols-outlined text-[15px] text-amber-500">military_tech</span>
+                            <span>Badges (<span id="tabBadgesCounter">2/8</span>)</span>
                         </button>
                         <button id="tabBtnSaved" onclick="switchTab('saved')" class="profile-tab-btn px-4 py-1.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">
                             Saved
@@ -373,7 +380,31 @@
                         <div class="py-12 text-center text-slate-400 text-sm">Loading answers...</div>
                     </div>
 
-                    <!-- Tab 3: Saved Feed -->
+                    <!-- Tab 3: Full Badges Showcase Feed -->
+                    <div id="tabContentBadges" class="space-y-4 hidden">
+                        <div class="p-4 rounded-2xl bg-gradient-to-r from-blue-500/10 via-indigo-500/10 to-purple-500/10 border border-blue-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                            <div class="space-y-1">
+                                <h4 class="text-sm font-bold text-slate-900 flex items-center gap-1.5">
+                                    <span class="material-symbols-outlined text-amber-500 text-[18px]">workspace_premium</span>
+                                    Community Achievement Badges
+                                </h4>
+                                <p class="text-xs text-slate-500">
+                                    Earn recognition, unlock profile flairs, and climb the campus leaderboard by helping peers and asking questions!
+                                </p>
+                            </div>
+                            <a href="dashboard.html" class="px-3.5 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-semibold shadow-xs shrink-0 self-start sm:self-center transition-colors flex items-center gap-1">
+                                <span>Contribute Now</span>
+                                <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+                            </a>
+                        </div>
+
+                        <!-- 8 Badges Grid -->
+                        <div id="fullBadgesGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                            <!-- Populated dynamically with all 8 badges -->
+                        </div>
+                    </div>
+
+                    <!-- Tab 4: Saved Feed -->
                     <div id="tabContentSaved" class="py-12 text-center text-slate-400 text-xs hidden">
                         <span class="material-symbols-outlined text-3xl text-slate-300 mb-1">bookmark_border</span>
                         <div>No saved queries yet.</div>
@@ -467,16 +498,28 @@
                         </div>
                     </div>
 
-                    <!-- Card 4: Achievement Badges (with Hover Scale Measurement) -->
-                    <div class="bg-white rounded-2xl border border-slate-200/70 p-5 shadow-sm space-y-3">
+                    <!-- Card 4: Community Badges & Milestones Showcase -->
+                    <div class="bg-white rounded-2xl border border-slate-200/70 p-5 shadow-sm space-y-3.5">
                         <div class="flex items-center justify-between">
-                            <h3 class="text-[11px] font-bold text-slate-400 tracking-wider uppercase">Achievement Badges</h3>
-                            <span class="text-[10px] text-slate-400 font-medium">Hover for scale</span>
+                            <div class="flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-[18px] text-amber-500">military_tech</span>
+                                <h3 class="text-[11px] font-bold text-slate-400 tracking-wider uppercase">Achievements</h3>
+                            </div>
+                            <span id="rightBadgesProgress" class="text-[10px] font-bold bg-amber-50 text-amber-700 px-2 py-0.5 rounded-full border border-amber-100">
+                                0 / 8 Unlocked
+                            </span>
                         </div>
                         
-                        <div id="badgesPillContainer" class="flex flex-wrap gap-2 pt-0.5">
-                            <!-- Populated dynamically with interactive hover scale explanations -->
+                        <!-- Badges preview list -->
+                        <div id="badgesPillContainer" class="space-y-2 max-h-[300px] overflow-y-auto pr-1">
+                            <div class="p-3 text-center text-xs text-slate-400">Loading achievements...</div>
                         </div>
+
+                        <!-- Button to open full badges tab -->
+                        <button onclick="switchTab('badges')" class="w-full py-2 px-3 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700 text-xs font-bold transition-colors flex items-center justify-center gap-1.5 border border-slate-200/80">
+                            <span>Explore All 8 Badges & Perks</span>
+                            <span class="material-symbols-outlined text-[15px]">arrow_forward</span>
+                        </button>
                     </div>
 
                 </aside>
@@ -666,44 +709,250 @@
                 skillsContainer.innerHTML = '<span class="text-xs text-slate-400">No skills added yet.</span>';
             }
 
-            // Badges count & Badges Widget with Interactive Hover Scale
-            const badgesContainer = document.getElementById('badgesPillContainer');
-            const badgesDef = [
-                { name: 'First Question', desc: 'Scale: Post at least 1 coursework question in the community.', icon: 'star', color: 'bg-amber-50 text-amber-700 border-amber-200' },
-                { name: 'Community Helper', desc: 'Scale: Provide 1 or more helpful answers to peer questions.', icon: 'handshake', color: 'bg-blue-50 text-blue-700 border-blue-200' },
-                { name: 'Master Mentor', desc: 'Scale: Contribute 10 or more peer answers across discussions.', icon: 'military_tech', color: 'bg-purple-50 text-purple-700 border-purple-200' },
-                { name: 'Verified Solver', desc: 'Scale: Have your solution marked as accepted by a question author.', icon: 'verified', color: 'bg-emerald-50 text-emerald-700 border-emerald-200' }
-            ];
+            // Render badges system across both main tab and sidebar widget
+            renderBadgesSystem();
+        }
 
-            const achievements = u.achievements || [];
+        // ====== ALL 8 COMMUNITY ACHIEVEMENT BADGES & GAMIFICATION SYSTEM ======
+        const ALL_COMMUNITY_BADGES = [
+            {
+                id: 'first_query',
+                name: 'First Question',
+                tier: 'Bronze',
+                tierBadge: 'bg-amber-100 text-amber-800 border-amber-200',
+                icon: 'star',
+                iconColor: 'bg-amber-50 text-amber-600',
+                desc: 'Post your first academic doubt or coursework inquiry in the community.',
+                scale: '+10 Reputation upon unlock. Awarded for 1 question.',
+                target: 1,
+                unit: 'question',
+                actionText: 'Ask a Question',
+                actionUrl: 'dashboard.html',
+                checkUnlocked: (u, q) => q.length >= 1 || (u.stats && u.stats.problems_solved >= 1),
+                getProgress: (u, q) => Math.min(q.length || (u.stats && u.stats.problems_solved) || 0, 1)
+            },
+            {
+                id: 'inquiry_leader',
+                name: 'Inquiry Leader',
+                tier: 'Silver',
+                tierBadge: 'bg-slate-100 text-slate-800 border-slate-200',
+                icon: 'help_center',
+                iconColor: 'bg-blue-50 text-blue-600',
+                desc: 'Publish 5 coursework questions to drive active peer discussions.',
+                scale: '+50 Reputation. Awarded upon asking 5 questions.',
+                target: 5,
+                unit: 'questions',
+                actionText: 'Ask a Question',
+                actionUrl: 'dashboard.html',
+                checkUnlocked: (u, q) => q.length >= 5 || (u.stats && u.stats.problems_solved >= 5),
+                getProgress: (u, q) => Math.min(q.length || (u.stats && u.stats.problems_solved) || 0, 5)
+            },
+            {
+                id: 'community_helper',
+                name: 'Community Helper',
+                tier: 'Bronze',
+                tierBadge: 'bg-blue-100 text-blue-800 border-blue-200',
+                icon: 'handshake',
+                iconColor: 'bg-indigo-50 text-indigo-600',
+                desc: 'Provide your first helpful answer or solution to a student in need.',
+                scale: '+15 Reputation. Awarded for answering 1 peer question.',
+                target: 1,
+                unit: 'answer',
+                actionText: 'Help a Peer',
+                actionUrl: 'dashboard.html',
+                checkUnlocked: (u, q) => (u.stats && u.stats.peers_helped >= 1) || (u.achievements && u.achievements.includes('Helper')),
+                getProgress: (u, q) => Math.min((u.stats && u.stats.peers_helped) || 0, 1)
+            },
+            {
+                id: 'master_mentor',
+                name: 'Master Mentor',
+                tier: 'Gold',
+                tierBadge: 'bg-amber-100 text-amber-800 border-amber-300',
+                icon: 'military_tech',
+                iconColor: 'bg-purple-50 text-purple-600',
+                desc: 'Contribute 10 or more solutions across branch discussions.',
+                scale: '+100 Reputation & Master Mentor status. Awarded for 10 answers.',
+                target: 10,
+                unit: 'answers',
+                actionText: 'Browse Open Questions',
+                actionUrl: 'dashboard.html',
+                checkUnlocked: (u, q) => (u.stats && u.stats.peers_helped >= 10) || (u.achievements && u.achievements.includes('Master Mentor')),
+                getProgress: (u, q) => Math.min((u.stats && u.stats.peers_helped) || 0, 10)
+            },
+            {
+                id: 'verified_solver',
+                name: 'Verified Solver',
+                tier: 'Diamond',
+                tierBadge: 'bg-emerald-100 text-emerald-800 border-emerald-300',
+                icon: 'verified',
+                iconColor: 'bg-emerald-50 text-emerald-600',
+                desc: 'Have your solution marked as verified and accepted by the question author.',
+                scale: '+150 Reputation. Awarded for verified accepted solutions.',
+                target: 1,
+                unit: 'solution',
+                actionText: 'Solve Queries',
+                actionUrl: 'dashboard.html',
+                checkUnlocked: (u, q) => (u.achievements && u.achievements.some(a => a.includes('Solver'))),
+                getProgress: (u, q) => (u.achievements && u.achievements.some(a => a.includes('Solver'))) ? 1 : 0
+            },
+            {
+                id: 'rising_star',
+                name: 'Rising Star',
+                tier: 'Gold',
+                tierBadge: 'bg-orange-100 text-orange-800 border-orange-200',
+                icon: 'local_fire_department',
+                iconColor: 'bg-orange-50 text-orange-600',
+                desc: 'Receive 5 or more likes/upvotes from fellow students on your posts.',
+                scale: '+75 Reputation. Awarded for community upvotes.',
+                target: 5,
+                unit: 'likes',
+                actionText: 'Share Solutions',
+                actionUrl: 'dashboard.html',
+                checkUnlocked: (u, q) => {
+                    const totalLikes = q.reduce((s, item) => s + (item.likes_count || 0), 0);
+                    return totalLikes >= 5;
+                },
+                getProgress: (u, q) => {
+                    const totalLikes = q.reduce((s, item) => s + (item.likes_count || 0), 0);
+                    return Math.min(totalLikes, 5);
+                }
+            },
+            {
+                id: 'campus_regular',
+                name: 'Active Scholar',
+                tier: 'Silver',
+                tierBadge: 'bg-indigo-100 text-indigo-800 border-indigo-200',
+                icon: 'calendar_month',
+                iconColor: 'bg-sky-50 text-sky-600',
+                desc: 'Contribute active queries or solutions across 3 distinct days.',
+                scale: '+40 Reputation. Encourages regular daily learning.',
+                target: 3,
+                unit: 'days',
+                actionText: 'Daily Activity',
+                actionUrl: 'dashboard.html',
+                checkUnlocked: (u, q) => q.length >= 3,
+                getProgress: (u, q) => Math.min(q.length, 3)
+            },
+            {
+                id: 'campus_legend',
+                name: 'Campus Legend',
+                tier: 'Platinum',
+                tierBadge: 'bg-purple-100 text-purple-800 border-purple-300',
+                icon: 'workspace_premium',
+                iconColor: 'bg-yellow-50 text-yellow-600',
+                desc: 'Amass 100+ Reputation points to become a recognized campus engineering leader.',
+                scale: 'Unlocks the Elite Gold flair and verified peer mentor status.',
+                target: 100,
+                unit: 'reputation pts',
+                actionText: 'Climb Leaderboard',
+                actionUrl: 'dashboard.html',
+                checkUnlocked: (u, q) => {
+                    const totalLikes = q.reduce((s, item) => s + (item.likes_count || 0), 0);
+                    const rep = (q.length * 10) + (totalLikes * 15) + 5;
+                    return rep >= 100;
+                },
+                getProgress: (u, q) => {
+                    const totalLikes = q.reduce((s, item) => s + (item.likes_count || 0), 0);
+                    const rep = (q.length * 10) + (totalLikes * 15) + 5;
+                    return Math.min(rep, 100);
+                }
+            }
+        ];
+
+        function renderBadgesSystem() {
+            const u = currentUser || {};
+            const q = userQueries || [];
             let unlockedCount = 0;
 
-            if (badgesContainer) {
-                badgesContainer.innerHTML = badgesDef.map(b => {
-                    const isUnlocked = achievements.includes(b.name) ||
-                        (b.name === 'First Question' && (userQueries.length > 0 || (u.stats && u.stats.problems_solved > 0))) ||
-                        (b.name === 'Community Helper' && (achievements.includes('Helper') || (u.stats && u.stats.peers_helped > 0))) ||
-                        (b.name === 'Master Mentor' && (achievements.includes('Master Mentor') || (u.stats && u.stats.peers_helped >= 10)));
+            // 1. Render Full Badges Grid (Left Column Tab)
+            const fullGrid = document.getElementById('fullBadgesGrid');
+            if (fullGrid) {
+                fullGrid.innerHTML = ALL_COMMUNITY_BADGES.map(b => {
+                    const isUnlocked = b.checkUnlocked(u, q);
+                    const currentProgress = b.getProgress(u, q);
+                    const pct = Math.min(Math.round((currentProgress / b.target) * 100), 100);
                     if (isUnlocked) unlockedCount++;
 
                     return `
-                        <div class="relative group/badge cursor-pointer" title="${b.desc}">
-                            <span class="px-2.5 py-1 rounded-lg text-xs font-semibold border flex items-center gap-1.5 transition-all ${isUnlocked ? b.color + ' shadow-xs' : 'bg-slate-100/70 text-slate-400 border-slate-200 opacity-60'}">
-                                <span class="material-symbols-outlined text-[15px]">${b.icon}</span>
-                                <span>${b.name}</span>
-                                ${isUnlocked ? '' : '<span class="text-[10px] text-slate-400">🔒</span>'}
-                            </span>
-                            <!-- Hover Tooltip Explaining Scale -->
-                            <div class="hidden group-hover/badge:block absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-52 p-2.5 bg-slate-900 text-white text-xs rounded-xl shadow-2xl z-50 pointer-events-none border border-slate-700 text-center">
-                                <div class="font-bold text-white text-[11px] mb-0.5">${b.name} ${isUnlocked ? '(Unlocked)' : '(Locked)'}</div>
-                                <div class="text-slate-300 text-[10px] leading-snug">${b.desc}</div>
+                        <div class="p-4 rounded-2xl border ${isUnlocked ? 'bg-white border-blue-200/80 shadow-sm' : 'bg-slate-50/70 border-slate-200/60 opacity-80'} space-y-3 transition-all hover:shadow-md">
+                            <div class="flex items-start justify-between gap-3">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-12 h-12 rounded-2xl ${isUnlocked ? b.iconColor : 'bg-slate-200/70 text-slate-400'} flex items-center justify-center shrink-0 text-2xl font-bold shadow-xs">
+                                        <span class="material-symbols-outlined text-[26px]">${b.icon}</span>
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center gap-2">
+                                            <h4 class="font-bold text-slate-900 text-sm leading-tight">${b.name}</h4>
+                                            <span class="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full border ${b.tierBadge}">${b.tier}</span>
+                                        </div>
+                                        <p class="text-xs text-slate-500 mt-0.5 line-clamp-2">${b.desc}</p>
+                                    </div>
+                                </div>
+                                <span class="text-xs font-bold shrink-0 ${isUnlocked ? 'text-emerald-600 bg-emerald-50 border border-emerald-200' : 'text-slate-500 bg-slate-100'} px-2.5 py-1 rounded-full flex items-center gap-1">
+                                    ${isUnlocked ? '<span class="material-symbols-outlined text-[14px]">check_circle</span> Unlocked' : '🔒 Locked'}
+                                </span>
+                            </div>
+
+                            <!-- Progress Bar -->
+                            <div class="space-y-1 pt-1 border-t border-slate-100">
+                                <div class="flex justify-between text-[11px] font-medium text-slate-500">
+                                    <span>${b.scale}</span>
+                                    <span class="font-bold text-slate-700">${currentProgress} / ${b.target} ${b.unit}</span>
+                                </div>
+                                <div class="w-full h-2 rounded-full bg-slate-200/80 overflow-hidden">
+                                    <div class="h-full rounded-full ${isUnlocked ? 'bg-emerald-500' : 'bg-blue-600'} transition-all duration-500" style="width: ${pct}%"></div>
+                                </div>
+                            </div>
+
+                            <!-- Action Button to stimulate input & traffic -->
+                            <div class="pt-1 flex items-center justify-between">
+                                <span class="text-[10px] text-slate-400 font-medium">${isUnlocked ? 'Badge earned' : 'Complete action to unlock:'}</span>
+                                <a href="${b.actionUrl}" class="text-xs font-bold ${isUnlocked ? 'text-slate-600 hover:text-blue-600' : 'text-blue-600 hover:underline'} flex items-center gap-1">
+                                    <span>${b.actionText}</span>
+                                    <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+                                </a>
                             </div>
                         </div>
                     `;
                 }).join('');
             }
 
-            document.getElementById('stat-badges').textContent = unlockedCount || 1;
+            // 2. Render Sidebar Badges Preview (Right Column Widget)
+            const sidebarContainer = document.getElementById('badgesPillContainer');
+            if (sidebarContainer) {
+                sidebarContainer.innerHTML = ALL_COMMUNITY_BADGES.map(b => {
+                    const isUnlocked = b.checkUnlocked(u, q);
+                    const currentProgress = b.getProgress(u, q);
+
+                    return `
+                        <div onclick="switchTab('badges')" class="p-2.5 rounded-xl border ${isUnlocked ? 'bg-blue-50/40 border-blue-200/70' : 'bg-slate-50/60 border-slate-200/60'} flex items-center justify-between gap-2.5 cursor-pointer hover:scale-[1.01] transition-all group/badge"
+                             title="${b.name}: ${b.desc} (${isUnlocked ? 'Unlocked' : currentProgress + '/' + b.target + ' ' + b.unit})">
+                            <div class="flex items-center gap-2.5 min-w-0">
+                                <div class="w-8 h-8 rounded-lg ${isUnlocked ? b.iconColor : 'bg-slate-200/60 text-slate-400'} flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-[18px]">${b.icon}</span>
+                                </div>
+                                <div class="min-w-0">
+                                    <div class="text-xs font-bold text-slate-800 truncate">${b.name}</div>
+                                    <div class="text-[10px] text-slate-400 truncate">${isUnlocked ? b.tier + ' Tier Earned' : currentProgress + '/' + b.target + ' ' + b.unit}</div>
+                                </div>
+                            </div>
+                            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full shrink-0 ${isUnlocked ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-500'}">
+                                ${isUnlocked ? 'Earned' : '🔒'}
+                            </span>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            // Update badge counters across the page
+            const countText = `${unlockedCount} / 8`;
+            const tabCounter = document.getElementById('tabBadgesCounter');
+            const rightProgress = document.getElementById('rightBadgesProgress');
+            const statBadges = document.getElementById('stat-badges');
+
+            if (tabCounter) tabCounter.textContent = countText;
+            if (rightProgress) rightProgress.textContent = `${countText} Unlocked`;
+            if (statBadges) statBadges.textContent = unlockedCount;
         }
 
         function setupLink(elementId, url, fallbackText) {
@@ -749,6 +998,9 @@
             const reputation = (userQueries.length * 10) + (totalLikes * 15) + 5;
             document.getElementById('stat-reputation').textContent = reputation;
             document.getElementById('stat-answers-given').textContent = totalAnswers;
+
+            // Recalculate badges with live queries and activity
+            renderBadgesSystem();
         }
 
         function renderQueriesFeed() {
@@ -792,21 +1044,25 @@
 
         // Tab Switching
         function switchTab(tab) {
-            const tabs = ['queries', 'answers', 'saved'];
+            const tabs = ['queries', 'answers', 'badges', 'saved'];
             tabs.forEach(t => {
                 const btn = document.getElementById(`tabBtn${t.charAt(0).toUpperCase() + t.slice(1)}`);
                 const content = document.getElementById(`tabContent${t.charAt(0).toUpperCase() + t.slice(1)}`);
-                if (t === tab) {
-                    btn.className = 'profile-tab-btn px-4 py-1.5 rounded-full text-xs font-bold bg-blue-600 text-white shadow-sm transition-all';
-                    content.classList.remove('hidden');
-                } else {
-                    btn.className = 'profile-tab-btn px-4 py-1.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all';
-                    content.classList.add('hidden');
+                if (btn && content) {
+                    if (t === tab) {
+                        btn.className = 'profile-tab-btn px-4 py-1.5 rounded-full text-xs font-bold bg-blue-600 text-white shadow-sm transition-all flex items-center gap-1.5';
+                        content.classList.remove('hidden');
+                    } else {
+                        btn.className = 'profile-tab-btn px-4 py-1.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all flex items-center gap-1.5';
+                        content.classList.add('hidden');
+                    }
                 }
             });
 
             if (tab === 'answers') {
                 renderAnswersFeed();
+            } else if (tab === 'badges') {
+                renderBadgesSystem();
             }
         }
 
