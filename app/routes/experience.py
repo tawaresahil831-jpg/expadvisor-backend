@@ -185,10 +185,15 @@ def create_experience(current_user):
     category = data.get("category")
     semester = data.get("semester")
 
-    err = validate_length(title, 5, 200, "Title")
+    if semester is not None:
+        s_clean = str(semester).strip()
+        sem_map = {"1": "1st", "2": "2nd", "3": "3rd", "4": "4th", "5": "5th", "6": "6th", "7": "7th", "8": "8th"}
+        semester = sem_map.get(s_clean, s_clean)
+
+    err = validate_length(title, 3, 200, "Title")
     if err: errors["title"] = err
 
-    err = validate_length(content, 20, 50000, "Content")
+    err = validate_length(content, 3, 50000, "Content")
     if err: errors["content"] = err
 
     if category is not None and str(category).strip():

@@ -35,7 +35,6 @@ def validate_semester(semester: str) -> str:
     if not semester:
         return ""
     semester = str(semester).strip()
-    valid_sems = ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th"]
-    if semester not in valid_sems:
-        return "Semester must be a valid format (e.g. 1st, 2nd, ..., 8th)"
+    if len(semester) > 25:
+        return "Semester must be less than 25 characters"
     return ""
