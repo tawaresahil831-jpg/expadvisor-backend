@@ -27,6 +27,54 @@ def get_community_stats():
     except Exception as e:
         return jsonify({"success": False, "message": str(e)}), 500
 
+@experience_bp.route("/trending", methods=["GET"])
+def get_trending_experience():
+    try:
+        all_experiences = Experience.query.all()
+        if not all_experiences:
+            return jsonify({"success": True, "data": None}), 200
+
+        def score(exp):
+            views = exp.views or 0
+            comments = len(exp.comments) if hasattr(exp, 'comments') and exp.comments else 0
+            likes = len(exp.likes) if hasattr(exp, 'likes') and exp.likes else 0
+            return views + (comments * 3) + (likes * 2)
+
+        trending = max(all_experiences, key=score)
+
+        participants = []
+        seen_ids = set()
+        if trending.author:
+            seen_ids.add(trending.author.user_id)
+            participants.append({
+                "user_id": trending.author.user_id,
+                "name": trending.author.name or "User",
+                "initial": (trending.author.name or "U")[0].upper(),
+                "avatar_url": getattr(trending.author, 'avatar_url', None)
+            })
+
+        for c in trending.comments:
+            if c.user and c.user.user_id not in seen_ids:
+                seen_ids.add(c.user.user_id)
+                participants.append({
+                    "user_id": c.user.user_id,
+                    "name": c.user.name or "User",
+                    "initial": (c.user.name or "U")[0].upper(),
+                    "avatar_url": getattr(c.user, 'avatar_url', None)
+                })
+            if len(participants) >= 3:
+                break
+
+        trending_data = trending.to_dict()
+        trending_data["participants"] = participants
+
+        return jsonify({
+            "success": True,
+            "data": trending_data
+        }), 200
+    except Exception as e:
+        return jsonify({"success": False, "message": str(e)}), 500
+
 @experience_bp.route("", methods=["GET"])
 def get_experiences():
     try:
