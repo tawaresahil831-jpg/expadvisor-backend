@@ -140,49 +140,109 @@
                 <p class="text-xs text-slate-500 font-medium">Discover, collaborate, and sharpen your skills</p>
             </div>
 
-            <!-- ====== TOP 4-STAT STRIP ====== -->
+            <!-- ====== TOP 4-STAT STRIP (WITH HOVER SCALE TOOLTIPS) ====== -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <!-- Stat 1: Total Queries -->
-                <div class="bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center gap-3.5">
-                    <div class="w-11 h-11 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
-                        <span class="material-symbols-outlined text-[22px]">feed</span>
+                <div class="group relative bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center justify-between cursor-pointer hover:border-blue-200 hover:shadow-md transition-all"
+                     title="Total questions and coursework problems submitted by all students.">
+                    <div class="flex items-center gap-3.5">
+                        <div class="w-11 h-11 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                            <span class="material-symbols-outlined text-[22px]">feed</span>
+                        </div>
+                        <div>
+                            <div id="stat-total-queries" class="text-xl font-bold text-slate-900 leading-none">0</div>
+                            <div class="text-xs text-slate-500 font-medium mt-1">Total Queries</div>
+                        </div>
                     </div>
-                    <div>
-                        <div id="stat-total-queries" class="text-xl font-bold text-slate-900 leading-none">0</div>
-                        <div class="text-xs text-slate-500 font-medium mt-1">Total Queries</div>
+                    <span class="material-symbols-outlined text-[16px] text-slate-300 group-hover:text-blue-500 transition-colors">info</span>
+
+                    <!-- Hover Popover Explaining Metric -->
+                    <div class="hidden group-hover:block absolute bottom-full left-0 mb-2 w-64 p-3 bg-slate-900 text-white text-xs rounded-xl shadow-2xl z-50 pointer-events-none border border-slate-700">
+                        <div class="font-bold text-blue-400 text-[10px] uppercase tracking-wider mb-1 flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[13px]">feed</span>
+                            Total Queries Metric
+                        </div>
+                        <p class="text-slate-300 text-[11px] leading-relaxed">
+                            The count of all coursework doubts, coding issues, exam questions, and project collaboration requests posted by the community.
+                        </p>
                     </div>
                 </div>
 
                 <!-- Stat 2: Answered -->
-                <div class="bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center gap-3.5">
-                    <div class="w-11 h-11 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0">
-                        <span class="material-symbols-outlined text-[22px]">check_circle</span>
+                <div class="group relative bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center justify-between cursor-pointer hover:border-indigo-200 hover:shadow-md transition-all"
+                     title="Questions that have received verified solutions or peer responses.">
+                    <div class="flex items-center gap-3.5">
+                        <div class="w-11 h-11 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0">
+                            <span class="material-symbols-outlined text-[22px]">check_circle</span>
+                        </div>
+                        <div>
+                            <div id="stat-answered" class="text-xl font-bold text-slate-900 leading-none">0</div>
+                            <div class="text-xs text-slate-500 font-medium mt-1">Answered</div>
+                        </div>
                     </div>
-                    <div>
-                        <div id="stat-answered" class="text-xl font-bold text-slate-900 leading-none">0</div>
-                        <div class="text-xs text-slate-500 font-medium mt-1">Answered</div>
+                    <span class="material-symbols-outlined text-[16px] text-slate-300 group-hover:text-indigo-500 transition-colors">info</span>
+
+                    <!-- Hover Popover Explaining Metric -->
+                    <div class="hidden group-hover:block absolute bottom-full left-0 mb-2 w-64 p-3 bg-slate-900 text-white text-xs rounded-xl shadow-2xl z-50 pointer-events-none border border-slate-700">
+                        <div class="font-bold text-indigo-400 text-[10px] uppercase tracking-wider mb-1 flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[13px]">check_circle</span>
+                            Resolved Inquiries
+                        </div>
+                        <p class="text-slate-300 text-[11px] leading-relaxed">
+                            Questions that have received verified solutions, peer responses, or have been successfully answered and marked as solved by students.
+                        </p>
                     </div>
                 </div>
 
                 <!-- Stat 3: Members -->
-                <div class="bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center gap-3.5">
-                    <div class="w-11 h-11 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
-                        <span class="material-symbols-outlined text-[22px]">group</span>
+                <div class="group relative bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center justify-between cursor-pointer hover:border-purple-200 hover:shadow-md transition-all"
+                     title="Total registered engineering students and peers across colleges.">
+                    <div class="flex items-center gap-3.5">
+                        <div class="w-11 h-11 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
+                            <span class="material-symbols-outlined text-[22px]">group</span>
+                        </div>
+                        <div>
+                            <div id="stat-members" class="text-xl font-bold text-slate-900 leading-none">0</div>
+                            <div class="text-xs text-slate-500 font-medium mt-1">Members</div>
+                        </div>
                     </div>
-                    <div>
-                        <div id="stat-members" class="text-xl font-bold text-slate-900 leading-none">0</div>
-                        <div class="text-xs text-slate-500 font-medium mt-1">Members</div>
+                    <span class="material-symbols-outlined text-[16px] text-slate-300 group-hover:text-purple-500 transition-colors">info</span>
+
+                    <!-- Hover Popover Explaining Metric -->
+                    <div class="hidden group-hover:block absolute bottom-full right-0 sm:left-0 mb-2 w-64 p-3 bg-slate-900 text-white text-xs rounded-xl shadow-2xl z-50 pointer-events-none border border-slate-700">
+                        <div class="font-bold text-purple-400 text-[10px] uppercase tracking-wider mb-1 flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[13px]">group</span>
+                            Campus Network
+                        </div>
+                        <p class="text-slate-300 text-[11px] leading-relaxed">
+                            Verified students, seniors, and alumni collaborating across academic departments and colleges on EXPadviser.
+                        </p>
                     </div>
                 </div>
 
                 <!-- Stat 4: Contributors -->
-                <div class="bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center gap-3.5">
-                    <div class="w-11 h-11 rounded-xl bg-violet-50 text-violet-600 flex items-center justify-center shrink-0">
-                        <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                <div class="group relative bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center justify-between cursor-pointer hover:border-violet-200 hover:shadow-md transition-all"
+                     title="Students who actively write solutions, answer queries, and mentor peers.">
+                    <div class="flex items-center gap-3.5">
+                        <div class="w-11 h-11 rounded-xl bg-violet-50 text-violet-600 flex items-center justify-center shrink-0">
+                            <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                        </div>
+                        <div>
+                            <div id="stat-contributors" class="text-xl font-bold text-slate-900 leading-none">0</div>
+                            <div class="text-xs text-slate-500 font-medium mt-1">Contributors</div>
+                        </div>
                     </div>
-                    <div>
-                        <div id="stat-contributors" class="text-xl font-bold text-slate-900 leading-none">0</div>
-                        <div class="text-xs text-slate-500 font-medium mt-1">Contributors</div>
+                    <span class="material-symbols-outlined text-[16px] text-slate-300 group-hover:text-violet-500 transition-colors">info</span>
+
+                    <!-- Hover Popover Explaining Metric -->
+                    <div class="hidden group-hover:block absolute bottom-full right-0 mb-2 w-64 p-3 bg-slate-900 text-white text-xs rounded-xl shadow-2xl z-50 pointer-events-none border border-slate-700">
+                        <div class="font-bold text-violet-400 text-[10px] uppercase tracking-wider mb-1 flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[13px]">military_tech</span>
+                            Active Contributors
+                        </div>
+                        <p class="text-slate-300 text-[11px] leading-relaxed">
+                            Students who actively solve doubts, write explanations, post verified solutions, and earn reputation flairs this semester.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -199,23 +259,23 @@
                             <h2 class="text-lg font-bold text-slate-900">Community Queries</h2>
                             <span id="queryCountBadge" class="text-xs font-semibold bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full"></span>
                         </div>
-                        <button onclick="document.getElementById('createModal').showModal()" class="bg-slate-900 hover:bg-black text-white px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 shadow-sm transition-all hover:shadow">
+                        <button onclick="document.getElementById('createModal').showModal()" class="bg-slate-900 hover:bg-black text-white px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 shadow-sm transition-all hover:shadow" title="Create and publish a new doubt or question for your college peers">
                             <span class="material-symbols-outlined text-[16px]">add</span>
                             Ask a Query
                         </button>
                     </div>
 
-                    <!-- Category Filter Pills -->
+                    <!-- Category Filter Pills with Explanatory Hover Titles -->
                     <div class="flex flex-wrap gap-1.5 items-center">
-                        <button class="filter-cat-btn px-3 py-1 rounded-full text-xs font-semibold bg-blue-600 text-white shadow-sm transition-all" data-category="">All</button>
-                        <button class="filter-cat-btn px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all" data-category="project">Projects</button>
-                        <button class="filter-cat-btn px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all" data-category="course">Courses</button>
-                        <button class="filter-cat-btn px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all" data-category="internship">Internships</button>
-                        <button class="filter-cat-btn px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all" data-category="placement">Placements</button>
-                        <button class="filter-cat-btn px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all" data-category="tech">Tech</button>
-                        <button class="filter-cat-btn px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all" data-category="career">Career</button>
-                        <button class="filter-cat-btn px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all" data-category="design">Design</button>
-                        <button class="filter-cat-btn px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all" data-category="other">Other</button>
+                        <button class="filter-cat-btn px-3 py-1 rounded-full text-xs font-semibold bg-blue-600 text-white shadow-sm transition-all" data-category="" title="Show all discussion topics across categories">All</button>
+                        <button class="filter-cat-btn px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all" data-category="project" title="Filter mini/major college projects, group formation, and project guidance">Projects</button>
+                        <button class="filter-cat-btn px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all" data-category="course" title="Filter syllabus doubts, textbook solutions, and course exam questions">Courses</button>
+                        <button class="filter-cat-btn px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all" data-category="internship" title="Filter internship interview questions, stipend insights, and referral requests">Internships</button>
+                        <button class="filter-cat-btn px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all" data-category="placement" title="Filter campus recruitment drives, company coding rounds, and interview tips">Placements</button>
+                        <button class="filter-cat-btn px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all" data-category="tech" title="Filter programming (Python, C++, Web), debugging, and technical challenges">Tech</button>
+                        <button class="filter-cat-btn px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all" data-category="career" title="Filter higher studies, GATE prep, resume guidance, and branch guidance">Career</button>
+                        <button class="filter-cat-btn px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all" data-category="design" title="Filter UI/UX design, Figma tutorials, and design portfolios">Design</button>
+                        <button class="filter-cat-btn px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all" data-category="other" title="General campus inquiries and miscellaneous questions">Other</button>
                     </div>
 
                     <!-- Status Filter Tabs (Open / Answered) -->
