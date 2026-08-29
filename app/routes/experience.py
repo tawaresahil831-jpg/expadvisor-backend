@@ -181,7 +181,18 @@ def delete_experience(current_user, experience_id):
     if experience.author_id != current_user.user_id:
         return jsonify({"success": False, "message": "You are not allowed to delete this experience"}), 403
 
-    db.session.delete(experience)
-    db.session.commit()
+    try:
+        from app.models.comment import Comment
+        from app.models.like import Like
+        from app.models.notification import Notification
 
-    return jsonify({"success": True, "message": "Experience deleted successfully"}), 200
+        Comment.query.filter_by(experience_id=experience_id).delete()
+        Like.query.filter_by(experience_id=experience_id).delete()
+        Notification.query.filter_by(experience_id=experience_id).delete()
+
+        db.session.delete(experience)
+        db.session.commit()
+        return jsonify({"success": True, "message": "Experience deleted successfully"}), 200
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"success": False, "message": f"Failed to delete experience: {str(e)}"}), 500
