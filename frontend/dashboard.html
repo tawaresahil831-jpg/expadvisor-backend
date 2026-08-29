@@ -1449,15 +1449,18 @@
             let expList = response.data.data;
             
             // Update stats
-            const total = expList.length;
-            const answered = expList.filter(e => e.comments_count > 0).length;
+            const total = response.data.pagination ? response.data.pagination.total_items : expList.length;
+            const answered = expList.filter(e => e.is_resolved).length;
             const uniqueUsers = new Set(expList.map(e => e.author_id));
             const contributors = uniqueUsers.size;
             
-            if(document.getElementById('stat-total-queries')) document.getElementById('stat-total-queries').textContent = total;
-            if(document.getElementById('stat-answered')) document.getElementById('stat-answered').textContent = answered;
+            // Only use as fallback if loadCommunityStats hasn't populated yet
+            const totalEl = document.getElementById('stat-total-queries');
+            const answeredEl = document.getElementById('stat-answered');
+            if(totalEl && (totalEl.textContent === '0' || !totalEl.textContent)) totalEl.textContent = total;
+            if(answeredEl && (answeredEl.textContent === '0' || !answeredEl.textContent)) answeredEl.textContent = answered;
             if(document.getElementById('stat-contributors')) document.getElementById('stat-contributors').textContent = contributors;
-            if(document.getElementById('stat-members')) document.getElementById('stat-members').textContent = contributors + 12; // Mock total members
+            if(document.getElementById('stat-members')) document.getElementById('stat-members').textContent = contributors + 12;
 
             if (currentStatus === 'Open') {
                 expList = expList.filter(e => !e.is_resolved);
@@ -1575,6 +1578,7 @@
         const response = await apiRequest(`/experiences/${id}`, { method: 'DELETE' });
         if (response.status === 200 && response.data.success) {
             loadExperiences();
+            loadCommunityStats();
         } else {
             alert(response.data.message || 'Failed to delete experience');
         }
@@ -1651,8 +1655,15 @@
         if (!confirm('Are you sure you want to accept this solution?')) return;
         const res = await apiRequest(`/comments/${commentId}/accept`, { method: 'PUT' });
         if (res.status === 200 && res.data.success) {
+            // Immediately reflect in stats card
+            const answeredEl = document.getElementById('stat-answered');
+            if (answeredEl) {
+                const currentCount = parseInt(answeredEl.textContent.trim()) || 0;
+                answeredEl.textContent = currentCount + 1;
+            }
             openExperienceDetail(currentDetailExpId);
             loadExperiences();
+            loadCommunityStats();
         } else {
             alert(res.data.message || 'Failed to accept solution');
         }
@@ -1839,6 +1850,7 @@
             currentEditExpId = null;
             document.querySelector('#createModal h3').textContent = 'Ask a Query';
             loadExperiences();
+            loadCommunityStats();
         } else {
             let errorMsg = response.data.message || 'Failed to create experience';
             if (response.data.errors) {
@@ -1861,7 +1873,21 @@
         }, 400);
     });
 
-    document.addEventListener('DOMContentLoaded', loadExperiences);
+    async function loadCommunityStats() {
+        const res = await apiRequest('/experiences/stats');
+        if (res.status === 200 && res.data.success) {
+            const s = res.data.data;
+            if (document.getElementById('stat-total-queries')) document.getElementById('stat-total-queries').textContent = s.total_queries;
+            if (document.getElementById('stat-answered')) document.getElementById('stat-answered').textContent = s.answered;
+            if (document.getElementById('stat-members')) document.getElementById('stat-members').textContent = s.members;
+            if (document.getElementById('stat-contributors')) document.getElementById('stat-contributors').textContent = s.contributors;
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        loadExperiences();
+        loadCommunityStats();
+    });
 </script>
 
 </body>
