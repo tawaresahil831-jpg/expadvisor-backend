@@ -241,13 +241,13 @@
                         </div>
 
                         <!-- Calendar Grid -->
-                        <div class="space-y-2">
+                        <div class="space-y-1.5 max-w-[340px]">
                             <!-- Weekday headers -->
-                            <div class="grid grid-cols-7 gap-2 text-center text-[11px] font-bold text-slate-400 tracking-wider uppercase">
-                                <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+                            <div class="grid grid-cols-7 gap-1.5 text-center text-[10px] font-bold text-slate-400 uppercase">
+                                <span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span><span>Su</span>
                             </div>
                             <!-- Monthly dynamic blocks -->
-                            <div id="monthlyGrid" class="grid grid-cols-7 gap-2"></div>
+                            <div id="monthlyGrid" class="grid grid-cols-7 gap-1.5"></div>
                         </div>
 
                         <!-- Monthly summary footer -->
@@ -449,7 +449,7 @@
 
             // Empty offset slots
             for (let i = 0; i < firstDayOfWeek; i++) {
-                cellsHTML += `<div class="h-10 rounded-xl bg-slate-50/60 border border-dashed border-slate-100"></div>`;
+                cellsHTML += `<div class="h-8 rounded-lg bg-slate-50/60 border border-dashed border-slate-100"></div>`;
             }
 
             // Month days
@@ -476,7 +476,7 @@
                 const tooltipText = count > 0 ? `${formattedDate} · ${count} contribution${count > 1 ? 's' : ''}` : `${formattedDate} · No activity`;
 
                 cellsHTML += `
-                    <div class="activity-block h-10 rounded-xl border transition-all cursor-pointer select-none hover:scale-105 hover:shadow-md ${bgClass}"
+                    <div class="activity-block h-8 rounded-lg border transition-all cursor-pointer select-none hover:scale-110 hover:shadow-sm ${bgClass}"
                          data-date="${formattedDate}"
                          data-count="${count}"
                          title="${tooltipText}">
