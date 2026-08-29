@@ -390,8 +390,9 @@
                             <span class="material-symbols-outlined text-[15px] text-amber-500">military_tech</span>
                             <span>Badges (<span id="tabBadgesCounter">2/8</span>)</span>
                         </button>
-                        <button id="tabBtnSaved" onclick="switchTab('saved')" class="profile-tab-btn px-4 py-1.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">
-                            Saved
+                        <button id="tabBtnSaved" onclick="switchTab('saved')" class="profile-tab-btn px-4 py-1.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all flex items-center gap-1.5">
+                            <span class="material-symbols-outlined text-[15px] text-blue-500">bookmark</span>
+                            <span>Saved (<span id="savedTabCounter">0</span>)</span>
                         </button>
                     </div>
 
@@ -430,9 +431,8 @@
                     </div>
 
                     <!-- Tab 4: Saved Feed -->
-                    <div id="tabContentSaved" class="py-12 text-center text-slate-400 text-xs hidden">
-                        <span class="material-symbols-outlined text-3xl text-slate-300 mb-1">bookmark_border</span>
-                        <div>No saved queries yet.</div>
+                    <div id="tabContentSaved" class="divide-y divide-slate-100 space-y-1 hidden">
+                        <!-- Populated dynamically with saved queries -->
                     </div>
 
                 </section>
@@ -707,6 +707,7 @@
 
             // Render badges system across both main tab and sidebar widget
             renderBadgesSystem();
+            updateSavedCounter();
         }
 
         // ====== ALL 8 COMMUNITY ACHIEVEMENT BADGES & GAMIFICATION SYSTEM ======
@@ -1059,6 +1060,8 @@
                 renderAnswersFeed();
             } else if (tab === 'badges') {
                 renderBadgesSystem();
+            } else if (tab === 'saved') {
+                renderSavedFeed();
             }
         }
 
@@ -1071,6 +1074,104 @@
                 </div>
             `;
         }
+
+        // ====== SAVED QUERIES SYNC & FEED ======
+        function renderSavedFeed() {
+            const container = document.getElementById('tabContentSaved');
+            const saved = getSavedQueries();
+            updateSavedCounter(saved.length);
+
+            if (saved.length === 0) {
+                container.innerHTML = `
+                    <div class="py-16 text-center text-slate-400 space-y-2">
+                        <span class="material-symbols-outlined text-4xl text-slate-300">bookmark_border</span>
+                        <div class="text-sm font-semibold text-slate-600">No saved queries yet</div>
+                        <div class="text-xs text-slate-400">Bookmark questions from the Community Dashboard to quickly review and reference them here.</div>
+                        <div class="pt-2">
+                            <a href="dashboard.html" class="inline-flex items-center gap-1 text-xs font-bold text-blue-600 hover:underline">
+                                Browse Community Queries →
+                            </a>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = saved.map(exp => {
+                const authorInitial = (exp.author_name || 'U').charAt(0).toUpperCase();
+
+                return `
+                    <div onclick="window.location.href='dashboard.html'" class="p-4 rounded-xl hover:bg-slate-50 transition-colors cursor-pointer group space-y-2">
+                        <!-- Top Metadata -->
+                        <div class="flex items-center justify-between text-xs">
+                            <div class="flex items-center gap-2">
+                                <div class="w-6 h-6 rounded-full bg-blue-100 text-blue-700 font-bold text-[10px] flex items-center justify-center">
+                                    ${authorInitial}
+                                </div>
+                                <span class="font-semibold text-slate-800">${exp.author_name || 'Anonymous'}</span>
+                                <span class="text-slate-400 text-[11px]">· ${new Date(exp.created_at).toLocaleDateString()}</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold ${exp.is_resolved ? 'bg-emerald-50 text-emerald-700' : 'bg-amber-50 text-amber-700'}">
+                                    ${exp.is_resolved ? 'Solved' : 'Open'}
+                                </span>
+                                <button onclick="event.stopPropagation(); removeSavedQuery(${exp.experience_id})" class="text-slate-400 hover:text-rose-600 p-1 transition-colors rounded-lg hover:bg-rose-50" title="Remove from Saved">
+                                    <span class="material-symbols-outlined text-[16px]">bookmark_remove</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Query Title -->
+                        <h4 class="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors leading-snug">
+                            ${exp.title}
+                        </h4>
+
+                        <!-- Snippet -->
+                        ${exp.content ? `<p class="text-xs text-slate-500 line-clamp-1">${exp.content}</p>` : ''}
+
+                        <!-- Bottom Details -->
+                        <div class="flex items-center justify-between pt-1 text-xs">
+                            <div class="flex items-center gap-1.5">
+                                <span class="bg-slate-100 text-slate-600 font-medium px-2 py-0.5 rounded text-[10px] capitalize">${exp.category || 'General'}</span>
+                                ${exp.company ? `<span class="bg-slate-50 text-slate-500 border border-slate-200 px-2 py-0.5 rounded text-[10px]">${exp.company}</span>` : ''}
+                            </div>
+                            <div class="flex items-center gap-3 text-slate-400 text-[11px]">
+                                <span class="flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-[14px]">favorite</span>
+                                    ${exp.likes_count || 0}
+                                </span>
+                                <span class="flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-[14px]">chat_bubble</span>
+                                    ${exp.comments_count || 0}
+                                </span>
+                                <span class="text-[11px] text-blue-600 font-semibold flex items-center gap-0.5 group-hover:underline">
+                                    <span>View on Dashboard</span>
+                                    <span class="material-symbols-outlined text-[13px]">arrow_forward</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function removeSavedQuery(id) {
+            toggleSaveQuery({ experience_id: id });
+            renderSavedFeed();
+        }
+
+        function updateSavedCounter(count) {
+            const counter = document.getElementById('savedTabCounter');
+            if (counter) counter.textContent = count !== undefined ? count : getSavedQueries().length;
+        }
+
+        window.addEventListener('savedQueriesUpdated', () => {
+            updateSavedCounter();
+            const savedContent = document.getElementById('tabContentSaved');
+            if (savedContent && !savedContent.classList.contains('hidden')) {
+                renderSavedFeed();
+            }
+        });
 
         // Share Profile
         function shareProfile() {

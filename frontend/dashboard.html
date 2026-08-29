@@ -523,9 +523,16 @@
                     <h3 id="detailTitle" class="text-xl font-bold text-slate-900 mt-2">Query Title</h3>
                     <p id="detailMeta" class="text-xs text-slate-500 mt-1">Posted by Author · Date</p>
                 </div>
-                <button onclick="document.getElementById('detailModal').close()" class="text-slate-400 hover:text-slate-600 p-1">
-                    <span class="material-symbols-outlined text-[20px]">close</span>
-                </button>
+                <div class="flex items-center gap-1.5 shrink-0">
+                    <!-- Save / Bookmark in Modal Header -->
+                    <button id="detailSaveBtn" onclick="toggleDetailSave()" class="px-2.5 py-1.5 rounded-xl border border-slate-200 text-slate-500 hover:text-blue-600 hover:border-blue-200 transition-colors flex items-center gap-1 text-xs" title="Save Query">
+                        <span id="detailSaveIcon" class="material-symbols-outlined text-[16px]">bookmark_border</span>
+                        <span id="detailSaveText" class="font-medium">Save</span>
+                    </button>
+                    <button onclick="document.getElementById('detailModal').close()" class="text-slate-400 hover:text-slate-600 p-1.5 rounded-xl hover:bg-slate-100 transition-colors">
+                        <span class="material-symbols-outlined text-[20px]">close</span>
+                    </button>
+                </div>
             </div>
 
             <!-- Content -->
@@ -692,9 +699,13 @@
                     return;
                 }
 
+                window.allLoadedExperiences = window.allLoadedExperiences || {};
+                list.forEach(e => { window.allLoadedExperiences[e.experience_id] = e; });
+
                 feed.innerHTML = list.map(exp => {
                     const authorInitial = (exp.author_name || 'U').charAt(0).toUpperCase();
                     const isOwner = currentUserId && (exp.author_id === currentUserId);
+                    const isSaved = isQuerySaved(exp.experience_id);
 
                     return `
                         <div onclick="openExperienceDetail(${exp.experience_id})" class="p-4 rounded-xl hover:bg-slate-50/90 transition-colors cursor-pointer group space-y-2">
@@ -730,21 +741,28 @@
                                 ${exp.content || ''}
                             </p>
 
-                            <!-- Bottom Row: Badges & Likes/Comments -->
+                            <!-- Bottom Row: Badges & Likes/Comments/Save -->
                             <div class="flex items-center justify-between pt-1 text-xs">
                                 <div class="flex items-center gap-1.5">
                                     <span class="bg-slate-100 text-slate-600 font-medium px-2 py-0.5 rounded-md text-[10px] capitalize">${exp.category || 'General'}</span>
                                     ${exp.company ? `<span class="bg-slate-50 text-slate-500 border border-slate-200 px-2 py-0.5 rounded-md text-[10px]">${exp.company}</span>` : ''}
                                 </div>
                                 <div class="flex items-center gap-3 text-slate-400 text-[11px]">
-                                    <button onclick="event.stopPropagation(); likeExperience(${exp.experience_id}, this)" class="flex items-center gap-1 hover:text-rose-500 transition-colors">
+                                    <button onclick="event.stopPropagation(); likeExperience(${exp.experience_id}, this)" class="flex items-center gap-1 hover:text-rose-500 transition-colors" title="Like">
                                         <span class="material-symbols-outlined text-[14px]">favorite</span>
                                         <span id="like-count-${exp.experience_id}">${exp.likes_count || 0}</span>
                                     </button>
-                                    <span class="flex items-center gap-1">
+                                    <span class="flex items-center gap-1" title="Comments">
                                         <span class="material-symbols-outlined text-[14px]">chat_bubble</span>
                                         ${exp.comments_count || 0}
                                     </span>
+                                    <!-- Save Option Beside Like and Comment -->
+                                    <button onclick="event.stopPropagation(); toggleSaveCard(${exp.experience_id})" class="save-btn-${exp.experience_id} flex items-center gap-1 hover:text-blue-600 transition-colors ${isSaved ? 'text-blue-600 font-semibold' : 'text-slate-400'}" title="${isSaved ? 'Saved to Profile' : 'Save Query'}">
+                                        <span class="material-symbols-outlined text-[14px]" style="${isSaved ? 'font-variation-settings: \'FILL\' 1;' : ''}">
+                                            ${isSaved ? 'bookmark' : 'bookmark_border'}
+                                        </span>
+                                        <span class="text-[10px] hidden sm:inline">${isSaved ? 'Saved' : 'Save'}</span>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -799,6 +817,7 @@
 
                 // Comments
                 loadComments(id, exp.author_id);
+                updateDetailSaveBtn(id);
                 document.getElementById('detailModal').showModal();
             }
         }
@@ -1029,6 +1048,74 @@
                 card.onclick = () => document.getElementById('createModal').showModal();
             }
         }
+
+        // ====== SAVED QUERIES HANDLERS ======
+        function toggleSaveCard(expId) {
+            const exp = (window.allLoadedExperiences && window.allLoadedExperiences[expId]) || { experience_id: expId };
+            const isNowSaved = toggleSaveQuery(exp);
+            updateSaveButtons(expId, isNowSaved);
+            if (currentDetailExpId === expId) {
+                updateDetailSaveBtn(expId);
+            }
+        }
+
+        function toggleDetailSave() {
+            if (!currentDetailExpId) return;
+            const exp = (window.allLoadedExperiences && window.allLoadedExperiences[currentDetailExpId]) || { experience_id: currentDetailExpId };
+            const isNowSaved = toggleSaveQuery(exp);
+            updateSaveButtons(currentDetailExpId, isNowSaved);
+            updateDetailSaveBtn(currentDetailExpId);
+        }
+
+        function updateDetailSaveBtn(expId) {
+            const isSaved = isQuerySaved(expId);
+            const icon = document.getElementById('detailSaveIcon');
+            const text = document.getElementById('detailSaveText');
+            const btn = document.getElementById('detailSaveBtn');
+            if (btn && icon && text) {
+                if (isSaved) {
+                    btn.className = 'px-2.5 py-1.5 rounded-xl border border-blue-200 bg-blue-50 text-blue-600 font-semibold transition-colors flex items-center gap-1 text-xs';
+                    icon.textContent = 'bookmark';
+                    icon.style.fontVariationSettings = "'FILL' 1";
+                    text.textContent = 'Saved';
+                } else {
+                    btn.className = 'px-2.5 py-1.5 rounded-xl border border-slate-200 text-slate-500 hover:text-blue-600 hover:border-blue-200 transition-colors flex items-center gap-1 text-xs';
+                    icon.textContent = 'bookmark_border';
+                    icon.style.fontVariationSettings = '';
+                    text.textContent = 'Save';
+                }
+            }
+        }
+
+        function updateSaveButtons(expId, isSaved) {
+            const btns = document.querySelectorAll(`.save-btn-${expId}`);
+            btns.forEach(btn => {
+                if (isSaved) {
+                    btn.className = `save-btn-${expId} flex items-center gap-1 text-blue-600 font-semibold transition-colors`;
+                    btn.title = 'Saved to Profile';
+                    btn.innerHTML = `
+                        <span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+                        <span class="text-[10px] hidden sm:inline">Saved</span>
+                    `;
+                } else {
+                    btn.className = `save-btn-${expId} flex items-center gap-1 text-slate-400 hover:text-blue-600 transition-colors`;
+                    btn.title = 'Save Query';
+                    btn.innerHTML = `
+                        <span class="material-symbols-outlined text-[14px]">bookmark_border</span>
+                        <span class="text-[10px] hidden sm:inline">Save</span>
+                    `;
+                }
+            });
+        }
+
+        window.addEventListener('savedQueriesUpdated', (e) => {
+            if (e.detail && e.detail.experienceId) {
+                updateSaveButtons(e.detail.experienceId, e.detail.isSaved);
+                if (currentDetailExpId === e.detail.experienceId) {
+                    updateDetailSaveBtn(e.detail.experienceId);
+                }
+            }
+        });
 
         // Initialize
         document.addEventListener('DOMContentLoaded', async () => {

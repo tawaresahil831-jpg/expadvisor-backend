@@ -231,3 +231,95 @@ if (typeof document !== 'undefined') {
     }
 }
 
+// ====== SAVED / BOOKMARKED QUERIES SYSTEM ======
+function getSavedQueriesKey() {
+    try {
+        const user = JSON.parse(localStorage.getItem('expadvisor_user') || '{}');
+        const userId = user.user_id || user.id || 'default';
+        return `expadvisor_saved_queries_${userId}`;
+    } catch(e) {
+        return 'expadvisor_saved_queries_default';
+    }
+}
+
+function getSavedQueries() {
+    try {
+        const key = getSavedQueriesKey();
+        return JSON.parse(localStorage.getItem(key) || '[]');
+    } catch(e) {
+        return [];
+    }
+}
+
+function isQuerySaved(experienceId) {
+    if (!experienceId) return false;
+    const saved = getSavedQueries();
+    return saved.some(q => String(q.experience_id) === String(experienceId));
+}
+
+function toggleSaveQuery(experience) {
+    if (!experience) return false;
+    const expId = typeof experience === 'object' ? experience.experience_id : experience;
+    let saved = getSavedQueries();
+    const index = saved.findIndex(q => String(q.experience_id) === String(expId));
+    let isNowSaved = false;
+
+    if (index >= 0) {
+        saved.splice(index, 1);
+        isNowSaved = false;
+        showToast('Query removed from Saved');
+    } else {
+        const itemToSave = typeof experience === 'object' ? {
+            experience_id: experience.experience_id,
+            title: experience.title || 'Untitled Query',
+            content: experience.content || '',
+            category: experience.category || 'General',
+            company: experience.company || '',
+            author_name: experience.author_name || 'Anonymous',
+            created_at: experience.created_at || new Date().toISOString(),
+            is_resolved: !!experience.is_resolved,
+            likes_count: experience.likes_count || 0,
+            comments_count: experience.comments_count || 0
+        } : { experience_id: expId, title: `Query #${expId}` };
+
+        saved.unshift(itemToSave);
+        isNowSaved = true;
+        showToast('Query saved to your Profile!');
+    }
+
+    const key = getSavedQueriesKey();
+    localStorage.setItem(key, JSON.stringify(saved));
+
+    // Dispatch global event for live sync across components & tabs
+    window.dispatchEvent(new CustomEvent('savedQueriesUpdated', { 
+        detail: { experienceId: expId, isSaved: isNowSaved, totalSaved: saved.length } 
+    }));
+
+    return isNowSaved;
+}
+
+// Lightweight Toast Notification
+function showToast(message) {
+    let toast = document.getElementById('expToastPill');
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'expToastPill';
+        toast.className = 'fixed bottom-6 right-6 z-50 bg-slate-900 text-white px-4 py-2.5 rounded-2xl shadow-2xl text-xs font-semibold flex items-center gap-2 border border-slate-700 transition-all duration-300 transform translate-y-12 opacity-0 pointer-events-none';
+        document.body.appendChild(toast);
+    }
+
+    toast.innerHTML = `
+        <span class="material-symbols-outlined text-[18px] text-blue-400">bookmark</span>
+        <span>${message}</span>
+    `;
+
+    toast.classList.remove('translate-y-12', 'opacity-0', 'pointer-events-none');
+    toast.classList.add('translate-y-0', 'opacity-100');
+
+    clearTimeout(window.__toastTimeout);
+    window.__toastTimeout = setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-12', 'opacity-0', 'pointer-events-none');
+    }, 2800);
+}
+
