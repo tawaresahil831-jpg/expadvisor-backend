@@ -106,7 +106,43 @@ async function populateUserProfile() {
 }
 
 function logout() {
+    let modal = document.getElementById('logoutConfirmModal');
+    if (!modal) {
+        modal = document.createElement('dialog');
+        modal.id = 'logoutConfirmModal';
+        modal.className = 'rounded-3xl shadow-2xl p-0 w-full max-w-sm bg-white border border-slate-200 overflow-hidden text-slate-800 backdrop:bg-slate-900/50 backdrop:backdrop-blur-sm';
+        modal.innerHTML = `
+            <div class="p-6 text-center space-y-4">
+                <div class="w-14 h-14 rounded-2xl bg-rose-50 text-rose-600 mx-auto flex items-center justify-center border border-rose-100 shadow-xs">
+                    <span class="material-symbols-outlined text-[28px]">logout</span>
+                </div>
+                <div class="space-y-1.5">
+                    <h3 class="text-base font-bold text-slate-900">Do you really want to log out?</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed px-2">
+                        You will be logged out of your EXPadviser account on this device and will need to sign in again.
+                    </p>
+                </div>
+                <div class="flex gap-2.5 pt-2">
+                    <button type="button" onclick="document.getElementById('logoutConfirmModal').close()" class="flex-1 px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 transition-colors">
+                        Cancel
+                    </button>
+                    <button type="button" onclick="confirmLogoutAction()" class="flex-1 px-4 py-2.5 rounded-xl text-xs font-semibold text-white bg-rose-600 hover:bg-rose-700 shadow-sm transition-colors flex items-center justify-center gap-1.5">
+                        <span class="material-symbols-outlined text-[15px]">logout</span>
+                        <span>Yes, Log Out</span>
+                    </button>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+    }
+    modal.showModal();
+}
+
+function confirmLogoutAction() {
     removeToken();
+    try {
+        localStorage.removeItem('expadvisor_user');
+    } catch(e) {}
     window.location.href = 'login.html';
 }
 

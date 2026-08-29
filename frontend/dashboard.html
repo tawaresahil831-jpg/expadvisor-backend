@@ -120,6 +120,9 @@
             background-color: #1e293b !important;
             color: #cbd5e1 !important;
         }
+        html.dark .border-white {
+            border-color: #111827 !important;
+        }
     </style>
 
     <script>
@@ -228,10 +231,55 @@
         <!-- ====== MAIN BODY ====== -->
         <main class="p-8 max-w-7xl mx-auto w-full space-y-6">
 
-            <!-- Title & Subtitle Row -->
-            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
-                <h1 class="text-2xl font-bold text-slate-900 tracking-tight">Community Dashboard</h1>
-                <p class="text-xs text-slate-500 font-medium">Discover, collaborate, and sharpen your skills</p>
+            <!-- ====== COMMUNITY DASHBOARD HERO BANNER ====== -->
+            <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden transition-all">
+                <!-- Blue/Indigo/Purple Accent Gradient Banner Strip -->
+                <div class="h-20 sm:h-24 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 w-full relative">
+                    <div class="absolute inset-0 bg-black/10"></div>
+                </div>
+
+                <!-- Banner Info Row -->
+                <div class="px-6 sm:px-8 pb-6 pt-3 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                    
+                    <!-- Left: Identity & Welcome -->
+                    <div class="flex items-end gap-4 -mt-10 sm:-mt-12">
+                        <!-- Big Icon / Avatar Box -->
+                        <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-blue-600 text-white text-3xl font-extrabold flex items-center justify-center shadow-lg border-4 border-white shrink-0 relative overflow-hidden">
+                            <span id="dashBannerInitial">M</span>
+                        </div>
+
+                        <!-- Title, Badge & Subtitle -->
+                        <div class="space-y-1 mb-1">
+                            <div class="flex items-center gap-2.5 flex-wrap">
+                                <h1 id="dashBannerWelcome" class="text-xl sm:text-2xl font-bold text-slate-900 leading-tight">Community Dashboard</h1>
+                                <span class="text-xs font-bold uppercase bg-blue-50 text-blue-700 px-2.5 py-0.5 rounded-full border border-blue-100 flex items-center gap-1">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse"></span>
+                                    Live Campus Hub
+                                </span>
+                            </div>
+                            <p class="text-xs text-slate-500 font-medium">
+                                Discover peer queries, solve coursework doubts, and collaborate with engineering peers.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Right: Quick Banner Actions -->
+                    <div class="flex items-center gap-2.5 pt-2 sm:pt-0">
+                        <button onclick="document.getElementById('createModal').showModal()" class="px-4 py-2 rounded-xl bg-slate-900 hover:bg-black text-white text-xs font-semibold shadow-sm transition-all flex items-center gap-1.5">
+                            <span class="material-symbols-outlined text-[16px]">add_circle</span>
+                            Ask a Query
+                        </button>
+                        <a href="my_problems.html" class="px-3.5 py-2 rounded-xl border border-slate-200 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-all flex items-center gap-1.5 shadow-sm">
+                            <span class="material-symbols-outlined text-[16px]">assignment</span>
+                            My Problems
+                        </a>
+                        <a href="my_profile.html" class="px-3.5 py-2 rounded-xl border border-slate-200 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-all flex items-center gap-1.5 shadow-sm">
+                            <span class="material-symbols-outlined text-[16px]">person</span>
+                            My Profile
+                        </a>
+                    </div>
+
+                </div>
             </div>
 
             <!-- ====== TOP 4-STAT STRIP (WITH HOVER SCALE TOOLTIPS) ====== -->
@@ -1125,6 +1173,12 @@
                 const initial = (userRes.data.data.name || 'U').charAt(0).toUpperCase();
                 const initEl = document.getElementById('userAvatarInitial');
                 if (initEl) initEl.textContent = initial;
+                const bannerInit = document.getElementById('dashBannerInitial');
+                if (bannerInit) bannerInit.textContent = initial;
+                const bannerWelcome = document.getElementById('dashBannerWelcome');
+                if (bannerWelcome && userRes.data.data.name) {
+                    bannerWelcome.textContent = `Welcome back, ${userRes.data.data.name.split(' ')[0]}! 👋`;
+                }
             }
             loadExperiences();
             loadCommunityStats();
