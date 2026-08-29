@@ -19,6 +19,19 @@ def like_experience(current_user, experience_id):
 
     new_like = Like(experience_id=experience_id, user_id=current_user.user_id)
     db.session.add(new_like)
+
+    # Notify post author if not the user themselves
+    if experience.author_id != current_user.user_id:
+        from app.models import Notification
+        snippet = (experience.title[:35] + '...') if experience.title and len(experience.title) > 35 else (experience.title or '')
+        notif = Notification(
+            user_id=experience.author_id,
+            actor_id=current_user.user_id,
+            experience_id=experience.experience_id,
+            message=f"{current_user.name} liked your query: '{snippet}'"
+        )
+        db.session.add(notif)
+
     db.session.commit()
 
     like_count = Like.query.filter_by(experience_id=experience_id).count()
