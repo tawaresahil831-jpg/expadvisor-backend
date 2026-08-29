@@ -5,1644 +5,497 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>EXPadviser · My Profile</title>
 
-    <!-- Tailwind + custom config -->
-    <script src="https://cdn.tailwindcss.com">
-    </script>
-    <script id="tailwind-config">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        "on-primary-container": "#8590a6",
-                        "surface-variant": "#d3e4fe",
-                        "surface-container-highest": "#d3e4fe",
-                        "on-error": "#ffffff",
-                        "on-surface": "#0b1c30",
-                        "on-surface-variant": "#45474c",
-                        "inverse-primary": "#bcc7de",
-                        "on-background": "#0b1c30",
-                        "surface-container-high": "#dce9ff",
-                        "on-tertiary-fixed": "#191c1e",
-                        "outline": "#75777d",
-                        "primary-fixed-dim": "#bcc7de",
-                        "surface-container": "#e5eeff",
-                        "on-tertiary": "#ffffff",
-                        "surface-container-lowest": "#ffffff",
-                        "on-secondary-container": "#fffbff",
-                        "on-primary-fixed": "#111c2d",
-                        "surface-bright": "#f8f9ff",
-                        "surface": "#f8f9ff",
-                        "error-container": "#ffdad6",
-                        "inverse-on-surface": "#eaf1ff",
-                        "tertiary": "#111516",
-                        "outline-variant": "#c5c6cd",
-                        "on-secondary-fixed-variant": "#2f2ebe",
-                        "primary-container": "#1e293b",
-                        "on-tertiary-fixed-variant": "#444749",
-                        "on-error-container": "#93000a",
-                        "secondary-container": "#6063ee",
-                        "primary-fixed": "#d8e3fb",
-                        "secondary-fixed": "#e1e0ff",
-                        "surface-container-low": "#eff4ff",
-                        "tertiary-fixed-dim": "#c4c7c9",
-                        "primary": "#091426",
-                        "on-secondary": "#ffffff",
-                        "secondary": "#4648d4",
-                        "on-tertiary-container": "#8d9092",
-                        "surface-tint": "#545f73",
-                        "on-secondary-fixed": "#07006c",
-                        "on-primary-fixed-variant": "#3c475a",
-                        "background": "#f8f9ff",
-                        "inverse-surface": "#213145",
-                        "tertiary-container": "#26292b",
-                        "tertiary-fixed": "#e0e3e5",
-                        "secondary-fixed-dim": "#c0c1ff",
-                        "on-primary": "#ffffff",
-                        "error": "#ba1a1a",
-                        "surface-dim": "#cbdbf5"
-                    },
-                    borderRadius: {
-                        DEFAULT: "0.25rem",
-                        lg: "0.5rem",
-                        xl: "0.75rem",
-                        full: "9999px"
-                    },
-                    spacing: {
-                        "margin-desktop": "40px",
-                        "margin-mobile": "16px",
-                        gutter: "24px",
-                        base: "8px",
-                        "container-max": "1280px"
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                        },
+                        surface: '#ffffff',
+                        canvas: '#f8fafc',
                     },
                     fontFamily: {
-                        "label-md": ["Inter"],
-                        "body-md": ["Inter"],
-                        "headline-md": ["Inter"],
-                        "headline-lg-mobile": ["Inter"],
-                        "body-lg": ["Inter"],
-                        "headline-lg": ["Inter"],
-                        "display-lg": ["Inter"],
-                        "label-sm": ["Inter"]
-                    },
-                    fontSize: {
-                        "label-md": ["14px", { lineHeight: "20px", letterSpacing: "0.01em", fontWeight: "500" }],
-                        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
-                        "headline-md": ["24px", { lineHeight: "32px", fontWeight: "600" }],
-                        "headline-lg-mobile": ["28px", { lineHeight: "36px", fontWeight: "600" }],
-                        "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
-                        "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "600" }],
-                        "display-lg": ["48px", { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "700" }],
-                        "label-sm": ["12px", { lineHeight: "16px", fontWeight: "600" }]
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
 
-    <!-- Google Fonts & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet" />
+    <!-- Google Fonts & Material Symbols -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..24,400..600,0..1,0&display=swap" rel="stylesheet" />
 
     <style>
-        /* ── reset & scrollbar ── */
-        @layer base {
-            html,
-            body {
-                margin: 0;
-                padding: 0;
-            }
-            body {
-                overscroll-behavior: none;
-            }
-            main>:first-child {
-                margin-top: 0 !important;
-            }
-            main>:last-child {
-                margin-bottom: 0 !important;
-            }
-        }
-        ::-webkit-scrollbar {
-            display: none;
-        }
-
-        /* ── utilities ── */
-        .line-clamp-1 {
-            display: -webkit-box;
-            -webkit-line-clamp: 1;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        .line-clamp-2 {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        .tracking-tight {
-            letter-spacing: -0.02em;
-        }
-        .backdrop-blur-xl {
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-        }
-        .shadow-\[0_1px_8px_rgba\(0\2c 0\2c 0\2c 0\.04\)\] {
-            box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
-        }
-        .ring-1 {
-            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
-        }
-        .ring-outline-variant\/20 {
-            --tw-ring-color: rgba(197, 198, 205, 0.2);
-        }
-        .ring-secondary {
-            --tw-ring-color: #4648d4;
-        }
-        .ring-2 {
-            box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
-        }
-        .ring-surface-variant {
-            --tw-ring-color: #d3e4fe;
-        }
-        .border-outline-variant\/10 {
-            border-color: rgba(197, 198, 205, 0.1);
-        }
-        .border-outline-variant\/30 {
-            border-color: rgba(197, 198, 205, 0.3);
-        }
-        .border-outline-variant\/40 {
-            border-color: rgba(197, 198, 205, 0.4);
-        }
-        .bg-secondary\/10 {
-            background-color: rgba(70, 72, 212, 0.10);
-        }
-        .bg-primary\/5 {
-            background-color: rgba(9, 20, 38, 0.05);
-        }
-        .bg-primary\/10 {
-            background-color: rgba(9, 20, 38, 0.10);
-        }
-        .bg-primary-fixed {
-            background-color: #d8e3fb;
-        }
-        .bg-primary-fixed\/50 {
-            background-color: rgba(216, 227, 251, 0.5);
-        }
-        .bg-secondary-fixed {
-            background-color: #e1e0ff;
-        }
-        .bg-tertiary-fixed {
-            background-color: #e0e3e5;
-        }
-        .text-on-primary-fixed {
-            color: #111c2d;
-        }
-        .text-on-secondary-fixed {
-            color: #07006c;
-        }
-        .text-on-tertiary-fixed {
-            color: #191c1e;
-        }
-        .text-on-error-container {
-            color: #93000a;
-        }
-        .bg-error-container {
-            background-color: #ffdad6;
-        }
-        .bg-tertiary-container {
-            background-color: #26292b;
-        }
-        .text-on-tertiary-container {
-            color: #8d9092;
-        }
-        .text-\[14px\] {
-            font-size: 14px;
-        }
-        .text-\[16px\] {
-            font-size: 16px;
-        }
-        .text-\[18px\] {
-            font-size: 18px;
-        }
-        .text-\[20px\] {
-            font-size: 20px;
-        }
-        .focus-within\:ring-secondary:focus-within {
-            --tw-ring-color: #4648d4;
-        }
-        .group-hover\:scale-105:hover {
-            transform: scale(1.05);
-        }
-        .group-hover\:text-primary:hover {
-            color: #091426;
-        }
-        .hover\:bg-inverse-surface:hover {
-            background-color: #213145;
-        }
-        .hover\:bg-surface-container:hover {
-            background-color: #e5eeff;
-        }
-        .hover\:bg-surface-container-high:hover {
-            background-color: #dce9ff;
-        }
-        .hover\:bg-surface-container-highest:hover {
-            background-color: #d3e4fe;
-        }
-        .hover\:bg-surface-container-low:hover {
-            background-color: #eff4ff;
-        }
-        .hover\:text-secondary:hover {
-            color: #4648d4;
-        }
-        .hover\:text-on-secondary:hover {
-            color: #ffffff;
-        }
-        .hover\:text-on-surface:hover {
-            color: #0b1c30;
-        }
-        .hover\:shadow-md:hover {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-        }
-        .hover\:shadow-xl:hover {
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-        }
-        .hover\:underline:hover {
-            text-decoration: underline;
-        }
-        .hover\:-translate-y-1:hover {
-            transform: translateY(-4px);
-        }
-        .transition-all {
-            transition: all 0.2s ease;
-        }
-        .transition-colors {
-            transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
-        }
-        .transition-transform {
-            transition: transform 0.2s ease;
-        }
-        .transition-shadow {
-            transition: box-shadow 0.2s ease;
-        }
-        .duration-200 {
-            transition-duration: 200ms;
-        }
-        .duration-300 {
-            transition-duration: 300ms;
-        }
-        .duration-500 {
-            transition-duration: 500ms;
-        }
-        .ease-out {
-            transition-timing-function: ease-out;
-        }
-        .cursor-pointer {
-            cursor: pointer;
-        }
-        .cursor-default {
-            cursor: default;
-        }
-        .z-0 {
-            z-index: 0;
-        }
-        .z-10 {
-            z-index: 10;
-        }
-        .z-40 {
-            z-index: 40;
-        }
-        .z-50 {
-            z-index: 50;
-        }
-        .relative {
-            position: relative;
-        }
-        .absolute {
-            position: absolute;
-        }
-        .fixed {
-            position: fixed;
-        }
-        .sticky {
-            position: sticky;
-        }
-        .top-0 {
-            top: 0;
-        }
-        .top-2 {
-            top: 0.5rem;
-        }
-        .left-0 {
-            left: 0;
-        }
-        .left-72 {
-            left: 18rem;
-        }
-        .right-0 {
-            right: 0;
-        }
-        .right-2 {
-            right: 0.5rem;
-        }
-        .-inset-2 {
-            inset: -0.5rem;
-        }
-        .inset-0 {
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-        }
-        .mt-auto {
-            margin-top: auto;
-        }
-        .mb-1 {
-            margin-bottom: 0.25rem;
-        }
-        .mb-2 {
-            margin-bottom: 0.5rem;
-        }
-        .mb-4 {
-            margin-bottom: 1rem;
-        }
-        .mb-6 {
-            margin-bottom: 1.5rem;
-        }
-        .mb-8 {
-            margin-bottom: 2rem;
-        }
-        .mt-1 {
-            margin-top: 0.25rem;
-        }
-        .mt-2 {
-            margin-top: 0.5rem;
-        }
-        .mt-4 {
-            margin-top: 1rem;
-        }
-        .mt-8 {
-            margin-top: 2rem;
-        }
-        .mr-2 {
-            margin-right: 0.5rem;
-        }
-        .mr-3 {
-            margin-right: 0.75rem;
-        }
-        .ml-auto {
-            margin-left: auto;
-        }
-        .gap-1 {
-            gap: 0.25rem;
-        }
-        .gap-1\.5 {
-            gap: 0.375rem;
-        }
-        .gap-2 {
-            gap: 0.5rem;
-        }
-        .gap-3 {
-            gap: 0.75rem;
-        }
-        .gap-4 {
-            gap: 1rem;
-        }
-        .gap-6 {
-            gap: 1.5rem;
-        }
-        .gap-8 {
-            gap: 2rem;
-        }
-        .gap-gutter {
-            gap: 24px;
-        }
-        .flex {
-            display: flex;
-        }
-        .flex-col {
-            flex-direction: column;
-        }
-        .flex-1 {
-            flex: 1 1 0%;
-        }
-        .flex-shrink-0 {
-            flex-shrink: 0;
-        }
-        .flex-wrap {
-            flex-wrap: wrap;
-        }
-        .items-center {
-            align-items: center;
-        }
-        .items-start {
-            align-items: flex-start;
-        }
-        .items-end {
-            align-items: flex-end;
-        }
-        .justify-between {
-            justify-content: space-between;
-        }
-        .justify-start {
-            justify-content: flex-start;
-        }
-        .justify-end {
-            justify-content: flex-end;
-        }
-        .justify-center {
-            justify-content: center;
-        }
-        .space-y-1>*+* {
-            margin-top: 0.25rem;
-        }
-        .space-y-2>*+* {
-            margin-top: 0.5rem;
-        }
-        .space-y-4>*+* {
-            margin-top: 1rem;
-        }
-        .w-full {
-            width: 100%;
-        }
-        .w-2 {
-            width: 0.5rem;
-        }
-        .w-3 {
-            width: 0.75rem;
-        }
-        .w-5 {
-            width: 1.25rem;
-        }
-        .w-8 {
-            width: 2rem;
-        }
-        .w-9 {
-            width: 2.25rem;
-        }
-        .w-10 {
-            width: 2.5rem;
-        }
-        .w-14 {
-            width: 3.5rem;
-        }
-        .w-32 {
-            width: 8rem;
-        }
-        .w-48 {
-            width: 12rem;
-        }
-        .w-64 {
-            width: 16rem;
-        }
-        .w-72 {
-            width: 18rem;
-        }
-        .w-auto {
-            width: auto;
-        }
-        .w-\[1px\] {
-            width: 1px;
-        }
-        .min-w-\[700px\] {
-            min-width: 700px;
-        }
-        .max-w-2xl {
-            max-width: 42rem;
-        }
-        .max-w-xl {
-            max-width: 36rem;
-        }
-        .max-w-lg {
-            max-width: 32rem;
-        }
-        .max-w-container-max {
-            max-width: 1280px;
-        }
-        .h-full {
-            height: 100%;
-        }
-        .h-2 {
-            height: 0.5rem;
-        }
-        .h-3 {
-            height: 0.75rem;
-        }
-        .h-5 {
-            height: 1.25rem;
-        }
-        .h-6 {
-            height: 1.5rem;
-        }
-        .h-8 {
-            height: 2rem;
-        }
-        .h-9 {
-            height: 2.25rem;
-        }
-        .h-10 {
-            height: 2.5rem;
-        }
-        .h-14 {
-            height: 3.5rem;
-        }
-        .h-16 {
-            height: 4rem;
-        }
-        .h-32 {
-            height: 8rem;
-        }
-        .h-\[1px\] {
-            height: 1px;
-        }
-        .min-h-screen {
-            min-height: 100vh;
-        }
-        .p-1 {
-            padding: 0.25rem;
-        }
-        .p-2 {
-            padding: 0.5rem;
-        }
-        .p-2\.5 {
-            padding: 0.625rem;
-        }
-        .p-3 {
-            padding: 0.75rem;
-        }
-        .p-4 {
-            padding: 1rem;
-        }
-        .p-6 {
-            padding: 1.5rem;
-        }
-        .p-8 {
-            padding: 2rem;
-        }
-        .p-margin-desktop {
-            padding: 40px;
-        }
-        .px-2 {
-            padding-left: 0.5rem;
-            padding-right: 0.5rem;
-        }
-        .px-2\.5 {
-            padding-left: 0.625rem;
-            padding-right: 0.625rem;
-        }
-        .px-3 {
-            padding-left: 0.75rem;
-            padding-right: 0.75rem;
-        }
-        .px-4 {
-            padding-left: 1rem;
-            padding-right: 1rem;
-        }
-        .px-6 {
-            padding-left: 1.5rem;
-            padding-right: 1.5rem;
-        }
-        .px-8 {
-            padding-left: 2rem;
-            padding-right: 2rem;
-        }
-        .px-margin-desktop {
-            padding-left: 40px;
-            padding-right: 40px;
-        }
-        .py-0\.5 {
-            padding-top: 0.125rem;
-            padding-bottom: 0.125rem;
-        }
-        .py-1 {
-            padding-top: 0.25rem;
-            padding-bottom: 0.25rem;
-        }
-        .py-1\.5 {
-            padding-top: 0.375rem;
-            padding-bottom: 0.375rem;
-        }
-        .py-2 {
-            padding-top: 0.5rem;
-            padding-bottom: 0.5rem;
-        }
-        .py-2\.5 {
-            padding-top: 0.625rem;
-            padding-bottom: 0.625rem;
-        }
-        .py-3 {
-            padding-top: 0.75rem;
-            padding-bottom: 0.75rem;
-        }
-        .py-4 {
-            padding-top: 1rem;
-            padding-bottom: 1rem;
-        }
-        .py-8 {
-            padding-top: 2rem;
-            padding-bottom: 2rem;
-        }
-        .pl-4 {
-            padding-left: 1rem;
-        }
-        .pl-72 {
-            padding-left: 18rem;
-        }
-        .pr-4 {
-            padding-right: 1rem;
-        }
-        .pt-4 {
-            padding-top: 1rem;
-        }
-        .pt-16 {
-            padding-top: 4rem;
-        }
-        .pb-2 {
-            padding-bottom: 0.5rem;
-        }
-        .text-left {
-            text-align: left;
-        }
-        .text-center {
-            text-align: center;
-        }
-        .text-right {
-            text-align: right;
-        }
-        .font-body-md {
-            font-family: "Inter", sans-serif;
-            font-size: 16px;
-            line-height: 24px;
-            font-weight: 400;
-        }
-        .font-label-md {
-            font-family: "Inter", sans-serif;
-            font-size: 14px;
-            line-height: 20px;
-            letter-spacing: 0.01em;
-            font-weight: 500;
-        }
-        .font-label-sm {
-            font-family: "Inter", sans-serif;
-            font-size: 12px;
-            line-height: 16px;
-            font-weight: 600;
-        }
-        .font-headline-md {
-            font-family: "Inter", sans-serif;
-            font-size: 24px;
-            line-height: 32px;
-            font-weight: 600;
-        }
-        .font-headline-lg {
-            font-family: "Inter", sans-serif;
-            font-size: 32px;
-            line-height: 40px;
-            letter-spacing: -0.01em;
-            font-weight: 600;
-        }
-        .font-display-lg {
-            font-family: "Inter", sans-serif;
-            font-size: 48px;
-            line-height: 56px;
-            letter-spacing: -0.02em;
-            font-weight: 700;
-        }
-        .font-body-lg {
-            font-family: "Inter", sans-serif;
-            font-size: 18px;
-            line-height: 28px;
-            font-weight: 400;
-        }
-        .font-bold {
-            font-weight: 700;
-        }
-        .font-semibold {
-            font-weight: 600;
-        }
-        .font-medium {
-            font-weight: 500;
-        }
-        .uppercase {
-            text-transform: uppercase;
-        }
-        .tracking-tight {
-            letter-spacing: -0.02em;
-        }
-        .tracking-widest {
-            letter-spacing: 0.1em;
-        }
-        .tracking-wider {
-            letter-spacing: 0.05em;
-        }
-        .text-on-surface {
-            color: #0b1c30;
-        }
-        .text-on-surface-variant {
-            color: #45474c;
-        }
-        .text-primary {
-            color: #091426;
-        }
-        .text-secondary {
-            color: #4648d4;
-        }
-        .text-on-secondary {
-            color: #ffffff;
-        }
-        .text-on-primary {
-            color: #ffffff;
-        }
-        .text-on-secondary-container {
-            color: #fffbff;
-        }
-        .text-on-error-container {
-            color: #93000a;
-        }
-        .text-error {
-            color: #ba1a1a;
-        }
-        .text-surface {
-            color: #f8f9ff;
-        }
-        .bg-background {
-            background-color: #f8f9ff;
-        }
-        .bg-surface {
-            background-color: #f8f9ff;
-        }
-        .bg-surface\/80 {
-            background-color: rgba(248, 249, 255, 0.8);
-        }
-        .bg-surface-container {
-            background-color: #e5eeff;
-        }
-        .bg-surface-container-low {
-            background-color: #eff4ff;
-        }
-        .bg-surface-container-high {
-            background-color: #dce9ff;
-        }
-        .bg-surface-container-lowest {
-            background-color: #ffffff;
-        }
-        .bg-secondary-container {
-            background-color: #6063ee;
-        }
-        .bg-secondary {
-            background-color: #4648d4;
-        }
-        .bg-primary {
-            background-color: #091426;
-        }
-        .bg-transparent {
-            background-color: transparent;
-        }
-        .bg-secondary\/10 {
-            background-color: rgba(70, 72, 212, 0.10);
-        }
-        .bg-primary\/5 {
-            background-color: rgba(9, 20, 38, 0.05);
-        }
-        .bg-primary\/10 {
-            background-color: rgba(9, 20, 38, 0.10);
-        }
-        .bg-primary\/20 {
-            background-color: rgba(9, 20, 38, 0.20);
-        }
-        .bg-primary\/40 {
-            background-color: rgba(9, 20, 38, 0.40);
-        }
-        .bg-primary\/70 {
-            background-color: rgba(9, 20, 38, 0.70);
-        }
-        .bg-primary-fixed {
-            background-color: #d8e3fb;
-        }
-        .bg-primary-fixed\/50 {
-            background-color: rgba(216, 227, 251, 0.5);
-        }
-        .bg-secondary-fixed {
-            background-color: #e1e0ff;
-        }
-        .bg-tertiary-fixed {
-            background-color: #e0e3e5;
-        }
-        .bg-surface-container-highest {
-            background-color: #d3e4fe;
-        }
-        .bg-surface-variant {
-            background-color: #d3e4fe;
-        }
-        .bg-error-container {
-            background-color: #ffdad6;
-        }
-        .bg-tertiary-container {
-            background-color: #26292b;
-        }
-        .border {
-            border-width: 1px;
-        }
-        .border-2 {
-            border-width: 2px;
-        }
-        .border-t {
-            border-top-width: 1px;
-        }
-        .border-l {
-            border-left-width: 1px;
-        }
-        .border-r {
-            border-right-width: 1px;
-        }
-        .border-b {
-            border-bottom-width: 1px;
-        }
-        .border-none {
-            border: none;
-        }
-        .border-outline-variant\/30 {
-            border-color: rgba(197, 198, 205, 0.3);
-        }
-        .border-outline-variant\/10 {
-            border-color: rgba(197, 198, 205, 0.1);
-        }
-        .border-outline-variant\/40 {
-            border-color: rgba(197, 198, 205, 0.4);
-        }
-        .border-secondary\/20 {
-            border-color: rgba(70, 72, 212, 0.2);
-        }
-        .border-outline-variant {
-            border-color: #c5c6cd;
-        }
-        .rounded {
-            border-radius: 0.25rem;
-        }
-        .rounded-full {
-            border-radius: 9999px;
-        }
-        .rounded-lg {
-            border-radius: 0.5rem;
-        }
-        .rounded-xl {
-            border-radius: 0.75rem;
-        }
-        .rounded-2xl {
-            border-radius: 1rem;
-        }
-        .rounded-3xl {
-            border-radius: 1.5rem;
-        }
-        .rounded-md {
-            border-radius: 0.375rem;
-        }
-        .rounded-sm {
-            border-radius: 0.125rem;
-        }
-        .outline-none {
-            outline: none;
-        }
-        .ring-1 {
-            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
-        }
-        .ring-2 {
-            box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
-        }
-        .ring-outline-variant\/20 {
-            --tw-ring-color: rgba(197, 198, 205, 0.2);
-        }
-        .ring-secondary {
-            --tw-ring-color: #4648d4;
-        }
-        .ring-surface-variant {
-            --tw-ring-color: #d3e4fe;
-        }
-        .shadow-sm {
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-        }
-        .shadow-md {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-        }
-        .shadow-lg {
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-        }
-        .shadow-\[0_1px_8px_rgba\(0\2c 0\2c 0\2c 0\.04\)\] {
-            box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
-        }
-        .shadow-primary\/20 {
-            box-shadow: 0 4px 12px rgba(9, 20, 38, 0.20);
-        }
-        .shadow-secondary\/20 {
-            box-shadow: 0 4px 12px rgba(70, 72, 212, 0.20);
-        }
-        .hover\:shadow-md:hover {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-        }
-        .hover\:shadow-xl:hover {
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-        }
-        .backdrop-blur-xl {
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-        }
-        .object-cover {
-            object-fit: cover;
-        }
-        .object-contain {
-            object-fit: contain;
-        }
-        .overflow-hidden {
-            overflow: hidden;
-        }
-        .overflow-x-auto {
-            overflow-x: auto;
-        }
-        .pointer-events-none {
-            pointer-events: none;
-        }
-        .line-clamp-1 {
-            display: -webkit-box;
-            -webkit-line-clamp: 1;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        .line-clamp-2 {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        .leading-none {
-            line-height: 1;
-        }
-        .leading-relaxed {
-            line-height: 1.625;
-        }
-        .leading-tight {
-            line-height: 1.25;
-        }
-        .tracking-tight {
-            letter-spacing: -0.02em;
-        }
-        .cursor-pointer {
-            cursor: pointer;
-        }
-        .cursor-default {
-            cursor: default;
-        }
-        .self-center {
-            align-self: center;
-        }
-        .shrink-0 {
-            flex-shrink: 0;
-        }
-        .z-0 {
-            z-index: 0;
-        }
-        .z-10 {
-            z-index: 10;
-        }
-        .z-40 {
-            z-index: 40;
-        }
-        .z-50 {
-            z-index: 50;
-        }
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border-width: 0;
-        }
-        .list-none {
-            list-style: none;
-        }
-        .appearance-none {
-            appearance: none;
-        }
-        .blur-3xl {
-            filter: blur(64px);
-        }
-        .blur-2xl {
-            filter: blur(40px);
-        }
-        .blur-md {
-            filter: blur(12px);
-        }
-        .opacity-0 {
-            opacity: 0;
-        }
-        .opacity-100 {
-            opacity: 1;
-        }
-        .opacity-5 {
-            opacity: 0.05;
-        }
-        .opacity-10 {
-            opacity: 0.10;
-        }
-        .opacity-20 {
-            opacity: 0.20;
-        }
-        .opacity-40 {
-            opacity: 0.40;
-        }
-        .opacity-50 {
-            opacity: 0.50;
-        }
-        .opacity-70 {
-            opacity: 0.70;
-        }
-        .group-hover\:opacity-100:hover {
-            opacity: 1;
-        }
-        .group-hover\:opacity-40:hover {
-            opacity: 0.40;
-        }
-        .group-hover\:scale-105:hover {
-            transform: scale(1.05);
-        }
-        .hover\:bg-surface-container:hover {
-            background-color: #e5eeff;
-        }
-        .hover\:bg-surface-container-high:hover {
-            background-color: #dce9ff;
-        }
-        .hover\:bg-surface-container-highest:hover {
-            background-color: #d3e4fe;
-        }
-        .hover\:bg-inverse-surface:hover {
-            background-color: #213145;
-        }
-        .hover\:text-primary:hover {
-            color: #091426;
-        }
-        .hover\:text-secondary:hover {
-            color: #4648d4;
-        }
-        .hover\:underline:hover {
-            text-decoration: underline;
-        }
-        .hover\:shadow-md:hover {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-        }
-        .hover\:-translate-y-1:hover {
-            transform: translateY(-4px);
-        }
-        .transition-all {
-            transition: all 0.2s ease;
-        }
-        .transition-colors {
-            transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
-        }
-        .transition-transform {
-            transition: transform 0.2s ease;
-        }
-        .transition-shadow {
-            transition: box-shadow 0.2s ease;
-        }
-        .transition-opacity {
-            transition: opacity 0.3s ease;
-        }
-        .duration-200 {
-            transition-duration: 200ms;
-        }
-        .duration-300 {
-            transition-duration: 300ms;
-        }
-        .duration-500 {
-            transition-duration: 500ms;
-        }
-        .stroke-2 {
-            stroke-width: 2px;
-        }
-        .stroke-primary {
-            stroke: #091426;
-        }
-        .hover\:stroke-primary:hover {
-            stroke: #091426;
-        }
-        select {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2345474c' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 0.5rem center;
-            padding-right: 2rem;
-            background-size: 0.75rem;
-        }
-        select:focus {
-            outline: none;
-        }
-
-        @media (max-width: 768px) {
-            .pl-72 {
-                padding-left: 0;
-            }
-            .px-margin-desktop {
-                padding-left: 16px;
-                padding-right: 16px;
-            }
-            .p-margin-desktop {
-                padding: 16px;
-            }
-            .gap-gutter {
-                gap: 16px;
-            }
-            .fixed.left-0.top-0 {
-                display: none;
-            }
-            .fixed.top-0.left-72 {
-                left: 0;
-            }
-            .text-display-lg {
-                font-size: 32px;
-                line-height: 40px;
-            }
-            .grid-cols-2 {
-                grid-template-columns: 1fr 1fr;
-            }
-            .lg\:col-span-4 {
-                grid-column: span 12 / span 12;
-            }
-            .lg\:col-span-8 {
-                grid-column: span 12 / span 12;
-            }
-            .hidden.sm\:block {
-                display: none !important;
-            }
-            .hidden.sm\:flex {
-                display: none !important;
-            }
-            .flex-col.lg\:flex-row {
-                flex-direction: column;
-            }
-            .w-32 {
-                width: 6rem;
-            }
-            .h-32 {
-                height: 6rem;
-            }
-            .min-w-\[700px\] {
-                min-width: auto;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .lg\:col-span-4 {
-                grid-column: span 4 / span 4;
-            }
-            .lg\:col-span-8 {
-                grid-column: span 8 / span 8;
-            }
-            .lg\:grid-cols-12 {
-                grid-template-columns: repeat(12, minmax(0, 1fr));
-            }
-            .sm\:block {
-                display: block;
-            }
-            .sm\:flex {
-                display: flex;
-            }
-        }
+        ::-webkit-scrollbar { display: none; }
+        .line-clamp-1 { display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+        .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        dialog::backdrop { background-color: rgba(15, 23, 42, 0.45); backdrop-filter: blur(6px); }
     </style>
 </head>
 
-<body class="bg-background font-body-md text-on-surface">
+<body class="bg-canvas text-slate-800 antialiased font-sans flex min-h-screen">
 
-    <!-- ====== SIDEBAR ====== -->
-    <aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-low z-50 flex flex-col border-r border-outline-variant/30">
-        <div class="p-margin-desktop flex items-center gap-3 mb-4">
-            <img alt="PeerSolve Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuACZwoeuAADBlK9-wogZgOTJIVtQtToQRyMwf5n8_tk41oRca2OH1tW32gdJCOj3lG4G2yA2TeXAVvwvMcxJiH9RF5KyDaG8tpDYq_uJdm67aE3d8asTTJQwKTKxXIO7dtOYAkFlRVyjswUBAHe79WOYQzihjiNDgCr2NwiOgj7OJtvgs19ml0mbc67KxFT3-xW5isvB4CxA3DHQJmE6dOLTTpPn9S2yM3jYZpb1B7qjhNnhZ7ZRX_K8MkDVb8D1-pYNXQIZRVvSl91gxA" />
-            <span class="font-headline-md text-headline-md text-primary tracking-tight">EXPadviser</span>
-        </div>
+    <!-- ====== SLIM DARK ICON RAIL (LEFT NAVIGATION) ====== -->
+    <aside class="w-16 bg-[#111827] flex flex-col items-center py-4 shrink-0 fixed top-0 bottom-0 left-0 z-50 border-r border-slate-800">
+        <!-- Logo -->
+        <a href="dashboard.html" class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold text-xl mb-6 shadow-md hover:scale-105 transition-transform" title="EXPadviser">
+            e
+        </a>
 
-        <nav class="flex-1 px-4 flex flex-col gap-1">
-            <div class="px-4 py-2 mt-4 mb-1">
-                
-            </div>
+        <!-- Navigation Links -->
+        <nav class="flex flex-col gap-3 w-full items-center">
+            <!-- Dashboard -->
+            <a href="dashboard.html" class="w-10 h-10 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 flex items-center justify-center transition-colors" title="Dashboard">
+                <span class="material-symbols-outlined text-[22px]">widgets</span>
+            </a>
 
-            <a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-label-md text-label-md" href="dashboard.html">
-                <span class="material-symbols-outlined mr-3">dashboard</span>Dashboard
+            <!-- My Problems -->
+            <a href="my_problems.html" class="w-10 h-10 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 flex items-center justify-center transition-colors" title="My Problems">
+                <span class="material-symbols-outlined text-[22px]">assignment</span>
             </a>
-            <a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-label-md text-label-md" href="my_problems.html">
-                <span class="material-symbols-outlined mr-3">assignment</span>My Problems
-            </a>
-            
-            <a aria-current="page" class="flex items-center px-4 py-3 rounded-xl transition-all font-label-md bg-secondary-container text-on-secondary-container" href="my_profile.html">
-                <span class="material-symbols-outlined mr-3">person</span>My Profile
-            </a>
-        
-            <a class="flex items-center px-4 py-3 rounded-xl text-error hover:bg-error/10 hover:text-error transition-all font-label-md text-label-md mt-auto" href="#" onclick="logout(); return false;">
-                <span class="material-symbols-outlined text-[20px] mr-3">logout</span>
-                Logout
-            </a>
-</nav>
 
-        <div class="px-8 py-8 mt-auto">
-            <div class="p-4 rounded-xl bg-surface-container text-center">
-                <p class="text-label-sm font-label-sm text-on-surface-variant">Academic Session</p>
-                <p class="text-label-md font-label-md text-primary">2026-2027</p>
-            </div>
+            <!-- My Profile (Active) -->
+            <a href="my_profile.html" class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-sm" title="My Profile">
+                <span class="material-symbols-outlined text-[22px]">person</span>
+            </a>
+        </nav>
+
+        <!-- Bottom Logout -->
+        <div class="mt-auto">
+            <button onclick="logout()" class="w-10 h-10 rounded-xl text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 flex items-center justify-center transition-colors" title="Logout">
+                <span class="material-symbols-outlined text-[22px]">logout</span>
+            </button>
         </div>
     </aside>
 
-    <!-- ====== MAIN WRAPPER ====== -->
-    <div class="pl-72">
+    <!-- ====== MAIN CONTENT WRAPPER ====== -->
+    <div class="pl-16 flex-1 flex flex-col min-w-0">
 
-        <!-- ====== HEADER ====== -->
-        <header class="fixed top-0 left-72 right-0 h-16 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center px-margin-desktop justify-between">
-            <div class="flex-1 max-w-xl">
-                <div class="relative flex items-center bg-surface-container-high rounded-full px-4 py-2 ring-1 ring-outline-variant/20 focus-within:ring-secondary">
-                    <span class="material-symbols-outlined text-on-surface-variant text-body-md">search</span>
-                    <input class="bg-transparent border-none outline-none w-full px-3 text-body-md text-on-surface placeholder:text-on-surface-variant/60" placeholder="Search for problems..." type="text" />
+        <!-- ====== TOP APP BAR ====== -->
+        <header class="h-16 bg-white border-b border-slate-200/80 px-8 flex items-center justify-between sticky top-0 z-40">
+            <!-- Brand Title -->
+            <div class="flex items-center gap-3">
+                <a href="dashboard.html" class="font-extrabold text-slate-900 text-lg tracking-tight hover:text-blue-600 transition-colors">EXPadviser</a>
+                <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-medium">Profile</span>
+            </div>
+
+            <!-- Search Bar (redirects to dashboard) -->
+            <div class="w-full max-w-md mx-6">
+                <div class="relative flex items-center">
+                    <span class="material-symbols-outlined absolute left-3.5 text-slate-400 text-[18px]">search</span>
+                    <input id="searchInput" type="text" placeholder="Search problems or press enter..." class="w-full bg-slate-50/80 border border-slate-200/90 rounded-full pl-9 pr-4 py-1.5 text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all" />
                 </div>
             </div>
-            <div class="flex items-center gap-6">
+
+            <!-- Right Header Actions -->
+            <div class="flex items-center gap-4">
+                <!-- Academic Session Pill -->
+                <span class="text-xs font-semibold text-slate-500 bg-slate-100 px-3 py-1 rounded-full hidden sm:inline-block">
+                    Session 2026–27
+                </span>
+
+                <!-- Notifications -->
                 <div class="relative">
-                <button id="notificationBtn" class="relative p-2 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors focus:outline-none">
-                    <span class="material-symbols-outlined">notifications</span>
-                    <span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
-                </button>
-                <div id="notificationDropdown" class="hidden absolute right-0 mt-2 w-80 bg-surface-container-lowest rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-outline-variant/30 z-50 overflow-hidden">
-                    <div class="p-4 border-b border-outline-variant/30 flex justify-between items-center bg-surface">
-                        <h3 class="font-headline-md text-label-md text-primary font-semibold">Notifications</h3>
-                        <span class="text-label-sm text-secondary cursor-pointer hover:underline">Mark all as read</span>
-                    </div>
-                    <div class="max-h-64 overflow-y-auto">
-                        <div class="p-4 border-b border-outline-variant/20 hover:bg-surface-container/50 transition-colors cursor-pointer flex gap-3 items-start">
-                            <div class="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-secondary text-[16px]">forum</span>
-                            </div>
-                            <div>
-                                <p class="text-label-md text-on-surface mb-1"><span class="font-semibold">Sarah</span> commented on your query</p>
-                                <p class="text-label-sm text-on-surface-variant">2 hours ago</p>
-                            </div>
+                    <button id="notificationBtn" class="w-9 h-9 rounded-full text-slate-600 hover:bg-slate-100 flex items-center justify-center transition-colors relative" title="Notifications">
+                        <span class="material-symbols-outlined text-[20px]">notifications</span>
+                        <span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-rose-500 hidden"></span>
+                    </button>
+                    <!-- Notification Dropdown -->
+                    <div id="notificationDropdown" class="hidden absolute right-0 mt-2 w-80 bg-white rounded-2xl shadow-xl border border-slate-100 py-2 z-50">
+                        <div class="px-4 py-2 border-b border-slate-100 flex items-center justify-between">
+                            <span class="font-bold text-xs uppercase tracking-wider text-slate-500">Notifications</span>
                         </div>
-                        <div class="p-4 hover:bg-surface-container/50 transition-colors cursor-pointer flex gap-3 items-start opacity-70">
-                            <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-primary text-[16px]">check_circle</span>
-                            </div>
-                            <div>
-                                <p class="text-label-md text-on-surface mb-1">Your query was resolved</p>
-                                <p class="text-label-sm text-on-surface-variant">Yesterday</p>
-                            </div>
+                        <div class="max-h-64 overflow-y-auto divide-y divide-slate-100">
+                            <div class="p-4 text-center text-xs text-slate-400">No new notifications</div>
                         </div>
                     </div>
-                    <div class="p-3 text-center border-t border-outline-variant/30 bg-surface/50 hover:bg-surface transition-colors cursor-pointer text-secondary font-label-md text-label-sm">
-                        View all notifications
-                    </div>
                 </div>
-            </div>
-                <div class="flex items-center gap-3 pl-4 border-l border-outline-variant/40">
-                    <div class="text-right hidden sm:block">
-                        <p class="text-label-md font-label-md text-on-surface leading-tight user-name-display">Alex Rivers</p>
-                        
+
+                <!-- User Profile Avatar Circle -->
+                <a href="my_profile.html" class="flex items-center gap-2 group">
+                    <div id="headerAvatarContainer" class="w-8 h-8 rounded-full bg-blue-600 text-white font-bold text-xs flex items-center justify-center shadow-sm group-hover:ring-2 group-hover:ring-blue-500 transition-all">
+                        <span id="headerAvatarInitial">M</span>
                     </div>
-                    <img alt="Profile" class="w-9 h-9 rounded-full object-cover ring-2 ring-surface-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdiQgYZHcs1i5qOIAd2Gz8LdgoSvQ6l9pvdU259XtTr3xzItG-ASIars6oHKk0pg8wSgW7QvR7MCXUnRfArSLjb31qE3UIZ1qentFczBi65HRSN7DfNCiVD_ibUEqEgvGT4SVe8x-As0GRBSksIpp7h1ia6hYtl41MhY6eBSnaMXov3JNFGrtqmOWK3fyZnDnIvXey0aQOo324g28QXnpBGIkYxrIJYYKkyubysvClLl1RU5xdqIhiDw" />
-                    
-                </div>
+                </a>
             </div>
         </header>
 
-        <!-- ====== MAIN CONTENT ====== -->
-        <main class="relative pt-16 bg-background min-h-screen">
-            <div class="flex flex-col w-full px-margin-desktop py-8 gap-8 max-w-container-max mx-auto">
+        <!-- ====== MAIN BODY ====== -->
+        <main class="p-8 max-w-7xl mx-auto w-full space-y-6">
 
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
-
-                    <!-- ====== LEFT SIDEBAR: PROFILE IDENTITY ====== -->
-                    <aside class="col-span-1 lg:col-span-4 flex flex-col gap-6">
-
-                        <!-- Profile Card -->
-                        <div class="bg-surface-container rounded-2xl p-6 shadow-sm flex flex-col items-center text-center relative overflow-hidden group">
-                            <div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                            <div class="relative w-32 h-32 mb-4" id="profileAvatarWrapper">
-                                <div id="profileAvatarContainer" class="w-full h-full rounded-full shadow-md z-10 relative overflow-hidden flex items-center justify-center bg-secondary/20 text-secondary font-bold text-5xl ring-4 ring-surface-variant">
-                                    <img id="profileAvatarImg" alt="Profile Photo" class="w-full h-full object-cover hidden" src="" />
-                                    <span id="profileAvatarInitial">U</span>
-                                </div>
-                                <div class="absolute -inset-2 bg-gradient-to-tr from-primary to-secondary rounded-full opacity-20 blur-md z-0 group-hover:opacity-40 transition-opacity duration-500"></div>
-                            </div>
-                            <h1 id="profile-name" class="font-headline-md text-headline-md text-on-surface mb-1 relative z-10 user-name-display">Loading...</h1>
-                            <p id="profile-role" class="font-label-md text-label-md text-primary bg-primary-fixed/50 px-3 py-1 rounded-full uppercase tracking-wider mb-4 relative z-10 user-role-display">Loading...</p>
-                            <p id="profile-bio" class="font-body-md text-body-md text-on-surface-variant mb-6 text-sm relative z-10">Loading bio...</p>
-                            <div class="flex gap-2 w-full relative z-10">
-                                <button id="edit-bio-btn" class="flex-1 bg-primary text-on-primary font-label-md text-label-md py-2.5 rounded-lg shadow-sm hover:shadow-md transition-all flex items-center justify-center gap-2">
-                                    <span class="material-symbols-outlined text-sm">edit</span>
-                                    Edit Bio
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Badges & Achievements -->
-                        <div class="bg-surface-container rounded-2xl p-6 shadow-sm flex flex-col gap-4">
-                            <h3 class="font-headline-md text-label-md text-on-surface uppercase tracking-widest border-b border-outline-variant/30 pb-2">Achievements</h3>
-                            <div id="achievements-container" class="flex flex-wrap gap-3">
-                                <!-- Dynamic Achievements -->
-                            </div>
-                        </div>
-
-                        <!-- Stats Overview -->
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="bg-surface-container rounded-2xl p-4 shadow-sm text-center flex flex-col items-center justify-center">
-                                <span id="stats-solved" class="font-display-lg text-headline-lg text-primary">0</span>
-                                <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide mt-1">Problems Solved</span>
-                            </div>
-                            <div class="bg-surface-container rounded-2xl p-4 shadow-sm text-center flex flex-col items-center justify-center">
-                                <span id="stats-helped" class="font-display-lg text-headline-lg text-secondary">0</span>
-                                <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide mt-1">Peers Helped</span>
-                            </div>
-                        </div>
-
-                    </aside>
-
-                    <!-- ====== RIGHT MAIN: PORTFOLIO & ACTIVITY ====== -->
-                    <main class="col-span-1 lg:col-span-8 flex flex-col gap-8">
-
-                        <!-- Contribution Graph -->
-                        <section class="bg-surface-container rounded-2xl p-6 shadow-sm">
-                            <div class="flex items-center justify-between mb-6">
-                                <h2 class="font-headline-md text-headline-md text-on-surface">Activity Graph</h2>
-                                <div class="flex items-center gap-4 text-label-sm font-label-md text-on-surface-variant">
-                                    <span>Less</span>
-                                    <div class="flex gap-1">
-                                        <div class="w-3 h-3 rounded-sm bg-surface-container-high"></div>
-                                        <div class="w-3 h-3 rounded-sm bg-primary/20"></div>
-                                        <div class="w-3 h-3 rounded-sm bg-primary/40"></div>
-                                        <div class="w-3 h-3 rounded-sm bg-primary/70"></div>
-                                        <div class="w-3 h-3 rounded-sm bg-primary"></div>
-                                    </div>
-                                    <span>More</span>
-                                </div>
-                            </div>
-                            <div class="w-full overflow-x-auto pb-2">
-                                <div class="min-w-[700px]">
-                                    <svg fill="none" height="110" id="contribution-graph" viewBox="0 0 700 110" width="100%" xmlns="http://www.w3.org/2000/svg">
-                                        <!-- will be populated by JS -->
-                                    </svg>
-                                </div>
-                            </div>
-                        </section>
-
-                        <!-- Recent Activity -->
-                        <section class="bg-surface-container rounded-2xl p-6 shadow-sm flex-1 flex flex-col">
-                            <div class="flex items-center justify-between mb-6">
-                                <h2 class="font-headline-md text-headline-md text-on-surface">Recent Activity</h2>
-                                <button class="text-primary font-label-md text-label-md hover:underline flex items-center gap-1">
-                                    View All
-                                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
-                                </button>
-                            </div>
-                            <div id="recent-activity-list" class="flex flex-col gap-3"></div>
-                        </section>
-
-                    </main>
-
-                </div>
-
+            <!-- Title & Subtitle Row -->
+            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+                <h1 class="text-2xl font-bold text-slate-900 tracking-tight">My Profile & Activity</h1>
+                <p class="text-xs text-slate-500 font-medium">Manage your identity, bio, achievements, and academic activity</p>
             </div>
 
-            
+            <!-- ====== 2-COLUMN LAYOUT ====== -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+                <!-- ====== LEFT COLUMN: IDENTITY & ACHIEVEMENTS (~35%) ====== -->
+                <aside class="lg:col-span-4 space-y-6">
+
+                    <!-- Profile Identity Card -->
+                    <div class="bg-white rounded-2xl border border-slate-200/70 p-6 shadow-sm flex flex-col items-center text-center space-y-4">
+                        <!-- Dynamic Avatar Initial / Image -->
+                        <div class="relative w-28 h-28">
+                            <div id="profileAvatarContainer" class="w-full h-full rounded-full shadow-inner border-4 border-slate-100 flex items-center justify-center bg-blue-100 text-blue-700 font-bold text-4xl overflow-hidden">
+                                <img id="profileAvatarImg" alt="Profile Photo" class="w-full h-full object-cover hidden" src="" />
+                                <span id="profileAvatarInitial">M</span>
+                            </div>
+                        </div>
+
+                        <!-- Name & Role -->
+                        <div>
+                            <h2 id="profile-name" class="text-lg font-bold text-slate-900 leading-snug user-name-display">Loading...</h2>
+                            <span id="profile-role" class="inline-block mt-1 px-3 py-0.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 uppercase tracking-wider user-role-display">
+                                Student
+                            </span>
+                        </div>
+
+                        <!-- Bio -->
+                        <p id="profile-bio" class="text-xs text-slate-500 leading-relaxed max-w-xs">
+                            Loading bio...
+                        </p>
+
+                        <!-- Edit Bio Action -->
+                        <button id="edit-bio-btn" class="w-full bg-slate-900 hover:bg-black text-white font-semibold py-2 rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-sm transition-all">
+                            <span class="material-symbols-outlined text-[16px]">edit</span>
+                            Edit Bio
+                        </button>
+                    </div>
+
+                    <!-- Achievements Card -->
+                    <div class="bg-white rounded-2xl border border-slate-200/70 p-5 shadow-sm space-y-3">
+                        <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
+                            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">Achievements</h3>
+                            <span class="material-symbols-outlined text-[18px] text-amber-500" style="font-variation-settings: 'FILL' 1;">stars</span>
+                        </div>
+                        <div id="achievements-container" class="flex flex-wrap gap-2 pt-1">
+                            <p class="text-xs text-slate-400">Loading achievements...</p>
+                        </div>
+                    </div>
+
+                </aside>
+
+                <!-- ====== RIGHT COLUMN: STATS, HEATMAP & RECENT ACTIVITY (~65%) ====== -->
+                <section class="lg:col-span-8 space-y-6">
+
+                    <!-- Top 2-Stat Ribbon -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center gap-3.5">
+                            <div class="w-11 h-11 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-[22px]">quiz</span>
+                            </div>
+                            <div>
+                                <div id="stats-solved" class="text-xl font-bold text-slate-900 leading-none">0</div>
+                                <div class="text-xs text-slate-500 font-medium mt-1">Queries Asked</div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center gap-3.5">
+                            <div class="w-11 h-11 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-[22px]">handshake</span>
+                            </div>
+                            <div>
+                                <div id="stats-helped" class="text-xl font-bold text-slate-900 leading-none">0</div>
+                                <div class="text-xs text-slate-500 font-medium mt-1">Replies & Solutions</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activity Heatmap Graph Card -->
+                    <div class="bg-white rounded-2xl border border-slate-200/70 p-6 shadow-sm space-y-4">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-sm font-bold text-slate-900">Annual Activity Graph</h3>
+                            <div class="flex items-center gap-1.5 text-[11px] text-slate-400">
+                                <span>Less</span>
+                                <span class="w-2.5 h-2.5 rounded-sm bg-[#eff6ff]"></span>
+                                <span class="w-2.5 h-2.5 rounded-sm bg-[#c7d2fe]"></span>
+                                <span class="w-2.5 h-2.5 rounded-sm bg-[#818cf8]"></span>
+                                <span class="w-2.5 h-2.5 rounded-sm bg-[#6366f1]"></span>
+                                <span class="w-2.5 h-2.5 rounded-sm bg-[#4648d4]"></span>
+                                <span>More</span>
+                            </div>
+                        </div>
+                        <div class="w-full overflow-x-auto pb-1">
+                            <svg id="contribution-graph" class="w-full h-28 min-w-[640px]"></svg>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity Card -->
+                    <div class="bg-white rounded-2xl border border-slate-200/70 p-6 shadow-sm space-y-4">
+                        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                            <h3 class="text-sm font-bold text-slate-900">Recent Contributions</h3>
+                            <a href="my_problems.html" class="text-xs text-blue-600 hover:underline font-semibold flex items-center gap-1">
+                                View All <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+                            </a>
+                        </div>
+                        <div id="recent-activity-list" class="divide-y divide-slate-100 space-y-1">
+                            <p class="py-6 text-center text-xs text-slate-400">Loading recent activity...</p>
+                        </div>
+                    </div>
+
+                </section>
+
+            </div>
 
         </main>
 
     </div>
 
-<script src="js/api.js?v=2"></script>
-<script>
-  requireAuth();
-  populateUserProfile();
-</script>
+    <!-- ====== EDIT BIO MODAL ====== -->
+    <dialog id="edit-bio-modal" class="rounded-2xl shadow-2xl p-0 w-full max-w-md bg-white border border-slate-200 overflow-hidden">
+        <div class="p-6 space-y-4">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                <h3 class="text-base font-bold text-slate-900">Edit Bio</h3>
+                <button type="button" id="close-bio-modal" class="text-slate-400 hover:text-slate-600">
+                    <span class="material-symbols-outlined text-[20px]">close</span>
+                </button>
+            </div>
+            
+            <form id="editBioForm" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">About You</label>
+                    <textarea id="edit-bio-input" rows="4" placeholder="Tell others about your academic focus or skills..." class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                </div>
+                <div class="flex justify-end gap-2 pt-2">
+                    <button type="button" onclick="document.getElementById('edit-bio-modal').close()" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100">Cancel</button>
+                    <button type="submit" id="save-bio-btn" class="px-5 py-2 rounded-xl text-xs font-semibold bg-slate-900 hover:bg-black text-white shadow-sm">Save Bio</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
 
+    <!-- ====== JAVASCRIPT LOGIC ====== -->
+    <script src="js/api.js?v=2"></script>
+    <script>
+        requireAuth();
+        populateUserProfile();
 
-<script>
-    let currentUserId = null;
+        let currentUserId = null;
 
-    
-    async function loadActivityGraph() {
-        if (!currentUserId) return;
-        var svg = document.getElementById('contribution-graph');
-        if (!svg) return;
-        
-        const res = await apiRequest(`/users/${currentUserId}/activity`);
-        let activityMap = {};
-        if (res.status === 200 && res.data.success) {
-            activityMap = res.data.data;
-        }
-        
-        var cols = 52;
-        var rows = 7;
-        var cellSize = 11;
-        var cellGap = 3;
-        var intensityColors = [
-            '#eff4ff', // 0 - empty light
-            '#c0c1ff', // 1 - light theme secondary
-            '#818cf8', // 2 - medium
-            '#6063ee', // 3 - bright
-            '#4648d4'  // 4 - deep theme secondary
-        ];
-        
-        // Build an array of the last 364 dates
-        let dates = [];
-        let today = new Date();
-        for (let i = 363; i >= 0; i--) {
-            let d = new Date(today);
-            d.setDate(today.getDate() - i);
-            dates.push(d.toISOString().split('T')[0]);
-        }
-        
-        var contentHTML = '';
-        let dateIndex = 0;
-        for (var i = 0; i < cols; i++) {
-            contentHTML += '<g transform="translate(' + (i * (cellSize + cellGap)) + ', 0)">';
-            for (var j = 0; j < rows; j++) {
-                if (dateIndex >= dates.length) break;
-                let dateStr = dates[dateIndex++];
-                let count = activityMap[dateStr] || 0;
-                
-                let intensity = 0;
-                if (count > 0 && count <= 2) intensity = 1;
-                else if (count > 2 && count <= 5) intensity = 2;
-                else if (count > 5 && count <= 10) intensity = 3;
-                else if (count > 10) intensity = 4;
-                
-                contentHTML += '<rect y="' + (j * (cellSize + cellGap)) + '" width="' + cellSize + '" height="' +
-                    cellSize + '" rx="2" fill="' + intensityColors[intensity] +
-                    '" class="hover:stroke-primary stroke-2 transition-all cursor-pointer" ' +
-                    'title="' + count + ' contributions on ' + dateStr + '" />';
+        // Search redirect to dashboard
+        document.getElementById('searchInput').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const val = e.target.value.trim();
+                window.location.href = val ? `dashboard.html?search=${encodeURIComponent(val)}` : 'dashboard.html';
             }
-            contentHTML += '</g>';
-        }
-        svg.innerHTML = contentHTML;
-    }
+        });
 
-    async function loadProfileData() {
-        const userRes = await apiRequest('/auth/me');
-        if (userRes.status !== 200) {
-            window.location.href = "login.html";
-            return;
-        }
-        currentUserId = userRes.data.data.user_id || userRes.data.data.id;
-        
-        // Fetch full profile stats
-        const profileRes = await apiRequest(`/users/${currentUserId}`);
-        if (profileRes.status === 200 && profileRes.data.success) {
-            const data = profileRes.data.data;
-            document.getElementById('profile-name').textContent = data.name || 'Student';
-            document.getElementById('profile-role').textContent = data.role ? data.role.toUpperCase() : 'STUDENT';
-            document.getElementById('profile-bio').textContent = data.bio || 'Add a bio to let others know about your academic journey.';
-            
-            const initial = (data.name || 'U').charAt(0).toUpperCase();
-            const initialEl = document.getElementById('profileAvatarInitial');
-            const imgEl = document.getElementById('profileAvatarImg');
-            if (data.avatar_url) {
-                if (imgEl) {
-                    imgEl.src = data.avatar_url;
-                    imgEl.classList.remove('hidden');
-                }
-                if (initialEl) initialEl.classList.add('hidden');
-            } else {
-                if (initialEl) {
-                    initialEl.textContent = initial;
-                    initialEl.classList.remove('hidden');
-                }
-                if (imgEl) imgEl.classList.add('hidden');
+        // ====== LOAD PROFILE DATA ======
+        async function loadProfileData() {
+            const userRes = await apiRequest('/auth/me');
+            if (userRes.status !== 200) {
+                window.location.href = "login.html";
+                return;
             }
-            
-            // Set Stats
-            document.getElementById('stats-solved').textContent = (data.stats && data.stats.problems_solved !== undefined) ? data.stats.problems_solved : 0;
-            document.getElementById('stats-helped').textContent = (data.stats && data.stats.peers_helped !== undefined) ? data.stats.peers_helped : 0;
-            
-            // Set Achievements
-            const achievementsContainer = document.getElementById('achievements-container');
-            if (data.achievements && data.achievements.length > 0) {
-                achievementsContainer.innerHTML = data.achievements.map(ach => `
-                    <div class="flex items-center gap-2 bg-surface-container-high rounded-xl p-2 pr-4 shadow-sm hover:-translate-y-1 transition-transform cursor-default">
-                        <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                            <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+            currentUserId = userRes.data.data.user_id || userRes.data.data.id;
+
+            // Set Header Avatar initial
+            const initial = (userRes.data.data.name || 'U').charAt(0).toUpperCase();
+            const initHeader = document.getElementById('headerAvatarInitial');
+            if (initHeader) initHeader.textContent = initial;
+
+            // Fetch full profile stats
+            const profileRes = await apiRequest(`/users/${currentUserId}`);
+            if (profileRes.status === 200 && profileRes.data.success) {
+                const data = profileRes.data.data;
+                document.getElementById('profile-name').textContent = data.name || 'Student';
+                document.getElementById('profile-role').textContent = data.role ? data.role.toUpperCase() : 'STUDENT';
+                document.getElementById('profile-bio').textContent = data.bio || 'Add a bio to let others know about your academic journey.';
+                
+                // Profile Avatar Initial / Image
+                const initialEl = document.getElementById('profileAvatarInitial');
+                const imgEl = document.getElementById('profileAvatarImg');
+                if (data.avatar_url) {
+                    if (imgEl) {
+                        imgEl.src = data.avatar_url;
+                        imgEl.classList.remove('hidden');
+                    }
+                    if (initialEl) initialEl.classList.add('hidden');
+                } else {
+                    if (initialEl) {
+                        initialEl.textContent = initial;
+                        initialEl.classList.remove('hidden');
+                    }
+                    if (imgEl) imgEl.classList.add('hidden');
+                }
+
+                // Stats
+                document.getElementById('stats-solved').textContent = (data.stats && data.stats.problems_solved !== undefined) ? data.stats.problems_solved : 0;
+                document.getElementById('stats-helped').textContent = (data.stats && data.stats.peers_helped !== undefined) ? data.stats.peers_helped : 0;
+
+                // Achievements
+                const achContainer = document.getElementById('achievements-container');
+                if (data.achievements && data.achievements.length > 0) {
+                    achContainer.innerHTML = data.achievements.map(ach => `
+                        <div class="flex items-center gap-1.5 bg-slate-50 border border-slate-200/80 rounded-lg px-2.5 py-1 text-xs font-semibold text-slate-700 shadow-sm">
+                            <span class="material-symbols-outlined text-[14px] text-amber-500" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span>${ach}</span>
                         </div>
-                        <span class="font-label-md text-label-sm text-on-surface">${ach}</span>
-                    </div>
-                `).join('');
-            } else {
-                achievementsContainer.innerHTML = '<p class="text-on-surface-variant text-sm">Post experiences or leave comments to earn achievements!</p>';
+                    `).join('');
+                } else {
+                    achContainer.innerHTML = '<p class="text-xs text-slate-400">Post queries or accept solutions to unlock achievements!</p>';
+                }
             }
+
+            loadRecentActivity();
+            loadActivityGraph();
         }
-        
-        loadRecentActivity();
-        loadActivityGraph();
-    }
-    
-    async function loadRecentActivity() {
-        const container = document.getElementById('recent-activity-list');
-        if (!container) return;
-        
-        if (!currentUserId) return;
-        container.innerHTML = '<p class="text-center py-4 text-on-surface-variant">Loading recent activity...</p>';
-        
-        const response = await apiRequest(`/experiences?author_id=${currentUserId}`);
-        if (response.status === 200 && response.data.success) {
-            const myActivities = response.data.data.slice(0, 5); // Take top 5
-            
-            if (myActivities.length === 0) {
-                container.innerHTML = '<p class="text-center py-4 text-on-surface-variant">No recent activity.</p>';
-            } else {
-                container.innerHTML = myActivities.map(exp => `
-                    <div class="bg-surface rounded-xl p-4 flex items-center justify-between group hover:shadow-md transition-shadow">
-                        <div class="flex items-center gap-4">
-                            <div class="w-10 h-10 rounded-lg bg-primary-fixed text-on-primary-fixed flex items-center justify-center group-hover:scale-105 transition-transform">
-                                <span class="material-symbols-outlined">forum</span>
-                            </div>
-                            <div>
-                                <h4 class="font-headline-md text-body-lg text-on-surface line-clamp-1"><a href="dashboard.html">${exp.title}</a></h4>
-                                <div class="flex items-center gap-3 mt-1">
-                                    <span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container-high px-2 py-0.5 rounded-md">${exp.category || 'General'}</span>
-                                    <span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">schedule</span>${new Date(exp.created_at).toLocaleDateString()}</span>
+
+        // ====== LOAD RECENT ACTIVITY ======
+        async function loadRecentActivity() {
+            const container = document.getElementById('recent-activity-list');
+            if (!container || !currentUserId) return;
+
+            const res = await apiRequest(`/experiences?author_id=${currentUserId}`);
+            if (res.status === 200 && res.data.success) {
+                const list = (res.data.data || []).slice(0, 5);
+
+                if (list.length === 0) {
+                    container.innerHTML = '<p class="py-6 text-center text-xs text-slate-400">No recent activity found.</p>';
+                } else {
+                    container.innerHTML = list.map(exp => `
+                        <div class="py-3 flex items-center justify-between group">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-[18px]">forum</span>
+                                </div>
+                                <div>
+                                    <h4 class="text-xs font-bold text-slate-800 group-hover:text-blue-600 transition-colors line-clamp-1">
+                                        <a href="dashboard.html">${exp.title}</a>
+                                    </h4>
+                                    <div class="flex items-center gap-2 mt-0.5 text-[10px] text-slate-400">
+                                        <span class="bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded capitalize">${exp.category || 'General'}</span>
+                                        <span>· ${new Date(exp.created_at).toLocaleDateString()}</span>
+                                    </div>
                                 </div>
                             </div>
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold ${exp.is_resolved ? 'bg-emerald-50 text-emerald-700' : 'bg-amber-50 text-amber-700'}">
+                                ${exp.is_resolved ? 'Solved' : 'Open'}
+                            </span>
                         </div>
-                    </div>
-                `).join('');
+                    `).join('');
+                }
             }
         }
-    }
-    
-    document.addEventListener('DOMContentLoaded', () => {
-        loadProfileData();
-        
-        // Modal Logic
-        const modal = document.getElementById('edit-bio-modal');
-        const editBtn = document.getElementById('edit-bio-btn');
-        const closeBtn = document.getElementById('close-bio-modal');
-        const saveBtn = document.getElementById('save-bio-btn');
-        const bioInput = document.getElementById('edit-bio-input');
-        
-        if (editBtn) {
-            editBtn.addEventListener('click', () => {
-                const currentBio = document.getElementById('profile-bio').textContent;
-                if (currentBio === 'Add a bio to let others know about your academic journey.' || currentBio === 'Loading bio...') {
-                    bioInput.value = '';
-                } else {
-                    bioInput.value = currentBio;
+
+        // ====== LOAD ACTIVITY GRAPH ======
+        async function loadActivityGraph() {
+            if (!currentUserId) return;
+            const svg = document.getElementById('contribution-graph');
+            if (!svg) return;
+
+            const res = await apiRequest(`/users/${currentUserId}/activity`);
+            let activityMap = {};
+            if (res.status === 200 && res.data.success) {
+                activityMap = res.data.data || {};
+            }
+
+            const cols = 52;
+            const rows = 7;
+            const cellSize = 11;
+            const cellGap = 3;
+            const intensityColors = [
+                '#eff6ff', // 0 - empty light
+                '#c7d2fe', // 1
+                '#818cf8', // 2
+                '#6366f1', // 3
+                '#4648d4'  // 4 - darkest brand
+            ];
+
+            let dates = [];
+            let today = new Date();
+            for (let i = 363; i >= 0; i--) {
+                let d = new Date(today);
+                d.setDate(today.getDate() - i);
+                dates.push(d.toISOString().split('T')[0]);
+            }
+
+            let contentHTML = '';
+            let dateIndex = 0;
+            for (let i = 0; i < cols; i++) {
+                contentHTML += `<g transform="translate(${i * (cellSize + cellGap)}, 0)">`;
+                for (let j = 0; j < rows; j++) {
+                    if (dateIndex >= dates.length) break;
+                    let dateStr = dates[dateIndex++];
+                    let count = activityMap[dateStr] || 0;
+
+                    let intensity = 0;
+                    if (count > 0 && count <= 2) intensity = 1;
+                    else if (count > 2 && count <= 5) intensity = 2;
+                    else if (count > 5 && count <= 10) intensity = 3;
+                    else if (count > 10) intensity = 4;
+
+                    contentHTML += `<rect y="${j * (cellSize + cellGap)}" width="${cellSize}" height="${cellSize}" rx="2.5" fill="${intensityColors[intensity]}" class="hover:stroke-blue-600 stroke-1 transition-all cursor-pointer" title="${count} contributions on ${dateStr}" />`;
                 }
-                modal.classList.remove('hidden');
-            });
+                contentHTML += '</g>';
+            }
+            svg.innerHTML = contentHTML;
         }
-        
-        if (closeBtn) {
-            closeBtn.addEventListener('click', () => {
-                modal.classList.add('hidden');
-            });
-        }
-        
-        if (saveBtn) {
-            saveBtn.addEventListener('click', async () => {
-                const newBio = bioInput.value;
-                const origText = saveBtn.textContent;
-                saveBtn.textContent = 'Saving...';
-                saveBtn.disabled = true;
-                
-                const res = await apiRequest('/users/me', {
-                    method: 'PUT',
-                    body: { bio: newBio }
+
+        // Bio Modal Events
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProfileData();
+
+            const modal = document.getElementById('edit-bio-modal');
+            const editBtn = document.getElementById('edit-bio-btn');
+            const closeBtn = document.getElementById('close-bio-modal');
+            const bioInput = document.getElementById('edit-bio-input');
+            const bioForm = document.getElementById('editBioForm');
+            const saveBtn = document.getElementById('save-bio-btn');
+
+            if (editBtn) {
+                editBtn.addEventListener('click', () => {
+                    const currentBio = document.getElementById('profile-bio').textContent.trim();
+                    if (currentBio === 'Add a bio to let others know about your academic journey.' || currentBio === 'Loading bio...') {
+                        bioInput.value = '';
+                    } else {
+                        bioInput.value = currentBio;
+                    }
+                    modal.showModal();
                 });
-                
-                if (res.status === 200 && res.data.success) {
-                    document.getElementById('profile-bio').textContent = res.data.data.bio || 'Add a bio to let others know about your academic journey.';
-                    modal.classList.add('hidden');
-                } else {
-                    alert(res.data.message || 'Failed to update bio');
-                }
-                
-                saveBtn.textContent = origText;
-                saveBtn.disabled = false;
-            });
-        }
-    });
-</script>
+            }
 
+            if (closeBtn) {
+                closeBtn.addEventListener('click', () => modal.close());
+            }
 
+            if (bioForm) {
+                bioForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const newBio = bioInput.value.trim();
+                    saveBtn.textContent = 'Saving...';
+                    saveBtn.disabled = true;
 
-<!-- Edit Bio Modal -->
-<div id="edit-bio-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-scrim/40 backdrop-blur-sm p-4">
-    <div class="bg-surface-container-high rounded-[28px] p-6 max-w-md w-full shadow-elevation-3 relative">
-        <h3 class="font-headline-sm text-headline-sm text-on-surface mb-4">Edit Profile</h3>
-        <div class="flex flex-col gap-4">
-            <div class="flex flex-col gap-1.5">
-                <label class="text-label-sm text-on-surface">Bio</label>
-                <textarea id="edit-bio-input" class="w-full px-4 py-3 rounded-xl bg-surface border border-outline-variant/50 text-body-md text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-secondary focus:ring-2 focus:ring-secondary/50 transition-all min-h-[100px]" placeholder="Tell us about yourself..."></textarea>
-            </div>
-            <div class="flex justify-end gap-2 mt-4">
-                <button type="button" id="close-bio-modal" class="px-6 py-2.5 rounded-full text-primary font-label-md hover:bg-primary/10 transition-colors">Cancel</button>
-                <button type="button" id="save-bio-btn" class="px-6 py-2.5 rounded-full bg-primary text-on-primary font-label-md shadow-sm hover:shadow-md transition-shadow">Save</button>
-            </div>
-        </div>
-    </div>
-</div>
+                    const res = await apiRequest('/users/me', {
+                        method: 'PUT',
+                        body: { bio: newBio }
+                    });
 
+                    if (res.status === 200 && res.data.success) {
+                        document.getElementById('profile-bio').textContent = res.data.data.bio || 'Add a bio to let others know about your academic journey.';
+                        modal.close();
+                    } else {
+                        alert(res.data.message || 'Failed to update bio');
+                    }
+
+                    saveBtn.textContent = 'Save Bio';
+                    saveBtn.disabled = false;
+                });
+            }
+        });
+    </script>
 </body>
 </html>

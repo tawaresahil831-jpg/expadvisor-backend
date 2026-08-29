@@ -5,1665 +5,373 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>EXPadviser · My Problems</title>
 
-    <!-- Tailwind + custom config -->
-    <script src="https://cdn.tailwindcss.com">
-    </script>
-    <script id="tailwind-config">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        "on-secondary-fixed-variant": "#2f2ebe",
-                        "secondary-fixed": "#e1e0ff",
-                        "error": "#ba1a1a",
-                        "tertiary": "#111516",
-                        "on-tertiary-fixed": "#191c1e",
-                        "surface-tint": "#545f73",
-                        "on-primary": "#ffffff",
-                        "outline-variant": "#c5c6cd",
-                        "on-error-container": "#93000a",
-                        "on-primary-fixed-variant": "#3c475a",
-                        "on-secondary-fixed": "#07006c",
-                        "tertiary-fixed": "#e0e3e5",
-                        "primary-container": "#1e293b",
-                        "on-secondary": "#ffffff",
-                        "on-error": "#ffffff",
-                        "secondary": "#4648d4",
-                        "on-surface": "#0b1c30",
-                        "surface-container": "#e5eeff",
-                        "tertiary-fixed-dim": "#c4c7c9",
-                        "surface-variant": "#d3e4fe",
-                        "surface-container-low": "#eff4ff",
-                        "inverse-primary": "#bcc7de",
-                        "on-background": "#0b1c30",
-                        "on-primary-container": "#8590a6",
-                        "surface-container-high": "#dce9ff",
-                        "primary-fixed-dim": "#bcc7de",
-                        "on-tertiary-container": "#8d9092",
-                        "surface-dim": "#cbdbf5",
-                        "background": "#f8f9ff",
-                        "surface-container-lowest": "#ffffff",
-                        "surface-bright": "#f8f9ff",
-                        "secondary-container": "#6063ee",
-                        "tertiary-container": "#26292b",
-                        "secondary-fixed-dim": "#c0c1ff",
-                        "inverse-on-surface": "#eaf1ff",
-                        "error-container": "#ffdad6",
-                        "on-tertiary-fixed-variant": "#444749",
-                        "on-secondary-container": "#fffbff",
-                        "on-primary-fixed": "#111c2d",
-                        "on-tertiary": "#ffffff",
-                        "inverse-surface": "#213145",
-                        "surface": "#f8f9ff",
-                        "surface-container-highest": "#d3e4fe",
-                        "on-surface-variant": "#45474c",
-                        "primary-fixed": "#d8e3fb",
-                        "outline": "#75777d",
-                        "primary": "#091426"
-                    },
-                    borderRadius: {
-                        DEFAULT: "0.25rem",
-                        lg: "0.5rem",
-                        xl: "0.75rem",
-                        full: "9999px"
-                    },
-                    spacing: {
-                        "margin-desktop": "40px",
-                        "gutter": "24px",
-                        "container-max": "1280px",
-                        "margin-mobile": "16px",
-                        "base": "8px"
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                        },
+                        surface: '#ffffff',
+                        canvas: '#f8fafc',
                     },
                     fontFamily: {
-                        "label-md": ["Inter"],
-                        "body-md": ["Inter"],
-                        "headline-md": ["Inter"],
-                        "display-lg": ["Inter"],
-                        "headline-lg-mobile": ["Inter"],
-                        "headline-lg": ["Inter"],
-                        "label-sm": ["Inter"],
-                        "body-lg": ["Inter"]
-                    },
-                    fontSize: {
-                        "label-md": ["14px", { lineHeight: "20px", letterSpacing: "0.01em", fontWeight: "500" }],
-                        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
-                        "headline-md": ["24px", { lineHeight: "32px", fontWeight: "600" }],
-                        "display-lg": ["48px", { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "700" }],
-                        "headline-lg-mobile": ["28px", { lineHeight: "36px", fontWeight: "600" }],
-                        "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "600" }],
-                        "label-sm": ["12px", { lineHeight: "16px", fontWeight: "600" }],
-                        "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }]
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
 
-    <!-- Google Fonts & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet" />
+    <!-- Google Fonts & Material Symbols -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..24,400..600,0..1,0&display=swap" rel="stylesheet" />
 
     <style>
-        /* ── reset & scrollbar ── */
-        @layer base {
-            html,
-            body {
-                margin: 0;
-                padding: 0;
-            }
-            body {
-                overscroll-behavior: none;
-            }
-            main>:first-child {
-                margin-top: 0 !important;
-            }
-            main>:last-child {
-                margin-bottom: 0 !important;
-            }
-        }
-        ::-webkit-scrollbar {
-            display: none;
-        }
-
-        /* ── utilities ── */
-        .line-clamp-1 {
-            display: -webkit-box;
-            -webkit-line-clamp: 1;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        .line-clamp-2 {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        .line-clamp-3 {
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        .tracking-tight {
-            letter-spacing: -0.02em;
-        }
-        .backdrop-blur-xl {
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-        }
-        .shadow-\[0_1px_8px_rgba\(0\2c 0\2c 0\2c 0\.04\)\] {
-            box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
-        }
-        .ring-1 {
-            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
-        }
-        .ring-outline-variant\/30 {
-            --tw-ring-color: rgba(197, 198, 205, 0.3);
-        }
-        .ring-2 {
-            box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
-        }
-        .ring-secondary {
-            --tw-ring-color: #4648d4;
-        }
-        .ring-surface-variant {
-            --tw-ring-color: #d3e4fe;
-        }
-        .border-outline-variant\/10 {
-            border-color: rgba(197, 198, 205, 0.1);
-        }
-        .border-outline-variant\/20 {
-            border-color: rgba(197, 198, 205, 0.2);
-        }
-        .border-outline-variant\/30 {
-            border-color: rgba(197, 198, 205, 0.3);
-        }
-        .border-outline-variant\/40 {
-            border-color: rgba(197, 198, 205, 0.4);
-        }
-        .bg-secondary\/10 {
-            background-color: rgba(70, 72, 212, 0.10);
-        }
-        .bg-primary\/5 {
-            background-color: rgba(9, 20, 38, 0.05);
-        }
-        .bg-primary\/10 {
-            background-color: rgba(9, 20, 38, 0.10);
-        }
-        .bg-primary-fixed {
-            background-color: #d8e3fb;
-        }
-        .bg-primary-fixed\/50 {
-            background-color: rgba(216, 227, 251, 0.5);
-        }
-        .bg-secondary-fixed {
-            background-color: #e1e0ff;
-        }
-        .bg-tertiary-fixed {
-            background-color: #e0e3e5;
-        }
-        .text-on-primary-fixed {
-            color: #111c2d;
-        }
-        .text-on-secondary-fixed {
-            color: #07006c;
-        }
-        .text-on-tertiary-fixed {
-            color: #191c1e;
-        }
-        .text-on-error-container {
-            color: #93000a;
-        }
-        .bg-error-container {
-            background-color: #ffdad6;
-        }
-        .bg-tertiary-container {
-            background-color: #26292b;
-        }
-        .text-on-tertiary-container {
-            color: #8d9092;
-        }
-        .bg-surface-container-highest\/50 {
-            background-color: rgba(211, 228, 254, 0.5);
-        }
-        .focus-within\:bg-surface-container-highest:focus-within {
-            background-color: #d3e4fe;
-        }
-        .focus-within\:ring-2:focus-within {
-            box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
-        }
-        .focus-within\:ring-secondary:focus-within {
-            --tw-ring-color: #4648d4;
-        }
-        .text-\[14px\] {
-            font-size: 14px;
-        }
-        .text-\[16px\] {
-            font-size: 16px;
-        }
-        .text-\[18px\] {
-            font-size: 18px;
-        }
-        .text-\[20px\] {
-            font-size: 20px;
-        }
-        .group-hover\:scale-110:hover {
-            transform: scale(1.10);
-        }
-        .group-hover\:text-primary:hover {
-            color: #091426;
-        }
-        .group-hover\:gap-2:hover {
-            gap: 0.5rem;
-        }
-        .group-hover\:rotate-90:hover {
-            transform: rotate(90deg);
-        }
-        .hover\:bg-inverse-surface:hover {
-            background-color: #213145;
-        }
-        .hover\:bg-surface-container:hover {
-            background-color: #e5eeff;
-        }
-        .hover\:bg-surface-container-high:hover {
-            background-color: #dce9ff;
-        }
-        .hover\:bg-surface-container-highest:hover {
-            background-color: #d3e4fe;
-        }
-        .hover\:bg-surface-container-low:hover {
-            background-color: #eff4ff;
-        }
-        .hover\:bg-surface-variant\/50:hover {
-            background-color: rgba(211, 228, 254, 0.5);
-        }
-        .hover\:text-secondary:hover {
-            color: #4648d4;
-        }
-        .hover\:text-on-secondary:hover {
-            color: #ffffff;
-        }
-        .hover\:text-on-surface:hover {
-            color: #0b1c30;
-        }
-        .hover\:text-primary:hover {
-            color: #091426;
-        }
-        .hover\:shadow-md:hover {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-        }
-        .hover\:shadow-lg:hover {
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-        }
-        .hover\:underline:hover {
-            text-decoration: underline;
-        }
-        .hover\:-translate-y-0\.5:hover {
-            transform: translateY(-2px);
-        }
-        .hover\:-translate-y-1:hover {
-            transform: translateY(-4px);
-        }
-        .transition-all {
-            transition: all 0.2s ease;
-        }
-        .transition-colors {
-            transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
-        }
-        .transition-transform {
-            transition: transform 0.2s ease;
-        }
-        .transition-shadow {
-            transition: box-shadow 0.2s ease;
-        }
-        .duration-200 {
-            transition-duration: 200ms;
-        }
-        .duration-300 {
-            transition-duration: 300ms;
-        }
-        .ease-out {
-            transition-timing-function: ease-out;
-        }
-        .cursor-pointer {
-            cursor: pointer;
-        }
-        .cursor-default {
-            cursor: default;
-        }
-        .z-0 {
-            z-index: 0;
-        }
-        .z-10 {
-            z-index: 10;
-        }
-        .z-40 {
-            z-index: 40;
-        }
-        .z-50 {
-            z-index: 50;
-        }
-        .relative {
-            position: relative;
-        }
-        .absolute {
-            position: absolute;
-        }
-        .fixed {
-            position: fixed;
-        }
-        .sticky {
-            position: sticky;
-        }
-        .top-0 {
-            top: 0;
-        }
-        .top-2 {
-            top: 0.5rem;
-        }
-        .-top-2 {
-            top: -0.5rem;
-        }
-        .left-0 {
-            left: 0;
-        }
-        .left-72 {
-            left: 18rem;
-        }
-        .right-0 {
-            right: 0;
-        }
-        .right-2 {
-            right: 0.5rem;
-        }
-        .-right-4 {
-            right: -1rem;
-        }
-        .-bottom-2 {
-            bottom: -0.5rem;
-        }
-        .-bottom-4 {
-            bottom: -1rem;
-        }
-        .inset-0 {
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-        }
-        .mt-auto {
-            margin-top: auto;
-        }
-        .mb-1 {
-            margin-bottom: 0.25rem;
-        }
-        .mb-2 {
-            margin-bottom: 0.5rem;
-        }
-        .mb-4 {
-            margin-bottom: 1rem;
-        }
-        .mb-6 {
-            margin-bottom: 1.5rem;
-        }
-        .mb-8 {
-            margin-bottom: 2rem;
-        }
-        .mt-1 {
-            margin-top: 0.25rem;
-        }
-        .mt-2 {
-            margin-top: 0.5rem;
-        }
-        .mt-4 {
-            margin-top: 1rem;
-        }
-        .mt-6 {
-            margin-top: 1.5rem;
-        }
-        .mt-8 {
-            margin-top: 2rem;
-        }
-        .mr-2 {
-            margin-right: 0.5rem;
-        }
-        .mr-3 {
-            margin-right: 0.75rem;
-        }
-        .ml-auto {
-            margin-left: auto;
-        }
-        .gap-1 {
-            gap: 0.25rem;
-        }
-        .gap-1\.5 {
-            gap: 0.375rem;
-        }
-        .gap-2 {
-            gap: 0.5rem;
-        }
-        .gap-3 {
-            gap: 0.75rem;
-        }
-        .gap-4 {
-            gap: 1rem;
-        }
-        .gap-6 {
-            gap: 1.5rem;
-        }
-        .gap-8 {
-            gap: 2rem;
-        }
-        .gap-12 {
-            gap: 3rem;
-        }
-        .gap-gutter {
-            gap: 24px;
-        }
-        .flex {
-            display: flex;
-        }
-        .inline-flex {
-            display: inline-flex;
-        }
-        .flex-col {
-            flex-direction: column;
-        }
-        .flex-1 {
-            flex: 1 1 0%;
-        }
-        .flex-shrink-0 {
-            flex-shrink: 0;
-        }
-        .flex-wrap {
-            flex-wrap: wrap;
-        }
-        .items-center {
-            align-items: center;
-        }
-        .items-start {
-            align-items: flex-start;
-        }
-        .items-end {
-            align-items: flex-end;
-        }
-        .justify-between {
-            justify-content: space-between;
-        }
-        .justify-start {
-            justify-content: flex-start;
-        }
-        .justify-end {
-            justify-content: flex-end;
-        }
-        .justify-center {
-            justify-content: center;
-        }
-        .space-y-1>*+* {
-            margin-top: 0.25rem;
-        }
-        .space-y-2>*+* {
-            margin-top: 0.5rem;
-        }
-        .space-y-4>*+* {
-            margin-top: 1rem;
-        }
-        .-space-x-2>*+* {
-            margin-left: -0.5rem;
-        }
-        .w-full {
-            width: 100%;
-        }
-        .w-2 {
-            width: 0.5rem;
-        }
-        .w-3 {
-            width: 0.75rem;
-        }
-        .w-5 {
-            width: 1.25rem;
-        }
-        .w-8 {
-            width: 2rem;
-        }
-        .w-9 {
-            width: 2.25rem;
-        }
-        .w-10 {
-            width: 2.5rem;
-        }
-        .w-14 {
-            width: 3.5rem;
-        }
-        .w-24 {
-            width: 6rem;
-        }
-        .w-32 {
-            width: 8rem;
-        }
-        .w-48 {
-            width: 12rem;
-        }
-        .w-64 {
-            width: 16rem;
-        }
-        .w-72 {
-            width: 18rem;
-        }
-        .w-auto {
-            width: auto;
-        }
-        .w-\[1px\] {
-            width: 1px;
-        }
-        .w-1\/3 {
-            width: 33.333333%;
-        }
-        .min-w-\[700px\] {
-            min-width: 700px;
-        }
-        .max-w-2xl {
-            max-width: 42rem;
-        }
-        .max-w-xl {
-            max-width: 36rem;
-        }
-        .max-w-lg {
-            max-width: 32rem;
-        }
-        .max-w-container-max {
-            max-width: 1280px;
-        }
-        .h-full {
-            height: 100%;
-        }
-        .h-2 {
-            height: 0.5rem;
-        }
-        .h-3 {
-            height: 0.75rem;
-        }
-        .h-5 {
-            height: 1.25rem;
-        }
-        .h-6 {
-            height: 1.5rem;
-        }
-        .h-8 {
-            height: 2rem;
-        }
-        .h-9 {
-            height: 2.25rem;
-        }
-        .h-10 {
-            height: 2.5rem;
-        }
-        .h-14 {
-            height: 3.5rem;
-        }
-        .h-16 {
-            height: 4rem;
-        }
-        .h-24 {
-            height: 6rem;
-        }
-        .h-32 {
-            height: 8rem;
-        }
-        .h-\[1px\] {
-            height: 1px;
-        }
-        .h-1 {
-            height: 0.25rem;
-        }
-        .min-h-screen {
-            min-height: 100vh;
-        }
-        .p-1 {
-            padding: 0.25rem;
-        }
-        .p-2 {
-            padding: 0.5rem;
-        }
-        .p-2\.5 {
-            padding: 0.625rem;
-        }
-        .p-3 {
-            padding: 0.75rem;
-        }
-        .p-4 {
-            padding: 1rem;
-        }
-        .p-6 {
-            padding: 1.5rem;
-        }
-        .p-8 {
-            padding: 2rem;
-        }
-        .p-margin-desktop {
-            padding: 40px;
-        }
-        .px-2 {
-            padding-left: 0.5rem;
-            padding-right: 0.5rem;
-        }
-        .px-2\.5 {
-            padding-left: 0.625rem;
-            padding-right: 0.625rem;
-        }
-        .px-3 {
-            padding-left: 0.75rem;
-            padding-right: 0.75rem;
-        }
-        .px-4 {
-            padding-left: 1rem;
-            padding-right: 1rem;
-        }
-        .px-6 {
-            padding-left: 1.5rem;
-            padding-right: 1.5rem;
-        }
-        .px-8 {
-            padding-left: 2rem;
-            padding-right: 2rem;
-        }
-        .px-margin-desktop {
-            padding-left: 40px;
-            padding-right: 40px;
-        }
-        .py-0\.5 {
-            padding-top: 0.125rem;
-            padding-bottom: 0.125rem;
-        }
-        .py-1 {
-            padding-top: 0.25rem;
-            padding-bottom: 0.25rem;
-        }
-        .py-1\.5 {
-            padding-top: 0.375rem;
-            padding-bottom: 0.375rem;
-        }
-        .py-2 {
-            padding-top: 0.5rem;
-            padding-bottom: 0.5rem;
-        }
-        .py-2\.5 {
-            padding-top: 0.625rem;
-            padding-bottom: 0.625rem;
-        }
-        .py-3 {
-            padding-top: 0.75rem;
-            padding-bottom: 0.75rem;
-        }
-        .py-4 {
-            padding-top: 1rem;
-            padding-bottom: 1rem;
-        }
-        .py-8 {
-            padding-top: 2rem;
-            padding-bottom: 2rem;
-        }
-        .pl-4 {
-            padding-left: 1rem;
-        }
-        .pl-72 {
-            padding-left: 18rem;
-        }
-        .pr-4 {
-            padding-right: 1rem;
-        }
-        .pt-4 {
-            padding-top: 1rem;
-        }
-        .pt-6 {
-            padding-top: 1.5rem;
-        }
-        .pt-16 {
-            padding-top: 4rem;
-        }
-        .pb-2 {
-            padding-bottom: 0.5rem;
-        }
-        .text-left {
-            text-align: left;
-        }
-        .text-center {
-            text-align: center;
-        }
-        .text-right {
-            text-align: right;
-        }
-        .font-body-md {
-            font-family: "Inter", sans-serif;
-            font-size: 16px;
-            line-height: 24px;
-            font-weight: 400;
-        }
-        .font-label-md {
-            font-family: "Inter", sans-serif;
-            font-size: 14px;
-            line-height: 20px;
-            letter-spacing: 0.01em;
-            font-weight: 500;
-        }
-        .font-label-sm {
-            font-family: "Inter", sans-serif;
-            font-size: 12px;
-            line-height: 16px;
-            font-weight: 600;
-        }
-        .font-headline-md {
-            font-family: "Inter", sans-serif;
-            font-size: 24px;
-            line-height: 32px;
-            font-weight: 600;
-        }
-        .font-headline-lg {
-            font-family: "Inter", sans-serif;
-            font-size: 32px;
-            line-height: 40px;
-            letter-spacing: -0.01em;
-            font-weight: 600;
-        }
-        .font-display-lg {
-            font-family: "Inter", sans-serif;
-            font-size: 48px;
-            line-height: 56px;
-            letter-spacing: -0.02em;
-            font-weight: 700;
-        }
-        .font-body-lg {
-            font-family: "Inter", sans-serif;
-            font-size: 18px;
-            line-height: 28px;
-            font-weight: 400;
-        }
-        .font-bold {
-            font-weight: 700;
-        }
-        .font-semibold {
-            font-weight: 600;
-        }
-        .font-medium {
-            font-weight: 500;
-        }
-        .uppercase {
-            text-transform: uppercase;
-        }
-        .tracking-tight {
-            letter-spacing: -0.02em;
-        }
-        .tracking-widest {
-            letter-spacing: 0.1em;
-        }
-        .tracking-wider {
-            letter-spacing: 0.05em;
-        }
-        .text-on-surface {
-            color: #0b1c30;
-        }
-        .text-on-surface-variant {
-            color: #45474c;
-        }
-        .text-primary {
-            color: #091426;
-        }
-        .text-secondary {
-            color: #4648d4;
-        }
-        .text-on-secondary {
-            color: #ffffff;
-        }
-        .text-on-primary {
-            color: #ffffff;
-        }
-        .text-on-secondary-container {
-            color: #fffbff;
-        }
-        .text-on-error-container {
-            color: #93000a;
-        }
-        .text-error {
-            color: #ba1a1a;
-        }
-        .text-on-background {
-            color: #0b1c30;
-        }
-        .text-surface {
-            color: #f8f9ff;
-        }
-        .bg-background {
-            background-color: #f8f9ff;
-        }
-        .bg-surface {
-            background-color: #f8f9ff;
-        }
-        .bg-surface\/80 {
-            background-color: rgba(248, 249, 255, 0.8);
-        }
-        .bg-surface-container {
-            background-color: #e5eeff;
-        }
-        .bg-surface-container-low {
-            background-color: #eff4ff;
-        }
-        .bg-surface-container-high {
-            background-color: #dce9ff;
-        }
-        .bg-surface-container-lowest {
-            background-color: #ffffff;
-        }
-        .bg-surface-container-highest {
-            background-color: #d3e4fe;
-        }
-        .bg-surface-container-highest\/50 {
-            background-color: rgba(211, 228, 254, 0.5);
-        }
-        .bg-secondary-container {
-            background-color: #6063ee;
-        }
-        .bg-secondary {
-            background-color: #4648d4;
-        }
-        .bg-primary {
-            background-color: #091426;
-        }
-        .bg-transparent {
-            background-color: transparent;
-        }
-        .bg-secondary\/10 {
-            background-color: rgba(70, 72, 212, 0.10);
-        }
-        .bg-primary\/5 {
-            background-color: rgba(9, 20, 38, 0.05);
-        }
-        .bg-primary\/10 {
-            background-color: rgba(9, 20, 38, 0.10);
-        }
-        .bg-primary-fixed {
-            background-color: #d8e3fb;
-        }
-        .bg-primary-fixed\/50 {
-            background-color: rgba(216, 227, 251, 0.5);
-        }
-        .bg-secondary-fixed {
-            background-color: #e1e0ff;
-        }
-        .bg-tertiary-fixed {
-            background-color: #e0e3e5;
-        }
-        .bg-surface-variant {
-            background-color: #d3e4fe;
-        }
-        .bg-error-container {
-            background-color: #ffdad6;
-        }
-        .bg-tertiary-container {
-            background-color: #26292b;
-        }
-        .border {
-            border-width: 1px;
-        }
-        .border-2 {
-            border-width: 2px;
-        }
-        .border-t {
-            border-top-width: 1px;
-        }
-        .border-l {
-            border-left-width: 1px;
-        }
-        .border-r {
-            border-right-width: 1px;
-        }
-        .border-b {
-            border-bottom-width: 1px;
-        }
-        .border-none {
-            border: none;
-        }
-        .border-outline-variant\/30 {
-            border-color: rgba(197, 198, 205, 0.3);
-        }
-        .border-outline-variant\/10 {
-            border-color: rgba(197, 198, 205, 0.1);
-        }
-        .border-outline-variant\/20 {
-            border-color: rgba(197, 198, 205, 0.2);
-        }
-        .border-outline-variant\/40 {
-            border-color: rgba(197, 198, 205, 0.4);
-        }
-        .border-outline-variant {
-            border-color: #c5c6cd;
-        }
-        .rounded {
-            border-radius: 0.25rem;
-        }
-        .rounded-full {
-            border-radius: 9999px;
-        }
-        .rounded-lg {
-            border-radius: 0.5rem;
-        }
-        .rounded-xl {
-            border-radius: 0.75rem;
-        }
-        .rounded-2xl {
-            border-radius: 1rem;
-        }
-        .rounded-3xl {
-            border-radius: 1.5rem;
-        }
-        .rounded-md {
-            border-radius: 0.375rem;
-        }
-        .rounded-sm {
-            border-radius: 0.125rem;
-        }
-        .rounded-\[20px\] {
-            border-radius: 20px;
-        }
-        .rounded-bl-full {
-            border-bottom-left-radius: 9999px;
-        }
-        .outline-none {
-            outline: none;
-        }
-        .ring-1 {
-            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
-        }
-        .ring-2 {
-            box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
-        }
-        .ring-outline-variant\/30 {
-            --tw-ring-color: rgba(197, 198, 205, 0.3);
-        }
-        .ring-secondary {
-            --tw-ring-color: #4648d4;
-        }
-        .ring-surface-variant {
-            --tw-ring-color: #d3e4fe;
-        }
-        .shadow-sm {
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-        }
-        .shadow-md {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-        }
-        .shadow-lg {
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-        }
-        .shadow-\[0_1px_8px_rgba\(0\2c 0\2c 0\2c 0\.04\)\] {
-            box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
-        }
-        .shadow-primary\/20 {
-            box-shadow: 0 4px 12px rgba(9, 20, 38, 0.20);
-        }
-        .shadow-secondary\/20 {
-            box-shadow: 0 4px 12px rgba(70, 72, 212, 0.20);
-        }
-        .hover\:shadow-md:hover {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-        }
-        .hover\:shadow-lg:hover {
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-        }
-        .backdrop-blur-xl {
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-        }
-        .object-cover {
-            object-fit: cover;
-        }
-        .object-contain {
-            object-fit: contain;
-        }
-        .overflow-hidden {
-            overflow: hidden;
-        }
-        .overflow-x-auto {
-            overflow-x: auto;
-        }
-        .pointer-events-none {
-            pointer-events: none;
-        }
-        .line-clamp-1 {
-            display: -webkit-box;
-            -webkit-line-clamp: 1;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        .line-clamp-2 {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        .line-clamp-3 {
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        .leading-none {
-            line-height: 1;
-        }
-        .leading-relaxed {
-            line-height: 1.625;
-        }
-        .leading-tight {
-            line-height: 1.25;
-        }
-        .tracking-tight {
-            letter-spacing: -0.02em;
-        }
-        .cursor-pointer {
-            cursor: pointer;
-        }
-        .cursor-default {
-            cursor: default;
-        }
-        .self-center {
-            align-self: center;
-        }
-        .shrink-0 {
-            flex-shrink: 0;
-        }
-        .z-0 {
-            z-index: 0;
-        }
-        .z-10 {
-            z-index: 10;
-        }
-        .z-40 {
-            z-index: 40;
-        }
-        .z-50 {
-            z-index: 50;
-        }
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border-width: 0;
-        }
-        .list-none {
-            list-style: none;
-        }
-        .appearance-none {
-            appearance: none;
-        }
-        .blur-3xl {
-            filter: blur(64px);
-        }
-        .blur-2xl {
-            filter: blur(40px);
-        }
-        .blur-md {
-            filter: blur(12px);
-        }
-        .opacity-0 {
-            opacity: 0;
-        }
-        .opacity-100 {
-            opacity: 1;
-        }
-        .opacity-10 {
-            opacity: 0.10;
-        }
-        .opacity-20 {
-            opacity: 0.20;
-        }
-        .opacity-30 {
-            opacity: 0.30;
-        }
-        .opacity-40 {
-            opacity: 0.40;
-        }
-        .opacity-50 {
-            opacity: 0.50;
-        }
-        .opacity-70 {
-            opacity: 0.70;
-        }
-        .group-hover\:opacity-100:hover {
-            opacity: 1;
-        }
-        .group-hover\:opacity-40:hover {
-            opacity: 0.40;
-        }
-        .group-hover\:scale-105:hover {
-            transform: scale(1.05);
-        }
-        .group-hover\:scale-110:hover {
-            transform: scale(1.10);
-        }
-        .group-hover\:rotate-90:hover {
-            transform: rotate(90deg);
-        }
-        .group-hover\:gap-2:hover {
-            gap: 0.5rem;
-        }
-        .group-hover\:text-primary:hover {
-            color: #091426;
-        }
-        .hover\:bg-inverse-surface:hover {
-            background-color: #213145;
-        }
-        .hover\:bg-surface-container:hover {
-            background-color: #e5eeff;
-        }
-        .hover\:bg-surface-container-high:hover {
-            background-color: #dce9ff;
-        }
-        .hover\:bg-surface-container-highest:hover {
-            background-color: #d3e4fe;
-        }
-        .hover\:bg-surface-container-low:hover {
-            background-color: #eff4ff;
-        }
-        .hover\:bg-surface-variant\/50:hover {
-            background-color: rgba(211, 228, 254, 0.5);
-        }
-        .hover\:text-primary:hover {
-            color: #091426;
-        }
-        .hover\:text-secondary:hover {
-            color: #4648d4;
-        }
-        .hover\:text-on-surface:hover {
-            color: #0b1c30;
-        }
-        .hover\:underline:hover {
-            text-decoration: underline;
-        }
-        .hover\:shadow-md:hover {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-        }
-        .hover\:shadow-lg:hover {
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-        }
-        .hover\:-translate-y-0\.5:hover {
-            transform: translateY(-2px);
-        }
-        .hover\:-translate-y-1:hover {
-            transform: translateY(-4px);
-        }
-        .transition-all {
-            transition: all 0.2s ease;
-        }
-        .transition-colors {
-            transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
-        }
-        .transition-transform {
-            transition: transform 0.2s ease;
-        }
-        .transition-shadow {
-            transition: box-shadow 0.2s ease;
-        }
-        .duration-200 {
-            transition-duration: 200ms;
-        }
-        .duration-300 {
-            transition-duration: 300ms;
-        }
-        .duration-500 {
-            transition-duration: 500ms;
-        }
-        .stroke-2 {
-            stroke-width: 2px;
-        }
-        .stroke-primary {
-            stroke: #091426;
-        }
-        .hover\:stroke-primary:hover {
-            stroke: #091426;
-        }
-        .animate-pulse {
-            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-        @keyframes pulse {
-            0%,
-            100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: .5;
-            }
-        }
-        .w-fit {
-            width: fit-content;
-        }
-        .-z-10 {
-            z-index: -10;
-        }
-        .hidden {
-            display: none;
-        }
-
-        select {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2345474c' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 0.5rem center;
-            padding-right: 2rem;
-            background-size: 0.75rem;
-        }
-        select:focus {
-            outline: none;
-        }
-
-        @media (max-width: 768px) {
-            .pl-72 {
-                padding-left: 0;
-            }
-            .px-margin-desktop {
-                padding-left: 16px;
-                padding-right: 16px;
-            }
-            .p-margin-desktop {
-                padding: 16px;
-            }
-            .gap-gutter {
-                gap: 16px;
-            }
-            .fixed.left-0.top-0 {
-                display: none;
-            }
-            .fixed.top-0.left-72 {
-                left: 0;
-            }
-            .text-display-lg {
-                font-size: 32px;
-                line-height: 40px;
-            }
-            .grid-cols-2 {
-                grid-template-columns: 1fr 1fr;
-            }
-            .md\:grid-cols-2 {
-                grid-template-columns: 1fr;
-            }
-            .lg\:grid-cols-3 {
-                grid-template-columns: 1fr;
-            }
-            .lg\:col-span-4 {
-                grid-column: span 12 / span 12;
-            }
-            .lg\:col-span-8 {
-                grid-column: span 12 / span 12;
-            }
-            .hidden.sm\:block {
-                display: none !important;
-            }
-            .hidden.sm\:flex {
-                display: none !important;
-            }
-            .flex-col.md\:flex-row {
-                flex-direction: column;
-            }
-            .md\:items-end {
-                align-items: flex-start;
-            }
-            .md\:py-12 {
-                padding-top: 2rem;
-                padding-bottom: 2rem;
-            }
-            .w-32 {
-                width: 6rem;
-            }
-            .h-32 {
-                height: 6rem;
-            }
-            .min-w-\[700px\] {
-                min-width: auto;
-            }
-            .rounded-\[20px\] {
-                border-radius: 1rem;
-            }
-            .flex-wrap {
-                flex-wrap: wrap;
-            }
-        }
-
-        @media (min-width: 768px) {
-            .md\:grid-cols-2 {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-            .md\:flex-row {
-                flex-direction: row;
-            }
-            .md\:items-end {
-                align-items: flex-end;
-            }
-            .md\:py-12 {
-                padding-top: 3rem;
-                padding-bottom: 3rem;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .lg\:grid-cols-3 {
-                grid-template-columns: repeat(3, minmax(0, 1fr));
-            }
-            .lg\:col-span-4 {
-                grid-column: span 4 / span 4;
-            }
-            .lg\:col-span-8 {
-                grid-column: span 8 / span 8;
-            }
-            .sm\:block {
-                display: block;
-            }
-            .sm\:flex {
-                display: flex;
-            }
-        }
+        ::-webkit-scrollbar { display: none; }
+        .line-clamp-1 { display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+        .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
     </style>
 </head>
 
-<body class="bg-background font-body-md text-on-surface">
+<body class="bg-canvas text-slate-800 antialiased font-sans flex min-h-screen">
 
-    <!-- ====== SIDEBAR ====== -->
-    <aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-low z-50 flex flex-col border-r border-outline-variant/30">
-        <div class="p-margin-desktop flex items-center gap-3 mb-4">
-            <img alt="PeerSolve Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxBjawRLRSsP4kIkiYqHpy2FoklkXkPAONBDgeFZDnLhBd-EIepeZuoKedJHY_Fj8qAhFLr-Pv_h-to_nTilIx42cbV4xErSTCMld1FJBh3LNuIgtKXZFnNYfGDNOpCtSxMxGS-g_nfko6iqme8-mCAP9X-zejY3fc4bMkZLplCjJvQ_PLcx8Xq6Shr2Zftw6EhEHYmbseuWEO5mD_qJvrnsprVLVECzipiuaVXh5o5jBAfhl92Y44hBjCGUsRPmoS35oSE8lXXOedP34" />
-            <span class="font-headline-md text-headline-md text-primary tracking-tight">EXPadviser</span>
-        </div>
+    <!-- ====== SLIM DARK ICON RAIL (LEFT NAVIGATION) ====== -->
+    <aside class="w-16 bg-[#111827] flex flex-col items-center py-4 shrink-0 fixed top-0 bottom-0 left-0 z-50 border-r border-slate-800">
+        <!-- Logo -->
+        <a href="dashboard.html" class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold text-xl mb-6 shadow-md hover:scale-105 transition-transform" title="EXPadviser">
+            e
+        </a>
 
-        <nav class="flex-1 px-4 flex flex-col gap-1">
-            <div class="px-4 py-2 mt-4 mb-1">
-                
-            </div>
-            <a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-label-md text-label-md" href="dashboard.html">
-                <span class="material-symbols-outlined mr-3">dashboard</span>Dashboard
+        <!-- Navigation Links -->
+        <nav class="flex flex-col gap-3 w-full items-center">
+            <!-- Dashboard -->
+            <a href="dashboard.html" class="w-10 h-10 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 flex items-center justify-center transition-colors" title="Dashboard">
+                <span class="material-symbols-outlined text-[22px]">widgets</span>
             </a>
-            <a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-label-md text-label-md" href="my_problems.html">
-                <span class="material-symbols-outlined mr-3">assignment</span>My Problems
-            </a>
-            <a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-label-md text-label-md" href="my_profile.html">
-                <span class="material-symbols-outlined mr-3">person</span>My Profile
-            </a>
-            
-            
 
-            
-        
-            <a class="flex items-center px-4 py-3 rounded-xl text-error hover:bg-error/10 hover:text-error transition-all font-label-md text-label-md mt-auto" href="#" onclick="logout(); return false;">
-                <span class="material-symbols-outlined text-[20px] mr-3">logout</span>
-                Logout
+            <!-- My Problems (Active) -->
+            <a href="my_problems.html" class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-sm" title="My Problems">
+                <span class="material-symbols-outlined text-[22px]">assignment</span>
             </a>
-</nav>
 
-        <div class="px-8 py-8 mt-auto">
-            <div class="p-4 rounded-xl bg-surface-container text-center">
-                <p class="text-label-sm font-label-sm text-on-surface-variant">Academic Session</p>
-                <p class="text-label-md font-label-md text-primary">2026-2027</p>
-            </div>
+            <!-- My Profile -->
+            <a href="my_profile.html" class="w-10 h-10 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 flex items-center justify-center transition-colors" title="My Profile">
+                <span class="material-symbols-outlined text-[22px]">person</span>
+            </a>
+        </nav>
+
+        <!-- Bottom Logout -->
+        <div class="mt-auto">
+            <button onclick="logout()" class="w-10 h-10 rounded-xl text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 flex items-center justify-center transition-colors" title="Logout">
+                <span class="material-symbols-outlined text-[22px]">logout</span>
+            </button>
         </div>
     </aside>
 
-    <!-- ====== MAIN WRAPPER ====== -->
-    <div class="pl-72">
+    <!-- ====== MAIN CONTENT WRAPPER ====== -->
+    <div class="pl-16 flex-1 flex flex-col min-w-0">
 
-        <!-- ====== HEADER ====== -->
-        <header class="fixed top-0 left-72 right-0 h-16 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center px-margin-desktop justify-between">
-            <div class="flex-1 max-w-xl">
-                <div class="relative flex items-center bg-surface-container-high rounded-full px-4 py-2 ring-1 ring-outline-variant/20 focus-within:ring-secondary">
-                    <span class="material-symbols-outlined text-on-surface-variant text-body-md">search</span>
-                    <input class="bg-transparent border-none outline-none w-full px-3 text-body-md text-on-surface placeholder:text-on-surface-variant/60" placeholder="Search for problems..." type="text" />
+        <!-- ====== TOP APP BAR ====== -->
+        <header class="h-16 bg-white border-b border-slate-200/80 px-8 flex items-center justify-between sticky top-0 z-40">
+            <!-- Brand Title -->
+            <div class="flex items-center gap-3">
+                <a href="dashboard.html" class="font-extrabold text-slate-900 text-lg tracking-tight hover:text-blue-600 transition-colors">EXPadviser</a>
+                <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-medium">My Archive</span>
+            </div>
+
+            <!-- Search Bar (redirects to dashboard) -->
+            <div class="w-full max-w-md mx-6">
+                <div class="relative flex items-center">
+                    <span class="material-symbols-outlined absolute left-3.5 text-slate-400 text-[18px]">search</span>
+                    <input id="searchInput" type="text" placeholder="Search problems or press enter..." class="w-full bg-slate-50/80 border border-slate-200/90 rounded-full pl-9 pr-4 py-1.5 text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all" />
                 </div>
             </div>
-            <div class="flex items-center gap-6">
+
+            <!-- Right Header Actions -->
+            <div class="flex items-center gap-4">
+                <!-- Academic Session Pill -->
+                <span class="text-xs font-semibold text-slate-500 bg-slate-100 px-3 py-1 rounded-full hidden sm:inline-block">
+                    Session 2026–27
+                </span>
+
+                <!-- Notifications -->
                 <div class="relative">
-                <button id="notificationBtn" class="relative p-2 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors focus:outline-none">
-                    <span class="material-symbols-outlined">notifications</span>
-                    <span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
-                </button>
-                <div id="notificationDropdown" class="hidden absolute right-0 mt-2 w-80 bg-surface-container-lowest rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-outline-variant/30 z-50 overflow-hidden">
-                    <div class="p-4 border-b border-outline-variant/30 flex justify-between items-center bg-surface">
-                        <h3 class="font-headline-md text-label-md text-primary font-semibold">Notifications</h3>
-                        <span class="text-label-sm text-secondary cursor-pointer hover:underline">Mark all as read</span>
-                    </div>
-                    <div class="max-h-64 overflow-y-auto">
-                        <div class="p-4 border-b border-outline-variant/20 hover:bg-surface-container/50 transition-colors cursor-pointer flex gap-3 items-start">
-                            <div class="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-secondary text-[16px]">forum</span>
-                            </div>
-                            <div>
-                                <p class="text-label-md text-on-surface mb-1"><span class="font-semibold">Sarah</span> commented on your query</p>
-                                <p class="text-label-sm text-on-surface-variant">2 hours ago</p>
-                            </div>
+                    <button id="notificationBtn" class="w-9 h-9 rounded-full text-slate-600 hover:bg-slate-100 flex items-center justify-center transition-colors relative" title="Notifications">
+                        <span class="material-symbols-outlined text-[20px]">notifications</span>
+                        <span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-rose-500 hidden"></span>
+                    </button>
+                    <!-- Notification Dropdown -->
+                    <div id="notificationDropdown" class="hidden absolute right-0 mt-2 w-80 bg-white rounded-2xl shadow-xl border border-slate-100 py-2 z-50">
+                        <div class="px-4 py-2 border-b border-slate-100 flex items-center justify-between">
+                            <span class="font-bold text-xs uppercase tracking-wider text-slate-500">Notifications</span>
                         </div>
-                        <div class="p-4 hover:bg-surface-container/50 transition-colors cursor-pointer flex gap-3 items-start opacity-70">
-                            <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-primary text-[16px]">check_circle</span>
-                            </div>
-                            <div>
-                                <p class="text-label-md text-on-surface mb-1">Your query was resolved</p>
-                                <p class="text-label-sm text-on-surface-variant">Yesterday</p>
-                            </div>
+                        <div class="max-h-64 overflow-y-auto divide-y divide-slate-100">
+                            <div class="p-4 text-center text-xs text-slate-400">No new notifications</div>
                         </div>
                     </div>
-                    <div class="p-3 text-center border-t border-outline-variant/30 bg-surface/50 hover:bg-surface transition-colors cursor-pointer text-secondary font-label-md text-label-sm">
-                        View all notifications
-                    </div>
                 </div>
-            </div>
-                <div class="flex items-center gap-3 pl-4 border-l border-outline-variant/40">
-                    <div class="text-right hidden sm:block">
-                        <p class="text-label-md font-label-md text-on-surface leading-tight user-name-display">Alex Rivers</p>
-                        
+
+                <!-- User Profile Avatar Circle -->
+                <a href="my_profile.html" class="flex items-center gap-2 group">
+                    <div id="userAvatarContainer" class="w-8 h-8 rounded-full bg-blue-600 text-white font-bold text-xs flex items-center justify-center shadow-sm group-hover:ring-2 group-hover:ring-blue-500 transition-all">
+                        <span id="userAvatarInitial">M</span>
                     </div>
-                    <img alt="Profile" class="w-9 h-9 rounded-full object-cover ring-2 ring-surface-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdiQgYZHcs1i5qOIAd2Gz8LdgoSvQ6l9pvdU259XtTr3xzItG-ASIars6oHKk0pg8wSgW7QvR7MCXUnRfArSLjb31qE3UIZ1qentFczBi65HRSN7DfNCiVD_ibUEqEgvGT4SVe8x-As0GRBSksIpp7h1ia6hYtl41MhY6eBSnaMXov3JNFGrtqmOWK3fyZnDnIvXey0aQOo324g28QXnpBGIkYxrIJYYKkyubysvClLl1RU5xdqIhiDw" />
-                    
-                </div>
+                </a>
             </div>
         </header>
 
-        <!-- ====== MAIN CONTENT ====== -->
-        <main class="relative pt-16 bg-background min-h-screen">
-            <div class="flex flex-col w-full">
+        <!-- ====== MAIN BODY ====== -->
+        <main class="p-8 max-w-7xl mx-auto w-full space-y-6">
 
-                <section class="w-full max-w-container-max mx-auto px-margin-desktop py-8 md:py-12 flex flex-col gap-12">
-
-                    <!-- Header -->
-                    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
-                        <div class="flex flex-col gap-2">
-                            <h1 class="font-display-lg text-display-lg text-on-background relative inline-block">
-                                My Problems
-                                <span class="absolute -bottom-2 left-0 w-1/3 h-1 bg-primary rounded-full"></span>
-                            </h1>
-                            <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mt-2">
-                                Your personal archive of academic inquiries and collaborative solutions.
-                            </p>
-                        </div>
-                        <button onclick="window.location.href='dashboard.html#ask'" class="flex items-center justify-center gap-2 px-6 py-3 bg-primary text-on-primary rounded-xl shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 group">
-                            <span class="material-symbols-outlined text-[20px] transition-transform group-hover:rotate-90">add</span>
-                            <span class="font-label-md text-label-md">Ask a New Question</span>
-                        </button>
-                    </div>
-
-                    <!-- Tabs -->
-                    <div class="w-full flex flex-col gap-6" id="problem-tabs-container">
-                        <div class="flex items-center gap-2 p-1 bg-surface-container-low rounded-xl w-fit">
-                            <button class="px-6 py-2 rounded-lg font-label-md text-label-md transition-all tab-btn active bg-primary text-on-primary shadow-sm" data-tab="asked">
-                                <span id="asked-count">Asked (0)</span>
-                            </button>
-                            <button class="px-6 py-2 rounded-lg font-label-md text-label-md transition-all tab-btn text-on-surface-variant hover:bg-surface-variant/50" data-tab="solved">
-                                <span id="solved-count">Solved (0)</span>
-                            </button>
-                        </div>
-
-                        <!-- ====== TAB: ASKED ====== -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 tab-content" id="tab-asked">
-                            <div class="col-span-3 text-center py-12">
-                                <p class="text-on-surface-variant font-label-md">Loading your queries...</p>
-                            </div>
-                        </div>
-
-                        <!-- ====== TAB: SOLVED ====== -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 tab-content hidden" id="tab-solved">
-</div>
-
-                    </div>
-
-                </section>
-
+            <!-- Title & Subtitle Row -->
+            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+                <h1 class="text-2xl font-bold text-slate-900 tracking-tight">My Problems & Archive</h1>
+                <p class="text-xs text-slate-500 font-medium">Your personal archive of academic queries and collaborative solutions</p>
             </div>
 
-            <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    var tabs = document.querySelectorAll('.tab-btn');
-                    var contents = document.querySelectorAll('.tab-content');
+            <!-- ====== METRIC STAT STRIP ====== -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <!-- Stat 1: Total Asked -->
+                <div class="bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center gap-3.5">
+                    <div class="w-11 h-11 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-[22px]">help</span>
+                    </div>
+                    <div>
+                        <div id="stat-my-asked" class="text-xl font-bold text-slate-900 leading-none">0</div>
+                        <div class="text-xs text-slate-500 font-medium mt-1">Total Asked</div>
+                    </div>
+                </div>
 
-                    tabs.forEach(function(tab) {
-                        tab.addEventListener('click', function() {
-                            // Remove active state from all tabs
-                            tabs.forEach(function(t) {
-                                t.classList.remove('bg-primary', 'text-on-primary', 'shadow-sm', 'active');
-                                t.classList.add('text-on-surface-variant', 'hover:bg-surface-variant/50');
-                            });
+                <!-- Stat 2: Solved Issues -->
+                <div class="bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center gap-3.5">
+                    <div class="w-11 h-11 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-[22px]">check_circle</span>
+                    </div>
+                    <div>
+                        <div id="stat-my-solved" class="text-xl font-bold text-slate-900 leading-none">0</div>
+                        <div class="text-xs text-slate-500 font-medium mt-1">Solved & Resolved</div>
+                    </div>
+                </div>
 
-                            // Activate clicked tab
-                            tab.classList.remove('text-on-surface-variant', 'hover:bg-surface-variant/50');
-                            tab.classList.add('bg-primary', 'text-on-primary', 'shadow-sm', 'active');
+                <!-- Stat 3: Open Issues -->
+                <div class="bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center gap-3.5">
+                    <div class="w-11 h-11 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-[22px]">pending</span>
+                    </div>
+                    <div>
+                        <div id="stat-my-open" class="text-xl font-bold text-slate-900 leading-none">0</div>
+                        <div class="text-xs text-slate-500 font-medium mt-1">Awaiting Solutions</div>
+                    </div>
+                </div>
+            </div>
 
-                            // Show corresponding content
-                            var targetId = 'tab-' + tab.dataset.tab;
-                            contents.forEach(function(content) {
-                                if (content.id === targetId) {
-                                    content.classList.remove('hidden');
-                                    content.style.opacity = 0;
-                                    setTimeout(function() {
-                                        content.style.transition = 'opacity 0.3s ease-in';
-                                        content.style.opacity = 1;
-                                    }, 10);
-                                } else {
-                                    content.classList.add('hidden');
-                                }
-                            });
-                        });
-                    });
-                });
-            </script>
+            <!-- ====== TAB SELECTOR ====== -->
+            <div class="flex items-center gap-2 border-b border-slate-200/80 pb-3">
+                <button id="tab-btn-asked" class="tab-btn px-4 py-1.5 rounded-full text-xs font-bold bg-blue-600 text-white shadow-sm transition-all flex items-center gap-1.5" data-tab="asked">
+                    <span class="material-symbols-outlined text-[16px]">list_alt</span>
+                    <span id="asked-count">Asked (0)</span>
+                </button>
+                <button id="tab-btn-solved" class="tab-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all flex items-center gap-1.5" data-tab="solved">
+                    <span class="material-symbols-outlined text-[16px]">verified</span>
+                    <span id="solved-count">Solved (0)</span>
+                </button>
+                <div class="ml-auto">
+                    <a href="dashboard.html" class="text-xs text-blue-600 hover:underline font-semibold flex items-center gap-1">
+                        Go to Dashboard <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- ====== TAB CONTENT: ASKED ====== -->
+            <div id="tab-asked" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 tab-content">
+                <div class="col-span-3 text-center py-12 text-slate-400 text-sm">Loading your queries...</div>
+            </div>
+
+            <!-- ====== TAB CONTENT: SOLVED ====== -->
+            <div id="tab-solved" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 tab-content hidden">
+                <div class="col-span-3 text-center py-12 text-slate-400 text-sm">Loading your solved queries...</div>
+            </div>
 
         </main>
 
     </div>
 
-<script src="js/api.js?v=2"></script>
-<script>
-  requireAuth();
-  populateUserProfile();
-</script>
+    <!-- ====== JAVASCRIPT LOGIC ====== -->
+    <script src="js/api.js?v=2"></script>
+    <script>
+        requireAuth();
+        populateUserProfile();
 
-<script>
-    async function loadMyProblems() {
-        const askedContainer = document.getElementById('tab-asked');
-        const solvedContainer = document.getElementById('tab-solved');
-        
-        // Get current user ID
-        const userRes = await apiRequest('/auth/me');
-        if (userRes.status !== 200) return;
-        const currentUserId = userRes.data.data.user_id || userRes.data.data.id;
-
-        const response = await apiRequest(`/experiences?author_id=${currentUserId}`);
-        
-        if (response.status === 200 && response.data.success) {
-            let askedList = response.data.data;
-            let solvedList = askedList.filter(e => e.is_resolved === true);
-            
-            document.getElementById('asked-count').textContent = `Asked (${askedList.length})`;
-            document.getElementById('solved-count').textContent = `Solved (${solvedList.length})`;
-            
-            if (askedList.length === 0) {
-                askedContainer.innerHTML = `
-                    <div class="col-span-1 md:col-span-2 lg:col-span-3 text-center py-16 bg-surface rounded-[24px] border border-dashed border-outline-variant/40">
-                        <span class="material-symbols-outlined text-4xl text-on-surface-variant mb-2">help_outline</span>
-                        <h3 class="text-headline-sm font-semibold text-on-surface mb-1">No Queries Asked Yet</h3>
-                        <p class="text-body-md text-on-surface-variant mb-4">You haven't posted any queries or questions to the community.</p>
-                        <a href="dashboard.html" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-primary text-on-primary font-label-md hover:bg-primary/90 transition-colors">Go to Dashboard</a>
-                    </div>
-                `;
-            } else {
-                askedContainer.innerHTML = askedList.map(exp => `
-                    <div class="bg-surface rounded-[20px] p-6 flex flex-col gap-4 shadow-sm hover:shadow-md transition-all group border border-outline-variant/10">
-                        <div class="flex justify-between items-start gap-4">
-                            <span class="px-3 py-1 bg-surface-container-high rounded-lg text-label-sm font-label-sm text-on-surface capitalize">${exp.category || 'General'}</span>
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold ${exp.is_resolved ? 'bg-secondary/10 text-secondary' : 'bg-error-container text-on-error-container'}">
-                                ${exp.is_resolved ? 'Solved' : 'Open'}
-                            </span>
-                        </div>
-                        <div class="flex flex-col gap-1 flex-1">
-                            <h3 class="font-headline-md text-headline-md text-on-surface line-clamp-2 mt-2">
-                                <a href="dashboard.html" class="hover:text-primary transition-colors">${exp.title}</a>
-                            </h3>
-                            <p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mt-2">${exp.content}</p>
-                        </div>
-                        <div class="mt-4 pt-4 border-t border-outline-variant/20 flex items-center justify-between">
-                            <div class="flex items-center gap-1.5 text-on-surface-variant">
-                                <span class="material-symbols-outlined text-[18px]">chat_bubble</span>
-                                <span class="font-label-md text-label-md">${exp.comments_count || 0}</span>
-                            </div>
-                            <a href="dashboard.html" class="text-primary font-label-md text-label-md flex items-center gap-1 hover:gap-2 transition-all">
-                                View in Dashboard <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
-                            </a>
-                        </div>
-                    </div>
-                `).join('');
+        // Search redirect to dashboard
+        document.getElementById('searchInput').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const val = e.target.value.trim();
+                window.location.href = val ? `dashboard.html?search=${encodeURIComponent(val)}` : 'dashboard.html';
             }
+        });
 
-            if (solvedList.length === 0) {
-                solvedContainer.innerHTML = `
-                    <div class="col-span-1 md:col-span-2 lg:col-span-3 text-center py-16 bg-surface rounded-[24px] border border-dashed border-outline-variant/40">
-                        <span class="material-symbols-outlined text-4xl text-on-surface-variant mb-2">check_circle_outline</span>
-                        <h3 class="text-headline-sm font-semibold text-on-surface mb-1">No Solved Queries Yet</h3>
-                        <p class="text-body-md text-on-surface-variant">When you accept a solution for one of your queries, it will show up here.</p>
-                    </div>
-                `;
+        // Tab Switching
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const tab = e.currentTarget.dataset.tab;
+                
+                // Toggle tab button states
+                tabBtns.forEach(b => {
+                    b.classList.remove('bg-blue-600', 'text-white', 'shadow-sm', 'font-bold');
+                    b.classList.add('bg-slate-100', 'text-slate-600', 'font-semibold');
+                });
+                e.currentTarget.classList.remove('bg-slate-100', 'text-slate-600', 'font-semibold');
+                e.currentTarget.classList.add('bg-blue-600', 'text-white', 'shadow-sm', 'font-bold');
+
+                // Toggle visibility
+                tabContents.forEach(c => {
+                    if (c.id === `tab-${tab}`) {
+                        c.classList.remove('hidden');
+                    } else {
+                        c.classList.add('hidden');
+                    }
+                });
+            });
+        });
+
+        // ====== LOAD MY PROBLEMS ======
+        async function loadMyProblems() {
+            const askedContainer = document.getElementById('tab-asked');
+            const solvedContainer = document.getElementById('tab-solved');
+
+            const userRes = await apiRequest('/auth/me');
+            if (userRes.status !== 200) return;
+            const currentUserId = userRes.data.data.user_id || userRes.data.data.id;
+
+            // Set Header Avatar initial
+            const initial = (userRes.data.data.name || 'U').charAt(0).toUpperCase();
+            const initEl = document.getElementById('userAvatarInitial');
+            if (initEl) initEl.textContent = initial;
+
+            const response = await apiRequest(`/experiences?author_id=${currentUserId}`);
+
+            if (response.status === 200 && response.data.success) {
+                const askedList = response.data.data || [];
+                const solvedList = askedList.filter(e => e.is_resolved === true);
+                const openList = askedList.filter(e => !e.is_resolved);
+
+                // Update Stat Strip
+                document.getElementById('stat-my-asked').textContent = askedList.length;
+                document.getElementById('stat-my-solved').textContent = solvedList.length;
+                document.getElementById('stat-my-open').textContent = openList.length;
+
+                // Update Tab Buttons
+                document.getElementById('asked-count').textContent = `Asked (${askedList.length})`;
+                document.getElementById('solved-count').textContent = `Solved (${solvedList.length})`;
+
+                // Render Asked Tab
+                if (askedList.length === 0) {
+                    askedContainer.innerHTML = `
+                        <div class="col-span-1 md:col-span-2 lg:col-span-3 text-center py-16 bg-white rounded-2xl border border-dashed border-slate-200 space-y-2">
+                            <span class="material-symbols-outlined text-4xl text-slate-300">help_outline</span>
+                            <h3 class="text-sm font-bold text-slate-800">No Queries Asked Yet</h3>
+                            <p class="text-xs text-slate-500">You haven't posted any inquiries or problems to the community.</p>
+                            <div class="pt-2">
+                                <a href="dashboard.html" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-900 text-white font-semibold text-xs hover:bg-black shadow-sm">
+                                    Ask a Query on Dashboard
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    askedContainer.innerHTML = askedList.map(exp => `
+                        <div class="bg-white rounded-2xl p-5 border border-slate-200/70 shadow-sm hover:shadow-md transition-all flex flex-col justify-between space-y-3 group">
+                            <div class="space-y-2">
+                                <div class="flex items-center justify-between text-xs">
+                                    <span class="bg-slate-100 text-slate-600 font-medium px-2.5 py-0.5 rounded-md text-[10px] capitalize">${exp.category || 'General'}</span>
+                                    <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold ${exp.is_resolved ? 'bg-emerald-50 text-emerald-700' : 'bg-amber-50 text-amber-700'}">
+                                        ${exp.is_resolved ? 'Solved' : 'Open'}
+                                    </span>
+                                </div>
+                                <h3 class="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-2 leading-snug">
+                                    <a href="dashboard.html">${exp.title}</a>
+                                </h3>
+                                <p class="text-xs text-slate-500 line-clamp-2">${exp.content || ''}</p>
+                            </div>
+
+                            <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                                <div class="flex items-center gap-3 text-[11px]">
+                                    <span class="flex items-center gap-1">
+                                        <span class="material-symbols-outlined text-[14px]">chat_bubble</span>
+                                        ${exp.comments_count || 0}
+                                    </span>
+                                    <span class="flex items-center gap-1">
+                                        <span class="material-symbols-outlined text-[14px]">favorite</span>
+                                        ${exp.likes_count || 0}
+                                    </span>
+                                </div>
+                                <a href="dashboard.html" class="text-blue-600 font-semibold text-[11px] hover:underline flex items-center gap-1">
+                                    View in Feed <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+                                </a>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+
+                // Render Solved Tab
+                if (solvedList.length === 0) {
+                    solvedContainer.innerHTML = `
+                        <div class="col-span-1 md:col-span-2 lg:col-span-3 text-center py-16 bg-white rounded-2xl border border-dashed border-slate-200 space-y-2">
+                            <span class="material-symbols-outlined text-4xl text-slate-300">check_circle_outline</span>
+                            <h3 class="text-sm font-bold text-slate-800">No Solved Queries Yet</h3>
+                            <p class="text-xs text-slate-500">When you accept a solution for one of your queries, it will appear here.</p>
+                        </div>
+                    `;
+                } else {
+                    solvedContainer.innerHTML = solvedList.map(exp => `
+                        <div class="bg-white rounded-2xl p-5 border border-slate-200/70 shadow-sm hover:shadow-md transition-all flex flex-col justify-between space-y-3 group">
+                            <div class="space-y-2">
+                                <div class="flex items-center justify-between text-xs">
+                                    <span class="flex items-center gap-1 text-emerald-700 font-bold text-[11px]">
+                                        <span class="material-symbols-outlined text-[15px]">verified</span>
+                                        Resolved
+                                    </span>
+                                    <span class="text-slate-400 text-[10px]">${new Date(exp.created_at).toLocaleDateString()}</span>
+                                </div>
+                                <h3 class="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-2 leading-snug">
+                                    <a href="dashboard.html">${exp.title}</a>
+                                </h3>
+                                ${exp.accepted_answer ? `
+                                    <div class="p-3 bg-emerald-50/70 border border-emerald-100 rounded-xl space-y-1">
+                                        <div class="text-[10px] font-bold uppercase text-emerald-700">Accepted Solution:</div>
+                                        <p class="text-xs text-emerald-950 line-clamp-2 italic">"${exp.accepted_answer}"</p>
+                                    </div>
+                                ` : ''}
+                            </div>
+
+                            <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                                <span class="bg-slate-100 text-slate-600 font-medium px-2 py-0.5 rounded text-[10px] capitalize">${exp.category || 'General'}</span>
+                                <a href="dashboard.html" class="text-blue-600 font-semibold text-[11px] hover:underline flex items-center gap-1">
+                                    View Query <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+                                </a>
+                            </div>
+                        </div>
+                    `).join('');
+                }
             } else {
-                solvedContainer.innerHTML = solvedList.map(exp => `
-                    <div class="bg-surface rounded-[20px] p-6 flex flex-col gap-4 shadow-sm hover:shadow-md transition-all group border border-outline-variant/10">
-                        <div class="flex justify-between items-start gap-4">
-                            <div class="flex items-center gap-2">
-                                <span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">verified</span>
-                                <span class="font-label-md text-label-md text-on-surface font-semibold">Resolved Issue</span>
-                            </div>
-                            <span class="font-label-sm text-label-sm text-on-surface-variant">${new Date(exp.created_at).toLocaleDateString()}</span>
-                        </div>
-                        <div class="flex flex-col gap-1 flex-1">
-                            <span class="font-label-sm text-label-sm text-secondary tracking-widest uppercase">${exp.category || 'General'}</span>
-                            <h3 class="font-headline-md text-headline-md text-on-surface line-clamp-2">
-                                <a href="dashboard.html" class="hover:text-primary transition-colors">${exp.title}</a>
-                            </h3>
-                            ${exp.accepted_answer ? `
-                            <div class="mt-4 p-3 bg-surface-container-high/40 rounded-xl border border-secondary/20">
-                                <p class="font-label-sm text-xs text-secondary font-bold mb-1">Accepted Solution:</p>
-                                <p class="font-body-md text-body-md text-on-surface line-clamp-2 text-sm">
-                                    "${exp.accepted_answer}"
-                                </p>
-                            </div>
-                            ` : ''}
-                        </div>
-                        <div class="mt-4 pt-4 border-t border-outline-variant/20 flex items-center justify-between">
-                            <a href="dashboard.html" class="text-primary font-label-md text-label-md flex items-center gap-1 hover:gap-2 transition-all">
-                                View Query <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
-                            </a>
-                        </div>
-                    </div>
-                `).join('');
+                askedContainer.innerHTML = '<div class="col-span-3 text-center py-12 text-rose-500 text-xs">Failed to load queries.</div>';
             }
         }
-    }
 
-    document.addEventListener('DOMContentLoaded', loadMyProblems);
-</script>
-
+        document.addEventListener('DOMContentLoaded', loadMyProblems);
+    </script>
 </body>
 </html>
