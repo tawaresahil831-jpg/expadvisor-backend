@@ -152,11 +152,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const notifBtn = document.getElementById('notificationBtn');
     const notifDropdown = document.getElementById('notificationDropdown');
     if (notifBtn && notifDropdown) {
-        // Prevent multiple bindings if already bound elsewhere
         if (!notifBtn.dataset.bound) {
             notifBtn.dataset.bound = 'true';
             notifBtn.addEventListener('click', (e) => {
                 notifDropdown.classList.toggle('hidden');
+                if (!notifDropdown.classList.contains('hidden')) {
+                    loadNotifications();
+                }
                 e.stopPropagation();
             });
             document.addEventListener('click', (e) => {
@@ -166,49 +168,165 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     }
+
+    // Automatically load notifications on page load if user is logged in
+    if (getToken()) {
+        loadNotifications();
+    }
 });
 
-
-// Notification Logic
+// ====== NOTIFICATION LOGIC ======
 async function loadNotifications() {
-    const res = await apiRequest('/notifications');
-    if (res.status === 200 && res.data.success) {
-        const notifications = res.data.data;
-        
-        // Find dropdowns in all headers (we use a specific ID, assuming there's only one header active)
-        const dropdownContainer = document.querySelector('#notificationDropdown .max-h-64');
-        const badge = document.querySelector('#notificationBtn span.bg-error');
-        
-        if (dropdownContainer) {
-            if (notifications.length === 0) {
-                dropdownContainer.innerHTML = '<div class="p-4 text-center text-on-surface-variant font-label-md">No new notifications</div>';
-                if (badge) badge.style.display = 'none';
-            } else {
-                const unreadCount = notifications.filter(n => !n.is_read).length;
-                if (badge) {
-                    badge.style.display = unreadCount > 0 ? 'block' : 'none';
-                }
+    if (!getToken()) return;
+
+    try {
+        const res = await apiRequest('/notifications');
+        if (res.status === 200 && res.data && res.data.success) {
+            const notifications = res.data.data || [];
+            renderNotifications(notifications);
+        }
+    } catch (e) {
+        console.warn('Could not load notifications:', e);
+    }
+}
+
+function renderNotifications(notifications) {
+    const dropdownContainer = document.querySelector('#notificationDropdown .max-h-64') || document.getElementById('notifList');
+    const badges = document.querySelectorAll('#notifDot, #notificationBtn .bg-rose-500, #notificationBtn span.absolute');
+    const unreadCountBadge = document.getElementById('notifUnreadBadge');
+    
+    const unreadCount = notifications.filter(n => !n.is_read).length;
+    
+    // Update red dot on notification bell button
+    badges.forEach(badge => {
+        if (unreadCount > 0) {
+            badge.classList.remove('hidden');
+            badge.style.display = 'block';
+        } else {
+            badge.classList.add('hidden');
+            badge.style.display = 'none';
+        }
+    });
+
+    // Update unread count badge in header
+    if (unreadCountBadge) {
+        if (unreadCount > 0) {
+            unreadCountBadge.textContent = `${unreadCount} new`;
+            unreadCountBadge.classList.remove('hidden');
+        } else {
+            unreadCountBadge.classList.add('hidden');
+        }
+    }
+    
+    if (dropdownContainer) {
+        if (!notifications || notifications.length === 0) {
+            dropdownContainer.innerHTML = `
+                <div class="p-6 text-center text-slate-400 dark:text-slate-500 text-xs flex flex-col items-center gap-2">
+                    <span class="material-symbols-outlined text-[28px] text-slate-300 dark:text-slate-600">notifications_none</span>
+                    <span>All caught up! No new notifications.</span>
+                </div>
+            `;
+        } else {
+            dropdownContainer.innerHTML = notifications.map(n => {
+                const isUnread = !n.is_read;
+                const timeStr = n.created_at ? formatNotifTime(n.created_at) : 'Recently';
                 
-                dropdownContainer.innerHTML = notifications.map(n => `
-                    <div onclick="readNotification(${n.id})" class="p-4 border-b border-outline-variant/20 hover:bg-surface-container/50 transition-colors cursor-pointer flex gap-3 items-start ${n.is_read ? 'opacity-70' : ''}">
-                        <div class="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center shrink-0 overflow-hidden">
-                            ${n.actor_avatar ? `<img src="${n.actor_avatar}" class="w-full h-full object-cover">` : `<span class="material-symbols-outlined text-secondary text-[16px]">forum</span>`}
+                return `
+                    <div onclick="readNotification(${n.id}, ${n.experience_id || 'null'})" class="p-3.5 hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-colors cursor-pointer flex gap-3 items-start ${isUnread ? 'bg-blue-50/50 dark:bg-blue-950/20' : 'opacity-75'}">
+                        <div class="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/60 text-blue-700 dark:text-blue-300 flex items-center justify-center shrink-0 overflow-hidden font-bold text-xs">
+                            ${n.actor_avatar 
+                                ? `<img src="${n.actor_avatar}" class="w-full h-full object-cover">` 
+                                : (n.actor_name ? n.actor_name.charAt(0).toUpperCase() : '<span class="material-symbols-outlined text-[16px]">notifications</span>')
+                            }
                         </div>
-                        <div>
-                            <p class="text-label-md text-on-surface mb-1">${n.message}</p>
-                            <p class="text-label-sm text-on-surface-variant">${new Date(n.created_at).toLocaleDateString()}</p>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-xs ${isUnread ? 'font-semibold text-slate-900 dark:text-slate-100' : 'text-slate-700 dark:text-slate-300'} leading-snug">
+                                ${escapeNotifHtml(n.message)}
+                            </p>
+                            <div class="flex items-center gap-2 mt-1">
+                                <span class="text-[10px] text-slate-400 font-medium">${timeStr}</span>
+                                ${n.experience_id ? '<span class="text-[10px] text-blue-600 dark:text-blue-400 font-semibold hover:underline">View query →</span>' : ''}
+                            </div>
                         </div>
+                        ${isUnread ? '<span class="w-2 h-2 rounded-full bg-blue-600 shrink-0 mt-1"></span>' : ''}
                     </div>
-                `).join('');
-            }
+                `;
+            }).join('');
         }
     }
 }
 
-async function readNotification(id) {
-    const res = await apiRequest(`/notifications/${id}/read`, { method: 'PUT' });
-    if (res.status === 200) {
+function formatNotifTime(dateString) {
+    try {
+        const date = new Date(dateString);
+        const now = new Date();
+        const diffMs = now - date;
+        const diffMins = Math.floor(diffMs / (1000 * 60));
+        const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+        const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
+        if (diffMins < 1) return 'Just now';
+        if (diffMins < 60) return `${diffMins}m ago`;
+        if (diffHours < 24) return `${diffHours}h ago`;
+        if (diffDays === 1) return 'Yesterday';
+        if (diffDays < 7) return `${diffDays}d ago`;
+        return date.toLocaleDateString();
+    } catch(e) {
+        return 'Recently';
+    }
+}
+
+function escapeNotifHtml(str) {
+    if (!str) return '';
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+}
+
+async function readNotification(id, experienceId) {
+    try {
+        await apiRequest(`/notifications/${id}/read`, { method: 'PUT' });
         loadNotifications();
+    } catch(e) {}
+
+    if (experienceId) {
+        if (window.location.pathname.includes('dashboard.html')) {
+            const card = document.getElementById(`exp-${experienceId}`);
+            if (card) {
+                card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                card.classList.add('ring-2', 'ring-blue-500');
+                setTimeout(() => card.classList.remove('ring-2', 'ring-blue-500'), 3000);
+            }
+        } else {
+            window.location.href = `dashboard.html#exp-${experienceId}`;
+        }
+    }
+}
+
+async function markAllNotificationsRead() {
+    const markBtn = document.getElementById('markAllReadBtn');
+    if (markBtn) {
+        markBtn.disabled = true;
+        markBtn.innerHTML = '<span class="material-symbols-outlined text-[13px] animate-spin">sync</span> Marking...';
+    }
+
+    try {
+        const res = await apiRequest('/notifications/read-all', { method: 'PUT' });
+        if (res.status === 200 || (res.data && res.data.success)) {
+            showToast('All notifications marked as read');
+        }
+    } catch(e) {
+        console.error('Failed to mark all notifications read:', e);
+    }
+
+    await loadNotifications();
+
+    if (markBtn) {
+        markBtn.disabled = false;
+        markBtn.innerHTML = '<span class="material-symbols-outlined text-[13px]">done_all</span><span>Mark all read</span>';
     }
 }
 
