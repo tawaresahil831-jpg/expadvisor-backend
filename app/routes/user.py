@@ -15,7 +15,7 @@ def get_user_profile(user_id):
         
     # Calculate stats
     experiences_count = Experience.query.filter_by(author_id=user_id).count()
-    comments_count = Comment.query.filter_by(author_id=user_id).count()
+    comments_count = Comment.query.filter_by(user_id=user_id).count()
     
     # Simple achievements logic
     achievements = []
