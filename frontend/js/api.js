@@ -18,8 +18,8 @@ async function apiRequest(endpoint, options = {}) {
     // Setup headers
     const headers = { ...options.headers };
     
-    // Only set Content-Type if it's not FormData
-    if (!(options.body instanceof FormData)) {
+    // Only set Content-Type if there is a body and it's not FormData
+    if (options.body && !(options.body instanceof FormData)) {
         headers["Content-Type"] = "application/json";
     }
 
@@ -49,11 +49,18 @@ async function apiRequest(endpoint, options = {}) {
             }
         }
         
-        const data = await response.json();
+        let data;
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+            data = await response.json();
+        } else {
+            const text = await response.text();
+            data = { success: response.ok, message: text || `HTTP ${response.status} Error` };
+        }
         return { status: response.status, data };
     } catch (error) {
         console.error("API Error:", error);
-        return { status: 500, data: { success: false, message: "Network error" } };
+        return { status: 500, data: { success: false, message: error.message || "Network error" } };
     }
 }
 
