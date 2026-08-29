@@ -1,11 +1,31 @@
 from flask import Blueprint, request, jsonify
 from sqlalchemy import or_
 from app.extensions import db
-from app.models import Experience
+from app.models import Experience, User, Comment, Like
 from app.utils.auth_utils import token_required
 from app.utils.validators import validate_length, validate_choice, validate_semester, ALLOWED_CATEGORIES
 
 experience_bp = Blueprint("experience", __name__, url_prefix="/api/experiences")
+
+@experience_bp.route("/stats", methods=["GET"])
+def get_community_stats():
+    try:
+        total_queries = Experience.query.count()
+        answered_queries = Experience.query.filter(Experience.is_resolved == True).count()
+        members_count = User.query.count()
+        contributors_count = db.session.query(db.func.count(db.func.distinct(Comment.user_id))).scalar() or 0
+
+        return jsonify({
+            "success": True,
+            "data": {
+                "total_queries": total_queries,
+                "answered": answered_queries,
+                "members": members_count,
+                "contributors": contributors_count
+            }
+        }), 200
+    except Exception as e:
+        return jsonify({"success": False, "message": str(e)}), 500
 
 @experience_bp.route("", methods=["GET"])
 def get_experiences():

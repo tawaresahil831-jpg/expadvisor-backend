@@ -40,8 +40,10 @@ class Experience(db.Model):
             "semester": self.semester,
             "tags": self.tags,
             "file_url": self.file_url,
-            "views": self.views,
-            "is_resolved": self.is_resolved,
+            "views": self.views or 0,
+            "is_resolved": self.is_resolved or False,
+            "likes_count": len(self.likes) if hasattr(self, 'likes') and self.likes else 0,
+            "comments_count": len(self.comments) if hasattr(self, 'comments') and self.comments else 0,
             "created_at": self.created_at.isoformat() if self.created_at else None,
             "updated_at": self.updated_at.isoformat() if self.updated_at else None
         }
