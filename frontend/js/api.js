@@ -176,13 +176,3 @@ async function readNotification(id) {
     }
 }
 
-// Bind dropdown toggle
-document.addEventListener('DOMContentLoaded', () => {
-    const notifBtn = document.getElementById('notificationBtn');
-    if (notifBtn) {
-        notifBtn.addEventListener('click', () => {
-            const dropdown = document.getElementById('notificationDropdown');
-            if (dropdown) dropdown.classList.toggle('hidden');
-        });
-    }
-});

@@ -1364,6 +1364,7 @@
                     target.classList.add('bg-secondary', 'text-on-secondary', 'shadow-sm');
                     currentStatus = target.textContent.trim();
                 }
+                currentPage = 1;
                 loadExperiences();
             });
         });
@@ -1376,6 +1377,7 @@
                 currentSearch = tag;
                 const searchInput = document.getElementById('searchInput');
                 if (searchInput) searchInput.value = currentSearch;
+                currentPage = 1;
                 loadExperiences();
             });
         });
