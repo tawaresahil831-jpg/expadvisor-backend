@@ -46,6 +46,23 @@ def get_user_profile(user_id):
 def update_my_profile(current_user):
     data = request.get_json(silent=True) or {}
     
+    if "name" in data and data.get("name"):
+        current_user.name = str(data.get("name")).strip()
+        
+    if "college" in data:
+        current_user.college = str(data.get("college")).strip() if data.get("college") else None
+        
+    if "branch" in data:
+        current_user.branch = str(data.get("branch")).strip() if data.get("branch") else None
+        
+    if "year" in data:
+        y_val = data.get("year")
+        if y_val:
+            s_digits = ''.join(c for c in str(y_val) if c.isdigit())
+            current_user.year = int(s_digits) if s_digits else None
+        else:
+            current_user.year = None
+            
     if "bio" in data:
         bio = data.get("bio")
         if bio:
@@ -58,12 +75,21 @@ def update_my_profile(current_user):
     if "skills" in data:
         skills = data.get("skills")
         if isinstance(skills, list):
-            current_user.skills = json.dumps(skills)
+            current_user.skills = ", ".join([s.strip() for s in skills if s.strip()])
         elif isinstance(skills, str):
-            current_user.skills = skills
+            current_user.skills = skills.strip()
         else:
             current_user.skills = None
-            
+
+    if "github" in data:
+        current_user.github = str(data.get("github")).strip() if data.get("github") else None
+
+    if "linkedin" in data:
+        current_user.linkedin = str(data.get("linkedin")).strip() if data.get("linkedin") else None
+
+    if "portfolio" in data:
+        current_user.portfolio = str(data.get("portfolio")).strip() if data.get("portfolio") else None
+        
     db.session.commit()
     
     return jsonify({

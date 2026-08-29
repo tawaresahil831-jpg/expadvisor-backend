@@ -17,6 +17,9 @@ class User(db.Model):
     bio = db.Column(db.Text, nullable=True)
     skills = db.Column(db.Text, nullable=True)
     avatar_url = db.Column(db.String(300), nullable=True)
+    github = db.Column(db.String(255), nullable=True)
+    linkedin = db.Column(db.String(255), nullable=True)
+    portfolio = db.Column(db.String(255), nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     reset_token = db.Column(db.String(100), unique=True, nullable=True)
     reset_token_expiry = db.Column(db.DateTime, nullable=True)
@@ -42,5 +45,8 @@ class User(db.Model):
             "bio": self.bio,
             "skills": self.skills,
             "avatar_url": self.avatar_url,
+            "github": self.github,
+            "linkedin": self.linkedin,
+            "portfolio": self.portfolio,
             "created_at": self.created_at.isoformat() if self.created_at else None
         }

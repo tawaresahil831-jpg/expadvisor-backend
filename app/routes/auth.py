@@ -18,6 +18,11 @@ def register():
     college = data.get("college")
     branch = data.get("branch")
     year_raw = data.get("year")
+    skills = data.get("skills")
+    github = data.get("github")
+    linkedin = data.get("linkedin")
+    portfolio = data.get("portfolio")
+    bio = data.get("bio")
 
     # Name 2-100 chars
     err = validate_length(name, 2, 100, "Name")
@@ -31,12 +36,28 @@ def register():
     err = validate_length(password, 6, 100, "Password")
     if err: errors["password"] = err
 
+    # College (Compulsory)
+    err = validate_length(college, 2, 150, "College")
+    if err: errors["college"] = "College name is required"
+
+    # Branch (Compulsory)
+    err = validate_length(branch, 2, 100, "Branch")
+    if err: errors["branch"] = "Branch is required"
+
+    # Year (Compulsory)
     year = None
-    if year_raw not in (None, ""):
+    if year_raw in (None, ""):
+        errors["year"] = "Year of study is required"
+    else:
         try:
-            year = int(year_raw)
+            s_digits = ''.join(c for c in str(year_raw) if c.isdigit())
+            year = int(s_digits) if s_digits else int(year_raw)
         except (TypeError, ValueError):
-            errors["year"] = "Year must be a number"
+            errors["year"] = "Year must be a number (e.g. 1, 2, 3, 4)"
+
+    # Skills (Compulsory)
+    err = validate_length(skills, 2, 500, "Skills")
+    if err: errors["skills"] = "At least one skill is required"
 
     if errors:
         return jsonify({
@@ -59,17 +80,26 @@ def register():
         email=email,
         college=str(college).strip() if college else None,
         branch=str(branch).strip() if branch else None,
-        year=year
+        year=year,
+        skills=str(skills).strip() if skills else None,
+        bio=str(bio).strip() if bio else None,
+        github=str(github).strip() if github else None,
+        linkedin=str(linkedin).strip() if linkedin else None,
+        portfolio=str(portfolio).strip() if portfolio else None
     )
     new_user.set_password(str(password))
 
     db.session.add(new_user)
     db.session.commit()
 
+    token = generate_token(new_user.user_id)
+    user_dict = new_user.to_dict()
+    user_dict["token"] = token
+
     return jsonify({
         "success": True,
         "message": "User registered successfully",
-        "data": new_user.to_dict()
+        "data": user_dict
     }), 201
 
 
