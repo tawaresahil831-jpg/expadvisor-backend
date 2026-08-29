@@ -35,8 +35,8 @@ def get_experiences():
         except ValueError:
             pass
 
-    if category:
-        query = query.filter(Experience.category == category)
+    if category and category.strip():
+        query = query.filter(Experience.category.ilike(category.strip()))
     if company:
         query = query.filter(Experience.company == company)
     if search and search.strip():
@@ -94,8 +94,8 @@ def create_experience(current_user):
     err = validate_length(content, 20, 50000, "Content")
     if err: errors["content"] = err
 
-    if category is not None:
-        err = validate_choice(category, ALLOWED_CATEGORIES, "Category")
+    if category is not None and str(category).strip():
+        err = validate_length(str(category).strip(), 1, 50, "Category")
         if err: errors["category"] = err
 
     if semester is not None:
@@ -146,9 +146,13 @@ def update_experience(current_user, experience_id):
         else: experience.content = str(data.get("content")).strip()
 
     if "category" in data:
-        err = validate_choice(data.get("category"), ALLOWED_CATEGORIES, "Category")
-        if err: errors["category"] = err
-        else: experience.category = str(data.get("category")).strip() if data.get("category") else None
+        val = data.get("category")
+        if val and str(val).strip():
+            err = validate_length(str(val).strip(), 1, 50, "Category")
+            if err: errors["category"] = err
+            else: experience.category = str(val).strip()
+        else:
+            experience.category = None
 
     if "semester" in data:
         err = validate_semester(data.get("semester"))
