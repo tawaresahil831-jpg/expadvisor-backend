@@ -476,11 +476,10 @@
                 const tooltipText = count > 0 ? `${formattedDate} · ${count} contribution${count > 1 ? 's' : ''}` : `${formattedDate} · No activity`;
 
                 cellsHTML += `
-                    <div class="activity-block h-10 rounded-xl border flex flex-col items-center justify-center transition-all cursor-pointer select-none hover:scale-105 hover:shadow-md ${bgClass}"
+                    <div class="activity-block h-10 rounded-xl border transition-all cursor-pointer select-none hover:scale-105 hover:shadow-md ${bgClass}"
                          data-date="${formattedDate}"
                          data-count="${count}"
                          title="${tooltipText}">
-                        <span class="text-xs">${day}</span>
                     </div>
                 `;
             }
