@@ -203,6 +203,59 @@
 
     </div>
 
+    <!-- ====== 6-DIGIT EMAIL OTP VERIFICATION MODAL ====== -->
+    <dialog id="otpModal" class="rounded-3xl shadow-2xl p-0 w-full max-w-md bg-white border border-slate-200 overflow-hidden backdrop:bg-slate-950/60 backdrop:backdrop-blur-md">
+        <div class="p-7 space-y-6 text-center">
+            <!-- Brand Icon Badge -->
+            <div class="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center mx-auto shadow-sm ring-8 ring-blue-50/50">
+                <span class="material-symbols-outlined text-[32px]">mark_email_read</span>
+            </div>
+
+            <div class="space-y-1.5">
+                <h3 class="text-lg font-extrabold text-slate-900 tracking-tight">Verify Your Email Address</h3>
+                <p class="text-xs text-slate-500 leading-relaxed max-w-xs mx-auto">
+                    We've sent a 6-digit verification code to<br>
+                    <strong id="otpTargetEmail" class="text-slate-900 font-semibold">user@email.com</strong>
+                </p>
+            </div>
+
+            <!-- Dev Hint (shown if dev_otp provided for viva / testing reliability) -->
+            <div id="devOtpBadge" class="hidden p-2 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-[11px] font-mono">
+                <span class="font-bold">Dev/Test OTP:</span> <span id="devOtpCode" class="font-extrabold tracking-widest text-amber-950">123456</span>
+            </div>
+
+            <!-- 6 Digit Input Boxes -->
+            <div class="space-y-3">
+                <div class="flex items-center justify-center gap-2 sm:gap-2.5" id="otpInputsContainer">
+                    <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]*" class="otp-box w-11 h-12 text-center text-xl font-extrabold text-slate-900 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-blue-600 focus:ring-4 focus:ring-blue-100 transition-all outline-none" />
+                    <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]*" class="otp-box w-11 h-12 text-center text-xl font-extrabold text-slate-900 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-blue-600 focus:ring-4 focus:ring-blue-100 transition-all outline-none" />
+                    <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]*" class="otp-box w-11 h-12 text-center text-xl font-extrabold text-slate-900 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-blue-600 focus:ring-4 focus:ring-blue-100 transition-all outline-none" />
+                    <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]*" class="otp-box w-11 h-12 text-center text-xl font-extrabold text-slate-900 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-blue-600 focus:ring-4 focus:ring-blue-100 transition-all outline-none" />
+                    <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]*" class="otp-box w-11 h-12 text-center text-xl font-extrabold text-slate-900 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-blue-600 focus:ring-4 focus:ring-blue-100 transition-all outline-none" />
+                    <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]*" class="otp-box w-11 h-12 text-center text-xl font-extrabold text-slate-900 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-blue-600 focus:ring-4 focus:ring-blue-100 transition-all outline-none" />
+                </div>
+                <!-- Error notice inside modal -->
+                <div id="otpError" class="hidden text-xs font-semibold text-rose-600"></div>
+            </div>
+
+            <!-- Action Button -->
+            <button id="verifyOtpBtn" onclick="submitOtpVerification()" class="w-full py-3 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 active:scale-[0.99] text-white text-xs font-bold shadow-md shadow-blue-500/25 transition-all flex items-center justify-center gap-2">
+                <span>Verify & Sign In</span>
+                <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+            </button>
+
+            <!-- Footer: Resend Timer & Close -->
+            <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                <button id="resendOtpBtn" onclick="resendOtpCode()" class="font-semibold text-slate-400 hover:text-blue-600 transition-colors disabled:opacity-50 disabled:pointer-events-none" disabled>
+                    Resend code in <span id="resendCountdown">60s</span>
+                </button>
+                <button onclick="closeOtpModal()" class="font-semibold text-slate-400 hover:text-slate-700 transition-colors">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </dialog>
+
     <!-- ====== SCRIPTS ====== -->
     <script src="js/api.js?v=2"></script>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
@@ -228,6 +281,176 @@
             });
         }
 
+        // ====== OTP MODAL & INPUTS UX ======
+        let activeLoginEmail = '';
+        let resendTimer = null;
+        let resendSeconds = 60;
+
+        const otpBoxes = Array.from(document.querySelectorAll('.otp-box'));
+
+        otpBoxes.forEach((box, index) => {
+            box.addEventListener('input', (e) => {
+                const val = e.target.value;
+                if (!/^[0-9]$/.test(val)) {
+                    e.target.value = '';
+                    return;
+                }
+                if (index < otpBoxes.length - 1) {
+                    otpBoxes[index + 1].focus();
+                } else {
+                    const code = otpBoxes.map(b => b.value).join('');
+                    if (code.length === 6) {
+                        submitOtpVerification();
+                    }
+                }
+            });
+
+            box.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && !box.value && index > 0) {
+                    otpBoxes[index - 1].focus();
+                } else if (e.key === 'Enter') {
+                    submitOtpVerification();
+                }
+            });
+
+            box.addEventListener('paste', (e) => {
+                e.preventDefault();
+                const text = (e.clipboardData || window.clipboardData).getData('text').trim();
+                const digits = text.replace(/\D/g, '').slice(0, 6);
+                if (digits.length > 0) {
+                    digits.split('').forEach((d, i) => {
+                        if (otpBoxes[i]) otpBoxes[i].value = d;
+                    });
+                    const targetFocus = Math.min(digits.length, otpBoxes.length - 1);
+                    otpBoxes[targetFocus].focus();
+                    if (digits.length === 6) {
+                        submitOtpVerification();
+                    }
+                }
+            });
+        });
+
+        function openOtpModal(email, devOtp) {
+            activeLoginEmail = email;
+            document.getElementById('otpTargetEmail').textContent = email;
+
+            otpBoxes.forEach(b => b.value = '');
+            const errEl = document.getElementById('otpError');
+            errEl.classList.add('hidden');
+            errEl.textContent = '';
+
+            const devBadge = document.getElementById('devOtpBadge');
+            const devCode = document.getElementById('devOtpCode');
+            if (devOtp) {
+                devCode.textContent = devOtp;
+                devBadge.classList.remove('hidden');
+            } else {
+                devBadge.classList.add('hidden');
+            }
+
+            startResendCountdown();
+            document.getElementById('otpModal').showModal();
+            setTimeout(() => otpBoxes[0].focus(), 150);
+        }
+
+        function closeOtpModal() {
+            document.getElementById('otpModal').close();
+            if (resendTimer) clearInterval(resendTimer);
+            document.getElementById('email').focus();
+        }
+
+        function startResendCountdown() {
+            if (resendTimer) clearInterval(resendTimer);
+            resendSeconds = 60;
+            const resendBtn = document.getElementById('resendOtpBtn');
+            const countdownSpan = document.getElementById('resendCountdown');
+            resendBtn.disabled = true;
+            countdownSpan.textContent = `${resendSeconds}s`;
+
+            resendTimer = setInterval(() => {
+                resendSeconds--;
+                if (resendSeconds <= 0) {
+                    clearInterval(resendTimer);
+                    resendBtn.disabled = false;
+                    resendBtn.textContent = 'Resend verification code';
+                } else {
+                    countdownSpan.textContent = `${resendSeconds}s`;
+                }
+            }, 1000);
+        }
+
+        async function resendOtpCode() {
+            if (!activeLoginEmail) return;
+            const resendBtn = document.getElementById('resendOtpBtn');
+            resendBtn.disabled = true;
+            resendBtn.textContent = 'Sending...';
+
+            const res = await apiRequest('/auth/resend-otp', {
+                method: 'POST',
+                body: { email: activeLoginEmail }
+            });
+
+            if (res.status === 200 && res.data.success) {
+                if (res.data.data && res.data.data.dev_otp) {
+                    document.getElementById('devOtpCode').textContent = res.data.data.dev_otp;
+                    document.getElementById('devOtpBadge').classList.remove('hidden');
+                }
+                showToast('Fresh verification code sent!');
+                startResendCountdown();
+            } else {
+                alert(res.data.message || 'Failed to resend code');
+                resendBtn.disabled = false;
+                resendBtn.textContent = 'Resend verification code';
+            }
+        }
+
+        async function submitOtpVerification() {
+            const code = otpBoxes.map(b => b.value).join('').trim();
+            const errEl = document.getElementById('otpError');
+            const verifyBtn = document.getElementById('verifyOtpBtn');
+
+            if (code.length !== 6) {
+                errEl.textContent = 'Please enter the complete 6-digit verification code.';
+                errEl.classList.remove('hidden');
+                return;
+            }
+
+            errEl.classList.add('hidden');
+            verifyBtn.disabled = true;
+            verifyBtn.innerHTML = `<span class="material-symbols-outlined text-[16px] animate-spin">sync</span><span>Verifying...</span>`;
+
+            const res = await apiRequest('/auth/verify-otp', {
+                method: 'POST',
+                body: {
+                    email: activeLoginEmail,
+                    otp: code
+                }
+            });
+
+            if (res.status === 200 && res.data.success) {
+                if (res.data.data && res.data.data.token) {
+                    setToken(res.data.data.token);
+                }
+                if (res.data.data && res.data.data.user) {
+                    try {
+                        localStorage.setItem('expadvisor_user', JSON.stringify(res.data.data.user));
+                    } catch(e) {}
+                }
+                verifyBtn.innerHTML = `<span class="material-symbols-outlined text-[16px]">check_circle</span><span>Verified! Redirecting...</span>`;
+                verifyBtn.classList.replace('bg-blue-600', 'bg-emerald-600');
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 800);
+            } else {
+                errEl.textContent = res.data.message || 'Invalid or expired verification code.';
+                errEl.classList.remove('hidden');
+                verifyBtn.disabled = false;
+                verifyBtn.innerHTML = `<span>Verify & Sign In</span><span class="material-symbols-outlined text-[16px]">arrow_forward</span>`;
+                otpBoxes.forEach(b => b.value = '');
+                otpBoxes[0].focus();
+            }
+        }
+
         // Login Form Submission
         document.getElementById('loginForm').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -246,14 +469,24 @@
                 body: { email, password }
             });
 
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = `<span>Sign In</span><span class="material-symbols-outlined text-[16px]">arrow_forward</span>`;
+
             if (res.status === 200 && res.data.success) {
                 setToken(res.data.data.token);
+                if (res.data.data.user) {
+                    try {
+                        localStorage.setItem('expadvisor_user', JSON.stringify(res.data.data.user));
+                    } catch(e) {}
+                }
                 window.location.href = 'dashboard.html';
+            } else if (res.data && res.data.requires_verification) {
+                // Email is not verified yet! Automatically open the OTP verification modal!
+                const devOtp = (res.data.data && res.data.data.dev_otp) ? res.data.data.dev_otp : null;
+                openOtpModal(email, devOtp);
             } else {
                 errorText.textContent = res.data.message || 'Invalid email or password. Please try again.';
                 errorBanner.classList.remove('hidden');
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = `<span>Sign In</span><span class="material-symbols-outlined text-[16px]">arrow_forward</span>`;
             }
         });
 
