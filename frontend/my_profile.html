@@ -232,49 +232,114 @@
                 </div>
             </div>
 
-            <!-- ====== TOP 4-STAT STRIP ====== -->
+            <!-- ====== TOP 4-STAT STRIP (WITH INTERACTIVE HOVER SCALES) ====== -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <!-- Stat 1: Queries Asked -->
-                <div class="bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center gap-3.5">
-                    <div class="w-11 h-11 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
-                        <span class="material-symbols-outlined text-[22px]">feed</span>
+                <div class="group relative bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center justify-between cursor-pointer hover:border-blue-200 hover:shadow-md transition-all"
+                     title="Scale: 1 per question asked. Total questions and problems posted to the community.">
+                    <div class="flex items-center gap-3.5">
+                        <div class="w-11 h-11 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                            <span class="material-symbols-outlined text-[22px]">feed</span>
+                        </div>
+                        <div>
+                            <div id="stat-queries-asked" class="text-xl font-bold text-slate-900 leading-none">0</div>
+                            <div class="text-xs text-slate-500 font-medium mt-1">Queries Asked</div>
+                        </div>
                     </div>
-                    <div>
-                        <div id="stat-queries-asked" class="text-xl font-bold text-slate-900 leading-none">0</div>
-                        <div class="text-xs text-slate-500 font-medium mt-1">Queries Asked</div>
+                    <span class="material-symbols-outlined text-[16px] text-slate-300 group-hover:text-blue-500 transition-colors">info</span>
+
+                    <!-- Hover Popover Explaining Measurement Scale -->
+                    <div class="hidden group-hover:block absolute bottom-full left-0 mb-2 w-64 p-3 bg-slate-900 text-white text-xs rounded-xl shadow-2xl z-50 pointer-events-none border border-slate-700 animate-fadeIn">
+                        <div class="font-bold text-blue-400 text-[10px] uppercase tracking-wider mb-1 flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[13px]">straighten</span>
+                            Scale Measurement
+                        </div>
+                        <p class="text-slate-300 text-[11px] leading-relaxed">
+                            <strong class="text-white font-bold">+1 point</strong> for every coursework doubt, discussion topic, or inquiry you publish to the campus community.
+                        </p>
                     </div>
                 </div>
 
                 <!-- Stat 2: Answers Given -->
-                <div class="bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center gap-3.5">
-                    <div class="w-11 h-11 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0">
-                        <span class="material-symbols-outlined text-[22px]">check_circle</span>
+                <div class="group relative bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center justify-between cursor-pointer hover:border-indigo-200 hover:shadow-md transition-all"
+                     title="Scale: 1 per response. Total community answers, solutions, and peer replies provided.">
+                    <div class="flex items-center gap-3.5">
+                        <div class="w-11 h-11 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0">
+                            <span class="material-symbols-outlined text-[22px]">check_circle</span>
+                        </div>
+                        <div>
+                            <div id="stat-answers-given" class="text-xl font-bold text-slate-900 leading-none">0</div>
+                            <div class="text-xs text-slate-500 font-medium mt-1">Answers Given</div>
+                        </div>
                     </div>
-                    <div>
-                        <div id="stat-answers-given" class="text-xl font-bold text-slate-900 leading-none">0</div>
-                        <div class="text-xs text-slate-500 font-medium mt-1">Answers Given</div>
+                    <span class="material-symbols-outlined text-[16px] text-slate-300 group-hover:text-indigo-500 transition-colors">info</span>
+
+                    <!-- Hover Popover Explaining Measurement Scale -->
+                    <div class="hidden group-hover:block absolute bottom-full left-0 mb-2 w-64 p-3 bg-slate-900 text-white text-xs rounded-xl shadow-2xl z-50 pointer-events-none border border-slate-700 animate-fadeIn">
+                        <div class="font-bold text-indigo-400 text-[10px] uppercase tracking-wider mb-1 flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[13px]">straighten</span>
+                            Scale Measurement
+                        </div>
+                        <p class="text-slate-300 text-[11px] leading-relaxed">
+                            <strong class="text-white font-bold">+1 point</strong> for each helpful answer, coursework solution, or collaborative reply given to peer questions.
+                        </p>
                     </div>
                 </div>
 
                 <!-- Stat 3: Reputation -->
-                <div class="bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center gap-3.5">
-                    <div class="w-11 h-11 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
-                        <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                <div class="group relative bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center justify-between cursor-pointer hover:border-purple-200 hover:shadow-md transition-all"
+                     title="Scale: +10 per query, +15 per like received, +25 per accepted solution. Reflects community trust.">
+                    <div class="flex items-center gap-3.5">
+                        <div class="w-11 h-11 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
+                            <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                        </div>
+                        <div>
+                            <div id="stat-reputation" class="text-xl font-bold text-slate-900 leading-none">0</div>
+                            <div class="text-xs text-slate-500 font-medium mt-1">Reputation</div>
+                        </div>
                     </div>
-                    <div>
-                        <div id="stat-reputation" class="text-xl font-bold text-slate-900 leading-none">0</div>
-                        <div class="text-xs text-slate-500 font-medium mt-1">Reputation</div>
+                    <span class="material-symbols-outlined text-[16px] text-slate-300 group-hover:text-purple-500 transition-colors">info</span>
+
+                    <!-- Hover Popover Explaining Measurement Scale -->
+                    <div class="hidden group-hover:block absolute bottom-full right-0 sm:left-0 mb-2 w-64 p-3 bg-slate-900 text-white text-xs rounded-xl shadow-2xl z-50 pointer-events-none border border-slate-700 animate-fadeIn">
+                        <div class="font-bold text-purple-400 text-[10px] uppercase tracking-wider mb-1 flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[13px]">calculate</span>
+                            Reputation Calculation Scale
+                        </div>
+                        <ul class="text-slate-300 text-[11px] space-y-1 pl-3.5 list-disc leading-relaxed">
+                            <li><strong class="text-white">+10 pts</strong> for each query asked</li>
+                            <li><strong class="text-white">+15 pts</strong> for each like received</li>
+                            <li><strong class="text-white">+25 pts</strong> for accepted solutions</li>
+                        </ul>
                     </div>
                 </div>
 
                 <!-- Stat 4: Badges -->
-                <div class="bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center gap-3.5">
-                    <div class="w-11 h-11 rounded-xl bg-violet-50 text-violet-600 flex items-center justify-center shrink-0">
-                        <span class="material-symbols-outlined text-[22px]">military_tech</span>
+                <div class="group relative bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center justify-between cursor-pointer hover:border-violet-200 hover:shadow-md transition-all"
+                     title="Scale: Milestones achieved across community participation, solutions, and peer mentoring.">
+                    <div class="flex items-center gap-3.5">
+                        <div class="w-11 h-11 rounded-xl bg-violet-50 text-violet-600 flex items-center justify-center shrink-0">
+                            <span class="material-symbols-outlined text-[22px]">military_tech</span>
+                        </div>
+                        <div>
+                            <div id="stat-badges" class="text-xl font-bold text-slate-900 leading-none">0</div>
+                            <div class="text-xs text-slate-500 font-medium mt-1">Badges</div>
+                        </div>
                     </div>
-                    <div>
-                        <div id="stat-badges" class="text-xl font-bold text-slate-900 leading-none">0</div>
-                        <div class="text-xs text-slate-500 font-medium mt-1">Badges</div>
+                    <span class="material-symbols-outlined text-[16px] text-slate-300 group-hover:text-violet-500 transition-colors">info</span>
+
+                    <!-- Hover Popover Explaining Measurement Scale -->
+                    <div class="hidden group-hover:block absolute bottom-full right-0 mb-2 w-64 p-3 bg-slate-900 text-white text-xs rounded-xl shadow-2xl z-50 pointer-events-none border border-slate-700 animate-fadeIn">
+                        <div class="font-bold text-violet-400 text-[10px] uppercase tracking-wider mb-1 flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[13px]">military_tech</span>
+                            Badge Milestone Tiers
+                        </div>
+                        <ul class="text-slate-300 text-[11px] space-y-1 pl-3.5 list-disc leading-relaxed">
+                            <li><strong>First Post:</strong> Post 1st question</li>
+                            <li><strong>Helper:</strong> Answer 1+ questions</li>
+                            <li><strong>Master Mentor:</strong> Answer 10+ questions</li>
+                            <li><strong>Top Solver:</strong> Accepted verified solution</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -399,6 +464,18 @@
                         
                         <div id="skillsPillContainer" class="flex flex-wrap gap-2 pt-0.5">
                             <span class="text-xs text-slate-400">Loading skills...</span>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: Achievement Badges (with Hover Scale Measurement) -->
+                    <div class="bg-white rounded-2xl border border-slate-200/70 p-5 shadow-sm space-y-3">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-[11px] font-bold text-slate-400 tracking-wider uppercase">Achievement Badges</h3>
+                            <span class="text-[10px] text-slate-400 font-medium">Hover for scale</span>
+                        </div>
+                        
+                        <div id="badgesPillContainer" class="flex flex-wrap gap-2 pt-0.5">
+                            <!-- Populated dynamically with interactive hover scale explanations -->
                         </div>
                     </div>
 
@@ -589,9 +666,44 @@
                 skillsContainer.innerHTML = '<span class="text-xs text-slate-400">No skills added yet.</span>';
             }
 
-            // Badges count
+            // Badges count & Badges Widget with Interactive Hover Scale
+            const badgesContainer = document.getElementById('badgesPillContainer');
+            const badgesDef = [
+                { name: 'First Question', desc: 'Scale: Post at least 1 coursework question in the community.', icon: 'star', color: 'bg-amber-50 text-amber-700 border-amber-200' },
+                { name: 'Community Helper', desc: 'Scale: Provide 1 or more helpful answers to peer questions.', icon: 'handshake', color: 'bg-blue-50 text-blue-700 border-blue-200' },
+                { name: 'Master Mentor', desc: 'Scale: Contribute 10 or more peer answers across discussions.', icon: 'military_tech', color: 'bg-purple-50 text-purple-700 border-purple-200' },
+                { name: 'Verified Solver', desc: 'Scale: Have your solution marked as accepted by a question author.', icon: 'verified', color: 'bg-emerald-50 text-emerald-700 border-emerald-200' }
+            ];
+
             const achievements = u.achievements || [];
-            document.getElementById('stat-badges').textContent = achievements.length || 1;
+            let unlockedCount = 0;
+
+            if (badgesContainer) {
+                badgesContainer.innerHTML = badgesDef.map(b => {
+                    const isUnlocked = achievements.includes(b.name) ||
+                        (b.name === 'First Question' && (userQueries.length > 0 || (u.stats && u.stats.problems_solved > 0))) ||
+                        (b.name === 'Community Helper' && (achievements.includes('Helper') || (u.stats && u.stats.peers_helped > 0))) ||
+                        (b.name === 'Master Mentor' && (achievements.includes('Master Mentor') || (u.stats && u.stats.peers_helped >= 10)));
+                    if (isUnlocked) unlockedCount++;
+
+                    return `
+                        <div class="relative group/badge cursor-pointer" title="${b.desc}">
+                            <span class="px-2.5 py-1 rounded-lg text-xs font-semibold border flex items-center gap-1.5 transition-all ${isUnlocked ? b.color + ' shadow-xs' : 'bg-slate-100/70 text-slate-400 border-slate-200 opacity-60'}">
+                                <span class="material-symbols-outlined text-[15px]">${b.icon}</span>
+                                <span>${b.name}</span>
+                                ${isUnlocked ? '' : '<span class="text-[10px] text-slate-400">🔒</span>'}
+                            </span>
+                            <!-- Hover Tooltip Explaining Scale -->
+                            <div class="hidden group-hover/badge:block absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-52 p-2.5 bg-slate-900 text-white text-xs rounded-xl shadow-2xl z-50 pointer-events-none border border-slate-700 text-center">
+                                <div class="font-bold text-white text-[11px] mb-0.5">${b.name} ${isUnlocked ? '(Unlocked)' : '(Locked)'}</div>
+                                <div class="text-slate-300 text-[10px] leading-snug">${b.desc}</div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            document.getElementById('stat-badges').textContent = unlockedCount || 1;
         }
 
         function setupLink(elementId, url, fallbackText) {
