@@ -50,19 +50,44 @@
             border-color: #1f2937 !important;
             color: #f1f5f9 !important;
         }
-        html.dark .bg-slate-50, html.dark .bg-slate-50\/80 {
+        html.dark .bg-slate-50, 
+        html.dark .bg-slate-50\/80, 
+        html.dark .bg-slate-50\/90, 
+        html.dark .bg-slate-50\/40, 
+        html.dark .bg-slate-50\/60, 
+        html.dark .bg-slate-50\/70 {
             background-color: #1e293b !important;
+            border-color: #334155 !important;
         }
-        html.dark .bg-slate-100 {
+        html.dark .bg-slate-100, 
+        html.dark .bg-slate-100\/70 {
             background-color: #1f2937 !important;
             color: #e2e8f0 !important;
+            border-color: #374151 !important;
+        }
+        /* CRITICAL: Fix hover states so cards NEVER flash white on hover in dark mode! */
+        html.dark .hover\:bg-slate-50:hover, 
+        html.dark .hover\:bg-slate-50\/90:hover,
+        html.dark .hover\:bg-slate-50\/80:hover,
+        html.dark .hover\:bg-slate-100:hover,
+        html.dark .hover\:bg-slate-200:hover {
+            background-color: #1e293b !important;
         }
         html.dark .text-slate-900 { color: #f8fafc !important; }
         html.dark .text-slate-800 { color: #f1f5f9 !important; }
         html.dark .text-slate-700 { color: #cbd5e1 !important; }
         html.dark .text-slate-600 { color: #94a3b8 !important; }
-        html.dark .text-slate-500 { color: #64748b !important; }
-        html.dark .border-slate-100, html.dark .border-slate-200, html.dark .border-slate-200\/70, html.dark .border-slate-200\/80, html.dark .border-slate-200\/90 {
+        html.dark .text-slate-500 { color: #94a3b8 !important; }
+        html.dark .text-slate-400 { color: #64748b !important; }
+        html.dark .border-slate-100, 
+        html.dark .border-slate-200, 
+        html.dark .border-slate-200\/60,
+        html.dark .border-slate-200\/70, 
+        html.dark .border-slate-200\/80, 
+        html.dark .border-slate-200\/90 {
+            border-color: #1f2937 !important;
+        }
+        html.dark .divide-slate-100 > * + * {
             border-color: #1f2937 !important;
         }
         html.dark header {
@@ -78,6 +103,10 @@
             background-color: #1e293b !important;
             color: #f8fafc !important;
             border-color: #374151 !important;
+        }
+        html.dark .profile-tab-btn.bg-slate-100 {
+            background-color: #1e293b !important;
+            color: #cbd5e1 !important;
         }
     </style>
 </head>
@@ -602,40 +631,11 @@
 
         // ====== THEME (DARK MODE) CONTROLLER ======
         function initTheme() {
-            const savedTheme = localStorage.getItem('exp_theme') || 'light';
-            applyTheme(savedTheme);
-
-            const toggleBtn = document.getElementById('themeToggleBtn');
-            const headerToggle = document.getElementById('headerThemeToggle');
-
-            const toggleHandler = () => {
-                const current = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
-                const next = current === 'dark' ? 'light' : 'dark';
-                applyTheme(next);
-            };
-
-            if (toggleBtn) toggleBtn.addEventListener('click', toggleHandler);
-            if (headerToggle) headerToggle.addEventListener('click', toggleHandler);
+            initGlobalTheme();
         }
 
         function applyTheme(theme) {
-            const toggleIcon = document.getElementById('themeToggleIcon');
-            const toggleText = document.getElementById('themeToggleText');
-            const headerIcon = document.getElementById('headerThemeIcon');
-
-            if (theme === 'dark') {
-                document.documentElement.classList.add('dark');
-                localStorage.setItem('exp_theme', 'dark');
-                if (toggleIcon) toggleIcon.textContent = 'light_mode';
-                if (toggleText) toggleText.textContent = 'Light Mode';
-                if (headerIcon) headerIcon.textContent = 'light_mode';
-            } else {
-                document.documentElement.classList.remove('dark');
-                localStorage.setItem('exp_theme', 'light');
-                if (toggleIcon) toggleIcon.textContent = 'dark_mode';
-                if (toggleText) toggleText.textContent = 'Dark Mode';
-                if (headerIcon) headerIcon.textContent = 'dark_mode';
-            }
+            applyGlobalTheme(theme);
         }
 
         // Initialize Theme immediately

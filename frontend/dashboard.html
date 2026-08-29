@@ -40,7 +40,96 @@
         .line-clamp-1 { display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
         .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         dialog::backdrop { background-color: rgba(15, 23, 42, 0.45); backdrop-filter: blur(6px); }
+
+        /* Dark mode overrides */
+        html.dark, html.dark body {
+            background-color: #0b1329 !important;
+            color: #f1f5f9 !important;
+        }
+        html.dark .bg-white {
+            background-color: #111827 !important;
+            border-color: #1f2937 !important;
+            color: #f1f5f9 !important;
+        }
+        html.dark .bg-canvas {
+            background-color: #0b1329 !important;
+        }
+        html.dark .bg-slate-50, 
+        html.dark .bg-slate-50\/80, 
+        html.dark .bg-slate-50\/90, 
+        html.dark .bg-slate-50\/40, 
+        html.dark .bg-slate-50\/60, 
+        html.dark .bg-slate-50\/70 {
+            background-color: #1e293b !important;
+            border-color: #334155 !important;
+        }
+        html.dark .bg-slate-100, 
+        html.dark .bg-slate-100\/70 {
+            background-color: #1f2937 !important;
+            color: #e2e8f0 !important;
+            border-color: #374151 !important;
+        }
+        /* Fix hover states in dark mode */
+        html.dark .hover\:bg-slate-50:hover, 
+        html.dark .hover\:bg-slate-50\/90:hover,
+        html.dark .hover\:bg-slate-50\/80:hover,
+        html.dark .hover\:bg-slate-100:hover,
+        html.dark .hover\:bg-slate-200:hover {
+            background-color: #1e293b !important;
+        }
+        html.dark .text-slate-900 { color: #f8fafc !important; }
+        html.dark .text-slate-800 { color: #f1f5f9 !important; }
+        html.dark .text-slate-700 { color: #cbd5e1 !important; }
+        html.dark .text-slate-600 { color: #94a3b8 !important; }
+        html.dark .text-slate-500 { color: #94a3b8 !important; }
+        html.dark .text-slate-400 { color: #64748b !important; }
+        html.dark .border-slate-100, 
+        html.dark .border-slate-200, 
+        html.dark .border-slate-200\/60,
+        html.dark .border-slate-200\/70, 
+        html.dark .border-slate-200\/80, 
+        html.dark .border-slate-200\/90 {
+            border-color: #1f2937 !important;
+        }
+        html.dark .divide-slate-100 > * + * {
+            border-color: #1f2937 !important;
+        }
+        html.dark header {
+            background-color: #111827 !important;
+            border-color: #1f2937 !important;
+        }
+        html.dark dialog {
+            background-color: #111827 !important;
+            color: #f1f5f9 !important;
+            border-color: #374151 !important;
+        }
+        html.dark input, html.dark select, html.dark textarea {
+            background-color: #1e293b !important;
+            color: #f8fafc !important;
+            border-color: #374151 !important;
+        }
+        html.dark #trendingCard, html.dark .bg-\[\#fff3ed\] {
+            background-color: #1a1625 !important;
+            border-color: #4a2818 !important;
+        }
+        html.dark #trendingTitle {
+            color: #fed7aa !important;
+        }
+        html.dark .filter-cat-btn.bg-slate-100,
+        html.dark .filter-status-btn.bg-slate-100 {
+            background-color: #1e293b !important;
+            color: #cbd5e1 !important;
+        }
     </style>
+
+    <script>
+        (function() {
+            try {
+                const saved = localStorage.getItem('exp_theme') || 'light';
+                if (saved === 'dark') document.documentElement.classList.add('dark');
+            } catch(e) {}
+        })();
+    </script>
 </head>
 
 <body class="bg-canvas text-slate-800 antialiased font-sans flex min-h-screen">
@@ -103,6 +192,11 @@
                 <span class="text-xs font-semibold text-slate-500 bg-slate-100 px-3 py-1 rounded-full hidden sm:inline-block">
                     Session 2026–27
                 </span>
+
+                <!-- Dark Mode Quick Toggle Button in Header -->
+                <button id="headerThemeToggle" class="w-9 h-9 rounded-full text-slate-600 hover:bg-slate-100 flex items-center justify-center transition-colors" title="Toggle Theme">
+                    <span id="headerThemeIcon" class="material-symbols-outlined text-[20px]">dark_mode</span>
+                </button>
 
                 <!-- Notifications -->
                 <div class="relative">

@@ -176,3 +176,58 @@ async function readNotification(id) {
     }
 }
 
+// ====== GLOBAL DARK THEME MANAGEMENT ======
+function initGlobalTheme() {
+    const savedTheme = localStorage.getItem('exp_theme') || 'light';
+    applyGlobalTheme(savedTheme);
+
+    const headerToggle = document.getElementById('headerThemeToggle');
+    const profileToggle = document.getElementById('themeToggleBtn');
+
+    const toggleHandler = (e) => {
+        if (e) e.preventDefault();
+        const isDark = document.documentElement.classList.contains('dark');
+        applyGlobalTheme(isDark ? 'light' : 'dark');
+    };
+
+    if (headerToggle) headerToggle.onclick = toggleHandler;
+    if (profileToggle) profileToggle.onclick = toggleHandler;
+}
+
+function applyGlobalTheme(theme) {
+    const isDark = theme === 'dark';
+    if (isDark) {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('exp_theme', 'dark');
+    } else {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('exp_theme', 'light');
+    }
+
+    // Update icons on whatever page is active
+    const headerIcon = document.getElementById('headerThemeIcon');
+    if (headerIcon) headerIcon.textContent = isDark ? 'light_mode' : 'dark_mode';
+
+    const toggleIcon = document.getElementById('themeToggleIcon');
+    if (toggleIcon) toggleIcon.textContent = isDark ? 'light_mode' : 'dark_mode';
+
+    const toggleText = document.getElementById('themeToggleText');
+    if (toggleText) toggleText.textContent = isDark ? 'Light Mode' : 'Dark Mode';
+}
+
+// Immediately apply saved theme on parse & after DOMContentLoaded
+(function() {
+    try {
+        const saved = localStorage.getItem('exp_theme') || 'light';
+        if (saved === 'dark') document.documentElement.classList.add('dark');
+    } catch(e) {}
+})();
+
+if (typeof document !== 'undefined') {
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initGlobalTheme);
+    } else {
+        initGlobalTheme();
+    }
+}
+
