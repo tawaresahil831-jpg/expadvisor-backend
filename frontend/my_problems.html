@@ -39,7 +39,7 @@
         ::-webkit-scrollbar { display: none; }
         .line-clamp-1 { display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
         .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+        dialog::backdrop { background-color: rgba(15, 23, 42, 0.45); backdrop-filter: blur(6px); }
     </style>
 </head>
 
@@ -86,14 +86,14 @@
             <!-- Brand Title -->
             <div class="flex items-center gap-3">
                 <a href="dashboard.html" class="font-extrabold text-slate-900 text-lg tracking-tight hover:text-blue-600 transition-colors">EXPadviser</a>
-                <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-medium">My Archive</span>
+                <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-medium">My Problems</span>
             </div>
 
-            <!-- Search Bar (redirects to dashboard) -->
+            <!-- Search Bar -->
             <div class="w-full max-w-md mx-6">
                 <div class="relative flex items-center">
                     <span class="material-symbols-outlined absolute left-3.5 text-slate-400 text-[18px]">search</span>
-                    <input id="searchInput" type="text" placeholder="Search problems or press enter..." class="w-full bg-slate-50/80 border border-slate-200/90 rounded-full pl-9 pr-4 py-1.5 text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all" />
+                    <input id="searchInput" type="text" placeholder="Search your queries..." class="w-full bg-slate-50/80 border border-slate-200/90 rounded-full pl-9 pr-4 py-1.5 text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all" />
                 </div>
             </div>
 
@@ -123,7 +123,7 @@
 
                 <!-- User Profile Avatar Circle -->
                 <a href="my_profile.html" class="flex items-center gap-2 group">
-                    <div id="userAvatarContainer" class="w-8 h-8 rounded-full bg-blue-600 text-white font-bold text-xs flex items-center justify-center shadow-sm group-hover:ring-2 group-hover:ring-blue-500 transition-all">
+                    <div id="headerAvatarContainer" class="w-8 h-8 rounded-full bg-blue-600 text-white font-bold text-xs flex items-center justify-center shadow-sm group-hover:ring-2 group-hover:ring-blue-500 transition-all">
                         <span id="userAvatarInitial">M</span>
                     </div>
                 </a>
@@ -135,76 +135,240 @@
 
             <!-- Title & Subtitle Row -->
             <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
-                <h1 class="text-2xl font-bold text-slate-900 tracking-tight">My Problems & Archive</h1>
-                <p class="text-xs text-slate-500 font-medium">Your personal archive of academic queries and collaborative solutions</p>
+                <h1 class="text-2xl font-bold text-slate-900 tracking-tight">My Queries & Problems</h1>
+                <p class="text-xs text-slate-500 font-medium">Track your academic inquiries, discussion answers, and accepted solutions</p>
             </div>
 
-            <!-- ====== METRIC STAT STRIP ====== -->
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <!-- ====== TOP 4-STAT STRIP ====== -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <!-- Stat 1: Total Asked -->
                 <div class="bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center gap-3.5">
                     <div class="w-11 h-11 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
-                        <span class="material-symbols-outlined text-[22px]">help</span>
+                        <span class="material-symbols-outlined text-[22px]">feed</span>
                     </div>
                     <div>
-                        <div id="stat-my-asked" class="text-xl font-bold text-slate-900 leading-none">0</div>
+                        <div id="stat-total" class="text-xl font-bold text-slate-900 leading-none">0</div>
                         <div class="text-xs text-slate-500 font-medium mt-1">Total Asked</div>
                     </div>
                 </div>
 
-                <!-- Stat 2: Solved Issues -->
+                <!-- Stat 2: Solved -->
                 <div class="bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center gap-3.5">
                     <div class="w-11 h-11 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
                         <span class="material-symbols-outlined text-[22px]">check_circle</span>
                     </div>
                     <div>
-                        <div id="stat-my-solved" class="text-xl font-bold text-slate-900 leading-none">0</div>
+                        <div id="stat-solved" class="text-xl font-bold text-slate-900 leading-none">0</div>
                         <div class="text-xs text-slate-500 font-medium mt-1">Solved & Resolved</div>
                     </div>
                 </div>
 
-                <!-- Stat 3: Open Issues -->
+                <!-- Stat 3: Awaiting Solutions -->
                 <div class="bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center gap-3.5">
                     <div class="w-11 h-11 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
                         <span class="material-symbols-outlined text-[22px]">pending</span>
                     </div>
                     <div>
-                        <div id="stat-my-open" class="text-xl font-bold text-slate-900 leading-none">0</div>
+                        <div id="stat-open" class="text-xl font-bold text-slate-900 leading-none">0</div>
                         <div class="text-xs text-slate-500 font-medium mt-1">Awaiting Solutions</div>
+                    </div>
+                </div>
+
+                <!-- Stat 4: Total Responses -->
+                <div class="bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center gap-3.5">
+                    <div class="w-11 h-11 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-[22px]">chat_bubble</span>
+                    </div>
+                    <div>
+                        <div id="stat-replies" class="text-xl font-bold text-slate-900 leading-none">0</div>
+                        <div class="text-xs text-slate-500 font-medium mt-1">Replies Received</div>
                     </div>
                 </div>
             </div>
 
-            <!-- ====== TAB SELECTOR ====== -->
-            <div class="flex items-center gap-2 border-b border-slate-200/80 pb-3">
-                <button id="tab-btn-asked" class="tab-btn px-4 py-1.5 rounded-full text-xs font-bold bg-blue-600 text-white shadow-sm transition-all flex items-center gap-1.5" data-tab="asked">
-                    <span class="material-symbols-outlined text-[16px]">list_alt</span>
-                    <span id="asked-count">Asked (0)</span>
-                </button>
-                <button id="tab-btn-solved" class="tab-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all flex items-center gap-1.5" data-tab="solved">
-                    <span class="material-symbols-outlined text-[16px]">verified</span>
-                    <span id="solved-count">Solved (0)</span>
-                </button>
-                <div class="ml-auto">
-                    <a href="dashboard.html" class="text-xs text-blue-600 hover:underline font-semibold flex items-center gap-1">
-                        Go to Dashboard <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
-                    </a>
-                </div>
-            </div>
+            <!-- ====== 2-COLUMN MAIN CONTENT GRID (8 cols Left / 4 cols Right) ====== -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
-            <!-- ====== TAB CONTENT: ASKED ====== -->
-            <div id="tab-asked" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 tab-content">
-                <div class="col-span-3 text-center py-12 text-slate-400 text-sm">Loading your queries...</div>
-            </div>
+                <!-- ====== LEFT COLUMN: PROBLEM LIST (~68%) ====== -->
+                <section class="lg:col-span-8 bg-white rounded-2xl border border-slate-200/70 p-6 shadow-sm space-y-5">
 
-            <!-- ====== TAB CONTENT: SOLVED ====== -->
-            <div id="tab-solved" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 tab-content hidden">
-                <div class="col-span-3 text-center py-12 text-slate-400 text-sm">Loading your solved queries...</div>
+                    <!-- Section Header with + Ask a Query Button -->
+                    <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                        <div class="flex items-center gap-2">
+                            <h2 class="text-lg font-bold text-slate-900">My Problem Archive</h2>
+                            <span id="queryCountBadge" class="text-xs font-semibold bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full"></span>
+                        </div>
+                        <button onclick="document.getElementById('createModal').showModal()" class="bg-slate-900 hover:bg-black text-white px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 shadow-sm transition-all hover:shadow">
+                            <span class="material-symbols-outlined text-[16px]">add</span>
+                            Ask a Query
+                        </button>
+                    </div>
+
+                    <!-- Filter Tabs: All, Open, Solved -->
+                    <div class="flex flex-wrap gap-1.5 items-center">
+                        <button class="status-tab-btn px-3 py-1 rounded-full text-xs font-semibold bg-blue-600 text-white shadow-sm transition-all" data-status="all">
+                            All Inquiries
+                        </button>
+                        <button class="status-tab-btn px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all" data-status="open">
+                            Awaiting Solutions
+                        </button>
+                        <button class="status-tab-btn px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all" data-status="solved">
+                            Solved & Resolved
+                        </button>
+                    </div>
+
+                    <!-- Problem Feed Container (Stacked Rows identical to Dashboard) -->
+                    <div id="problemFeed" class="divide-y divide-slate-100 space-y-1">
+                        <div class="py-12 text-center text-slate-400 text-sm">Loading your inquiries...</div>
+                    </div>
+
+                </section>
+
+                <!-- ====== RIGHT COLUMN: WIDGETS (~32%) ====== -->
+                <aside class="lg:col-span-4 space-y-6">
+
+                    <!-- Resolution Summary Card (Warm Mint/Emerald Widget) -->
+                    <div class="bg-[#f0fdf4] border border-[#bbf7d0] rounded-2xl p-5 shadow-sm space-y-3">
+                        <div class="flex items-center gap-1.5 text-emerald-700 font-bold text-[11px] uppercase tracking-wider">
+                            <span class="material-symbols-outlined text-[16px]">verified</span>
+                            <span>Resolution Rate</span>
+                        </div>
+                        <div>
+                            <div id="resolutionRateNumber" class="text-3xl font-extrabold text-emerald-900">0%</div>
+                            <p class="text-xs text-emerald-700 mt-1">of your posted questions have received an accepted solution.</p>
+                        </div>
+                        <div class="w-full bg-emerald-200/70 h-2 rounded-full overflow-hidden">
+                            <div id="resolutionBar" class="bg-emerald-600 h-full rounded-full transition-all duration-500" style="width: 0%;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions Card (Exact Match with Dashboard) -->
+                    <div class="bg-white rounded-2xl border border-slate-200/70 p-5 shadow-sm space-y-3">
+                        <h3 class="text-[11px] font-bold text-slate-400 tracking-wider uppercase">Quick Actions</h3>
+                        
+                        <button onclick="document.getElementById('createModal').showModal()" class="w-full bg-slate-900 hover:bg-black text-white font-semibold py-2.5 rounded-xl text-xs flex items-center justify-center gap-2 shadow-sm transition-all">
+                            <span class="material-symbols-outlined text-[16px]">add_circle</span>
+                            Ask a Query
+                        </button>
+                        
+                        <a href="dashboard.html" class="block w-full bg-white hover:bg-slate-50 text-slate-700 font-semibold py-2 rounded-xl border border-slate-200 text-xs transition-all text-center">
+                            Browse Community Feed
+                        </a>
+
+                        <a href="my_profile.html" class="block w-full bg-white hover:bg-slate-50 text-slate-700 font-semibold py-2 rounded-xl border border-slate-200 text-xs transition-all text-center">
+                            My Profile & Heatmap
+                        </a>
+                    </div>
+
+                </aside>
+
             </div>
 
         </main>
 
     </div>
+
+    <!-- ====== ASK QUERY MODAL ====== -->
+    <dialog id="createModal" class="rounded-2xl shadow-2xl p-0 w-full max-w-lg bg-white border border-slate-200 overflow-hidden">
+        <div class="p-6">
+            <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
+                <h3 class="text-base font-bold text-slate-900">Ask a Query</h3>
+                <button type="button" onclick="document.getElementById('createModal').close()" class="text-slate-400 hover:text-slate-600">
+                    <span class="material-symbols-outlined text-[20px]">close</span>
+                </button>
+            </div>
+            
+            <form id="createExpForm" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Title</label>
+                    <input type="text" id="expTitle" required placeholder="What's your doubt or question?" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Category</label>
+                    <select id="expCategory" required class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="project">Project</option>
+                        <option value="course">Course</option>
+                        <option value="internship">Internship</option>
+                        <option value="placement">Placement</option>
+                        <option value="tech">Tech</option>
+                        <option value="career">Career</option>
+                        <option value="design">Design</option>
+                        <option value="other">Other</option>
+                        <option value="custom">Custom (type your own)...</option>
+                    </select>
+                </div>
+                <div id="customCategoryContainer" class="hidden">
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Custom Category Name</label>
+                    <input type="text" id="expCustomCategory" placeholder="e.g. #everyone, ai-tools" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Company / College</label>
+                        <input type="text" id="expCompany" placeholder="e.g. DYP, Google" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Semester / Year</label>
+                        <input type="text" id="expSemester" placeholder="e.g. 5, 3rd Sem" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Description</label>
+                    <textarea id="expContent" required rows="4" placeholder="Explain the problem in detail..." class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Attachment (Optional)</label>
+                    <input type="file" id="expFile" class="w-full text-xs text-slate-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200" />
+                </div>
+                <div class="flex justify-end gap-2 pt-2">
+                    <button type="button" onclick="document.getElementById('createModal').close()" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100">Cancel</button>
+                    <button type="submit" id="submitExpBtn" class="px-5 py-2 rounded-xl text-xs font-semibold bg-slate-900 hover:bg-black text-white shadow-sm">Post Query</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
+
+    <!-- ====== QUERY DETAIL & DISCUSSION MODAL ====== -->
+    <dialog id="detailModal" class="rounded-2xl shadow-2xl p-0 w-full max-w-2xl bg-white border border-slate-200 overflow-hidden">
+        <div class="p-6 max-h-[85vh] overflow-y-auto space-y-5">
+            <div class="flex items-start justify-between gap-4 pb-3 border-b border-slate-100">
+                <div>
+                    <span id="detailCategory" class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 capitalize">Category</span>
+                    <h3 id="detailTitle" class="text-xl font-bold text-slate-900 mt-2">Query Title</h3>
+                    <p id="detailMeta" class="text-xs text-slate-500 mt-1">Posted by Author · Date</p>
+                </div>
+                <button onclick="document.getElementById('detailModal').close()" class="text-slate-400 hover:text-slate-600 p-1">
+                    <span class="material-symbols-outlined text-[20px]">close</span>
+                </button>
+            </div>
+
+            <div id="detailContent" class="text-sm text-slate-700 leading-relaxed whitespace-pre-wrap"></div>
+
+            <div id="detailAttachment" class="hidden p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-between text-xs">
+                <span class="text-slate-600 font-medium truncate flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-[16px] text-slate-400">attach_file</span>
+                    <span id="attachmentFileName">Attachment</span>
+                </span>
+                <a id="attachmentDownloadBtn" href="#" target="_blank" class="text-blue-600 font-semibold hover:underline shrink-0">Download</a>
+            </div>
+
+            <div id="detailAcceptedSolution" class="hidden p-4 bg-emerald-50 border border-emerald-200 rounded-xl space-y-1">
+                <div class="flex items-center gap-1.5 text-emerald-700 font-bold text-xs">
+                    <span class="material-symbols-outlined text-[16px]">verified</span>
+                    Accepted Solution
+                </div>
+                <p id="detailAcceptedText" class="text-xs text-emerald-900 leading-relaxed italic"></p>
+            </div>
+
+            <div class="pt-3 border-t border-slate-100 space-y-4">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">Discussion (<span id="commentsCount">0</span>)</h4>
+                <div id="commentsList" class="space-y-3 max-h-60 overflow-y-auto"></div>
+                <form id="addCommentForm" class="flex gap-2 pt-2">
+                    <input type="text" id="commentInput" required placeholder="Write a response or solution..." class="flex-1 px-3.5 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    <button type="submit" class="bg-slate-900 hover:bg-black text-white px-4 py-2 rounded-xl text-xs font-semibold shadow-sm shrink-0">Reply</button>
+                </form>
+            </div>
+        </div>
+    </dialog>
 
     <!-- ====== JAVASCRIPT LOGIC ====== -->
     <script src="js/api.js?v=2"></script>
@@ -212,164 +376,337 @@
         requireAuth();
         populateUserProfile();
 
-        // Search redirect to dashboard
-        document.getElementById('searchInput').addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                const val = e.target.value.trim();
-                window.location.href = val ? `dashboard.html?search=${encodeURIComponent(val)}` : 'dashboard.html';
+        let allQueries = [];
+        let currentFilter = 'all';
+        let currentUserId = null;
+        let currentDetailExpId = null;
+
+        // Custom Category toggle
+        document.getElementById('expCategory').addEventListener('change', (e) => {
+            const container = document.getElementById('customCategoryContainer');
+            if (e.target.value === 'custom') {
+                container.classList.remove('hidden');
+                document.getElementById('expCustomCategory').required = true;
+            } else {
+                container.classList.add('hidden');
+                document.getElementById('expCustomCategory').required = false;
             }
         });
 
+        // Search in page
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            const val = e.target.value.toLowerCase().trim();
+            renderQueries(val);
+        });
+
         // Tab Switching
-        const tabBtns = document.querySelectorAll('.tab-btn');
-        const tabContents = document.querySelectorAll('.tab-content');
-
-        tabBtns.forEach(btn => {
+        const statusBtns = document.querySelectorAll('.status-tab-btn');
+        statusBtns.forEach(btn => {
             btn.addEventListener('click', (e) => {
-                const tab = e.currentTarget.dataset.tab;
-                
-                // Toggle tab button states
-                tabBtns.forEach(b => {
-                    b.classList.remove('bg-blue-600', 'text-white', 'shadow-sm', 'font-bold');
-                    b.classList.add('bg-slate-100', 'text-slate-600', 'font-semibold');
+                statusBtns.forEach(b => {
+                    b.classList.remove('bg-blue-600', 'text-white', 'shadow-sm', 'font-semibold');
+                    b.classList.add('bg-slate-100', 'text-slate-600', 'font-medium');
                 });
-                e.currentTarget.classList.remove('bg-slate-100', 'text-slate-600', 'font-semibold');
-                e.currentTarget.classList.add('bg-blue-600', 'text-white', 'shadow-sm', 'font-bold');
+                const target = e.currentTarget;
+                target.classList.remove('bg-slate-100', 'text-slate-600', 'font-medium');
+                target.classList.add('bg-blue-600', 'text-white', 'shadow-sm', 'font-semibold');
 
-                // Toggle visibility
-                tabContents.forEach(c => {
-                    if (c.id === `tab-${tab}`) {
-                        c.classList.remove('hidden');
-                    } else {
-                        c.classList.add('hidden');
-                    }
-                });
+                currentFilter = target.dataset.status;
+                renderQueries(document.getElementById('searchInput').value.toLowerCase().trim());
             });
         });
 
-        // ====== LOAD MY PROBLEMS ======
+        // Load user problems
         async function loadMyProblems() {
-            const askedContainer = document.getElementById('tab-asked');
-            const solvedContainer = document.getElementById('tab-solved');
-
             const userRes = await apiRequest('/auth/me');
             if (userRes.status !== 200) return;
-            const currentUserId = userRes.data.data.user_id || userRes.data.data.id;
+            currentUserId = userRes.data.data.user_id || userRes.data.data.id;
 
-            // Set Header Avatar initial
             const initial = (userRes.data.data.name || 'U').charAt(0).toUpperCase();
             const initEl = document.getElementById('userAvatarInitial');
             if (initEl) initEl.textContent = initial;
 
-            const response = await apiRequest(`/experiences?author_id=${currentUserId}`);
+            const res = await apiRequest(`/experiences?author_id=${currentUserId}`);
+            if (res.status === 200 && res.data.success) {
+                allQueries = res.data.data || [];
 
-            if (response.status === 200 && response.data.success) {
-                const askedList = response.data.data || [];
-                const solvedList = askedList.filter(e => e.is_resolved === true);
-                const openList = askedList.filter(e => !e.is_resolved);
+                // Stats calculation
+                const total = allQueries.length;
+                const solved = allQueries.filter(q => q.is_resolved).length;
+                const open = total - solved;
+                const totalReplies = allQueries.reduce((sum, q) => sum + (q.comments_count || 0), 0);
 
-                // Update Stat Strip
-                document.getElementById('stat-my-asked').textContent = askedList.length;
-                document.getElementById('stat-my-solved').textContent = solvedList.length;
-                document.getElementById('stat-my-open').textContent = openList.length;
+                document.getElementById('stat-total').textContent = total;
+                document.getElementById('stat-solved').textContent = solved;
+                document.getElementById('stat-open').textContent = open;
+                document.getElementById('stat-replies').textContent = totalReplies;
 
-                // Update Tab Buttons
-                document.getElementById('asked-count').textContent = `Asked (${askedList.length})`;
-                document.getElementById('solved-count').textContent = `Solved (${solvedList.length})`;
+                // Resolution Rate Widget
+                const rate = total > 0 ? Math.round((solved / total) * 100) : 0;
+                document.getElementById('resolutionRateNumber').textContent = `${rate}%`;
+                document.getElementById('resolutionBar').style.width = `${rate}%`;
 
-                // Render Asked Tab
-                if (askedList.length === 0) {
-                    askedContainer.innerHTML = `
-                        <div class="col-span-1 md:col-span-2 lg:col-span-3 text-center py-16 bg-white rounded-2xl border border-dashed border-slate-200 space-y-2">
-                            <span class="material-symbols-outlined text-4xl text-slate-300">help_outline</span>
-                            <h3 class="text-sm font-bold text-slate-800">No Queries Asked Yet</h3>
-                            <p class="text-xs text-slate-500">You haven't posted any inquiries or problems to the community.</p>
-                            <div class="pt-2">
-                                <a href="dashboard.html" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-900 text-white font-semibold text-xs hover:bg-black shadow-sm">
-                                    Ask a Query on Dashboard
-                                </a>
-                            </div>
-                        </div>
-                    `;
-                } else {
-                    askedContainer.innerHTML = askedList.map(exp => `
-                        <div class="bg-white rounded-2xl p-5 border border-slate-200/70 shadow-sm hover:shadow-md transition-all flex flex-col justify-between space-y-3 group">
-                            <div class="space-y-2">
-                                <div class="flex items-center justify-between text-xs">
-                                    <span class="bg-slate-100 text-slate-600 font-medium px-2.5 py-0.5 rounded-md text-[10px] capitalize">${exp.category || 'General'}</span>
-                                    <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold ${exp.is_resolved ? 'bg-emerald-50 text-emerald-700' : 'bg-amber-50 text-amber-700'}">
-                                        ${exp.is_resolved ? 'Solved' : 'Open'}
-                                    </span>
-                                </div>
-                                <h3 class="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-2 leading-snug">
-                                    <a href="dashboard.html">${exp.title}</a>
-                                </h3>
-                                <p class="text-xs text-slate-500 line-clamp-2">${exp.content || ''}</p>
-                            </div>
-
-                            <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
-                                <div class="flex items-center gap-3 text-[11px]">
-                                    <span class="flex items-center gap-1">
-                                        <span class="material-symbols-outlined text-[14px]">chat_bubble</span>
-                                        ${exp.comments_count || 0}
-                                    </span>
-                                    <span class="flex items-center gap-1">
-                                        <span class="material-symbols-outlined text-[14px]">favorite</span>
-                                        ${exp.likes_count || 0}
-                                    </span>
-                                </div>
-                                <a href="dashboard.html" class="text-blue-600 font-semibold text-[11px] hover:underline flex items-center gap-1">
-                                    View in Feed <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
-                                </a>
-                            </div>
-                        </div>
-                    `).join('');
-                }
-
-                // Render Solved Tab
-                if (solvedList.length === 0) {
-                    solvedContainer.innerHTML = `
-                        <div class="col-span-1 md:col-span-2 lg:col-span-3 text-center py-16 bg-white rounded-2xl border border-dashed border-slate-200 space-y-2">
-                            <span class="material-symbols-outlined text-4xl text-slate-300">check_circle_outline</span>
-                            <h3 class="text-sm font-bold text-slate-800">No Solved Queries Yet</h3>
-                            <p class="text-xs text-slate-500">When you accept a solution for one of your queries, it will appear here.</p>
-                        </div>
-                    `;
-                } else {
-                    solvedContainer.innerHTML = solvedList.map(exp => `
-                        <div class="bg-white rounded-2xl p-5 border border-slate-200/70 shadow-sm hover:shadow-md transition-all flex flex-col justify-between space-y-3 group">
-                            <div class="space-y-2">
-                                <div class="flex items-center justify-between text-xs">
-                                    <span class="flex items-center gap-1 text-emerald-700 font-bold text-[11px]">
-                                        <span class="material-symbols-outlined text-[15px]">verified</span>
-                                        Resolved
-                                    </span>
-                                    <span class="text-slate-400 text-[10px]">${new Date(exp.created_at).toLocaleDateString()}</span>
-                                </div>
-                                <h3 class="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-2 leading-snug">
-                                    <a href="dashboard.html">${exp.title}</a>
-                                </h3>
-                                ${exp.accepted_answer ? `
-                                    <div class="p-3 bg-emerald-50/70 border border-emerald-100 rounded-xl space-y-1">
-                                        <div class="text-[10px] font-bold uppercase text-emerald-700">Accepted Solution:</div>
-                                        <p class="text-xs text-emerald-950 line-clamp-2 italic">"${exp.accepted_answer}"</p>
-                                    </div>
-                                ` : ''}
-                            </div>
-
-                            <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-                                <span class="bg-slate-100 text-slate-600 font-medium px-2 py-0.5 rounded text-[10px] capitalize">${exp.category || 'General'}</span>
-                                <a href="dashboard.html" class="text-blue-600 font-semibold text-[11px] hover:underline flex items-center gap-1">
-                                    View Query <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
-                                </a>
-                            </div>
-                        </div>
-                    `).join('');
-                }
+                renderQueries();
             } else {
-                askedContainer.innerHTML = '<div class="col-span-3 text-center py-12 text-rose-500 text-xs">Failed to load queries.</div>';
+                document.getElementById('problemFeed').innerHTML = '<div class="py-12 text-center text-rose-500 text-xs">Failed to load inquiries.</div>';
             }
         }
+
+        // Render queries in rows
+        function renderQueries(searchQuery = '') {
+            const feed = document.getElementById('problemFeed');
+            const badge = document.getElementById('queryCountBadge');
+
+            let filtered = allQueries;
+
+            // Status filter
+            if (currentFilter === 'open') {
+                filtered = filtered.filter(q => !q.is_resolved);
+            } else if (currentFilter === 'solved') {
+                filtered = filtered.filter(q => q.is_resolved);
+            }
+
+            // Search filter
+            if (searchQuery) {
+                filtered = filtered.filter(q => 
+                    (q.title && q.title.toLowerCase().includes(searchQuery)) ||
+                    (q.content && q.content.toLowerCase().includes(searchQuery)) ||
+                    (q.category && q.category.toLowerCase().includes(searchQuery))
+                );
+            }
+
+            badge.textContent = `${filtered.length} queries`;
+
+            if (filtered.length === 0) {
+                feed.innerHTML = `
+                    <div class="py-16 text-center text-slate-400 space-y-2">
+                        <span class="material-symbols-outlined text-4xl text-slate-300">search_off</span>
+                        <div class="text-sm font-semibold text-slate-600">No inquiries found</div>
+                        <div class="text-xs text-slate-400">Try adjusting your filter or search terms.</div>
+                    </div>
+                `;
+                return;
+            }
+
+            feed.innerHTML = filtered.map(exp => {
+                const authorInitial = (exp.author_name || 'U').charAt(0).toUpperCase();
+
+                return `
+                    <div onclick="openExperienceDetail(${exp.experience_id})" class="p-4 rounded-xl hover:bg-slate-50/90 transition-colors cursor-pointer group space-y-2">
+                        <div class="flex items-center justify-between text-xs">
+                            <div class="flex items-center gap-2">
+                                <div class="w-6 h-6 rounded-full bg-blue-100 text-blue-700 font-bold text-[10px] flex items-center justify-center">
+                                    ${authorInitial}
+                                </div>
+                                <span class="font-semibold text-slate-800">${exp.author_name || 'You'}</span>
+                                ${exp.semester ? `<span class="bg-slate-100 text-slate-500 font-medium px-1.5 py-0.5 rounded text-[10px]">${exp.semester}</span>` : ''}
+                                <span class="text-slate-400 text-[11px]">· ${new Date(exp.created_at).toLocaleDateString()}</span>
+                            </div>
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold ${exp.is_resolved ? 'bg-emerald-50 text-emerald-700' : 'bg-amber-50 text-amber-700'}">
+                                ${exp.is_resolved ? 'Solved' : 'Open'}
+                            </span>
+                        </div>
+
+                        <h3 class="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors leading-snug">
+                            ${exp.title}
+                        </h3>
+
+                        <p class="text-xs text-slate-500 line-clamp-1">
+                            ${exp.content || ''}
+                        </p>
+
+                        ${exp.accepted_answer ? `
+                            <div class="p-2.5 bg-emerald-50/80 border border-emerald-100 rounded-lg text-xs space-y-0.5">
+                                <div class="text-[10px] font-bold text-emerald-700 flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-[13px]">verified</span>
+                                    Accepted Solution
+                                </div>
+                                <p class="text-emerald-950 line-clamp-1 italic text-[11px]">"${exp.accepted_answer}"</p>
+                            </div>
+                        ` : ''}
+
+                        <div class="flex items-center justify-between pt-1 text-xs">
+                            <div class="flex items-center gap-1.5">
+                                <span class="bg-slate-100 text-slate-600 font-medium px-2 py-0.5 rounded-md text-[10px] capitalize">${exp.category || 'General'}</span>
+                                ${exp.company ? `<span class="bg-slate-50 text-slate-500 border border-slate-200 px-2 py-0.5 rounded-md text-[10px]">${exp.company}</span>` : ''}
+                            </div>
+                            <div class="flex items-center gap-3 text-slate-400 text-[11px]">
+                                <span class="flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-[14px]">favorite</span>
+                                    ${exp.likes_count || 0}
+                                </span>
+                                <span class="flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-[14px]">chat_bubble</span>
+                                    ${exp.comments_count || 0}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Open Detail Modal
+        async function openExperienceDetail(id) {
+            currentDetailExpId = id;
+            const res = await apiRequest(`/experiences/${id}`);
+            if (res.status === 200 && res.data.success) {
+                const exp = res.data.data;
+                document.getElementById('detailCategory').textContent = exp.category || 'General';
+                document.getElementById('detailTitle').textContent = exp.title;
+                document.getElementById('detailMeta').textContent = `Posted on ${new Date(exp.created_at).toLocaleDateString()}`;
+                document.getElementById('detailContent').textContent = exp.content || '';
+
+                const attDiv = document.getElementById('detailAttachment');
+                if (exp.file_url) {
+                    attDiv.classList.remove('hidden');
+                    document.getElementById('attachmentFileName').textContent = exp.file_url.split('/').pop() || 'Attachment';
+                    document.getElementById('attachmentDownloadBtn').href = exp.file_url;
+                } else {
+                    attDiv.classList.add('hidden');
+                }
+
+                const solDiv = document.getElementById('detailAcceptedSolution');
+                if (exp.accepted_answer) {
+                    solDiv.classList.remove('hidden');
+                    document.getElementById('detailAcceptedText').textContent = exp.accepted_answer;
+                } else {
+                    solDiv.classList.add('hidden');
+                }
+
+                loadComments(id, exp.author_id);
+                document.getElementById('detailModal').showModal();
+            }
+        }
+
+        async function loadComments(expId, queryAuthorId) {
+            const list = document.getElementById('commentsList');
+            const countEl = document.getElementById('commentsCount');
+            list.innerHTML = '<div class="text-center text-xs text-slate-400 py-4">Loading replies...</div>';
+
+            const res = await apiRequest(`/experiences/${expId}/comments`);
+            if (res.status === 200 && res.data.success) {
+                const comments = res.data.data || [];
+                countEl.textContent = comments.length;
+
+                if (comments.length === 0) {
+                    list.innerHTML = '<div class="text-center text-xs text-slate-400 py-3">No responses yet.</div>';
+                    return;
+                }
+
+                const isOwner = currentUserId && (queryAuthorId === currentUserId);
+
+                list.innerHTML = comments.map(c => `
+                    <div class="p-3 rounded-xl ${c.is_accepted ? 'bg-emerald-50/80 border border-emerald-200' : 'bg-slate-50'} space-y-1 text-xs">
+                        <div class="flex items-center justify-between text-slate-500">
+                            <span class="font-bold text-slate-800">${c.author_name || c.user_name || 'User'}</span>
+                            <span class="text-[10px]">${new Date(c.created_at).toLocaleDateString()}</span>
+                        </div>
+                        <p class="text-slate-700 leading-relaxed">${c.comment || c.content}</p>
+                        <div class="flex items-center justify-between pt-1">
+                            ${c.is_accepted ? `
+                                <span class="text-emerald-700 font-bold text-[10px] flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-[14px]">check_circle</span>
+                                    Accepted Answer
+                                </span>
+                            ` : (isOwner ? `
+                                <button onclick="acceptSolution(${c.comment_id})" class="text-blue-600 hover:text-blue-800 font-semibold text-[11px]">
+                                    Accept as Solution
+                                </button>
+                            ` : '<span></span>')}
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Add Comment
+        document.getElementById('addCommentForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const input = document.getElementById('commentInput');
+            const content = input.value.trim();
+            if (!content || !currentDetailExpId) return;
+
+            const res = await apiRequest(`/experiences/${currentDetailExpId}/comments`, {
+                method: 'POST',
+                body: { comment: content, content: content }
+            });
+
+            if (res.status === 200 || res.status === 201) {
+                input.value = '';
+                openExperienceDetail(currentDetailExpId);
+                loadMyProblems();
+            } else {
+                let errorMsg = res.data.message || 'Failed to submit response';
+                if (res.data.errors) {
+                    errorMsg += ':\n• ' + Object.values(res.data.errors).join('\n• ');
+                }
+                alert(errorMsg);
+            }
+        });
+
+        // Accept Solution
+        async function acceptSolution(commentId) {
+            const res = await apiRequest(`/comments/${commentId}/accept`, { method: 'PUT' });
+            if (res.status === 200 && res.data.success) {
+                openExperienceDetail(currentDetailExpId);
+                loadMyProblems();
+            } else {
+                alert(res.data.message || 'Failed to accept solution');
+            }
+        }
+
+        // Create Query
+        document.getElementById('createExpForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('submitExpBtn');
+            btn.disabled = true;
+            btn.textContent = 'Posting...';
+
+            let category = document.getElementById('expCategory').value;
+            if (category === 'custom') {
+                category = document.getElementById('expCustomCategory').value.trim();
+            }
+
+            const body = {
+                title: document.getElementById('expTitle').value.trim(),
+                category: category,
+                content: document.getElementById('expContent').value.trim(),
+                company: document.getElementById('expCompany').value.trim(),
+                semester: document.getElementById('expSemester').value.trim(),
+            };
+
+            const res = await apiRequest('/experiences', {
+                method: 'POST',
+                body: body
+            });
+
+            if (res.status === 200 || res.status === 201) {
+                const expId = res.data.data.experience_id;
+                const fileInput = document.getElementById('expFile');
+                if (fileInput.files.length > 0) {
+                    const formData = new FormData();
+                    formData.append('file', fileInput.files[0]);
+                    await apiRequest(`/experiences/${expId}/upload`, {
+                        method: 'POST',
+                        body: formData,
+                        isFormData: true
+                    });
+                }
+                document.getElementById('createModal').close();
+                e.target.reset();
+                document.getElementById('customCategoryContainer').classList.add('hidden');
+                loadMyProblems();
+            } else {
+                let errorMsg = res.data.message || 'Failed to post query';
+                if (res.data.errors) {
+                    errorMsg += ':\n• ' + Object.values(res.data.errors).join('\n• ');
+                }
+                alert(errorMsg);
+            }
+            btn.disabled = false;
+            btn.textContent = 'Post Query';
+        });
 
         document.addEventListener('DOMContentLoaded', loadMyProblems);
     </script>
