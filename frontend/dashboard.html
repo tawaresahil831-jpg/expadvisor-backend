@@ -1147,12 +1147,17 @@
                                 <input id="searchInput" class="bg-transparent border-none outline-none w-full px-3 text-body-md text-on-surface placeholder:text-on-surface-variant/60" placeholder="Search queries..." type="text" />
                             </div>
                             <div class="flex items-center justify-between overflow-x-auto pb-2 gap-4">
-                                <div class="flex gap-2 shrink-0">
+                                <div class="flex gap-2 shrink-0 overflow-x-auto pb-1 sm:pb-0">
                                     <span class="text-label-sm text-on-surface-variant self-center mr-2">Category:</span>
-                                    <button class="px-4 py-1.5 rounded-full bg-secondary text-on-secondary font-label-sm filter-cat-btn">All</button>
-                                    <button class="px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm hover:bg-surface-container-highest filter-cat-btn">Tech</button>
-                                    <button class="px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm hover:bg-surface-container-highest filter-cat-btn">Career</button>
-                                    <button class="px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm hover:bg-surface-container-highest filter-cat-btn">Design</button>
+                                    <button data-category="" class="px-4 py-1.5 rounded-full bg-secondary text-on-secondary font-label-sm filter-cat-btn whitespace-nowrap">All</button>
+                                    <button data-category="project" class="px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm hover:bg-surface-container-highest filter-cat-btn whitespace-nowrap">Projects</button>
+                                    <button data-category="course" class="px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm hover:bg-surface-container-highest filter-cat-btn whitespace-nowrap">Courses</button>
+                                    <button data-category="internship" class="px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm hover:bg-surface-container-highest filter-cat-btn whitespace-nowrap">Internships</button>
+                                    <button data-category="placement" class="px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm hover:bg-surface-container-highest filter-cat-btn whitespace-nowrap">Placements</button>
+                                    <button data-category="tech" class="px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm hover:bg-surface-container-highest filter-cat-btn whitespace-nowrap">Tech</button>
+                                    <button data-category="career" class="px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm hover:bg-surface-container-highest filter-cat-btn whitespace-nowrap">Career</button>
+                                    <button data-category="design" class="px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm hover:bg-surface-container-highest filter-cat-btn whitespace-nowrap">Design</button>
+                                    <button data-category="other" class="px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm hover:bg-surface-container-highest filter-cat-btn whitespace-nowrap">Other</button>
                                 </div>
                                 <div class="flex gap-2 shrink-0">
                                     <span class="text-label-sm text-on-surface-variant self-center mr-2">Status:</span>
@@ -1221,12 +1226,17 @@
                 <input id="expTitle" type="text" placeholder="Title" required class="w-full px-4 py-3 rounded-xl bg-surface border border-outline-variant/50 text-body-md text-on-surface focus:outline-none focus:border-secondary focus:ring-2 focus:ring-secondary/50">
                 <input id="expCompany" type="text" placeholder="Company/Institution" required class="w-full px-4 py-3 rounded-xl bg-surface border border-outline-variant/50 text-body-md text-on-surface focus:outline-none focus:border-secondary focus:ring-2 focus:ring-secondary/50">
                 <select id="expCategory" required class="w-full px-4 py-3 rounded-xl bg-surface border border-outline-variant/50 text-body-md text-on-surface focus:outline-none focus:border-secondary focus:ring-2 focus:ring-secondary/50">
+                    <option value="project">Project</option>
+                    <option value="course">Course</option>
                     <option value="internship">Internship</option>
                     <option value="placement">Placement</option>
-                    <option value="course">Course</option>
-                    <option value="project">Project</option>
+                    <option value="tech">Tech</option>
+                    <option value="career">Career</option>
+                    <option value="design">Design</option>
                     <option value="other">Other</option>
+                    <option value="custom">Custom (type your own)...</option>
                 </select>
+                <input id="expCustomCategory" type="text" placeholder="Enter custom category name..." class="hidden w-full px-4 py-3 rounded-xl bg-surface border border-outline-variant/50 text-body-md text-on-surface focus:outline-none focus:border-secondary focus:ring-2 focus:ring-secondary/50">
                 <select id="expDifficulty" required class="w-full px-4 py-3 rounded-xl bg-surface border border-outline-variant/50 text-body-md text-on-surface focus:outline-none focus:border-secondary focus:ring-2 focus:ring-secondary/50">
                     <option value="1st">Semester 1</option>
                     <option value="2nd">Semester 2</option>
@@ -1327,7 +1337,7 @@
                 target.classList.add('bg-secondary', 'text-on-secondary', 'shadow-sm');
                 
                 // Set currentCategory and reload
-                currentCategory = target.textContent.trim() === 'All' ? '' : target.textContent.trim();
+                currentCategory = target.hasAttribute('data-category') ? target.getAttribute('data-category') : (target.textContent.trim() === 'All' ? '' : target.textContent.trim().toLowerCase());
                 currentPage = 1;
                 loadExperiences();
             });
@@ -1394,7 +1404,8 @@
         const catBtns = document.querySelectorAll('.filter-cat-btn');
         let matched = false;
         catBtns.forEach(b => {
-            if (b.textContent.trim().toLowerCase() === tag.toLowerCase()) {
+            const bCat = (b.getAttribute('data-category') || b.textContent.trim()).toLowerCase();
+            if (bCat === tag.toLowerCase()) {
                 b.click(); // This will trigger the category filter
                 matched = true;
             }
@@ -1407,6 +1418,12 @@
                 b.classList.remove('bg-secondary', 'text-on-secondary', 'shadow-sm');
                 b.classList.add('bg-surface-container-high', 'text-on-surface-variant', 'hover:bg-surface-container-highest');
             });
+            // Highlight 'All'
+            const allBtn = document.querySelector('.filter-cat-btn[data-category=""]');
+            if (allBtn) {
+                allBtn.classList.remove('bg-surface-container-high', 'text-on-surface-variant', 'hover:bg-surface-container-highest');
+                allBtn.classList.add('bg-secondary', 'text-on-secondary', 'shadow-sm');
+            }
             currentCategory = '';
         }
         currentPage = 1;
@@ -1480,7 +1497,7 @@
                         <p onclick="openExperienceDetail(${exp.experience_id})" class="font-body-md text-on-surface-variant line-clamp-2 cursor-pointer">${formatHashtags(exp.content)}</p>
                     </div>
                     <div class="flex flex-wrap gap-2">
-                        <span class="px-2.5 py-1 rounded-md bg-surface-container-high text-on-surface-variant font-label-sm">${exp.category || 'General'}</span>
+                        <span class="px-2.5 py-1 rounded-md bg-surface-container-high text-on-surface-variant font-label-sm capitalize">${exp.category || 'General'}</span>
                         <span class="px-2.5 py-1 rounded-md border border-outline-variant/30 text-on-surface-variant font-label-sm">${exp.company || 'Company'}</span>
                     </div>
                     ${exp.accepted_answer ? `
@@ -1712,7 +1729,25 @@
             const exp = res.data.data;
             document.getElementById('expTitle').value = exp.title;
             document.getElementById('expCompany').value = exp.company || '';
-            document.getElementById('expCategory').value = exp.category || 'General';
+
+            const catSelect = document.getElementById('expCategory');
+            const customInput = document.getElementById('expCustomCategory');
+            const catVal = (exp.category || '').toLowerCase();
+            const hasOption = Array.from(catSelect.options).some(o => o.value === catVal);
+            if (hasOption) {
+                catSelect.value = catVal;
+                if (customInput) customInput.classList.add('hidden');
+            } else if (catVal) {
+                catSelect.value = 'custom';
+                if (customInput) {
+                    customInput.value = exp.category;
+                    customInput.classList.remove('hidden');
+                }
+            } else {
+                catSelect.value = 'other';
+                if (customInput) customInput.classList.add('hidden');
+            }
+
             document.getElementById('expDifficulty').value = exp.semester || 'All';
             document.getElementById('expDetails').value = exp.content || '';
             
@@ -1725,11 +1760,26 @@
         }
     }
 
+    // Toggle custom category input when user selects 'custom'
+    const expCatSelect = document.getElementById('expCategory');
+    const expCustomCatInput = document.getElementById('expCustomCategory');
+    if (expCatSelect && expCustomCatInput) {
+        expCatSelect.addEventListener('change', () => {
+            if (expCatSelect.value === 'custom') {
+                expCustomCatInput.classList.remove('hidden');
+                expCustomCatInput.focus();
+            } else {
+                expCustomCatInput.classList.add('hidden');
+            }
+        });
+    }
+
     // Reset currentEditExpId when modal closes (e.g. Cancel button)
     document.querySelector('#createModal button[onclick="document.getElementById(\'createModal\').close()"]').addEventListener('click', () => {
         currentEditExpId = null;
         document.querySelector('#createModal h3').textContent = 'Ask a Query';
         document.getElementById('createExpForm').reset();
+        if (expCustomCatInput) expCustomCatInput.classList.add('hidden');
     });
 
     document.getElementById('createExpForm').addEventListener('submit', async (e) => {
@@ -1738,10 +1788,15 @@
         btn.disabled = true;
         btn.textContent = 'Submitting...';
 
+        let categoryVal = document.getElementById('expCategory').value;
+        if (categoryVal === 'custom') {
+            categoryVal = (document.getElementById('expCustomCategory').value.trim()) || 'other';
+        }
+
         const requestBody = {
             title: document.getElementById('expTitle').value,
             company: document.getElementById('expCompany').value,
-            category: document.getElementById('expCategory').value,
+            category: categoryVal,
             semester: document.getElementById('expDifficulty').value,
             content: document.getElementById('expDetails').value
         };
