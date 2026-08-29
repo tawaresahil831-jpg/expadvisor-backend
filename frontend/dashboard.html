@@ -1095,22 +1095,19 @@
                         <h1 class="font-display-lg text-display-lg text-on-surface">Community Dashboard</h1>
                         <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Discover active problems, collaborate with peers, and sharpen your skills. Your expertise is needed.</p>
                     </div>
-                    <div class="z-10 relative bg-surface-container-high rounded-xl p-4 shadow-sm border border-outline-variant/20 max-w-sm ml-auto animate-fade-in-up">
+                    <div id="trendingCard" class="z-10 relative bg-surface-container-high rounded-xl p-4 shadow-sm border border-outline-variant/20 max-w-sm ml-auto animate-fade-in-up transition-all hover:shadow-md cursor-pointer group">
                         <div class="flex items-center justify-between mb-2">
                             <div class="flex items-center gap-2 text-error">
                                 <span class="material-symbols-outlined text-[18px]">local_fire_department</span>
                                 <span class="font-label-md text-label-sm font-bold uppercase tracking-wider">Trending Now</span>
                             </div>
-                            <span class="px-2 py-0.5 rounded bg-primary/10 text-primary text-[10px] font-bold uppercase">Web Dev</span>
+                            <span id="trendingCategory" class="px-2 py-0.5 rounded bg-primary/10 text-primary text-[10px] font-bold uppercase">Loading...</span>
                         </div>
-                        <h3 class="font-headline-sm text-headline-sm text-on-surface mb-3">How to optimize React rendering performance?</h3>
+                        <h3 id="trendingTitle" class="font-headline-sm text-headline-sm text-on-surface mb-3 line-clamp-2 group-hover:text-secondary transition-colors">Loading trending discussion...</h3>
                         <div class="flex items-center justify-between">
-                            <div class="flex -space-x-2">
-                                <img src="https://i.pravatar.cc/100?img=1" class="w-6 h-6 rounded-full border-2 border-surface">
-                                <img src="https://i.pravatar.cc/100?img=2" class="w-6 h-6 rounded-full border-2 border-surface">
-                                <img src="https://i.pravatar.cc/100?img=3" class="w-6 h-6 rounded-full border-2 border-surface">
+                            <div id="trendingAvatars" class="flex -space-x-2">
                             </div>
-                            <button class="text-primary font-label-md text-label-sm hover:underline flex items-center gap-1">
+                            <button id="trendingBtn" class="text-primary font-label-md text-label-sm hover:underline flex items-center gap-1">
                                 Join Discussion <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
                             </button>
                         </div>
@@ -1603,6 +1600,7 @@
         if (response.status === 200 && response.data.success) {
             loadExperiences();
             loadCommunityStats();
+            loadTrendingQuery();
         } else {
             alert(response.data.message || 'Failed to delete experience');
         }
@@ -1688,6 +1686,7 @@
             openExperienceDetail(currentDetailExpId);
             loadExperiences();
             loadCommunityStats();
+            loadTrendingQuery();
         } else {
             alert(res.data.message || 'Failed to accept solution');
         }
@@ -1875,6 +1874,7 @@
             document.querySelector('#createModal h3').textContent = 'Ask a Query';
             loadExperiences();
             loadCommunityStats();
+            loadTrendingQuery();
         } else {
             let errorMsg = response.data.message || 'Failed to create experience';
             if (response.data.errors) {
@@ -1908,9 +1908,63 @@
         }
     }
 
+    async function loadTrendingQuery() {
+        const card = document.getElementById('trendingCard');
+        if (!card) return;
+        
+        const catEl = document.getElementById('trendingCategory');
+        const titleEl = document.getElementById('trendingTitle');
+        const avatarsEl = document.getElementById('trendingAvatars');
+        const btnEl = document.getElementById('trendingBtn');
+        
+        const res = await apiRequest('/experiences/trending');
+        if (res.status === 200 && res.data.success && res.data.data) {
+            const exp = res.data.data;
+            if (catEl) catEl.textContent = exp.category || 'General';
+            if (titleEl) titleEl.innerHTML = formatHashtags(exp.title);
+            
+            if (avatarsEl) {
+                const colors = ['bg-primary text-on-primary', 'bg-secondary text-on-secondary', 'bg-tertiary text-white'];
+                const participants = exp.participants || [];
+                if (participants.length > 0) {
+                    avatarsEl.innerHTML = participants.map((p, idx) => `
+                        <div class="w-6 h-6 rounded-full border-2 border-surface flex items-center justify-center font-bold text-[10px] ${colors[idx % colors.length]}" title="${p.name}">
+                            ${p.initial}
+                        </div>
+                    `).join('');
+                } else {
+                    avatarsEl.innerHTML = `
+                        <div class="w-6 h-6 rounded-full border-2 border-surface flex items-center justify-center font-bold text-[10px] bg-secondary text-on-secondary">
+                            ${(exp.author_name || 'U')[0].toUpperCase()}
+                        </div>
+                    `;
+                }
+            }
+            
+            card.onclick = () => openExperienceDetail(exp.experience_id);
+            if (btnEl) btnEl.onclick = (e) => {
+                e.stopPropagation();
+                openExperienceDetail(exp.experience_id);
+            };
+        } else {
+            if (catEl) catEl.textContent = 'Community';
+            if (titleEl) titleEl.textContent = 'Start the first trending discussion!';
+            if (avatarsEl) avatarsEl.innerHTML = '';
+            if (btnEl) {
+                btnEl.innerHTML = 'Ask a Query <span class="material-symbols-outlined text-[14px]">add</span>';
+                btnEl.onclick = (e) => {
+                    e.stopPropagation();
+                    document.getElementById('createModal').showModal();
+                };
+            }
+            card.onclick = () => document.getElementById('createModal').showModal();
+        }
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
         loadExperiences();
         loadCommunityStats();
+        loadTrendingQuery();
     });
 </script>
 
