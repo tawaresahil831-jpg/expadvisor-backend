@@ -1502,129 +1502,9 @@
 
                         <!-- ====== TAB: ASKED ====== -->
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 tab-content" id="tab-asked">
-
-                            <!-- Card 1: Open -->
-                            <div class="bg-surface-container-lowest rounded-[20px] p-6 flex flex-col gap-4 shadow-sm hover:shadow-md transition-all group relative overflow-hidden">
-                                <div class="absolute top-0 right-0 w-24 h-24 bg-error-container rounded-bl-full opacity-20 -z-10 transition-transform group-hover:scale-110"></div>
-                                <div class="flex justify-between items-start gap-4">
-                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm">
-                                        Open
-                                    </span>
-                                    <span class="font-label-sm text-label-sm text-on-surface-variant">2 hours ago</span>
-                                </div>
-                                <div class="flex flex-col gap-1 flex-1">
-                                    <span class="font-label-sm text-label-sm text-secondary tracking-widest uppercase">Calculus III</span>
-                                    <h3 class="font-headline-md text-headline-md text-on-surface line-clamp-2 group-hover:text-primary transition-colors">
-                                        Stokes' Theorem surface integral orientation
-                                    </h3>
-                                    <p class="font-body-md text-body-md text-on-surface-variant line-clamp-3 mt-2">
-                                        I'm struggling to determine the correct normal vector orientation when applying Stokes' Theorem to a hemispherical surface bounded by the xy-plane.
-                                    </p>
-                                </div>
-                                <div class="pt-4 border-t border-outline-variant/20 flex items-center justify-between">
-                                    <div class="flex -space-x-2">
-                                        <div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center shadow-sm border-2 border-surface-container-lowest">
-                                            <span class="material-symbols-outlined text-[16px] text-on-surface-variant">person_off</span>
-                                        </div>
-                                    </div>
-                                    <button class="text-primary font-label-md text-label-md flex items-center gap-1 hover:gap-2 transition-all">
-                                        View <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
-                                    </button>
-                                </div>
+                            <div class="col-span-3 text-center py-12">
+                                <p class="text-on-surface-variant font-label-md">Loading your queries...</p>
                             </div>
-
-                            <!-- Card 2: In Progress -->
-                            <div class="bg-surface-container-lowest rounded-[20px] p-6 flex flex-col gap-4 shadow-sm hover:shadow-md transition-all group relative overflow-hidden">
-                                <div class="absolute top-0 right-0 w-24 h-24 bg-surface-variant rounded-bl-full opacity-30 -z-10 transition-transform group-hover:scale-110"></div>
-                                <div class="flex justify-between items-start gap-4">
-                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full bg-surface-variant text-on-surface-variant font-label-sm text-label-sm flex gap-1">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
-                                        In Progress
-                                    </span>
-                                    <span class="font-label-sm text-label-sm text-on-surface-variant">Yesterday</span>
-                                </div>
-                                <div class="flex flex-col gap-1 flex-1">
-                                    <span class="font-label-sm text-label-sm text-secondary tracking-widest uppercase">Organic Chem</span>
-                                    <h3 class="font-headline-md text-headline-md text-on-surface line-clamp-2 group-hover:text-primary transition-colors">
-                                        E1 vs E2 elimination mechanism prediction
-                                    </h3>
-                                    <p class="font-body-md text-body-md text-on-surface-variant line-clamp-3 mt-2">
-                                        Given a secondary alkyl halide and a bulky base like t-butoxide, how can I definitively predict if E1 or E2 will dominate?
-                                    </p>
-                                </div>
-                                <div class="pt-4 border-t border-outline-variant/20 flex items-center justify-between">
-                                    <div class="flex items-center gap-2">
-                                        <img class="w-8 h-8 rounded-full object-cover shadow-sm border-2 border-surface-container-lowest" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCODyiDyeqau1jegQiDWNVFCFPoxNpg4ws2EZLO8rNr_oQMYqlgqTnvJmKHXRXbv8tUMWQKCdnw_V0wWx4xYSow7K2P1Hjc_FgLJRf2uE5aMWDfQWcbQ3NyO7ocfCo5lb1FqC7IrmMLZUuQoAUMSVmwtPBPcYDOUl7ecJz_MQjc7BQb6QOqXc6y7vq4EZ9tBUfrlt3uyhk1yTZfQCqZAa15-KAkG_cy0UpvyjfszSN5qIqd2SKqjg2xNg" />
-                                        <span class="font-label-sm text-label-sm text-on-surface-variant">Mentor: Sarah J.</span>
-                                    </div>
-                                    <button class="text-primary font-label-md text-label-md flex items-center gap-1 hover:gap-2 transition-all">
-                                        Join <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- Card 3: Solved -->
-                            <div class="bg-surface-container-lowest rounded-[20px] p-6 flex flex-col gap-4 shadow-sm hover:shadow-md transition-all group relative overflow-hidden">
-                                <div class="absolute top-0 right-0 w-24 h-24 bg-secondary-container rounded-bl-full opacity-10 -z-10 transition-transform group-hover:scale-110"></div>
-                                <div class="flex justify-between items-start gap-4">
-                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full bg-surface-variant text-on-surface-variant font-label-sm text-label-sm">
-                                        Solved
-                                    </span>
-                                    <span class="font-label-sm text-label-sm text-on-surface-variant">Oct 12</span>
-                                </div>
-                                <div class="flex flex-col gap-1 flex-1">
-                                    <span class="font-label-sm text-label-sm text-secondary tracking-widest uppercase">Data Structures</span>
-                                    <h3 class="font-headline-md text-headline-md text-on-surface line-clamp-2 group-hover:text-primary transition-colors">
-                                        Time complexity of AVL Tree balancing
-                                    </h3>
-                                </div>
-                                <div class="pt-4 border-t border-outline-variant/20 flex items-center justify-between">
-                                    <div class="flex items-center gap-1 text-primary">
-                                        <span class="material-symbols-outlined text-[16px] text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
-                                        <span class="material-symbols-outlined text-[16px] text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
-                                        <span class="material-symbols-outlined text-[16px] text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
-                                        <span class="material-symbols-outlined text-[16px] text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
-                                        <span class="material-symbols-outlined text-[16px] text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
-                                    </div>
-                                    <button class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors">
-                                        Review
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- Card 4: Open (extra) -->
-                            <div class="bg-surface-container-lowest rounded-[20px] p-6 flex flex-col gap-4 shadow-sm hover:shadow-md transition-all group relative overflow-hidden">
-                                <div class="absolute top-0 right-0 w-24 h-24 bg-error-container rounded-bl-full opacity-20 -z-10 transition-transform group-hover:scale-110"></div>
-                                <div class="flex justify-between items-start gap-4">
-                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm">
-                                        Open
-                                    </span>
-                                    <span class="font-label-sm text-label-sm text-on-surface-variant">3 days ago</span>
-                                </div>
-                                <div class="flex flex-col gap-1 flex-1">
-                                    <span class="font-label-sm text-label-sm text-secondary tracking-widest uppercase">Discrete Math</span>
-                                    <h3 class="font-headline-md text-headline-md text-on-surface line-clamp-2 group-hover:text-primary transition-colors">
-                                        Graph coloring algorithm optimization
-                                    </h3>
-                                    <p class="font-body-md text-body-md text-on-surface-variant line-clamp-3 mt-2">
-                                        I need help optimizing a graph coloring algorithm for a large dataset. Current implementation is O(n³) and I need to reduce it.
-                                    </p>
-                                </div>
-                                <div class="pt-4 border-t border-outline-variant/20 flex items-center justify-between">
-                                    <div class="flex -space-x-2">
-                                        <div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center shadow-sm border-2 border-surface-container-lowest">
-                                            <span class="material-symbols-outlined text-[16px] text-on-surface-variant">person_off</span>
-                                        </div>
-                                        <div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center shadow-sm border-2 border-surface-container-lowest">
-                                            <span class="material-symbols-outlined text-[16px] text-on-surface-variant">person_off</span>
-                                        </div>
-                                    </div>
-                                    <button class="text-primary font-label-md text-label-md flex items-center gap-1 hover:gap-2 transition-all">
-                                        View <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
-                                    </button>
-                                </div>
-                            </div>
-
                         </div>
 
                         <!-- ====== TAB: SOLVED ====== -->
@@ -1688,37 +1568,37 @@
         const askedContainer = document.getElementById('tab-asked');
         const solvedContainer = document.getElementById('tab-solved');
         
-        askedContainer.innerHTML = '<p class="col-span-3 text-center py-4">Loading your asked queries...</p>';
-        solvedContainer.innerHTML = '<p class="col-span-3 text-center py-4">Loading your solved queries...</p>';
-        
         // Get current user ID
         const userRes = await apiRequest('/auth/me');
         if (userRes.status !== 200) return;
         const currentUserId = userRes.data.data.user_id || userRes.data.data.id;
 
-        const response = await apiRequest('/experiences');
+        const response = await apiRequest(`/experiences?author_id=${currentUserId}`);
         
         if (response.status === 200 && response.data.success) {
-            let allList = response.data.data;
-            
-            // "Asked" = queries created by the user
-            const askedList = allList.filter(e => e.author_id === currentUserId);
-            
-            // "Solved" = queries created by the user that have comments (resolved)
-            const solvedList = askedList.filter(e => e.comments_count > 0);
-            
+            let askedList = response.data.data;
+            let solvedList = askedList.filter(e => e.is_resolved === true);
             
             document.getElementById('asked-count').textContent = `Asked (${askedList.length})`;
             document.getElementById('solved-count').textContent = `Solved (${solvedList.length})`;
             
             if (askedList.length === 0) {
-                askedContainer.innerHTML = '<p class="col-span-3 text-center py-4 text-on-surface-variant">You haven\'t asked any questions yet.</p>';
+                askedContainer.innerHTML = `
+                    <div class="col-span-1 md:col-span-2 lg:col-span-3 text-center py-16 bg-surface rounded-[24px] border border-dashed border-outline-variant/40">
+                        <span class="material-symbols-outlined text-4xl text-on-surface-variant mb-2">help_outline</span>
+                        <h3 class="text-headline-sm font-semibold text-on-surface mb-1">No Queries Asked Yet</h3>
+                        <p class="text-body-md text-on-surface-variant mb-4">You haven't posted any queries or questions to the community.</p>
+                        <a href="dashboard.html" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-primary text-on-primary font-label-md hover:bg-primary/90 transition-colors">Go to Dashboard</a>
+                    </div>
+                `;
             } else {
                 askedContainer.innerHTML = askedList.map(exp => `
                     <div class="bg-surface rounded-[20px] p-6 flex flex-col gap-4 shadow-sm hover:shadow-md transition-all group border border-outline-variant/10">
                         <div class="flex justify-between items-start gap-4">
-                            <span class="px-3 py-1 bg-surface-container-high rounded-lg text-label-sm font-label-sm text-on-surface">${exp.category || 'General'}</span>
-                            <span class="font-label-sm text-label-sm text-on-surface-variant">${new Date(exp.created_at).toLocaleDateString()}</span>
+                            <span class="px-3 py-1 bg-surface-container-high rounded-lg text-label-sm font-label-sm text-on-surface capitalize">${exp.category || 'General'}</span>
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold ${exp.is_resolved ? 'bg-secondary/10 text-secondary' : 'bg-error-container text-on-error-container'}">
+                                ${exp.is_resolved ? 'Solved' : 'Open'}
+                            </span>
                         </div>
                         <div class="flex flex-col gap-1 flex-1">
                             <h3 class="font-headline-md text-headline-md text-on-surface line-clamp-2 mt-2">
@@ -1731,36 +1611,50 @@
                                 <span class="material-symbols-outlined text-[18px]">chat_bubble</span>
                                 <span class="font-label-md text-label-md">${exp.comments_count || 0}</span>
                             </div>
-                            <div class="flex items-center gap-1 text-primary">
-                                <span class="material-symbols-outlined text-[18px]">visibility</span>
-                            </div>
+                            <a href="dashboard.html" class="text-primary font-label-md text-label-md flex items-center gap-1 hover:gap-2 transition-all">
+                                View in Dashboard <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                            </a>
                         </div>
                     </div>
                 `).join('');
             }
 
             if (solvedList.length === 0) {
-                solvedContainer.innerHTML = '<p class="col-span-3 text-center py-4 text-on-surface-variant">None of your queries are marked as solved yet.</p>';
+                solvedContainer.innerHTML = `
+                    <div class="col-span-1 md:col-span-2 lg:col-span-3 text-center py-16 bg-surface rounded-[24px] border border-dashed border-outline-variant/40">
+                        <span class="material-symbols-outlined text-4xl text-on-surface-variant mb-2">check_circle_outline</span>
+                        <h3 class="text-headline-sm font-semibold text-on-surface mb-1">No Solved Queries Yet</h3>
+                        <p class="text-body-md text-on-surface-variant">When you accept a solution for one of your queries, it will show up here.</p>
+                    </div>
+                `;
             } else {
                 solvedContainer.innerHTML = solvedList.map(exp => `
-                    <div class="bg-surface-container-highest rounded-[20px] p-6 flex flex-col gap-4 shadow-sm hover:shadow-md transition-all group">
+                    <div class="bg-surface rounded-[20px] p-6 flex flex-col gap-4 shadow-sm hover:shadow-md transition-all group border border-outline-variant/10">
                         <div class="flex justify-between items-start gap-4">
                             <div class="flex items-center gap-2">
                                 <span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">verified</span>
-                                <span class="font-label-md text-label-md text-on-surface">Resolved Issue</span>
+                                <span class="font-label-md text-label-md text-on-surface font-semibold">Resolved Issue</span>
                             </div>
                             <span class="font-label-sm text-label-sm text-on-surface-variant">${new Date(exp.created_at).toLocaleDateString()}</span>
                         </div>
                         <div class="flex flex-col gap-1 flex-1">
-                            <span class="font-label-sm text-label-sm text-on-surface-variant tracking-widest uppercase">${exp.category || 'General'}</span>
+                            <span class="font-label-sm text-label-sm text-secondary tracking-widest uppercase">${exp.category || 'General'}</span>
                             <h3 class="font-headline-md text-headline-md text-on-surface line-clamp-2">
                                 <a href="dashboard.html" class="hover:text-primary transition-colors">${exp.title}</a>
                             </h3>
-                            <div class="mt-4 p-3 bg-surface-container-lowest rounded-lg border border-outline-variant/20">
-                                <p class="font-body-md text-body-md text-on-surface-variant italic line-clamp-2 text-sm">
-                                    "Resolved by community feedback."
+                            ${exp.accepted_answer ? `
+                            <div class="mt-4 p-3 bg-surface-container-high/40 rounded-xl border border-secondary/20">
+                                <p class="font-label-sm text-xs text-secondary font-bold mb-1">Accepted Solution:</p>
+                                <p class="font-body-md text-body-md text-on-surface line-clamp-2 text-sm">
+                                    "${exp.accepted_answer}"
                                 </p>
                             </div>
+                            ` : ''}
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-outline-variant/20 flex items-center justify-between">
+                            <a href="dashboard.html" class="text-primary font-label-md text-label-md flex items-center gap-1 hover:gap-2 transition-all">
+                                View Query <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                            </a>
                         </div>
                     </div>
                 `).join('');
