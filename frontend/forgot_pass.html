@@ -1,901 +1,245 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EXPadviser · Forgot Password</title>
-    <style>
-        @layer base {
-            html,
-            body {
-                margin: 0;
-                padding: 0;
-            }
-            body {
-                overscroll-behavior: none;
-            }
-            main>:first-child {
-                margin-top: 0 !important;
-            }
-            main>:last-child {
-                margin-bottom: 0 !important;
-            }
-        }
-        ::-webkit-scrollbar {
-            display: none;
-        }
-    </style>
-    <script src="https://cdn.tailwindcss.com">
-    </script>
-    <script id="tailwind-config">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        "surface-container": "#e5eeff",
-                        "inverse-primary": "#b3cad9",
-                        "secondary": "#4648d4",
-                        "surface-variant": "#d3e4fe",
-                        "surface-container-high": "#dce9ff",
-                        "on-tertiary": "#ffffff",
-                        "on-tertiary-fixed-variant": "#444749",
-                        "on-secondary": "#ffffff",
-                        "tertiary-fixed": "#e0e3e5",
-                        "on-background": "#0b1c30",
-                        "on-secondary-fixed": "#07006c",
-                        "on-secondary-container": "#fffbff",
-                        "error-container": "#ffdad6",
-                        "primary-container": "#374c59",
-                        "tertiary-container": "#474a4c",
-                        "surface-container-highest": "#d3e4fe",
-                        "outline-variant": "#c3c7cb",
-                        "error": "#ba1a1a",
-                        "on-primary-fixed-variant": "#344956",
-                        "surface-bright": "#f8f9ff",
-                        "on-error-container": "#93000a",
-                        "on-surface-variant": "#43474b",
-                        "on-surface": "#0b1c30",
-                        "on-primary-fixed": "#071e29",
-                        "tertiary": "#303335",
-                        "on-error": "#ffffff",
-                        "surface-container-low": "#eff4ff",
-                        "inverse-surface": "#213145",
-                        "outline": "#73787c",
-                        "tertiary-fixed-dim": "#c4c7c9",
-                        "on-primary-container": "#a6bccb",
-                        "primary-fixed": "#cfe6f6",
-                        "surface": "#f8f9ff",
-                        "on-tertiary-fixed": "#191c1e",
-                        "primary": "#203542",
-                        "secondary-fixed-dim": "#c0c1ff",
-                        "background": "#f8f9ff",
-                        "on-secondary-fixed-variant": "#2f2ebe",
-                        "surface-container-lowest": "#ffffff",
-                        "primary-fixed-dim": "#b3cad9",
-                        "on-primary": "#ffffff",
-                        "inverse-on-surface": "#eaf1ff",
-                        "secondary-container": "#6063ee",
-                        "surface-tint": "#4c616f",
-                        "on-tertiary-container": "#b7b9bb",
-                        "secondary-fixed": "#e1e0ff",
-                        "surface-dim": "#cbdbf5"
-                    },
-                    borderRadius: {
-                        DEFAULT: "0.25rem",
-                        lg: "0.5rem",
-                        xl: "0.75rem",
-                        full: "9999px"
-                    },
-                    spacing: {
-                        "margin-desktop": "40px",
-                        "gutter": "24px",
-                        "container-max": "1280px",
-                        "base": "8px",
-                        "margin-mobile": "16px"
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                        }
                     },
                     fontFamily: {
-                        "headline-lg": ["Inter"],
-                        "display-lg": ["Inter"],
-                        "label-sm": ["Inter"],
-                        "body-lg": ["Inter"],
-                        "headline-md": ["Inter"],
-                        "headline-lg-mobile": ["Inter"],
-                        "label-md": ["Inter"],
-                        "body-md": ["Inter"]
-                    },
-                    fontSize: {
-                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
-                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
-                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
-                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
-                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
-                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
-                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500" }],
-                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet" />
+
+    <!-- Google Fonts & Material Symbols -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..24,400..600,0..1,0&display=swap" rel="stylesheet" />
+
     <style>
-        /* extra micro-interactions not covered by Tailwind */
-        .backdrop-blur-xl {
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-        }
-        .shadow-\[0_4px_24px_-4px_rgba\(32\2c 53\2c 66\2c 0\.08\)\] {
-            box-shadow: 0 4px 24px -4px rgba(32, 53, 66, 0.08);
-        }
-        .shadow-\[0_12px_48px_-12px_rgba\(32\2c 53\2c 66\2c 0\.12\)\] {
-            box-shadow: 0 12px 48px -12px rgba(32, 53, 66, 0.12);
-        }
-        .shadow-\[0_4px_12px_rgba\(99\2c 102\2c 241\2c 0\.2\)\] {
-            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
-        }
-        .shadow-\[0_8px_20px_rgba\(99\2c 102\2c 241\2c 0\.3\)\] {
-            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
-        }
-        .mix-blend-multiply {
-            mix-blend-mode: multiply;
-        }
-        .filter {
-            filter: var(--tw-filter);
-        }
-        .blur-\[120px\] {
-            --tw-blur: blur(120px);
-            filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
-        }
-        .animate-spin {
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-        .group-hover\:ml-0:hover {
-            margin-left: 0;
-        }
-        .group-hover\:opacity-100:hover {
-            opacity: 1;
-        }
-        .group-hover\:scale-105:hover {
-            transform: scale(1.05);
-        }
-        .group-hover\:-translate-x-1:hover {
-            --tw-translate-x: -0.25rem;
-            transform: translate(var(--tw-translate-x), var(--tw-translate-y));
-        }
-        .group-hover\:opacity-100:hover {
-            opacity: 1;
-        }
-        .focus-within\:text-primary:focus-within {
-            color: #203542;
-        }
-        .focus-within\:ring-primary\/10:focus-within {
-            --tw-ring-color: rgba(32, 53, 66, 0.1);
-        }
-        .focus-within\:border-primary:focus-within {
-            border-color: #203542;
-        }
-        .pointer-events-none {
-            pointer-events: none;
-        }
-        .opacity-0 {
-            opacity: 0;
-        }
-        .opacity-25 {
-            opacity: 0.25;
-        }
-        .opacity-30 {
-            opacity: 0.3;
-        }
-        .opacity-75 {
-            opacity: 0.75;
-        }
-        .opacity-80 {
-            opacity: 0.8;
-        }
-        .opacity-90 {
-            opacity: 0.9;
-        }
-        .opacity-100 {
-            opacity: 1;
-        }
-        .-ml-4 {
-            margin-left: -1rem;
-        }
-        .group-hover\:ml-0:hover {
-            margin-left: 0;
-        }
-        .group-hover\:opacity-100:hover {
-            opacity: 1;
-        }
-        .transition-all {
-            transition-property: all;
-            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-            transition-duration: 300ms;
-        }
-        .transition-colors {
-            transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
-            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-            transition-duration: 200ms;
-        }
-        .transition-transform {
-            transition-property: transform;
-            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-            transition-duration: 300ms;
-        }
-        .duration-200 {
-            transition-duration: 200ms;
-        }
-        .duration-300 {
-            transition-duration: 300ms;
-        }
-        .duration-700 {
-            transition-duration: 700ms;
-        }
-        .cursor-not-allowed {
-            cursor: not-allowed;
-        }
-        .hidden {
-            display: none;
-        }
-        .flex {
-            display: flex;
-        }
-        .inline-flex {
-            display: inline-flex;
-        }
-        .items-center {
-            align-items: center;
-        }
-        .justify-center {
-            justify-content: center;
-        }
-        .justify-between {
-            justify-content: space-between;
-        }
-        .gap-2 {
-            gap: 0.5rem;
-        }
-        .gap-4 {
-            gap: 1rem;
-        }
-        .gap-6 {
-            gap: 1.5rem;
-        }
-        .w-full {
-            width: 100%;
-        }
-        .w-8 {
-            width: 2rem;
-        }
-        .w-10 {
-            width: 2.5rem;
-        }
-        .w-\[800px\] {
-            width: 800px;
-        }
-        .w-auto {
-            width: auto;
-        }
-        .max-w-4xl {
-            max-width: 56rem;
-        }
-        .max-w-7xl {
-            max-width: 80rem;
-        }
-        .max-w-\[280px\] {
-            max-width: 280px;
-        }
-        .max-w-md {
-            max-width: 28rem;
-        }
-        .h-8 {
-            height: 2rem;
-        }
-        .h-10 {
-            height: 2.5rem;
-        }
-        .h-16 {
-            height: 4rem;
-        }
-        .h-\[800px\] {
-            height: 800px;
-        }
-        .h-auto {
-            height: auto;
-        }
-        .h-5 {
-            height: 1.25rem;
-        }
-        .min-h-\[calc\(100vh-64px\)\] {
-            min-height: calc(100vh - 64px);
-        }
-        .px-margin-mobile {
-            padding-left: 16px;
-            padding-right: 16px;
-        }
-        .px-margin-desktop {
-            padding-left: 40px;
-            padding-right: 40px;
-        }
-        .py-12 {
-            padding-top: 3rem;
-            padding-bottom: 3rem;
-        }
-        .p-8 {
-            padding: 2rem;
-        }
-        .pl-4 {
-            padding-left: 1rem;
-        }
-        .pl-11 {
-            padding-left: 2.75rem;
-        }
-        .pr-4 {
-            padding-right: 1rem;
-        }
-        .py-3\.5 {
-            padding-top: 0.875rem;
-            padding-bottom: 0.875rem;
-        }
-        .mb-2 {
-            margin-bottom: 0.5rem;
-        }
-        .mb-3 {
-            margin-bottom: 0.75rem;
-        }
-        .mb-8 {
-            margin-bottom: 2rem;
-        }
-        .mb-10 {
-            margin-bottom: 2.5rem;
-        }
-        .mt-8 {
-            margin-top: 2rem;
-        }
-        .mt-12 {
-            margin-top: 3rem;
-        }
-        .ml-1 {
-            margin-left: 0.25rem;
-        }
-        .mx-auto {
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .text-center {
-            text-align: center;
-        }
-        .relative {
-            position: relative;
-        }
-        .absolute {
-            position: absolute;
-        }
-        .fixed {
-            position: fixed;
-        }
-        .inset-0 {
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-        }
-        .inset-y-0 {
-            top: 0;
-            bottom: 0;
-        }
-        .left-0 {
-            left: 0;
-        }
-        .top-0 {
-            top: 0;
-        }
-        .z-0 {
-            z-index: 0;
-        }
-        .z-10 {
-            z-index: 10;
-        }
-        .z-50 {
-            z-index: 50;
-        }
-        .overflow-hidden {
-            overflow: hidden;
-        }
-        .rounded-\[24px\] {
-            border-radius: 24px;
-        }
-        .rounded-full {
-            border-radius: 9999px;
-        }
-        .rounded-lg {
-            border-radius: 0.5rem;
-        }
-        .rounded-xl {
-            border-radius: 0.75rem;
-        }
-        .border {
-            border-width: 1px;
-        }
-        .border-surface-variant\/50 {
-            border-color: rgba(211, 228, 254, 0.5);
-        }
-        .border-outline-variant {
-            border-color: #c3c7cb;
-        }
-        .border-outline {
-            border-color: #73787c;
-        }
-        .bg-background {
-            background-color: #f8f9ff;
-        }
-        .bg-surface\/80 {
-            background-color: rgba(248, 249, 255, 0.8);
-        }
-        .bg-surface-container-lowest\/80 {
-            background-color: rgba(255, 255, 255, 0.8);
-        }
-        .bg-surface-container-low {
-            background-color: #eff4ff;
-        }
-        .bg-surface-container-lowest {
-            background-color: #ffffff;
-        }
-        .bg-surface-container-high {
-            background-color: #dce9ff;
-        }
-        .bg-surface-container-low {
-            background-color: #eff4ff;
-        }
-        .bg-primary {
-            background-color: #203542;
-        }
-        .bg-\[\#6366F1\] {
-            background-color: #6366F1;
-        }
-        .bg-gradient-to-br {
-            background-image: linear-gradient(to bottom right, var(--tw-gradient-stops));
-        }
-        .from-primary\/10 {
-            --tw-gradient-from: rgba(32, 53, 66, 0.1);
-            --tw-gradient-to: rgba(32, 53, 66, 0);
-            --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-        }
-        .from-primary\/5 {
-            --tw-gradient-from: rgba(32, 53, 66, 0.05);
-            --tw-gradient-to: rgba(32, 53, 66, 0);
-            --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-        }
-        .via-secondary\/10 {
-            --tw-gradient-to: rgba(70, 72, 212, 0);
-            --tw-gradient-stops: var(--tw-gradient-from), rgba(70, 72, 212, 0.1), var(--tw-gradient-to);
-        }
-        .to-transparent {
-            --tw-gradient-to: transparent;
-        }
-        .bg-white\/20 {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-        .text-on-primary {
-            color: #ffffff;
-        }
-        .text-on-surface {
-            color: #0b1c30;
-        }
-        .text-on-surface-variant {
-            color: #43474b;
-        }
-        .text-primary {
-            color: #203542;
-        }
-        .text-secondary {
-            color: #4648d4;
-        }
-        .text-white {
-            color: #ffffff;
-        }
-        .text-outline-variant {
-            color: #c3c7cb;
-        }
-        .text-outline {
-            color: #73787c;
-        }
-        .shadow-\[0_1px_8px_rgba\(0\2c 0\2c 0\2c 0\.04\)\] {
-            box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
-        }
-        .shadow-sm {
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-        }
-        .drop-shadow-lg {
-            --tw-drop-shadow: drop-shadow(0 10px 8px rgba(0, 0, 0, 0.04)) drop-shadow(0 4px 3px rgba(0, 0, 0, 0.1));
-            filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
-        }
-        .hover\:bg-\[\#4F46E5\]:hover {
-            background-color: #4F46E5;
-        }
-        .hover\:bg-surface-container-low:hover {
-            background-color: #eff4ff;
-        }
-        .hover\:text-secondary:hover {
-            color: #4648d4;
-        }
-        .hover\:text-on-surface:hover {
-            color: #0b1c30;
-        }
-        .hover\:shadow-\[0_8px_20px_rgba\(99\2c 102\2c 241\2c 0\.3\)\]:hover {
-            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
-        }
-        .hover\:scale-105:hover {
-            transform: scale(1.05);
-        }
-        .hover\:opacity-100:hover {
-            opacity: 1;
-        }
-        .focus\:border-primary:focus {
-            border-color: #203542;
-        }
-        .focus\:outline-none:focus {
-            outline: 2px solid transparent;
-            outline-offset: 2px;
-        }
-        .focus\:ring-4:focus {
-            --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
-            --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(4px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-            box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
-        }
-        .focus\:ring-primary\/10:focus {
-            --tw-ring-color: rgba(32, 53, 66, 0.1);
-        }
-        .group-hover\:opacity-100:hover .group-hover\:opacity-100 {
-            opacity: 1;
-        }
-        .group-hover\:ml-0:hover .group-hover\:ml-0 {
-            margin-left: 0;
-        }
-        .group-hover\:-translate-x-1:hover .group-hover\:-translate-x-1 {
-            --tw-translate-x: -0.25rem;
-            transform: translate(var(--tw-translate-x), var(--tw-translate-y));
-        }
-        .group-hover\:scale-105:hover .group-hover\:scale-105 {
-            transform: scale(1.05);
-        }
-        .group-hover\:opacity-100:hover .group-hover\:opacity-100 {
-            opacity: 1;
-        }
-        .group-focus-within\:text-primary:focus-within .group-focus-within\:text-primary {
-            color: #203542;
-        }
-        .md\:flex {
-            display: flex;
-        }
-        .md\:w-3\/5 {
-            width: 60%;
-        }
-        .md\:w-2\/5 {
-            width: 40%;
-        }
-        .md\:px-margin-desktop {
-            padding-left: 40px;
-            padding-right: 40px;
-        }
-        .md\:text-headline-lg {
-            font-size: 32px;
-            line-height: 40px;
-            letter-spacing: -0.01em;
-            font-weight: 600;
-        }
-        .md\:flex-row {
-            flex-direction: row;
-        }
-        .lg\:p-16 {
-            padding: 4rem;
-        }
-        .sm\:p-12 {
-            padding: 3rem;
-        }
-        .sm\:p-8 {
-            padding: 2rem;
-        }
-        .hidden {
-            display: none;
-        }
-        .md\:flex {
-            display: flex;
-        }
-        .block {
-            display: block;
-        }
-        .sm\:block {
-            display: block;
-        }
-        .flex-col {
-            flex-direction: column;
-        }
-        .md\:flex-row {
-            flex-direction: row;
-        }
-        .items-center {
-            align-items: center;
-        }
-        .justify-center {
-            justify-content: center;
-        }
-        .justify-between {
-            justify-content: space-between;
-        }
-        .w-full {
-            width: 100%;
-        }
-        .max-w-4xl {
-            max-width: 56rem;
-        }
-        .mx-auto {
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .mt-12 {
-            margin-top: 3rem;
-        }
-        .mb-8 {
-            margin-bottom: 2rem;
-        }
-        .text-center {
-            text-align: center;
-        }
-        .tracking-tight {
-            letter-spacing: -0.02em;
-        }
-        .tracking-widest {
-            letter-spacing: 0.1em;
-        }
-        .leading-relaxed {
-            line-height: 1.625;
-        }
-        .object-contain {
-            object-fit: contain;
-        }
-        @media (min-width: 640px) {
-            .sm\:p-12 {
-                padding: 3rem;
-            }
-        }
-        @media (min-width: 768px) {
-            .md\:flex {
-                display: flex;
-            }
-            .md\:w-3\/5 {
-                width: 60%;
-            }
-            .md\:w-2\/5 {
-                width: 40%;
-            }
-            .md\:px-margin-desktop {
-                padding-left: 40px;
-                padding-right: 40px;
-            }
-            .md\:text-headline-lg {
-                font-size: 32px;
-                line-height: 40px;
-                letter-spacing: -0.01em;
-                font-weight: 600;
-            }
-            .md\:flex-row {
-                flex-direction: row;
-            }
-            .md\:block {
-                display: block;
-            }
-        }
-        @media (min-width: 1024px) {
-            .lg\:p-16 {
-                padding: 4rem;
-            }
-        }
+        ::-webkit-scrollbar { display: none; }
     </style>
 </head>
-<body class="bg-background font-body-md text-on-background">
 
-    <!-- Header -->
-    <header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
-        <div class="h-16 max-w-7xl mx-auto px-margin-desktop flex items-center justify-between">
-            <div class="flex items-center gap-4">
-                <img alt="EXP Adviser logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-H1DRh4Qtu8lJX8ED1yal6piGWCHdK7z6esA4fqHkANmCLz2Xqvo8DOEXd0I1H9LBF_FXvnptrTeBXNLXsarG85H5thsS-5VxHcjDZ_F7suBfek1ZtTIiWN2zpmCz83Lexx7lNZOnKkbhgYd1sWGl9Ssz255AzWZ--FiWCLNfK0FKQebCCWaY4bGwwDfVj_lY0dkknvdgZ4YkVyvGqQNOo44dgSYqBgse1CHovK709MYOycUm4hPvJN_cI5ylFHqnXw-wxYgQ-_WgIlY" />
-                <span class="font-headline-md text-headline-md text-primary tracking-tight">EXPadviser</span>
+<body class="bg-[#f8fafc] text-slate-800 antialiased font-sans min-h-screen flex items-center justify-center p-4 sm:p-6 lg:p-10">
+
+    <!-- ====== AUTH CONTAINER (SPLIT SHOWPIECE) ====== -->
+    <div class="w-full max-w-5xl bg-white rounded-3xl shadow-2xl border border-slate-200/80 overflow-hidden grid grid-cols-1 lg:grid-cols-12 min-h-[600px]">
+
+        <!-- ====== LEFT HERO / BRAND SHOWPIECE (~46%) ====== -->
+        <div class="hidden lg:flex lg:col-span-5 bg-[#0b1329] text-white p-10 flex-col justify-between relative overflow-hidden">
+            <!-- Subtle decorative background glows -->
+            <div class="absolute -top-24 -left-24 w-80 h-80 bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-24 -right-24 w-80 h-80 bg-indigo-600/20 rounded-full blur-3xl pointer-events-none"></div>
+
+            <!-- Top Brand Badge -->
+            <div class="relative z-10 flex items-center gap-3">
+                <a href="login.html" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold text-xl shadow-lg group-hover:scale-105 transition-transform">
+                        e
+                    </div>
+                    <div>
+                        <div class="font-extrabold text-lg tracking-tight leading-none text-white">EXPadviser</div>
+                        <div class="text-[11px] text-slate-400 font-medium mt-0.5">Campus Knowledge Hub</div>
+                    </div>
+                </a>
             </div>
-            <div class="flex items-center gap-4">
-                <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
-                    <span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
+
+            <!-- Middle Value Proposition & Floating Preview Widget -->
+            <div class="relative z-10 space-y-6 my-auto py-8">
+                <div class="space-y-3">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                        <span class="material-symbols-outlined text-[14px]">lock_reset</span>
+                        Secure Account Recovery
+                    </span>
+                    <h1 class="text-3xl font-extrabold tracking-tight text-white leading-snug">
+                        Regain access to your academic profile & doubts.
+                    </h1>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Enter your registered campus email and we will send you a single-use authenticated recovery link to safely reset your password.
+                    </p>
                 </div>
+
+                <!-- Floating Glass Mini-Cards Preview -->
+                <div class="space-y-3 pt-2">
+                    <!-- Mini Card 1: Enterprise Grade Encryption -->
+                    <div class="bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl p-3.5 space-y-1.5">
+                        <div class="flex items-center gap-2 text-[11px] font-bold text-blue-400">
+                            <span class="material-symbols-outlined text-[16px]">shield</span>
+                            <span>Enterprise Protection</span>
+                        </div>
+                        <div class="text-xs font-semibold text-slate-200">
+                            Cryptographically Signed Tokens
+                        </div>
+                        <div class="text-[11px] text-slate-400">
+                            Recovery links expire automatically in 1 hour for your protection.
+                        </div>
+                    </div>
+
+                    <!-- Mini Card 2: Safe Reset Guarantee -->
+                    <div class="bg-emerald-500/10 border border-emerald-500/20 backdrop-blur-md rounded-2xl p-3 flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+                            <span class="material-symbols-outlined text-[18px]">verified_user</span>
+                        </div>
+                        <div>
+                            <div class="text-xs font-bold text-emerald-300">Identity Guard Active</div>
+                            <div class="text-[11px] text-slate-400">Your campus answers & saved doubts stay protected</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Footnote -->
+            <div class="relative z-10 pt-4 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-500 font-medium">
+                <span>© 2026 EXPadviser</span>
+                <span class="flex items-center gap-1 text-slate-400">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                    Security Engine Live
+                </span>
             </div>
         </div>
-    </header>
 
-    <!-- Main Content -->
-    <main class="w-full pt-16 bg-background">
-        <div class="flex flex-col w-full items-center justify-center min-h-[calc(100vh-64px)] px-margin-mobile md:px-margin-desktop py-12 relative overflow-hidden">
+        <!-- ====== RIGHT RECOVERY FORM (~54%) ====== -->
+        <div class="lg:col-span-7 p-8 sm:p-12 flex flex-col justify-center max-w-lg mx-auto w-full">
 
-            <!-- Background Decoration -->
-            <div class="absolute inset-0 pointer-events-none opacity-30 z-0 flex justify-center items-center">
-                <div class="w-[800px] h-[800px] rounded-full bg-gradient-to-br from-primary/10 via-secondary/10 to-transparent blur-3xl mix-blend-multiply filter blur-[120px]"></div>
+            <!-- Mobile Brand Header (Visible only on small screens) -->
+            <div class="lg:hidden flex items-center gap-2.5 mb-8">
+                <div class="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center font-bold text-base shadow-sm">
+                    e
+                </div>
+                <span class="font-extrabold text-slate-900 text-lg tracking-tight">EXPadviser</span>
             </div>
 
-            <!-- Card -->
-            <div class="relative z-10 w-full max-w-4xl bg-surface-container-lowest/80 backdrop-blur-xl rounded-[24px] shadow-[0_4px_24px_-4px_rgba(32,53,66,0.08),0_12px_48px_-12px_rgba(32,53,66,0.12)] border border-surface-variant/50 overflow-hidden flex flex-col md:flex-row">
-
-                <!-- Left Illustration (hidden on mobile) -->
-                <div class="hidden md:flex w-full md:w-2/5 bg-surface-container-low flex-col items-center justify-center p-8 relative overflow-hidden">
-                    <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent z-0"></div>
-                    <img alt="Security and Protection Illustration" class="w-full max-w-[280px] h-auto object-contain relative z-10 drop-shadow-lg transition-transform duration-700 hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbF61xbGDT2Y1_FjAcmQLE_H7l3uWCRCH0pXz5UOOZXfrJoljNON5iLoN9MLAad-r0YlxuOJMTM8iD4qF2CqdP_BEmyqMwJcWWPjzlLaYnJjZJNe5AhJOA57Ka2h7LXozjGcWvwB90dls2sb8oiJAlTSgrCkP93wxvgTl4bXZVSiEL4mU4qUuzyNg8qlZpDHL-kqic-gMegrSO0JuzOVxOWsQDUVComnwNawoQo8ILtv5XCURonjnLzA" />
-                    <div class="mt-8 text-center relative z-10">
-                        <p class="font-label-sm text-label-sm text-primary tracking-widest uppercase mb-2">Secure Recovery</p>
-                        <p class="font-body-md text-body-md text-on-surface-variant opacity-80 leading-relaxed">Protecting your academic journey with enterprise-grade security protocols.</p>
-                    </div>
+            <!-- Header Icon & Title -->
+            <div class="space-y-2 mb-6">
+                <div class="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center mb-4 shadow-sm ring-4 ring-blue-50/50">
+                    <span class="material-symbols-outlined text-[26px]">lock_reset</span>
                 </div>
-
-                <!-- Right Form -->
-                <div class="w-full md:w-3/5 p-8 sm:p-12 lg:p-16 flex flex-col justify-center">
-                    <div class="flex items-center gap-4 mb-10">
-                        <img alt="EXP Adviser Logo" class="h-10 w-10 object-contain rounded-lg shadow-sm" src="https://lh3.googleusercontent.com/aida/AEtjO1VSCdUYjzApWn9Se829y5GZj6DSXS9xvQVFeMxCOgg-4Nd_DQ0fnHQCvPDSdTltSBYulHz3kgqygUBkZIpnMU4RMazudiGnpRUtQ_biNV9b9DFOaczt5ZWor594xWTkZR7wAxO15MQhoxwIaHd2njywJYTdYsJxu44YygyA-2PgXbetjsqsW1J4uy-6uQFYmCxwrH2Vz3Tm0nF7tuECp9ZBJNsknjkcagTVJRLmC8dBdyMOFlIw4uOWHJo" />
-                        <div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary shadow-sm">
-                            <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">lock_reset</span>
-                        </div>
-                    </div>
-
-                    <div class="mb-8">
-                        <h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-3 tracking-tight">Forgot Password?</h1>
-                        <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-                            Don't worry! Enter your registered email address and we'll send you a link to reset your password.
-                        </p>
-                    </div>
-
-                    <div id="statusMessage" class="hidden mb-6 p-4 rounded-lg"></div>
-                    <form class="flex flex-col gap-6" id="resetForm">
-                        <div class="flex flex-col gap-2 group">
-                            <label class="font-label-sm text-label-sm text-on-surface-variant ml-1 transition-colors group-focus-within:text-primary" for="email">Email Address</label>
-                            <div class="relative">
-                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                    <span class="material-symbols-outlined text-outline-variant text-[20px] transition-colors group-focus-within:text-primary">mail</span>
-                                </div>
-                                <input class="w-full bg-surface-container-lowest border border-outline-variant rounded-xl py-3.5 pl-11 pr-4 font-body-md text-body-md text-on-surface placeholder:text-outline focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-200" id="email" name="email" placeholder="Enter your registered email address" required="" type="email" />
-                            </div>
-                        </div>
-                        
-                        <button class="w-full bg-[#6366F1] hover:bg-[#4F46E5] text-white rounded-lg py-3.5 px-6 font-label-md text-label-md shadow-[0_4px_12px_rgba(99,102,241,0.2)] hover:shadow-[0_8px_20px_rgba(99,102,241,0.3)] transition-all duration-300 relative overflow-hidden group flex items-center justify-center gap-2" id="submitBtn" type="submit">
-                            <span class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                            <span class="relative z-10 flex items-center gap-2" id="btnText">
-                                Send Reset Link
-                                <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
-                            </span>
-                            <div class="hidden relative z-10 items-center justify-center" id="btnLoader">
-                                <svg class="animate-spin h-5 w-5 text-white" fill="none" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                    <path class="opacity-75" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" fill="currentColor"></path>
-                                </svg>
-                            </div>
-                        </button>
-                        
-                    </form>
-
-                    <div class="mt-8 flex flex-col gap-4 text-center">
-                        <a class="inline-flex items-center justify-center gap-2 font-label-md text-label-md text-primary hover:text-secondary transition-colors group" href="login.html">
-                            Remember your password? Sign In
-                            <span class="material-symbols-outlined text-[16px] opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300">login</span>
-                        </a>
-                        
-                    </div>
-                </div>
-            </div>
-
-            <!-- Footer Note -->
-            <div class="mt-12 text-center max-w-md mx-auto">
-                <p class="font-label-sm text-label-sm text-on-surface-variant flex items-center justify-center gap-2 opacity-80">
-                    <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">lock</span>
-                    Secure Password Recovery - For your security, the password reset link will expire after a limited time.
+                <h2 class="text-2xl font-bold text-slate-900 tracking-tight">Forgot Password?</h2>
+                <p class="text-xs text-slate-500 leading-relaxed">
+                    Don't worry! Enter your registered email address below and we'll send you an instant link to reset your password.
                 </p>
             </div>
 
-            <script>
-                function handleResetSubmit() {
-                    const btnText = document.getElementById('btnText');
-                    const btnLoader = document.getElementById('btnLoader');
-                    const submitBtn = document.getElementById('submitBtn');
-                    const emailInput = document.getElementById('email');
+            <!-- Status Banner (Success / Error / Dev Link) -->
+            <div id="statusMessage" class="hidden mb-5 p-4 rounded-2xl text-xs font-medium transition-all"></div>
 
-                    if (!emailInput.value) return;
+            <!-- Forgot Password Form -->
+            <form id="resetForm" class="space-y-4">
+                <!-- Email Address -->
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1.5" for="email">Registered Email Address</label>
+                    <div class="relative">
+                        <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-[18px]">mail</span>
+                        <input type="email" id="email" required placeholder="student@university.edu" class="w-full bg-slate-50/80 border border-slate-200/90 rounded-xl pl-10 pr-4 py-2.5 text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all" />
+                    </div>
+                </div>
 
-                    // Loading state
-                    btnText.classList.add('hidden');
-                    btnLoader.classList.remove('hidden');
-                    btnLoader.classList.add('flex');
-                    submitBtn.disabled = true;
-                    submitBtn.classList.add('opacity-90', 'cursor-not-allowed');
+                <!-- Submit Button -->
+                <button type="submit" id="submitBtn" class="w-full bg-slate-900 hover:bg-black text-white font-semibold py-2.5 rounded-xl text-sm shadow-md hover:shadow transition-all flex items-center justify-center gap-2 mt-3">
+                    <span>Send Reset Link</span>
+                    <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                </button>
+            </form>
 
-                    // Simulate API call
-                    setTimeout(function() {
-                        // Success state
-                        btnLoader.classList.remove('flex');
-                        btnLoader.classList.add('hidden');
-                        btnText.classList.remove('hidden');
-
-                        btnText.innerHTML = `
-                            Link Sent Successfully 
-                            <span class="material-symbols-outlined text-[18px]">check_circle</span>
-                        `;
-
-                        submitBtn.classList.remove('bg-[#6366F1]', 'hover:bg-[#4F46E5]', 'cursor-not-allowed');
-                        submitBtn.classList.add('bg-primary', 'pointer-events-none');
-
-                        emailInput.value = '';
-                        emailInput.disabled = true;
-
-                        // Reset after 3 seconds for demo
-                        setTimeout(function() {
-                            btnText.innerHTML = `
-                                Send Reset Link
-                                <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
-                            `;
-                            submitBtn.classList.add('bg-[#6366F1]', 'hover:bg-[#4F46E5]');
-                            submitBtn.classList.remove('bg-primary', 'pointer-events-none', 'opacity-90');
-                            submitBtn.disabled = false;
-                            emailInput.disabled = false;
-                        }, 3000);
-                    }, 1500);
-                }
-            </script>
+            <!-- Bottom Return to Sign In Link -->
+            <div class="mt-8 pt-6 border-t border-slate-100 text-center text-xs text-slate-500">
+                Remember your password? 
+                <a href="login.html" class="font-bold text-blue-600 hover:underline ml-1 inline-flex items-center gap-0.5">
+                    <span>Sign In</span>
+                    <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+                </a>
+            </div>
 
         </div>
-    </main>
 
-    <!-- Footer -->
-    <footer class="w-full bg-surface-container-low py-12">
-        <div class="max-w-7xl mx-auto px-margin-desktop text-center text-on-surface-variant font-label-sm text-label-sm">© 2024 EXP Adviser. Empowering academic growth through precise guidance.</div>
-    </footer>
+    </div>
 
+    <!-- ====== SCRIPTS ====== -->
+    <script src="js/api.js?v=2"></script>
+    <script>
+        document.getElementById('resetForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const emailInput = document.getElementById('email');
+            const email = emailInput.value.trim();
+            const submitBtn = document.getElementById('submitBtn');
+            const statusMsg = document.getElementById('statusMessage');
 
-<script src="js/api.js?v=2"></script>
-<script>
-    document.getElementById('resetForm').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const email = document.getElementById('email').value;
-        const btn = e.target.querySelector('button[type="submit"]');
-        const statusMsg = document.getElementById('statusMessage');
-        
-        btn.disabled = true;
-        btn.innerHTML = `<span>Sending...</span><span class="material-symbols-outlined text-[18px] animate-spin">refresh</span>`;
-        statusMsg.classList.add('hidden');
-        
-        try {
-            const response = await apiRequest('/auth/forgot-password', {
-                method: 'POST',
-                body: { email }
-            });
-            
-            if (response.status === 200) {
-                const devLink = response.data.dev_link;
+            if (!email) return;
+
+            statusMsg.classList.add('hidden');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `
+                <span class="material-symbols-outlined text-[16px] animate-spin">refresh</span>
+                <span>Sending Recovery Link...</span>
+            `;
+
+            try {
+                const res = await apiRequest('/auth/forgot-password', {
+                    method: 'POST',
+                    body: { email }
+                });
+
+                if (res.status === 200 && res.data.success) {
+                    const devLink = res.data.dev_link;
+                    statusMsg.innerHTML = `
+                        <div class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-emerald-600 text-[20px] shrink-0 mt-0.5">check_circle</span>
+                            <div class="space-y-1.5 flex-1">
+                                <div class="font-bold text-emerald-900">Reset link dispatched!</div>
+                                <div class="text-emerald-800/90 text-xs">If an account exists for <strong>${email}</strong>, a recovery link has been sent to your inbox.</div>
+                                ${devLink ? `
+                                    <div class="pt-2">
+                                        <a href="${devLink}" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-700 hover:bg-emerald-800 text-white rounded-lg text-xs font-bold shadow-sm transition-colors">
+                                            <span>Presentation Shortcut: Click to Reset Password</span>
+                                            <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+                                        </a>
+                                    </div>
+                                ` : ''}
+                            </div>
+                        </div>
+                    `;
+                    statusMsg.className = 'mb-5 p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-900 block';
+                    emailInput.value = '';
+                } else {
+                    statusMsg.innerHTML = `
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-rose-600 text-[18px] shrink-0">error</span>
+                            <span>${res.data ? res.data.message : 'Unable to send reset link. Please try again.'}</span>
+                        </div>
+                    `;
+                    statusMsg.className = 'mb-5 p-4 rounded-2xl bg-rose-50 border border-rose-200 text-rose-800 block';
+                }
+            } catch (err) {
                 statusMsg.innerHTML = `
-                    <div class="mb-2">If an account exists for ${email}, a reset code has been sent.</div>
-                    ${devLink ? `<a href="${devLink}" class="inline-block mt-2 px-4 py-2 bg-primary text-on-primary rounded-lg text-sm hover:bg-primary/90 transition-colors">Presentation Shortcut: Click to Reset</a>` : ''}
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-rose-600 text-[18px] shrink-0">wifi_off</span>
+                        <span>Network error occurred. Please check your connection.</span>
+                    </div>
                 `;
-                statusMsg.className = 'font-label-md mb-6 p-4 rounded-lg bg-surface-container-high text-on-surface border border-outline-variant/30 text-center block';
-            } else {
-                statusMsg.textContent = response.data ? response.data.message : 'An error occurred';
-                statusMsg.className = 'font-label-md mb-6 p-4 rounded-lg bg-error-container text-on-error-container border border-error/30 text-center block';
+                statusMsg.className = 'mb-5 p-4 rounded-2xl bg-rose-50 border border-rose-200 text-rose-800 block';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = `<span>Send Reset Link</span><span class="material-symbols-outlined text-[16px]">arrow_forward</span>`;
             }
-        } catch (error) {
-            statusMsg.textContent = 'Network error occurred';
-            statusMsg.className = 'font-label-md mb-6 p-4 rounded-lg bg-error-container text-on-error-container border border-error/30 text-center block';
-        } finally {
-            btn.disabled = false;
-            btn.innerHTML = `<span>Send Recovery Link</span>`;
-            document.getElementById('email').value = '';
-        }
-    });
-</script>
+        });
+    </script>
 </body>
 </html>
