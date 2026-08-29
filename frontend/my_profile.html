@@ -1245,7 +1245,7 @@
         <div class="px-8 py-8 mt-auto">
             <div class="p-4 rounded-xl bg-surface-container text-center">
                 <p class="text-label-sm font-label-sm text-on-surface-variant">Academic Session</p>
-                <p class="text-label-md font-label-md text-primary">Spring 2024</p>
+                <p class="text-label-md font-label-md text-primary">2026-2027</p>
             </div>
         </div>
     </aside>
@@ -1320,8 +1320,11 @@
                         <!-- Profile Card -->
                         <div class="bg-surface-container rounded-2xl p-6 shadow-sm flex flex-col items-center text-center relative overflow-hidden group">
                             <div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                            <div class="relative w-32 h-32 mb-4">
-                                <img alt="Profile Photo" class="w-full h-full object-cover rounded-full shadow-md z-10 relative" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdiQgYZHcs1i5qOIAd2Gz8LdgoSvQ6l9pvdU259XtTr3xzItG-ASIars6oHKk0pg8wSgW7QvR7MCXUnRfArSLjb31qE3UIZ1qentFczBi65HRSN7DfNCiVD_ibUEqEgvGT4SVe8x-As0GRBSksIpp7h1ia6hYtl41MhY6eBSnaMXov3JNFGrtqmOWK3fyZnDnIvXey0aQOo324g28QXnpBGIkYxrIJYYKkyubysvClLl1RU5xdqIhiDw" />
+                            <div class="relative w-32 h-32 mb-4" id="profileAvatarWrapper">
+                                <div id="profileAvatarContainer" class="w-full h-full rounded-full shadow-md z-10 relative overflow-hidden flex items-center justify-center bg-secondary/20 text-secondary font-bold text-5xl ring-4 ring-surface-variant">
+                                    <img id="profileAvatarImg" alt="Profile Photo" class="w-full h-full object-cover hidden" src="" />
+                                    <span id="profileAvatarInitial">U</span>
+                                </div>
                                 <div class="absolute -inset-2 bg-gradient-to-tr from-primary to-secondary rounded-full opacity-20 blur-md z-0 group-hover:opacity-40 transition-opacity duration-500"></div>
                             </div>
                             <h1 id="profile-name" class="font-headline-md text-headline-md text-on-surface mb-1 relative z-10 user-name-display">Loading...</h1>
@@ -1436,11 +1439,11 @@
         var cellSize = 11;
         var cellGap = 3;
         var intensityColors = [
-            '#dce9ff', // 0 - lightest
-            '#bcc7de', // 1
-            '#8590a6', // 2
-            '#545f73', // 3
-            '#091426' // 4 - darkest
+            '#eff4ff', // 0 - empty light
+            '#c0c1ff', // 1 - light theme secondary
+            '#818cf8', // 2 - medium
+            '#6063ee', // 3 - bright
+            '#4648d4'  // 4 - deep theme secondary
         ];
         
         // Build an array of the last 364 dates
@@ -1492,14 +1495,27 @@
             document.getElementById('profile-name').textContent = data.name || 'Student';
             document.getElementById('profile-role').textContent = data.role ? data.role.toUpperCase() : 'STUDENT';
             document.getElementById('profile-bio').textContent = data.bio || 'Add a bio to let others know about your academic journey.';
+            
+            const initial = (data.name || 'U').charAt(0).toUpperCase();
+            const initialEl = document.getElementById('profileAvatarInitial');
+            const imgEl = document.getElementById('profileAvatarImg');
             if (data.avatar_url) {
-                const img = document.getElementById('profileAvatarImg');
-                if (img) img.src = data.avatar_url;
+                if (imgEl) {
+                    imgEl.src = data.avatar_url;
+                    imgEl.classList.remove('hidden');
+                }
+                if (initialEl) initialEl.classList.add('hidden');
+            } else {
+                if (initialEl) {
+                    initialEl.textContent = initial;
+                    initialEl.classList.remove('hidden');
+                }
+                if (imgEl) imgEl.classList.add('hidden');
             }
             
             // Set Stats
-            document.getElementById('stats-solved').textContent = data.stats.problems_solved || 0;
-            document.getElementById('stats-helped').textContent = data.stats.peers_helped || 0;
+            document.getElementById('stats-solved').textContent = (data.stats && data.stats.problems_solved !== undefined) ? data.stats.problems_solved : 0;
+            document.getElementById('stats-helped').textContent = (data.stats && data.stats.peers_helped !== undefined) ? data.stats.peers_helped : 0;
             
             // Set Achievements
             const achievementsContainer = document.getElementById('achievements-container');
@@ -1568,7 +1584,11 @@
         if (editBtn) {
             editBtn.addEventListener('click', () => {
                 const currentBio = document.getElementById('profile-bio').textContent;
-                bioInput.value = currentBio === 'Add a bio to let others know about your academic journey.' ? '' : currentBio;
+                if (currentBio === 'Add a bio to let others know about your academic journey.' || currentBio === 'Loading bio...') {
+                    bioInput.value = '';
+                } else {
+                    bioInput.value = currentBio;
+                }
                 modal.classList.remove('hidden');
             });
         }
