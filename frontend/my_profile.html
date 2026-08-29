@@ -234,9 +234,12 @@
                                     1st Year
                                 </span>
                             </div>
-                            <p id="profileSubtitle" class="text-xs text-slate-500 font-medium">
-                                @username · College of Engineering
-                            </p>
+                            <div class="flex items-center gap-2 flex-wrap">
+                                <p id="profileSubtitle" class="text-xs text-slate-500 font-medium">
+                                    @username · College of Engineering
+                                </p>
+                                <div id="heroSocialBadges" class="flex items-center gap-1.5"></div>
+                            </div>
                         </div>
                     </div>
 
@@ -485,34 +488,64 @@
 
                     <!-- Card 2: Links -->
                     <div class="bg-white rounded-2xl border border-slate-200/70 p-5 shadow-sm space-y-3">
-                        <h3 class="text-[11px] font-bold text-slate-400 tracking-wider uppercase">Links</h3>
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-[11px] font-bold text-slate-400 tracking-wider uppercase">Links & Profiles</h3>
+                            <button onclick="openEditModal()" class="text-[11px] font-bold text-blue-600 hover:underline flex items-center gap-0.5">
+                                <span class="material-symbols-outlined text-[13px]">edit</span>
+                                Edit
+                            </button>
+                        </div>
                         
-                        <div class="space-y-2">
+                        <div class="space-y-2.5">
                             <!-- GitHub -->
-                            <a id="linkGithub" href="#" target="_blank" class="w-full bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl p-2.5 text-xs font-semibold text-slate-800 flex items-center justify-between transition-colors group">
-                                <div class="flex items-center gap-2">
-                                    <span class="material-symbols-outlined text-[18px] text-slate-600">code</span>
-                                    <span>GitHub</span>
+                            <a id="linkGithub" href="#" target="_blank" class="w-full bg-slate-50 hover:bg-slate-100/80 border border-slate-200 rounded-xl p-2.5 text-xs font-semibold text-slate-800 flex items-center justify-between transition-colors group">
+                                <div class="flex items-center gap-2.5 min-w-0">
+                                    <div class="w-8 h-8 rounded-lg bg-slate-200/80 text-slate-800 flex items-center justify-center shrink-0">
+                                        <span class="material-symbols-outlined text-[18px]">code</span>
+                                    </div>
+                                    <div class="min-w-0 text-left">
+                                        <div class="text-[11px] font-bold text-slate-900 leading-tight">GitHub</div>
+                                        <div id="linkGithubValue" class="text-[10px] text-slate-400 font-normal truncate max-w-[170px] sm:max-w-[200px]">Not connected</div>
+                                    </div>
                                 </div>
-                                <span class="material-symbols-outlined text-[16px] text-slate-400 group-hover:translate-x-0.5 transition-transform">open_in_new</span>
+                                <div class="flex items-center gap-1.5 shrink-0">
+                                    <span id="linkGithubBadge" class="hidden text-[9px] font-bold bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full border border-emerald-200/70">Linked</span>
+                                    <span class="material-symbols-outlined text-[15px] text-slate-400 group-hover:translate-x-0.5 transition-transform">open_in_new</span>
+                                </div>
                             </a>
 
                             <!-- LinkedIn -->
-                            <a id="linkLinkedin" href="#" target="_blank" class="w-full bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl p-2.5 text-xs font-semibold text-slate-800 flex items-center justify-between transition-colors group">
-                                <div class="flex items-center gap-2">
-                                    <span class="material-symbols-outlined text-[18px] text-blue-600">badge</span>
-                                    <span>LinkedIn</span>
+                            <a id="linkLinkedin" href="#" target="_blank" class="w-full bg-slate-50 hover:bg-slate-100/80 border border-slate-200 rounded-xl p-2.5 text-xs font-semibold text-slate-800 flex items-center justify-between transition-colors group">
+                                <div class="flex items-center gap-2.5 min-w-0">
+                                    <div class="w-8 h-8 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center shrink-0">
+                                        <span class="material-symbols-outlined text-[18px]">badge</span>
+                                    </div>
+                                    <div class="min-w-0 text-left">
+                                        <div class="text-[11px] font-bold text-slate-900 leading-tight">LinkedIn</div>
+                                        <div id="linkLinkedinValue" class="text-[10px] text-slate-400 font-normal truncate max-w-[170px] sm:max-w-[200px]">Not connected</div>
+                                    </div>
                                 </div>
-                                <span class="material-symbols-outlined text-[16px] text-slate-400 group-hover:translate-x-0.5 transition-transform">open_in_new</span>
+                                <div class="flex items-center gap-1.5 shrink-0">
+                                    <span id="linkLinkedinBadge" class="hidden text-[9px] font-bold bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full border border-emerald-200/70">Linked</span>
+                                    <span class="material-symbols-outlined text-[15px] text-slate-400 group-hover:translate-x-0.5 transition-transform">open_in_new</span>
+                                </div>
                             </a>
 
                             <!-- Portfolio -->
-                            <a id="linkPortfolio" href="#" target="_blank" class="w-full bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl p-2.5 text-xs font-semibold text-slate-800 flex items-center justify-between transition-colors group">
-                                <div class="flex items-center gap-2">
-                                    <span class="material-symbols-outlined text-[18px] text-emerald-600">public</span>
-                                    <span>Portfolio</span>
+                            <a id="linkPortfolio" href="#" target="_blank" class="w-full bg-slate-50 hover:bg-slate-100/80 border border-slate-200 rounded-xl p-2.5 text-xs font-semibold text-slate-800 flex items-center justify-between transition-colors group">
+                                <div class="flex items-center gap-2.5 min-w-0">
+                                    <div class="w-8 h-8 rounded-lg bg-indigo-100 text-indigo-700 flex items-center justify-center shrink-0">
+                                        <span class="material-symbols-outlined text-[18px]">public</span>
+                                    </div>
+                                    <div class="min-w-0 text-left">
+                                        <div class="text-[11px] font-bold text-slate-900 leading-tight">Portfolio</div>
+                                        <div id="linkPortfolioValue" class="text-[10px] text-slate-400 font-normal truncate max-w-[170px] sm:max-w-[200px]">Not connected</div>
+                                    </div>
                                 </div>
-                                <span class="material-symbols-outlined text-[16px] text-slate-400 group-hover:translate-x-0.5 transition-transform">open_in_new</span>
+                                <div class="flex items-center gap-1.5 shrink-0">
+                                    <span id="linkPortfolioBadge" class="hidden text-[9px] font-bold bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full border border-emerald-200/70">Linked</span>
+                                    <span class="material-symbols-outlined text-[15px] text-slate-400 group-hover:translate-x-0.5 transition-transform">open_in_new</span>
+                                </div>
                             </a>
                         </div>
                     </div>
@@ -691,9 +724,41 @@
             document.getElementById('academicEmail').textContent = u.email || '';
 
             // Links Widget
-            setupLink('linkGithub', u.github, 'Add GitHub');
-            setupLink('linkLinkedin', u.linkedin, 'Add LinkedIn');
-            setupLink('linkPortfolio', u.portfolio, 'Add Portfolio');
+            setupLink('linkGithub', 'linkGithubValue', 'linkGithubBadge', u.github, 'GitHub');
+            setupLink('linkLinkedin', 'linkLinkedinValue', 'linkLinkedinBadge', u.linkedin, 'LinkedIn');
+            setupLink('linkPortfolio', 'linkPortfolioValue', 'linkPortfolioBadge', u.portfolio, 'Portfolio');
+
+            // Hero Social Badges
+            const heroBadges = document.getElementById('heroSocialBadges');
+            if (heroBadges) {
+                let badgesHtml = '';
+                if (u.github) {
+                    const ghUser = u.github.replace(/^https?:\/\/(www\.)?github\.com\//, '').replace(/\/$/, '');
+                    badgesHtml += `
+                        <a href="${u.github.startsWith('http') ? u.github : 'https://' + u.github}" target="_blank" class="inline-flex items-center gap-1 text-[10px] font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-0.5 rounded-full border border-slate-200 transition-colors" title="GitHub: @${ghUser}">
+                            <span class="material-symbols-outlined text-[12px]">code</span>
+                            <span>@${ghUser}</span>
+                        </a>
+                    `;
+                }
+                if (u.linkedin) {
+                    badgesHtml += `
+                        <a href="${u.linkedin.startsWith('http') ? u.linkedin : 'https://' + u.linkedin}" target="_blank" class="inline-flex items-center gap-1 text-[10px] font-semibold bg-blue-50 hover:bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full border border-blue-200 transition-colors" title="View LinkedIn">
+                            <span class="material-symbols-outlined text-[12px]">badge</span>
+                            <span>LinkedIn</span>
+                        </a>
+                    `;
+                }
+                if (u.portfolio) {
+                    badgesHtml += `
+                        <a href="${u.portfolio.startsWith('http') ? u.portfolio : 'https://' + u.portfolio}" target="_blank" class="inline-flex items-center gap-1 text-[10px] font-semibold bg-emerald-50 hover:bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full border border-emerald-200 transition-colors" title="View Portfolio">
+                            <span class="material-symbols-outlined text-[12px]">public</span>
+                            <span>Portfolio</span>
+                        </a>
+                    `;
+                }
+                heroBadges.innerHTML = badgesHtml;
+            }
 
             // Skills Widget
             const skillsContainer = document.getElementById('skillsPillContainer');
@@ -955,15 +1020,52 @@
             if (statBadges) statBadges.textContent = unlockedCount;
         }
 
-        function setupLink(elementId, url, fallbackText) {
+        function setupLink(elementId, valueId, badgeId, rawUrl, typeName) {
             const el = document.getElementById(elementId);
+            const valEl = document.getElementById(valueId);
+            const badgeEl = document.getElementById(badgeId);
             if (!el) return;
-            if (url && url.startsWith('http')) {
+
+            let url = (rawUrl || '').trim();
+            if (url && !url.startsWith('http://') && !url.startsWith('https://')) {
+                url = 'https://' + url;
+            }
+
+            if (url && (url.startsWith('http://') || url.startsWith('https://')) && url.length > 10) {
                 el.href = url;
-                el.classList.remove('opacity-50');
+                el.target = '_blank';
+                el.removeAttribute('onclick');
+                el.classList.remove('opacity-60', 'opacity-70');
+
+                // Format clean handle for display
+                let displayHandle = url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
+                if (typeName === 'GitHub' && displayHandle.includes('github.com/')) {
+                    const handle = displayHandle.split('github.com/')[1] || '';
+                    displayHandle = handle ? `@${handle}` : displayHandle;
+                } else if (typeName === 'LinkedIn' && displayHandle.includes('linkedin.com/in/')) {
+                    const handle = displayHandle.split('linkedin.com/in/')[1] || '';
+                    displayHandle = handle ? `in/${handle}` : displayHandle;
+                }
+
+                if (valEl) {
+                    valEl.textContent = displayHandle;
+                    valEl.className = 'text-[10px] text-blue-600 font-semibold truncate max-w-[170px] sm:max-w-[200px]';
+                }
+                if (badgeEl) {
+                    badgeEl.classList.remove('hidden');
+                }
             } else {
-                el.href = 'javascript:openEditModal()';
+                el.href = 'javascript:void(0);';
+                el.target = '';
+                el.setAttribute('onclick', 'openEditModal()');
                 el.classList.add('opacity-70');
+                if (valEl) {
+                    valEl.textContent = '+ Add link';
+                    valEl.className = 'text-[10px] text-slate-400 font-normal truncate max-w-[170px] sm:max-w-[200px]';
+                }
+                if (badgeEl) {
+                    badgeEl.classList.add('hidden');
+                }
             }
         }
 
@@ -1223,8 +1325,13 @@
 
             if (res.status === 200 && res.data.success) {
                 currentUser = res.data.data;
+                try {
+                    const stored = JSON.parse(localStorage.getItem('expadvisor_user') || '{}');
+                    localStorage.setItem('expadvisor_user', JSON.stringify({ ...stored, ...res.data.data }));
+                } catch(e) {}
                 renderProfileHeader();
                 document.getElementById('editProfileModal').close();
+                showToast('Profile & links updated!');
             } else {
                 alert(res.data.message || 'Failed to update profile');
             }
