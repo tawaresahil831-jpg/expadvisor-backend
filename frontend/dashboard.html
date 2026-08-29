@@ -1397,6 +1397,27 @@
         return escaped.replace(/#(\w+)/g, '<span class="text-secondary font-semibold hover:underline cursor-pointer" onclick="event.stopPropagation(); setHashtagSearch(\'$1\')">#$1</span>');
     }
 
+    function setCategoryOrHashtagSearch(cat) {
+        if (!cat) return;
+        if (cat.startsWith('#')) {
+            setHashtagSearch(cat);
+        } else {
+            const catBtns = document.querySelectorAll('.filter-cat-btn');
+            let matched = false;
+            catBtns.forEach(b => {
+                const bCat = (b.getAttribute('data-category') || b.textContent.trim()).toLowerCase();
+                if (bCat === cat.toLowerCase()) {
+                    b.click();
+                    matched = true;
+                }
+            });
+            if (!matched) {
+                const otherBtn = document.querySelector('.filter-cat-btn[data-category="other"]');
+                if (otherBtn) otherBtn.click();
+            }
+        }
+    }
+
     function setHashtagSearch(tag) {
         currentSearch = tag;
         const searchInput = document.getElementById('searchInput');
@@ -1405,9 +1426,10 @@
         // Also try to match a category button if it's an exact match
         const catBtns = document.querySelectorAll('.filter-cat-btn');
         let matched = false;
+        const cleanTag = tag.toLowerCase().replace('#', '');
         catBtns.forEach(b => {
             const bCat = (b.getAttribute('data-category') || b.textContent.trim()).toLowerCase();
-            if (bCat === tag.toLowerCase()) {
+            if (bCat === cleanTag && cleanTag !== '') {
                 b.click(); // This will trigger the category filter
                 matched = true;
             }
@@ -1502,7 +1524,7 @@
                         <p onclick="openExperienceDetail(${exp.experience_id})" class="font-body-md text-on-surface-variant line-clamp-2 cursor-pointer">${formatHashtags(exp.content)}</p>
                     </div>
                     <div class="flex flex-wrap gap-2">
-                        <span class="px-2.5 py-1 rounded-md bg-surface-container-high text-on-surface-variant font-label-sm capitalize">${exp.category || 'General'}</span>
+                        <span onclick="event.stopPropagation(); setCategoryOrHashtagSearch('${(exp.category || 'General').replace(/'/g, "\\'")}')" class="px-2.5 py-1 rounded-md bg-surface-container-high text-on-surface-variant font-label-sm capitalize hover:bg-surface-container-highest cursor-pointer transition-colors" title="Filter by this category">${exp.category || 'General'}</span>
                         <span class="px-2.5 py-1 rounded-md border border-outline-variant/30 text-on-surface-variant font-label-sm">${exp.company || 'Company'}</span>
                     </div>
                     ${exp.accepted_answer ? `
