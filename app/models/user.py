@@ -23,6 +23,9 @@ class User(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     reset_token = db.Column(db.String(100), unique=True, nullable=True)
     reset_token_expiry = db.Column(db.DateTime, nullable=True)
+    is_verified = db.Column(db.Boolean, default=False, nullable=False)
+    verification_otp = db.Column(db.String(6), nullable=True)
+    verification_otp_expiry = db.Column(db.DateTime, nullable=True)
 
     def set_password(self, plain_password):
         """Hashes and stores the password. Never save plain text."""
@@ -48,5 +51,6 @@ class User(db.Model):
             "github": self.github,
             "linkedin": self.linkedin,
             "portfolio": self.portfolio,
+            "is_verified": bool(self.is_verified),
             "created_at": self.created_at.isoformat() if self.created_at else None
         }
