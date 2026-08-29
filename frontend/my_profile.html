@@ -9,6 +9,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
@@ -18,9 +19,7 @@
                             500: '#3b82f6',
                             600: '#2563eb',
                             700: '#1d4ed8',
-                        },
-                        surface: '#ffffff',
-                        canvas: '#f8fafc',
+                        }
                     },
                     fontFamily: {
                         sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
@@ -39,11 +38,51 @@
         ::-webkit-scrollbar { display: none; }
         .line-clamp-1 { display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
         .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        dialog::backdrop { background-color: rgba(15, 23, 42, 0.45); backdrop-filter: blur(6px); }
+        dialog::backdrop { background-color: rgba(15, 23, 42, 0.55); backdrop-filter: blur(6px); }
+
+        /* Dark mode overrides */
+        html.dark, html.dark body {
+            background-color: #0b1329 !important;
+            color: #f1f5f9 !important;
+        }
+        html.dark .bg-white {
+            background-color: #111827 !important;
+            border-color: #1f2937 !important;
+            color: #f1f5f9 !important;
+        }
+        html.dark .bg-slate-50, html.dark .bg-slate-50\/80 {
+            background-color: #1e293b !important;
+        }
+        html.dark .bg-slate-100 {
+            background-color: #1f2937 !important;
+            color: #e2e8f0 !important;
+        }
+        html.dark .text-slate-900 { color: #f8fafc !important; }
+        html.dark .text-slate-800 { color: #f1f5f9 !important; }
+        html.dark .text-slate-700 { color: #cbd5e1 !important; }
+        html.dark .text-slate-600 { color: #94a3b8 !important; }
+        html.dark .text-slate-500 { color: #64748b !important; }
+        html.dark .border-slate-100, html.dark .border-slate-200, html.dark .border-slate-200\/70, html.dark .border-slate-200\/80, html.dark .border-slate-200\/90 {
+            border-color: #1f2937 !important;
+        }
+        html.dark header {
+            background-color: #111827 !important;
+            border-color: #1f2937 !important;
+        }
+        html.dark dialog {
+            background-color: #111827 !important;
+            color: #f1f5f9 !important;
+            border-color: #374151 !important;
+        }
+        html.dark input, html.dark select, html.dark textarea {
+            background-color: #1e293b !important;
+            color: #f8fafc !important;
+            border-color: #374151 !important;
+        }
     </style>
 </head>
 
-<body class="bg-canvas text-slate-800 antialiased font-sans flex min-h-screen">
+<body class="bg-[#f8fafc] text-slate-800 antialiased font-sans flex min-h-screen">
 
     <!-- ====== SLIM DARK ICON RAIL (LEFT NAVIGATION) ====== -->
     <aside class="w-16 bg-[#111827] flex flex-col items-center py-4 shrink-0 fixed top-0 bottom-0 left-0 z-50 border-r border-slate-800">
@@ -89,11 +128,11 @@
                 <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-medium">Profile</span>
             </div>
 
-            <!-- Search Bar (redirects to dashboard) -->
+            <!-- Search Bar -->
             <div class="w-full max-w-md mx-6">
                 <div class="relative flex items-center">
                     <span class="material-symbols-outlined absolute left-3.5 text-slate-400 text-[18px]">search</span>
-                    <input id="searchInput" type="text" placeholder="Search problems or press enter..." class="w-full bg-slate-50/80 border border-slate-200/90 rounded-full pl-9 pr-4 py-1.5 text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all" />
+                    <input id="searchInput" type="text" placeholder="Search for problems..." class="w-full bg-slate-50/80 border border-slate-200/90 rounded-full pl-9 pr-4 py-1.5 text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all" />
                 </div>
             </div>
 
@@ -103,6 +142,11 @@
                 <span class="text-xs font-semibold text-slate-500 bg-slate-100 px-3 py-1 rounded-full hidden sm:inline-block">
                     Session 2026–27
                 </span>
+
+                <!-- Dark Mode Quick Toggle Button in Header -->
+                <button id="headerThemeToggle" class="w-9 h-9 rounded-full text-slate-600 hover:bg-slate-100 flex items-center justify-center transition-colors" title="Toggle Theme">
+                    <span id="headerThemeIcon" class="material-symbols-outlined text-[20px]">dark_mode</span>
+                </button>
 
                 <!-- Notifications -->
                 <div class="relative">
@@ -133,144 +177,232 @@
         <!-- ====== MAIN BODY ====== -->
         <main class="p-8 max-w-7xl mx-auto w-full space-y-6">
 
-            <!-- Title & Subtitle Row -->
-            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
-                <h1 class="text-2xl font-bold text-slate-900 tracking-tight">My Profile & Activity</h1>
-                <p class="text-xs text-slate-500 font-medium">Manage your identity, bio, achievements, and academic activity</p>
-            </div>
+            <!-- ====== PROFILE BANNER & IDENTITY CARD ====== -->
+            <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden">
+                <!-- Purple/Indigo Accent Banner -->
+                <div class="h-20 sm:h-24 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 w-full relative">
+                    <div class="absolute inset-0 bg-black/10"></div>
+                </div>
 
-            <!-- ====== 2-COLUMN LAYOUT ====== -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                <!-- Profile Info Row -->
+                <div class="px-6 sm:px-8 pb-6 pt-3 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                    
+                    <!-- Left: Avatar + Details -->
+                    <div class="flex items-end gap-4 -mt-10 sm:-mt-12">
+                        <!-- Big Avatar Square/Circle -->
+                        <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-blue-600 text-white text-3xl font-extrabold flex items-center justify-center shadow-lg border-4 border-white shrink-0 relative overflow-hidden">
+                            <span id="profileAvatarInitial">M</span>
+                        </div>
 
-                <!-- ====== LEFT COLUMN: IDENTITY & ACHIEVEMENTS (~35%) ====== -->
-                <aside class="lg:col-span-4 space-y-6">
-
-                    <!-- Profile Identity Card -->
-                    <div class="bg-white rounded-2xl border border-slate-200/70 p-6 shadow-sm flex flex-col items-center text-center space-y-4">
-                        <!-- Dynamic Avatar Initial / Image -->
-                        <div class="relative w-28 h-28">
-                            <div id="profileAvatarContainer" class="w-full h-full rounded-full shadow-inner border-4 border-slate-100 flex items-center justify-center bg-blue-100 text-blue-700 font-bold text-4xl overflow-hidden">
-                                <img id="profileAvatarImg" alt="Profile Photo" class="w-full h-full object-cover hidden" src="" />
-                                <span id="profileAvatarInitial">M</span>
+                        <!-- Name, Year Badge & College Subtitle -->
+                        <div class="space-y-1 mb-1">
+                            <div class="flex items-center gap-2.5 flex-wrap">
+                                <h1 id="profileName" class="text-xl sm:text-2xl font-bold text-slate-900 leading-tight">Loading Name...</h1>
+                                <span id="profileYearBadge" class="text-xs font-bold uppercase bg-indigo-50 text-indigo-700 px-2.5 py-0.5 rounded-full border border-indigo-100">
+                                    1st Year
+                                </span>
                             </div>
+                            <p id="profileSubtitle" class="text-xs text-slate-500 font-medium">
+                                @username · College of Engineering
+                            </p>
                         </div>
+                    </div>
 
-                        <!-- Name & Role -->
-                        <div>
-                            <h2 id="profile-name" class="text-lg font-bold text-slate-900 leading-snug user-name-display">Loading...</h2>
-                            <span id="profile-role" class="inline-block mt-1 px-3 py-0.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 uppercase tracking-wider user-role-display">
-                                Student
-                            </span>
-                        </div>
+                    <!-- Right: Action Buttons -->
+                    <div class="flex items-center gap-2.5 pt-2 sm:pt-0">
+                        <!-- Dark Mode Toggle Button -->
+                        <button id="themeToggleBtn" class="px-3.5 py-2 rounded-xl border border-slate-200 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-all flex items-center gap-1.5 shadow-sm">
+                            <span id="themeToggleIcon" class="material-symbols-outlined text-[16px]">dark_mode</span>
+                            <span id="themeToggleText">Dark Mode</span>
+                        </button>
 
-                        <!-- Bio -->
-                        <p id="profile-bio" class="text-xs text-slate-500 leading-relaxed max-w-xs">
-                            Loading bio...
-                        </p>
-
-                        <!-- Edit Bio Action -->
-                        <button id="edit-bio-btn" class="w-full bg-slate-900 hover:bg-black text-white font-semibold py-2 rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-sm transition-all">
+                        <!-- Edit Profile Button -->
+                        <button onclick="openEditModal()" class="px-4 py-2 rounded-xl bg-slate-900 hover:bg-black text-white text-xs font-semibold shadow-sm transition-all flex items-center gap-1.5">
                             <span class="material-symbols-outlined text-[16px]">edit</span>
-                            Edit Bio
+                            Edit Profile
+                        </button>
+
+                        <!-- Share Button -->
+                        <button onclick="shareProfile()" class="px-3.5 py-2 rounded-xl border border-slate-200 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-all flex items-center gap-1.5 shadow-sm">
+                            <span class="material-symbols-outlined text-[16px]">share</span>
+                            Share
                         </button>
                     </div>
 
-                    <!-- Achievements Card -->
-                    <div class="bg-white rounded-2xl border border-slate-200/70 p-5 shadow-sm space-y-3">
-                        <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
-                            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">Achievements</h3>
-                            <span class="material-symbols-outlined text-[18px] text-amber-500" style="font-variation-settings: 'FILL' 1;">stars</span>
+                </div>
+            </div>
+
+            <!-- ====== TOP 4-STAT STRIP ====== -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <!-- Stat 1: Queries Asked -->
+                <div class="bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center gap-3.5">
+                    <div class="w-11 h-11 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-[22px]">feed</span>
+                    </div>
+                    <div>
+                        <div id="stat-queries-asked" class="text-xl font-bold text-slate-900 leading-none">0</div>
+                        <div class="text-xs text-slate-500 font-medium mt-1">Queries Asked</div>
+                    </div>
+                </div>
+
+                <!-- Stat 2: Answers Given -->
+                <div class="bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center gap-3.5">
+                    <div class="w-11 h-11 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-[22px]">check_circle</span>
+                    </div>
+                    <div>
+                        <div id="stat-answers-given" class="text-xl font-bold text-slate-900 leading-none">0</div>
+                        <div class="text-xs text-slate-500 font-medium mt-1">Answers Given</div>
+                    </div>
+                </div>
+
+                <!-- Stat 3: Reputation -->
+                <div class="bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center gap-3.5">
+                    <div class="w-11 h-11 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                    </div>
+                    <div>
+                        <div id="stat-reputation" class="text-xl font-bold text-slate-900 leading-none">0</div>
+                        <div class="text-xs text-slate-500 font-medium mt-1">Reputation</div>
+                    </div>
+                </div>
+
+                <!-- Stat 4: Badges -->
+                <div class="bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center gap-3.5">
+                    <div class="w-11 h-11 rounded-xl bg-violet-50 text-violet-600 flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-[22px]">military_tech</span>
+                    </div>
+                    <div>
+                        <div id="stat-badges" class="text-xl font-bold text-slate-900 leading-none">0</div>
+                        <div class="text-xs text-slate-500 font-medium mt-1">Badges</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ====== 2-COLUMN MAIN CONTENT GRID (8 cols Left / 4 cols Right) ====== -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+                <!-- ====== LEFT COLUMN: ACTIVITY TABS (~66%) ====== -->
+                <section class="lg:col-span-8 bg-white rounded-2xl border border-slate-200/70 p-6 shadow-sm space-y-5">
+                    
+                    <!-- Tabs Header -->
+                    <div class="flex items-center gap-2 border-b border-slate-100 pb-3">
+                        <button id="tabBtnQueries" onclick="switchTab('queries')" class="profile-tab-btn px-4 py-1.5 rounded-full text-xs font-bold bg-blue-600 text-white shadow-sm transition-all">
+                            My Queries
+                        </button>
+                        <button id="tabBtnAnswers" onclick="switchTab('answers')" class="profile-tab-btn px-4 py-1.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">
+                            My Answers
+                        </button>
+                        <button id="tabBtnSaved" onclick="switchTab('saved')" class="profile-tab-btn px-4 py-1.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">
+                            Saved
+                        </button>
+                    </div>
+
+                    <!-- Tab 1: Queries Feed -->
+                    <div id="tabContentQueries" class="divide-y divide-slate-100 space-y-1">
+                        <div class="py-12 text-center text-slate-400 text-sm">Loading queries...</div>
+                    </div>
+
+                    <!-- Tab 2: Answers Feed -->
+                    <div id="tabContentAnswers" class="divide-y divide-slate-100 space-y-1 hidden">
+                        <div class="py-12 text-center text-slate-400 text-sm">Loading answers...</div>
+                    </div>
+
+                    <!-- Tab 3: Saved Feed -->
+                    <div id="tabContentSaved" class="py-12 text-center text-slate-400 text-xs hidden">
+                        <span class="material-symbols-outlined text-3xl text-slate-300 mb-1">bookmark_border</span>
+                        <div>No saved queries yet.</div>
+                    </div>
+
+                </section>
+
+                <!-- ====== RIGHT COLUMN: ABOUT WIDGETS (~34%) ====== -->
+                <aside class="lg:col-span-4 space-y-6">
+
+                    <!-- Card 1: Academic Details -->
+                    <div class="bg-white rounded-2xl border border-slate-200/70 p-5 shadow-sm space-y-4">
+                        <h3 class="text-[11px] font-bold text-slate-400 tracking-wider uppercase">Academic Details</h3>
+                        
+                        <div class="space-y-3.5 text-xs">
+                            <!-- College -->
+                            <div class="flex items-start gap-3">
+                                <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-[18px]">school</span>
+                                </div>
+                                <div>
+                                    <div class="text-[10px] font-bold uppercase text-slate-400">College</div>
+                                    <div id="academicCollege" class="font-bold text-slate-900 mt-0.5">DYP College of Engineering</div>
+                                </div>
+                            </div>
+
+                            <!-- Branch / Year -->
+                            <div class="flex items-start gap-3">
+                                <div class="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-[18px]">badge</span>
+                                </div>
+                                <div>
+                                    <div class="text-[10px] font-bold uppercase text-slate-400">Branch / Year</div>
+                                    <div id="academicBranchYear" class="font-bold text-slate-900 mt-0.5">Computer Eng., 1st Yr</div>
+                                </div>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="flex items-start gap-3">
+                                <div class="w-8 h-8 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-[18px]">mail</span>
+                                </div>
+                                <div>
+                                    <div class="text-[10px] font-bold uppercase text-slate-400">Email</div>
+                                    <div id="academicEmail" class="font-bold text-slate-900 mt-0.5 truncate max-w-[200px]">student@dyp.edu.in</div>
+                                </div>
+                            </div>
                         </div>
-                        <div id="achievements-container" class="flex flex-wrap gap-2 pt-1">
-                            <p class="text-xs text-slate-400">Loading achievements...</p>
+                    </div>
+
+                    <!-- Card 2: Links -->
+                    <div class="bg-white rounded-2xl border border-slate-200/70 p-5 shadow-sm space-y-3">
+                        <h3 class="text-[11px] font-bold text-slate-400 tracking-wider uppercase">Links</h3>
+                        
+                        <div class="space-y-2">
+                            <!-- GitHub -->
+                            <a id="linkGithub" href="#" target="_blank" class="w-full bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl p-2.5 text-xs font-semibold text-slate-800 flex items-center justify-between transition-colors group">
+                                <div class="flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-[18px] text-slate-600">code</span>
+                                    <span>GitHub</span>
+                                </div>
+                                <span class="material-symbols-outlined text-[16px] text-slate-400 group-hover:translate-x-0.5 transition-transform">open_in_new</span>
+                            </a>
+
+                            <!-- LinkedIn -->
+                            <a id="linkLinkedin" href="#" target="_blank" class="w-full bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl p-2.5 text-xs font-semibold text-slate-800 flex items-center justify-between transition-colors group">
+                                <div class="flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-[18px] text-blue-600">badge</span>
+                                    <span>LinkedIn</span>
+                                </div>
+                                <span class="material-symbols-outlined text-[16px] text-slate-400 group-hover:translate-x-0.5 transition-transform">open_in_new</span>
+                            </a>
+
+                            <!-- Portfolio -->
+                            <a id="linkPortfolio" href="#" target="_blank" class="w-full bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl p-2.5 text-xs font-semibold text-slate-800 flex items-center justify-between transition-colors group">
+                                <div class="flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-[18px] text-emerald-600">public</span>
+                                    <span>Portfolio</span>
+                                </div>
+                                <span class="material-symbols-outlined text-[16px] text-slate-400 group-hover:translate-x-0.5 transition-transform">open_in_new</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Skills -->
+                    <div class="bg-white rounded-2xl border border-slate-200/70 p-5 shadow-sm space-y-3">
+                        <h3 class="text-[11px] font-bold text-slate-400 tracking-wider uppercase">Skills</h3>
+                        
+                        <div id="skillsPillContainer" class="flex flex-wrap gap-2 pt-0.5">
+                            <span class="text-xs text-slate-400">Loading skills...</span>
                         </div>
                     </div>
 
                 </aside>
-
-                <!-- ====== RIGHT COLUMN: STATS, HEATMAP & RECENT ACTIVITY (~65%) ====== -->
-                <section class="lg:col-span-8 space-y-6">
-
-                    <!-- Top 2-Stat Ribbon -->
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center gap-3.5">
-                            <div class="w-11 h-11 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-[22px]">quiz</span>
-                            </div>
-                            <div>
-                                <div id="stats-solved" class="text-xl font-bold text-slate-900 leading-none">0</div>
-                                <div class="text-xs text-slate-500 font-medium mt-1">Queries Asked</div>
-                            </div>
-                        </div>
-
-                        <div class="bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center gap-3.5">
-                            <div class="w-11 h-11 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-[22px]">handshake</span>
-                            </div>
-                            <div>
-                                <div id="stats-helped" class="text-xl font-bold text-slate-900 leading-none">0</div>
-                                <div class="text-xs text-slate-500 font-medium mt-1">Replies & Solutions</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Monthly Activity Graph Card -->
-                    <div class="bg-white rounded-2xl border border-slate-200/70 p-6 shadow-sm space-y-4">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center gap-3">
-                                <h3 class="text-sm font-bold text-slate-900">Monthly Activity</h3>
-                                <div class="flex items-center bg-slate-100 rounded-lg px-1.5 py-0.5 text-xs font-semibold text-slate-700">
-                                    <button id="prevMonthBtn" class="p-1 hover:text-blue-600 rounded transition-colors" title="Previous Month">
-                                        <span class="material-symbols-outlined text-[14px]">chevron_left</span>
-                                    </button>
-                                    <span id="currentMonthBadge" class="px-2 font-bold text-slate-800">August 2026</span>
-                                    <button id="nextMonthBtn" class="p-1 hover:text-blue-600 rounded transition-colors" title="Next Month">
-                                        <span class="material-symbols-outlined text-[14px]">chevron_right</span>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="flex items-center gap-1.5 text-[11px] text-slate-400">
-                                <span>Less</span>
-                                <span class="w-2.5 h-2.5 rounded-sm bg-slate-100 border border-slate-200"></span>
-                                <span class="w-2.5 h-2.5 rounded-sm bg-blue-100"></span>
-                                <span class="w-2.5 h-2.5 rounded-sm bg-blue-300"></span>
-                                <span class="w-2.5 h-2.5 rounded-sm bg-blue-500"></span>
-                                <span class="w-2.5 h-2.5 rounded-sm bg-blue-700"></span>
-                                <span>More</span>
-                            </div>
-                        </div>
-
-                        <!-- Calendar Grid -->
-                        <div class="space-y-1.5 max-w-[340px]">
-                            <!-- Weekday headers -->
-                            <div class="grid grid-cols-7 gap-1.5 text-center text-[10px] font-bold text-slate-400 uppercase">
-                                <span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span><span>Su</span>
-                            </div>
-                            <!-- Monthly dynamic blocks -->
-                            <div id="monthlyGrid" class="grid grid-cols-7 gap-1.5"></div>
-                        </div>
-
-                        <!-- Monthly summary footer -->
-                        <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                            <div>Total Monthly Contributions: <span id="monthlyTotalCount" class="font-bold text-slate-900">0</span></div>
-                            <div>Active Days: <span id="monthlyActiveDays" class="font-bold text-slate-900">0</span></div>
-                        </div>
-                    </div>
-
-                    <!-- Recent Activity Card -->
-                    <div class="bg-white rounded-2xl border border-slate-200/70 p-6 shadow-sm space-y-4">
-                        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-                            <h3 class="text-sm font-bold text-slate-900">Recent Contributions</h3>
-                            <a href="my_problems.html" class="text-xs text-blue-600 hover:underline font-semibold flex items-center gap-1">
-                                View All <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
-                            </a>
-                        </div>
-                        <div id="recent-activity-list" class="divide-y divide-slate-100 space-y-1">
-                            <p class="py-6 text-center text-xs text-slate-400">Loading recent activity...</p>
-                        </div>
-                    </div>
-
-                </section>
 
             </div>
 
@@ -278,24 +410,65 @@
 
     </div>
 
-    <!-- ====== EDIT BIO MODAL ====== -->
-    <dialog id="edit-bio-modal" class="rounded-2xl shadow-2xl p-0 w-full max-w-md bg-white border border-slate-200 overflow-hidden">
-        <div class="p-6 space-y-4">
+    <!-- ====== EDIT PROFILE MODAL ====== -->
+    <dialog id="editProfileModal" class="rounded-2xl shadow-2xl p-0 w-full max-w-lg bg-white border border-slate-200 overflow-hidden">
+        <div class="p-6 max-h-[85vh] overflow-y-auto space-y-4">
             <div class="flex items-center justify-between pb-3 border-b border-slate-100">
-                <h3 class="text-base font-bold text-slate-900">Edit Bio</h3>
-                <button type="button" id="close-bio-modal" class="text-slate-400 hover:text-slate-600">
+                <h3 class="text-base font-bold text-slate-900">Edit Profile Details</h3>
+                <button type="button" onclick="document.getElementById('editProfileModal').close()" class="text-slate-400 hover:text-slate-600">
                     <span class="material-symbols-outlined text-[20px]">close</span>
                 </button>
             </div>
             
-            <form id="editBioForm" class="space-y-4">
+            <form id="editProfileForm" class="space-y-4">
                 <div>
-                    <label class="block text-xs font-semibold text-slate-700 mb-1">About You</label>
-                    <textarea id="edit-bio-input" rows="4" placeholder="Tell others about your academic focus or skills..." class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Full Name</label>
+                    <input type="text" id="editName" required class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
                 </div>
-                <div class="flex justify-end gap-2 pt-2">
-                    <button type="button" onclick="document.getElementById('edit-bio-modal').close()" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100">Cancel</button>
-                    <button type="submit" id="save-bio-btn" class="px-5 py-2 rounded-xl text-xs font-semibold bg-slate-900 hover:bg-black text-white shadow-sm">Save Bio</button>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">College</label>
+                        <input type="text" id="editCollege" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Branch</label>
+                        <input type="text" id="editBranch" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Year of Study</label>
+                        <select id="editYear" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="1">1st Year</option>
+                            <option value="2">2nd Year</option>
+                            <option value="3">3rd Year</option>
+                            <option value="4">4th Year</option>
+                            <option value="5">5th Year / Other</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Skills (comma-separated)</label>
+                        <input type="text" id="editSkills" placeholder="Web Dev, Python, UI/UX" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">About / Bio</label>
+                    <textarea id="editBio" rows="3" placeholder="Tell others about yourself..." class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                </div>
+
+                <div class="space-y-2 pt-2 border-t border-slate-100">
+                    <div class="text-[11px] font-bold text-slate-400 uppercase">Social & Portfolio Links</div>
+                    <input type="url" id="editGithub" placeholder="GitHub URL (https://github.com/...)" class="w-full px-3.5 py-1.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    <input type="url" id="editLinkedin" placeholder="LinkedIn URL (https://linkedin.com/in/...)" class="w-full px-3.5 py-1.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    <input type="url" id="editPortfolio" placeholder="Portfolio URL (https://...)" class="w-full px-3.5 py-1.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                </div>
+
+                <div class="flex justify-end gap-2 pt-3">
+                    <button type="button" onclick="document.getElementById('editProfileModal').close()" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100">Cancel</button>
+                    <button type="submit" id="saveProfileBtn" class="px-5 py-2 rounded-xl text-xs font-semibold bg-slate-900 hover:bg-black text-white shadow-sm">Save Changes</button>
                 </div>
             </form>
         </div>
@@ -307,289 +480,292 @@
         requireAuth();
         populateUserProfile();
 
-        let currentUserId = null;
+        let currentUser = null;
+        let userQueries = [];
+        let userComments = [];
 
-        // Search redirect to dashboard
-        document.getElementById('searchInput').addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                const val = e.target.value.trim();
-                window.location.href = val ? `dashboard.html?search=${encodeURIComponent(val)}` : 'dashboard.html';
-            }
-        });
+        // ====== THEME (DARK MODE) CONTROLLER ======
+        function initTheme() {
+            const savedTheme = localStorage.getItem('exp_theme') || 'light';
+            applyTheme(savedTheme);
 
-        // ====== LOAD PROFILE DATA ======
-        async function loadProfileData() {
-            const userRes = await apiRequest('/auth/me');
-            if (userRes.status !== 200) {
-                window.location.href = "login.html";
-                return;
-            }
-            currentUserId = userRes.data.data.user_id || userRes.data.data.id;
+            const toggleBtn = document.getElementById('themeToggleBtn');
+            const headerToggle = document.getElementById('headerThemeToggle');
 
-            // Set Header Avatar initial
-            const initial = (userRes.data.data.name || 'U').charAt(0).toUpperCase();
-            const initHeader = document.getElementById('headerAvatarInitial');
-            if (initHeader) initHeader.textContent = initial;
+            const toggleHandler = () => {
+                const current = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+                const next = current === 'dark' ? 'light' : 'dark';
+                applyTheme(next);
+            };
 
-            // Fetch full profile stats
-            const profileRes = await apiRequest(`/users/${currentUserId}`);
-            if (profileRes.status === 200 && profileRes.data.success) {
-                const data = profileRes.data.data;
-                document.getElementById('profile-name').textContent = data.name || 'Student';
-                document.getElementById('profile-role').textContent = data.role ? data.role.toUpperCase() : 'STUDENT';
-                document.getElementById('profile-bio').textContent = data.bio || 'Add a bio to let others know about your academic journey.';
-                
-                // Profile Avatar Initial / Image
-                const initialEl = document.getElementById('profileAvatarInitial');
-                const imgEl = document.getElementById('profileAvatarImg');
-                if (data.avatar_url) {
-                    if (imgEl) {
-                        imgEl.src = data.avatar_url;
-                        imgEl.classList.remove('hidden');
-                    }
-                    if (initialEl) initialEl.classList.add('hidden');
-                } else {
-                    if (initialEl) {
-                        initialEl.textContent = initial;
-                        initialEl.classList.remove('hidden');
-                    }
-                    if (imgEl) imgEl.classList.add('hidden');
-                }
-
-                // Stats
-                document.getElementById('stats-solved').textContent = (data.stats && data.stats.problems_solved !== undefined) ? data.stats.problems_solved : 0;
-                document.getElementById('stats-helped').textContent = (data.stats && data.stats.peers_helped !== undefined) ? data.stats.peers_helped : 0;
-
-                // Achievements
-                const achContainer = document.getElementById('achievements-container');
-                if (data.achievements && data.achievements.length > 0) {
-                    achContainer.innerHTML = data.achievements.map(ach => `
-                        <div class="flex items-center gap-1.5 bg-slate-50 border border-slate-200/80 rounded-lg px-2.5 py-1 text-xs font-semibold text-slate-700 shadow-sm">
-                            <span class="material-symbols-outlined text-[14px] text-amber-500" style="font-variation-settings: 'FILL' 1;">star</span>
-                            <span>${ach}</span>
-                        </div>
-                    `).join('');
-                } else {
-                    achContainer.innerHTML = '<p class="text-xs text-slate-400">Post queries or accept solutions to unlock achievements!</p>';
-                }
-            }
-
-            loadRecentActivity();
-            loadActivityGraph();
+            if (toggleBtn) toggleBtn.addEventListener('click', toggleHandler);
+            if (headerToggle) headerToggle.addEventListener('click', toggleHandler);
         }
 
-        // ====== LOAD RECENT ACTIVITY ======
-        async function loadRecentActivity() {
-            const container = document.getElementById('recent-activity-list');
-            if (!container || !currentUserId) return;
+        function applyTheme(theme) {
+            const toggleIcon = document.getElementById('themeToggleIcon');
+            const toggleText = document.getElementById('themeToggleText');
+            const headerIcon = document.getElementById('headerThemeIcon');
 
-            const res = await apiRequest(`/experiences?author_id=${currentUserId}`);
-            if (res.status === 200 && res.data.success) {
-                const list = (res.data.data || []).slice(0, 5);
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('exp_theme', 'dark');
+                if (toggleIcon) toggleIcon.textContent = 'light_mode';
+                if (toggleText) toggleText.textContent = 'Light Mode';
+                if (headerIcon) headerIcon.textContent = 'light_mode';
+            } else {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('exp_theme', 'light');
+                if (toggleIcon) toggleIcon.textContent = 'dark_mode';
+                if (toggleText) toggleText.textContent = 'Dark Mode';
+                if (headerIcon) headerIcon.textContent = 'dark_mode';
+            }
+        }
 
-                if (list.length === 0) {
-                    container.innerHTML = '<p class="py-6 text-center text-xs text-slate-400">No recent activity found.</p>';
-                } else {
-                    container.innerHTML = list.map(exp => `
-                        <div class="py-3 flex items-center justify-between group">
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
-                                    <span class="material-symbols-outlined text-[18px]">forum</span>
+        // Initialize Theme immediately
+        initTheme();
+
+        // ====== LOAD PROFILE DATA ======
+        async function loadProfile() {
+            const meRes = await apiRequest('/auth/me');
+            if (meRes.status !== 200 || !meRes.data.success) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            currentUser = meRes.data.data;
+            const userId = currentUser.user_id || currentUser.id;
+
+            // Fetch full profile details
+            const userRes = await apiRequest(`/users/${userId}`);
+            if (userRes.status === 200 && userRes.data.success) {
+                currentUser = userRes.data.data;
+            }
+
+            renderProfileHeader();
+            loadUserActivity(userId);
+        }
+
+        function renderProfileHeader() {
+            const u = currentUser;
+            const initial = (u.name || 'U').charAt(0).toUpperCase();
+
+            // Avatars
+            document.getElementById('profileAvatarInitial').textContent = initial;
+            document.getElementById('headerAvatarInitial').textContent = initial;
+
+            // Name & Year Badge
+            document.getElementById('profileName').textContent = u.name || 'Student';
+            const yearNum = u.year || 1;
+            const yearOrd = yearNum === 1 ? '1ST' : yearNum === 2 ? '2ND' : yearNum === 3 ? '3RD' : `${yearNum}TH`;
+            document.getElementById('profileYearBadge').textContent = `${yearOrd} YEAR`;
+
+            // Subtitle
+            const cleanUser = (u.email || '').split('@')[0];
+            const college = u.college || 'Engineering College';
+            const branch = u.branch || '';
+            document.getElementById('profileSubtitle').textContent = `@${cleanUser} · ${college} ${branch ? '· ' + branch : ''}`;
+
+            // Academic Details Widget
+            document.getElementById('academicCollege').textContent = college;
+            document.getElementById('academicBranchYear').textContent = `${branch || 'Engineering'}, ${yearOrd} Yr`;
+            document.getElementById('academicEmail').textContent = u.email || '';
+
+            // Links Widget
+            setupLink('linkGithub', u.github, 'Add GitHub');
+            setupLink('linkLinkedin', u.linkedin, 'Add LinkedIn');
+            setupLink('linkPortfolio', u.portfolio, 'Add Portfolio');
+
+            // Skills Widget
+            const skillsContainer = document.getElementById('skillsPillContainer');
+            const skillsList = parseSkills(u.skills);
+            if (skillsList.length > 0) {
+                skillsContainer.innerHTML = skillsList.map(s => `
+                    <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold border border-slate-200/60 shadow-xs">
+                        ${s}
+                    </span>
+                `).join('');
+            } else {
+                skillsContainer.innerHTML = '<span class="text-xs text-slate-400">No skills added yet.</span>';
+            }
+
+            // Badges count
+            const achievements = u.achievements || [];
+            document.getElementById('stat-badges').textContent = achievements.length || 1;
+        }
+
+        function setupLink(elementId, url, fallbackText) {
+            const el = document.getElementById(elementId);
+            if (!el) return;
+            if (url && url.startsWith('http')) {
+                el.href = url;
+                el.classList.remove('opacity-50');
+            } else {
+                el.href = 'javascript:openEditModal()';
+                el.classList.add('opacity-70');
+            }
+        }
+
+        function parseSkills(skills) {
+            if (!skills) return ['Web Dev', 'Python'];
+            if (Array.isArray(skills)) return skills;
+            try {
+                const parsed = JSON.parse(skills);
+                if (Array.isArray(parsed)) return parsed;
+            } catch (e) {}
+            return skills.split(',').map(s => s.trim()).filter(Boolean);
+        }
+
+        // ====== LOAD USER QUERIES & ANSWERS ======
+        async function loadUserActivity(userId) {
+            // Fetch Queries
+            const qRes = await apiRequest(`/experiences?author_id=${userId}`);
+            if (qRes.status === 200 && qRes.data.success) {
+                userQueries = qRes.data.data || [];
+                document.getElementById('stat-queries-asked').textContent = userQueries.length;
+                renderQueriesFeed();
+            }
+
+            // Calculate Reputation & Answers
+            let totalAnswers = 0;
+            let totalLikes = userQueries.reduce((sum, q) => sum + (q.likes_count || 0), 0);
+            
+            userQueries.forEach(q => {
+                totalAnswers += (q.comments_count || 0);
+            });
+
+            const reputation = (userQueries.length * 10) + (totalLikes * 15) + 5;
+            document.getElementById('stat-reputation').textContent = reputation;
+            document.getElementById('stat-answers-given').textContent = totalAnswers;
+        }
+
+        function renderQueriesFeed() {
+            const container = document.getElementById('tabContentQueries');
+            if (userQueries.length === 0) {
+                container.innerHTML = `
+                    <div class="py-12 text-center text-slate-400 text-xs">
+                        No queries posted yet. <a href="dashboard.html" class="text-blue-600 font-bold hover:underline">Ask a Query</a>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = userQueries.map(exp => {
+                const initial = (currentUser.name || 'U').charAt(0).toUpperCase();
+                return `
+                    <div onclick="window.location.href='dashboard.html'" class="p-4 rounded-xl hover:bg-slate-50 transition-colors cursor-pointer group space-y-1.5">
+                        <div class="flex items-center justify-between text-xs">
+                            <div class="flex items-center gap-2">
+                                <div class="w-6 h-6 rounded-full bg-blue-600 text-white font-bold text-[10px] flex items-center justify-center">
+                                    ${initial}
                                 </div>
-                                <div>
-                                    <h4 class="text-xs font-bold text-slate-800 group-hover:text-blue-600 transition-colors line-clamp-1">
-                                        <a href="dashboard.html">${exp.title}</a>
-                                    </h4>
-                                    <div class="flex items-center gap-2 mt-0.5 text-[10px] text-slate-400">
-                                        <span class="bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded capitalize">${exp.category || 'General'}</span>
-                                        <span>· ${new Date(exp.created_at).toLocaleDateString()}</span>
-                                    </div>
-                                </div>
+                                <span class="text-slate-400 text-[11px]">${new Date(exp.created_at).toLocaleDateString()}</span>
                             </div>
                             <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold ${exp.is_resolved ? 'bg-emerald-50 text-emerald-700' : 'bg-amber-50 text-amber-700'}">
                                 ${exp.is_resolved ? 'Solved' : 'Open'}
                             </span>
                         </div>
-                    `).join('');
-                }
-            }
-        }
-
-        // ====== MONTHLY ACTIVITY GRAPH ======
-        let userActivityMap = {};
-        let selectedDate = new Date();
-
-        async function loadActivityGraph() {
-            if (!currentUserId) return;
-            const res = await apiRequest(`/users/${currentUserId}/activity`);
-            if (res.status === 200 && res.data.success) {
-                userActivityMap = res.data.data || {};
-                renderMonthlyGraph();
-            }
-        }
-
-        function renderMonthlyGraph() {
-            const grid = document.getElementById('monthlyGrid');
-            const badge = document.getElementById('currentMonthBadge');
-            if (!grid) return;
-
-            const year = selectedDate.getFullYear();
-            const month = selectedDate.getMonth();
-
-            const monthName = selectedDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
-            if (badge) badge.textContent = monthName;
-
-            const totalDays = new Date(year, month + 1, 0).getDate();
-            // Monday as first day of week (0=Mon, 6=Sun)
-            const firstDayOfWeek = (new Date(year, month, 1).getDay() + 6) % 7;
-
-            let totalContributions = 0;
-            let activeDays = 0;
-            let cellsHTML = '';
-
-            // Empty offset slots
-            for (let i = 0; i < firstDayOfWeek; i++) {
-                cellsHTML += `<div class="h-8 rounded-lg bg-slate-50/60 border border-dashed border-slate-100"></div>`;
-            }
-
-            // Month days
-            for (let day = 1; day <= totalDays; day++) {
-                const dateObj = new Date(year, month, day);
-                const yyyy = year;
-                const mm = String(month + 1).padStart(2, '0');
-                const dd = String(day).padStart(2, '0');
-                const dateStr = `${yyyy}-${mm}-${dd}`;
-
-                const count = userActivityMap[dateStr] || 0;
-                if (count > 0) {
-                    totalContributions += count;
-                    activeDays++;
-                }
-
-                let bgClass = 'bg-slate-100/90 text-slate-600 hover:bg-slate-200 border-transparent';
-                if (count > 0 && count <= 2) bgClass = 'bg-blue-100 text-blue-700 font-bold border-blue-200 hover:bg-blue-200';
-                else if (count > 2 && count <= 5) bgClass = 'bg-blue-300 text-blue-900 font-bold border-blue-400 hover:bg-blue-400';
-                else if (count > 5 && count <= 10) bgClass = 'bg-blue-500 text-white font-bold border-blue-600 hover:bg-blue-600';
-                else if (count > 10) bgClass = 'bg-blue-700 text-white font-bold border-blue-800 hover:bg-blue-800';
-
-                const formattedDate = dateObj.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
-                const tooltipText = count > 0 ? `${formattedDate} · ${count} contribution${count > 1 ? 's' : ''}` : `${formattedDate} · No activity`;
-
-                cellsHTML += `
-                    <div class="activity-block h-8 rounded-lg border transition-all cursor-pointer select-none hover:scale-110 hover:shadow-sm ${bgClass}"
-                         data-date="${formattedDate}"
-                         data-count="${count}"
-                         title="${tooltipText}">
+                        <h4 class="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors leading-snug">
+                            ${exp.title}
+                        </h4>
+                        <p class="text-xs text-slate-500 line-clamp-1">${exp.content || ''}</p>
+                        <div class="flex items-center gap-1.5 pt-1 text-xs">
+                            <span class="bg-slate-100 text-slate-600 font-medium px-2 py-0.5 rounded text-[10px] capitalize">${exp.category || 'General'}</span>
+                            ${exp.company ? `<span class="bg-slate-100 text-slate-600 font-medium px-2 py-0.5 rounded text-[10px]">${exp.company}</span>` : ''}
+                        </div>
                     </div>
                 `;
-            }
-
-            grid.innerHTML = cellsHTML;
-
-            const totalEl = document.getElementById('monthlyTotalCount');
-            const activeEl = document.getElementById('monthlyActiveDays');
-            if (totalEl) totalEl.textContent = totalContributions;
-            if (activeEl) activeEl.textContent = activeDays;
-
-            attachTooltipListeners();
+            }).join('');
         }
 
-        function attachTooltipListeners() {
-            const tooltip = document.getElementById('heatmap-tooltip');
-            const textEl = document.getElementById('tooltip-text');
-            const blocks = document.querySelectorAll('.activity-block');
-
-            blocks.forEach(block => {
-                block.addEventListener('mouseenter', (e) => {
-                    const date = block.dataset.date;
-                    const count = parseInt(block.dataset.count) || 0;
-                    textEl.innerHTML = `<div class="text-blue-300 font-bold text-[11px]">📅 ${date}</div><div class="text-slate-300 text-[10px] mt-0.5">${count} contribution${count === 1 ? '' : 's'}</div>`;
-                    tooltip.classList.remove('hidden');
-                });
-
-                block.addEventListener('mousemove', (e) => {
-                    tooltip.style.left = `${e.clientX + 12}px`;
-                    tooltip.style.top = `${e.clientY - 40}px`;
-                });
-
-                block.addEventListener('mouseleave', () => {
-                    tooltip.classList.add('hidden');
-                });
+        // Tab Switching
+        function switchTab(tab) {
+            const tabs = ['queries', 'answers', 'saved'];
+            tabs.forEach(t => {
+                const btn = document.getElementById(`tabBtn${t.charAt(0).toUpperCase() + t.slice(1)}`);
+                const content = document.getElementById(`tabContent${t.charAt(0).toUpperCase() + t.slice(1)}`);
+                if (t === tab) {
+                    btn.className = 'profile-tab-btn px-4 py-1.5 rounded-full text-xs font-bold bg-blue-600 text-white shadow-sm transition-all';
+                    content.classList.remove('hidden');
+                } else {
+                    btn.className = 'profile-tab-btn px-4 py-1.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all';
+                    content.classList.add('hidden');
+                }
             });
+
+            if (tab === 'answers') {
+                renderAnswersFeed();
+            }
         }
 
-        // Bio Modal Events
-        document.addEventListener('DOMContentLoaded', () => {
-            loadProfileData();
+        function renderAnswersFeed() {
+            const container = document.getElementById('tabContentAnswers');
+            container.innerHTML = `
+                <div class="py-8 text-center text-slate-400 text-xs">
+                    <span class="material-symbols-outlined text-3xl text-slate-300 mb-1">forum</span>
+                    <div>Answers and solutions given to community questions appear here.</div>
+                </div>
+            `;
+        }
 
-            const modal = document.getElementById('edit-bio-modal');
-            const editBtn = document.getElementById('edit-bio-btn');
-            const closeBtn = document.getElementById('close-bio-modal');
-            const bioInput = document.getElementById('edit-bio-input');
-            const bioForm = document.getElementById('editBioForm');
-            const saveBtn = document.getElementById('save-bio-btn');
+        // Share Profile
+        function shareProfile() {
+            navigator.clipboard.writeText(window.location.href);
+            alert('Profile link copied to clipboard!');
+        }
 
-            if (editBtn) {
-                editBtn.addEventListener('click', () => {
-                    const currentBio = document.getElementById('profile-bio').textContent.trim();
-                    if (currentBio === 'Add a bio to let others know about your academic journey.' || currentBio === 'Loading bio...') {
-                        bioInput.value = '';
-                    } else {
-                        bioInput.value = currentBio;
-                    }
-                    modal.showModal();
-                });
+        // Edit Profile Modal
+        function openEditModal() {
+            const u = currentUser || {};
+            document.getElementById('editName').value = u.name || '';
+            document.getElementById('editCollege').value = u.college || '';
+            document.getElementById('editBranch').value = u.branch || '';
+            document.getElementById('editYear').value = u.year || 1;
+            document.getElementById('editSkills').value = parseSkills(u.skills).join(', ');
+            document.getElementById('editBio').value = u.bio || '';
+            document.getElementById('editGithub').value = u.github || '';
+            document.getElementById('editLinkedin').value = u.linkedin || '';
+            document.getElementById('editPortfolio').value = u.portfolio || '';
+
+            document.getElementById('editProfileModal').showModal();
+        }
+
+        document.getElementById('editProfileForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('saveProfileBtn');
+            btn.disabled = true;
+            btn.textContent = 'Saving...';
+
+            const payload = {
+                name: document.getElementById('editName').value.trim(),
+                college: document.getElementById('editCollege').value.trim(),
+                branch: document.getElementById('editBranch').value.trim(),
+                year: parseInt(document.getElementById('editYear').value) || 1,
+                skills: document.getElementById('editSkills').value.trim(),
+                bio: document.getElementById('editBio').value.trim(),
+                github: document.getElementById('editGithub').value.trim() || null,
+                linkedin: document.getElementById('editLinkedin').value.trim() || null,
+                portfolio: document.getElementById('editPortfolio').value.trim() || null,
+            };
+
+            const res = await apiRequest('/users/me', {
+                method: 'PUT',
+                body: payload
+            });
+
+            if (res.status === 200 && res.data.success) {
+                currentUser = res.data.data;
+                renderProfileHeader();
+                document.getElementById('editProfileModal').close();
+            } else {
+                alert(res.data.message || 'Failed to update profile');
             }
 
-            if (closeBtn) {
-                closeBtn.addEventListener('click', () => modal.close());
-            }
-
-            if (bioForm) {
-                bioForm.addEventListener('submit', async (e) => {
-                    e.preventDefault();
-                    const newBio = bioInput.value.trim();
-                    saveBtn.textContent = 'Saving...';
-                    saveBtn.disabled = true;
-
-                    const res = await apiRequest('/users/me', {
-                        method: 'PUT',
-                        body: { bio: newBio }
-                    });
-
-                    if (res.status === 200 && res.data.success) {
-                        document.getElementById('profile-bio').textContent = res.data.data.bio || 'Add a bio to let others know about your academic journey.';
-                        modal.close();
-                    } else {
-                        alert(res.data.message || 'Failed to update bio');
-                    }
-
-                    saveBtn.textContent = 'Save Bio';
-                    saveBtn.disabled = false;
-                });
-            }
-
-            // Month navigation
-            const prevBtn = document.getElementById('prevMonthBtn');
-            const nextBtn = document.getElementById('nextMonthBtn');
-            if (prevBtn) {
-                prevBtn.addEventListener('click', () => {
-                    selectedDate.setMonth(selectedDate.getMonth() - 1);
-                    renderMonthlyGraph();
-                });
-            }
-            if (nextBtn) {
-                nextBtn.addEventListener('click', () => {
-                    selectedDate.setMonth(selectedDate.getMonth() + 1);
-                    renderMonthlyGraph();
-                });
-            }
+            btn.disabled = false;
+            btn.textContent = 'Save Changes';
         });
-    </script>
 
-    <!-- Floating Heatmap Hover Tooltip -->
-    <div id="heatmap-tooltip" class="fixed hidden z-50 bg-slate-900 text-white text-xs font-semibold px-3 py-1.5 rounded-xl shadow-2xl pointer-events-none transition-opacity duration-150 border border-slate-700">
-        <div id="tooltip-text"></div>
-    </div>
+        document.addEventListener('DOMContentLoaded', loadProfile);
+    </script>
 </body>
 </html>
