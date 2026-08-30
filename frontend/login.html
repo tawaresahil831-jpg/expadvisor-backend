@@ -494,21 +494,48 @@
         function handleGoogleLogin(response) {
             const errorBanner = document.getElementById('errorMessage');
             const errorText = document.getElementById('errorText');
+            const submitBtn = document.getElementById('submitBtn');
             if (errorBanner) errorBanner.classList.add('hidden');
+
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = `<span class="material-symbols-outlined text-[16px] animate-spin">refresh</span><span>Verifying with Google...</span>`;
+            }
 
             apiRequest('/auth/google', {
                 method: 'POST',
                 body: { credential: response.credential, token: response.credential }
             }).then(res => {
                 if (res.status === 200 || res.status === 201) {
-                    setToken(res.data.data.token);
-                    window.location.href = 'dashboard.html';
+                    if (res.data.data && res.data.data.token) {
+                        setToken(res.data.data.token);
+                    }
+                    if (res.data.data && res.data.data.user) {
+                        try {
+                            localStorage.setItem('expadvisor_user', JSON.stringify(res.data.data.user));
+                        } catch(e) {}
+                    }
+                    if (submitBtn) {
+                        submitBtn.innerHTML = `<span class="material-symbols-outlined text-[16px]">check_circle</span><span>Authenticated! Opening Dashboard...</span>`;
+                        submitBtn.classList.replace('bg-slate-900', 'bg-emerald-600');
+                    }
+                    setTimeout(() => {
+                        window.location.replace('dashboard.html');
+                    }, 500);
                 } else {
+                    if (submitBtn) {
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = `<span>Sign In</span><span class="material-symbols-outlined text-[16px]">arrow_forward</span>`;
+                    }
                     if (errorText) errorText.textContent = 'Google Sign In failed: ' + (res.data ? res.data.message : 'Unknown error');
                     if (errorBanner) errorBanner.classList.remove('hidden');
                 }
             }).catch(err => {
                 console.error(err);
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = `<span>Sign In</span><span class="material-symbols-outlined text-[16px]">arrow_forward</span>`;
+                }
                 if (errorText) errorText.textContent = 'Network error during Google Sign In. Please try again.';
                 if (errorBanner) errorBanner.classList.remove('hidden');
             });
