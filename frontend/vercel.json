@@ -1,0 +1,15 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/", "destination": "/login.html" },
+    { "source": "/login", "destination": "/login.html" },
+    { "source": "/register", "destination": "/register.html" },
+    { "source": "/dashboard", "destination": "/dashboard.html" },
+    { "source": "/my_problems", "destination": "/my_problems.html" },
+    { "source": "/my_profile", "destination": "/my_profile.html" },
+    { "source": "/forgot_pass", "destination": "/forgot_pass.html" },
+    { "source": "/reset_password", "destination": "/reset_password.html" },
+    { "source": "/solve", "destination": "/solve.html" },
+    { "source": "/student_directory", "destination": "/student_directory.html" }
+  ]
+}
