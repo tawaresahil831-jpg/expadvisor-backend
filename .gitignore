@@ -1,0 +1,5 @@
+.vercel
+*.py
+frontend/temp_*.js
+frontend/test_*.js
+.DS_Store
