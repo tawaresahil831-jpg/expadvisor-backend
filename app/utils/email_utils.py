@@ -66,6 +66,76 @@ def send_otp_email(recipient_email, otp_code, recipient_name="Student"):
 </body>
 </html>"""
 
+    return _dispatch_email(recipient_email, subject, plain_text, html_content)
+
+
+def send_password_reset_email(recipient_email, reset_link, recipient_name="Student"):
+    """
+    Sends a real password recovery link to the recipient's email inbox.
+    """
+    print("\n=========================================")
+    print(f"[AUTH PASSWORD RESET DISPATCH] -> {recipient_email}")
+    print(f"[LINK]: {reset_link}")
+    print("=========================================\n")
+
+    subject = "Reset Your EXPadviser Password"
+    plain_text = (
+        f"Hello {recipient_name},\n\n"
+        "We received a request to reset your EXPadviser account password.\n\n"
+        f"Please click or copy the following link to choose a new password:\n{reset_link}\n\n"
+        "This link is valid for 1 hour. If you did not request this, please disregard this message.\n\n"
+        "Best regards,\nEXPadviser Campus Hub Team"
+    )
+
+    html_content = f"""<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f8fafc; margin: 0; padding: 24px; color: #1e293b; }}
+    .container {{ max-width: 520px; margin: 0 auto; background: #ffffff; border-radius: 20px; border: 1px solid #e2e8f0; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }}
+    .header {{ background: #0b1329; padding: 28px; text-align: center; color: #ffffff; }}
+    .brand {{ font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }}
+    .content {{ padding: 32px; }}
+    .btn {{ display: inline-block; background: #1d4ed8; color: #ffffff !important; font-weight: 700; font-size: 14px; text-decoration: none; padding: 14px 28px; border-radius: 12px; margin: 20px 0; text-align: center; }}
+    .footer {{ padding: 20px 32px; background: #f1f5f9; text-align: center; font-size: 11px; color: #64748b; }}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="brand">EXPadviser · Campus Hub</div>
+    </div>
+    <div class="content">
+      <h2 style="margin-top: 0; font-size: 18px; color: #0f172a;">Password Recovery Request</h2>
+      <p style="font-size: 14px; line-height: 1.6; color: #475569;">
+        Hello <strong>{recipient_name}</strong>,<br>
+        We received a request to reset your password for your EXPadviser account. Click the button below to set a new password:
+      </p>
+      <div style="text-align: center;">
+        <a href="{reset_link}" class="btn" target="_blank">Reset Password Now →</a>
+      </div>
+      <p style="font-size: 12px; color: #64748b; line-height: 1.5;">
+        ⏱️ <strong>This link is valid for 1 hour.</strong><br>
+        If the button above does not work, copy and paste this link into your browser:<br>
+        <a href="{reset_link}" style="color: #2563eb; word-break: break-all;">{reset_link}</a>
+      </p>
+      <p style="font-size: 11px; color: #94a3b8; margin-top: 20px;">
+        If you did not request a password reset, you can safely ignore this email. Your password will remain unchanged.
+      </p>
+    </div>
+    <div class="footer">
+      © 2026 EXPadviser Platform · Engineered for Campus Problem Solving
+    </div>
+  </div>
+</body>
+</html>"""
+
+    return _dispatch_email(recipient_email, subject, plain_text, html_content)
+
+
+def _dispatch_email(recipient_email, subject, plain_text, html_content):
+    """Helper to send email via Resend or SMTP."""
     # Option A: Resend API
     resend_api_key = os.environ.get("RESEND_API_KEY")
     if resend_api_key:
@@ -114,11 +184,11 @@ def send_otp_email(recipient_email, otp_code, recipient_name="Student"):
                 server.login(mail_username, mail_password)
                 server.sendmail(sender, [recipient_email], msg.as_string())
 
-            print(f"[EMAIL SUCCESS via SMTP] Verification email sent to {recipient_email}")
+            print(f"[EMAIL SUCCESS via SMTP] Email sent to {recipient_email}")
             return True
         except Exception as e:
             print(f"[EMAIL ERROR via SMTP] Failed to send email via SMTP: {str(e)}")
             return False
 
-    print("[EMAIL NOTICE] Neither RESEND_API_KEY nor MAIL_USERNAME/PASSWORD configured. Logged OTP to console.")
+    print("[EMAIL NOTICE] Neither RESEND_API_KEY nor MAIL_USERNAME/PASSWORD configured. Logged to console.")
     return False

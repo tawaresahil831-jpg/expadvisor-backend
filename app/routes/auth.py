@@ -7,7 +7,7 @@ from app.extensions import db, limiter
 from app.models import User
 from app.utils.auth_utils import generate_token, token_required
 from app.utils.validators import validate_length, validate_email
-from app.utils.email_utils import send_otp_email
+from app.utils.email_utils import send_otp_email, send_password_reset_email
 from google.oauth2 import id_token
 from google.auth.transport import requests as google_requests
 
@@ -317,8 +317,14 @@ def forgot_password():
     
     db.session.commit()
     
-    reset_link = f"http://localhost:8000/reset_password.html?token={token}"
-    print(f"\n=== DEV RESET LINK ===\n{reset_link}\n======================\n")
+    origin = request.headers.get("Origin") or "https://expadvisor.vercel.app"
+    if "localhost" in origin or "127.0.0.1" in origin:
+        base_url = "http://localhost:3000" if ":3000" in origin else "http://localhost:8000"
+        reset_link = f"{base_url}/reset_password.html?token={token}"
+    else:
+        reset_link = f"https://expadvisor.vercel.app/frontend/reset_password.html?token={token}"
+
+    send_password_reset_email(user.email, reset_link, user.name or "Student")
     
     return jsonify({
         "success": True, 
