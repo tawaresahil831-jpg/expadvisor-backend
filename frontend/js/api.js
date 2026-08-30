@@ -191,7 +191,11 @@ async function loadNotifications() {
 }
 
 function renderNotifications(notifications) {
-    const dropdownContainer = document.querySelector('#notificationDropdown .max-h-64') || document.getElementById('notifList');
+    const dropdownContainer = document.getElementById('notifList') || 
+                              document.querySelector('#notificationDropdown .overflow-y-auto') || 
+                              document.querySelector('#notificationDropdown .max-h-80') || 
+                              document.querySelector('#notificationDropdown .max-h-64') ||
+                              document.querySelector('#notificationDropdown > div:nth-child(2)');
     const badges = document.querySelectorAll('#notifDot, #notificationBtn .bg-rose-500, #notificationBtn span.absolute');
     const unreadCountBadge = document.getElementById('notifUnreadBadge');
     
