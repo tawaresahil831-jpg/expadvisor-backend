@@ -11,29 +11,18 @@ def send_otp_email(recipient_email, otp_code, recipient_name="Student"):
     1. Resend REST API (if RESEND_API_KEY is provided)
     2. Standard SMTP (Gmail, etc. if MAIL_USERNAME and MAIL_PASSWORD are provided)
     """
-    print("
-" + "=" * 41)
+    print("\n=========================================")
     print(f"[AUTH OTP DISPATCH] -> {recipient_email}")
     print(f"[CODE]: {otp_code} (Valid for 10 minutes)")
-    print("=" * 41 + "
-")
+    print("=========================================\n")
 
     subject = f"{otp_code} is your EXPadviser verification code"
     plain_text = (
-        f"Hello {recipient_name},
-
-"
-        f"Your EXPadviser email verification code is: {otp_code}
-
-"
-        "This code is valid for 10 minutes. Please enter this code to verify your account.
-
-"
-        "If you did not request this code, please ignore this email.
-
-"
-        "Best regards,
-EXPadviser Campus Hub Team"
+        f"Hello {recipient_name},\n\n"
+        f"Your EXPadviser email verification code is: {otp_code}\n\n"
+        "This code is valid for 10 minutes. Please enter this code to verify your account.\n\n"
+        "If you did not request this code, please ignore this email.\n\n"
+        "Best regards,\nEXPadviser Campus Hub Team"
     )
 
     html_content = f"""<!DOCTYPE html>
