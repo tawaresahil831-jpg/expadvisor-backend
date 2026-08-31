@@ -34,7 +34,11 @@ Plans:
 **Success Criteria**:
   1. `pytest` runs locally without requiring an active external database server.
   2. Authentication, experience CRUD, comment, and like flows pass unit and integration tests.
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] 02-01: Implement in-memory SQLite fixtures and pytest test suites for Auth, Experiences, Comments, and Likes
+- [ ] 02-02: Configure GitHub Actions CI workflow to run test suite on pushes and pull requests
 
 ### Phase 3: Frontend Build & Asset Modernization
 **Goal**: Transition static HTML pages to a consistent UI architecture with compiled styling.
