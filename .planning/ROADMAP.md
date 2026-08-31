@@ -47,4 +47,8 @@ Plans:
 **Success Criteria**:
   1. Production bundle eliminates CDN compilation lag.
   2. Shared components (header, sidebar, user badge) are DRY and centrally updated.
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] 03-01: Setup Tailwind CLI build process, compile minified output.css, and integrate into HTML pages
+- [ ] 03-02: Implement shared ui-layout.js for navigation, drawer menus, and modal dialogs
