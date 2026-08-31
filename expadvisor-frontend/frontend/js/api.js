@@ -292,6 +292,9 @@ function renderNotifications(notifications) {
 
 function formatNotifTime(dateString) {
     try {
+        if (dateString && !dateString.endsWith('Z') && !dateString.match(/[+-]\d{2}:\d{2}$/)) {
+            dateString += 'Z';
+        }
         const date = new Date(dateString);
         const now = new Date();
         const diffMs = now - date;
