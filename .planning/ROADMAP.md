@@ -7,7 +7,7 @@ ExpAdvisor has an existing, functional core featuring user authentication, exper
 ## Phases
 
 - [x] **Phase 1: Codebase Hygiene & Repository Consolidation** - Clean up ad-hoc patch scripts, eliminate external hardcoded paths, and unify git tracking.
-- [ ] **Phase 2: Automated Testing Infrastructure** - Implement isolated pytest test suites with test DB fixtures, deprecating script-only regression checks.
+- [x] **Phase 2: Automated Testing Infrastructure** - Implement isolated pytest test suites with test DB fixtures, deprecating script-only regression checks.
 - [ ] **Phase 3: Frontend Build & Asset Modernization** - Replace client-side Tailwind CDN with an optimized build system and clean up repetitive template code.
 - [ ] **Phase 4: Feature Enhancements & Engagement** - Expand notification workflows, user bookmarks, and advanced search filters.
 
@@ -37,8 +37,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 02-01: Implement in-memory SQLite fixtures and pytest test suites for Auth, Experiences, Comments, and Likes
-- [ ] 02-02: Configure GitHub Actions CI workflow to run test suite on pushes and pull requests
+- [x] 02-01: Implement in-memory SQLite fixtures and pytest test suites for Auth, Experiences, Comments, and Likes
+- [x] 02-02: Configure GitHub Actions CI workflow to run test suite on pushes and pull requests
 
 ### Phase 3: Frontend Build & Asset Modernization
 **Goal**: Transition static HTML pages to a consistent UI architecture with compiled styling.

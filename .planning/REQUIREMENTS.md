@@ -33,8 +33,8 @@
 - [x] **HYG-03**: Initialize unified root git repository covering backend and frontend codebases.
 
 ### Quality Assurance & Automated Testing
-- [ ] **TEST-01**: Establish unit and integration test suite using `pytest` with in-memory SQLite/Postgres test fixtures.
-- [ ] **TEST-02**: Setup continuous integration workflow (GitHub Actions).
+- [x] **TEST-01**: Establish unit and integration test suite using `pytest` with in-memory SQLite/Postgres test fixtures.
+- [x] **TEST-02**: Setup continuous integration workflow (GitHub Actions).
 
 ### Frontend Production Hardening
 - [ ] **FE-01**: Eliminate runtime Tailwind CDN script in favor of a modern build or pre-compiled bundle.

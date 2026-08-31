@@ -7,9 +7,9 @@ from app.extensions import db, limiter
 def basedir_instance():
     return os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
-def create_app():
+def create_app(config_class=Config):
     app = Flask(__name__)
-    app.config.from_object(Config)
+    app.config.from_object(config_class)
 
     os.makedirs(os.path.join(basedir_instance(), "instance"), exist_ok=True)
 
