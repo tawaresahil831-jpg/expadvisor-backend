@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>EXPadviser · My Problems</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                        },
+                        surface: '#ffffff',
+                        canvas: '#f8fafc',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts & Material Symbols -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..24,400..600,0..1,0&display=swap" rel="stylesheet" />
+
+    <style>
+        ::-webkit-scrollbar { display: none; }
+        .line-clamp-1 { display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+        .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        dialog::backdrop { background-color: rgba(15, 23, 42, 0.45); backdrop-filter: blur(6px); }
+
+        /* Dark mode overrides */
+        html.dark, html.dark body {
+            background-color: #0b1329 !important;
+            color: #f1f5f9 !important;
+        }
+        html.dark .bg-white {
+            background-color: #111827 !important;
+            border-color: #1f2937 !important;
+            color: #f1f5f9 !important;
+        }
+        html.dark .bg-canvas {
+            background-color: #0b1329 !important;
+        }
+        html.dark .bg-slate-50, 
+        html.dark .bg-slate-50\/80, 
+        html.dark .bg-slate-50\/90, 
+        html.dark .bg-slate-50\/40, 
+        html.dark .bg-slate-50\/60, 
+        html.dark .bg-slate-50\/70 {
+            background-color: #1e293b !important;
+            border-color: #334155 !important;
+        }
+        html.dark .bg-slate-100, 
+        html.dark .bg-slate-100\/70 {
+            background-color: #1f2937 !important;
+            color: #e2e8f0 !important;
+            border-color: #374151 !important;
+        }
+        /* Fix hover states in dark mode */
+        html.dark .hover\:bg-slate-50:hover, 
+        html.dark .hover\:bg-slate-50\/90:hover,
+        html.dark .hover\:bg-slate-50\/80:hover,
+        html.dark .hover\:bg-slate-100:hover,
+        html.dark .hover\:bg-slate-200:hover {
+            background-color: #1e293b !important;
+        }
+        html.dark .text-slate-900 { color: #f8fafc !important; }
+        html.dark .text-slate-800 { color: #f1f5f9 !important; }
+        html.dark .text-slate-700 { color: #cbd5e1 !important; }
+        html.dark .text-slate-600 { color: #94a3b8 !important; }
+        html.dark .text-slate-500 { color: #94a3b8 !important; }
+        html.dark .text-slate-400 { color: #64748b !important; }
+        html.dark .border-slate-100, 
+        html.dark .border-slate-200, 
+        html.dark .border-slate-200\/60,
+        html.dark .border-slate-200\/70, 
+        html.dark .border-slate-200\/80, 
+        html.dark .border-slate-200\/90 {
+            border-color: #1f2937 !important;
+        }
+        html.dark .divide-slate-100 > * + * {
+            border-color: #1f2937 !important;
+        }
+        html.dark header {
+            background-color: #111827 !important;
+            border-color: #1f2937 !important;
+        }
+        html.dark dialog {
+            background-color: #111827 !important;
+            color: #f1f5f9 !important;
+            border-color: #374151 !important;
+        }
+        html.dark input, html.dark select, html.dark textarea {
+            background-color: #1e293b !important;
+            color: #f8fafc !important;
+            border-color: #374151 !important;
+        }
+        html.dark .bg-\[\#f0fdf4\] {
+            background-color: #0d2818 !important;
+            border-color: #134e2b !important;
+        }
+        html.dark #resolutionRateNumber {
+            color: #86efac !important;
+        }
+        html.dark .status-tab-btn.bg-slate-100 {
+            background-color: #1e293b !important;
+            color: #cbd5e1 !important;
+        }
+        html.dark .border-white {
+            border-color: #111827 !important;
+        }
+    </style>
+
+    <script>
+        (function() {
+            try {
+                const saved = localStorage.getItem('exp_theme') || 'light';
+                if (saved === 'dark') document.documentElement.classList.add('dark');
+            } catch(e) {}
+        })();
+    </script>
+</head>
+
+<body class="bg-canvas text-slate-800 antialiased font-sans flex min-h-screen">
+
+    <!-- ====== SLIM DARK ICON RAIL (LEFT NAVIGATION) ====== -->
+    <aside class="w-16 bg-[#111827] flex flex-col items-center py-4 shrink-0 fixed top-0 bottom-0 left-0 z-50 border-r border-slate-800">
+        <!-- Logo -->
+        <a href="dashboard.html" class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold text-xl mb-6 shadow-md hover:scale-105 transition-transform" title="EXPadviser">
+            e
+        </a>
+
+        <!-- Navigation Links -->
+        <nav class="flex flex-col gap-3 w-full items-center">
+            <!-- Dashboard -->
+            <a href="dashboard.html" class="w-10 h-10 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 flex items-center justify-center transition-colors" title="Dashboard">
+                <span class="material-symbols-outlined text-[22px]">widgets</span>
+            </a>
+
+            <!-- My Problems (Active) -->
+            <a href="my_problems.html" class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-sm" title="My Problems">
+                <span class="material-symbols-outlined text-[22px]">assignment</span>
+            </a>
+
+            <!-- My Profile -->
+            <a href="my_profile.html" class="w-10 h-10 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 flex items-center justify-center transition-colors" title="My Profile">
+                <span class="material-symbols-outlined text-[22px]">person</span>
+            </a>
+        </nav>
+
+        <!-- Bottom Logout -->
+        <div class="mt-auto">
+            <button onclick="logout()" class="w-10 h-10 rounded-xl text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 flex items-center justify-center transition-colors" title="Logout">
+                <span class="material-symbols-outlined text-[22px]">logout</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- ====== MAIN CONTENT WRAPPER ====== -->
+    <div class="pl-16 flex-1 flex flex-col min-w-0">
+
+        <!-- ====== TOP APP BAR ====== -->
+        <header class="h-16 bg-white border-b border-slate-200/80 px-8 flex items-center justify-between sticky top-0 z-40">
+            <!-- Brand Title -->
+            <div class="flex items-center gap-3">
+                <a href="dashboard.html" class="font-extrabold text-slate-900 text-lg tracking-tight hover:text-blue-600 transition-colors">EXPadviser</a>
+                <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-medium">My Problems</span>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="w-full max-w-md mx-6">
+                <div class="relative flex items-center">
+                    <span class="material-symbols-outlined absolute left-3.5 text-slate-400 text-[18px]">search</span>
+                    <input id="searchInput" type="text" placeholder="Search your queries..." class="w-full bg-slate-50/80 border border-slate-200/90 rounded-full pl-9 pr-4 py-1.5 text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all" />
+                </div>
+            </div>
+
+            <!-- Right Header Actions -->
+            <div class="flex items-center gap-4">
+                <!-- Academic Session Pill -->
+                <span class="text-xs font-semibold text-slate-500 bg-slate-100 px-3 py-1 rounded-full hidden sm:inline-block">
+                    Session 2026–27
+                </span>
+
+                <!-- Dark Mode Quick Toggle Button in Header -->
+                <button id="headerThemeToggle" class="w-9 h-9 rounded-full text-slate-600 hover:bg-slate-100 flex items-center justify-center transition-colors" title="Toggle Theme">
+                    <span id="headerThemeIcon" class="material-symbols-outlined text-[20px]">dark_mode</span>
+                </button>
+
+                <!-- Notifications -->
+                <div class="relative">
+                    <button id="notificationBtn" class="w-9 h-9 rounded-full text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center justify-center transition-colors relative" title="Notifications">
+                        <span class="material-symbols-outlined text-[20px]">notifications</span>
+                        <span id="notifDot" class="absolute top-2 right-2 w-2 h-2 rounded-full bg-rose-500 hidden ring-2 ring-white dark:ring-slate-900"></span>
+                    </button>
+                    <!-- Notification Dropdown -->
+                    <div id="notificationDropdown" class="hidden absolute right-0 mt-2 w-80 sm:w-96 bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-800 py-2 z-50 overflow-hidden">
+                        <div class="px-4 py-2.5 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <span class="font-bold text-xs uppercase tracking-wider text-slate-700 dark:text-slate-200">Notifications</span>
+                                <span id="notifUnreadBadge" class="hidden text-[10px] font-bold bg-blue-100 text-blue-700 dark:bg-blue-900/60 dark:text-blue-300 px-1.5 py-0.2 rounded-full">0 new</span>
+                            </div>
+                            <button id="markAllReadBtn" onclick="markAllNotificationsRead()" class="text-[11px] text-blue-600 dark:text-blue-400 font-semibold cursor-pointer hover:underline flex items-center gap-1">
+                                <span class="material-symbols-outlined text-[14px]">done_all</span>
+                                <span>Mark all read</span>
+                            </button>
+                        </div>
+                        <div id="notifList" class="max-h-80 overflow-y-auto divide-y divide-slate-100 dark:divide-slate-800">
+                            <div class="p-6 text-center text-xs text-slate-400">Loading notifications...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Profile Avatar Circle -->
+                <a href="my_profile.html" class="flex items-center gap-2 group">
+                    <div id="headerAvatarContainer" class="w-8 h-8 rounded-full bg-blue-600 text-white font-bold text-xs flex items-center justify-center shadow-sm group-hover:ring-2 group-hover:ring-blue-500 transition-all">
+                        <span id="userAvatarInitial">M</span>
+                    </div>
+                </a>
+            </div>
+        </header>
+
+        <!-- ====== MAIN BODY ====== -->
+        <main class="p-8 max-w-7xl mx-auto w-full space-y-6">
+
+            <!-- ====== MY PROBLEMS HERO BANNER ====== -->
+            <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden transition-all">
+                <!-- Teal/Emerald/Indigo Gradient Banner Strip -->
+                <div class="h-20 sm:h-24 bg-gradient-to-r from-teal-600 via-emerald-600 to-indigo-600 w-full relative">
+                    <div class="absolute inset-0 bg-black/10"></div>
+                </div>
+
+                <!-- Banner Info Row -->
+                <div class="px-6 sm:px-8 pb-6 pt-3 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                    
+                    <!-- Left: Identity & Title -->
+                    <div class="flex items-end gap-4 -mt-10 sm:-mt-12">
+                        <!-- Big Icon / Avatar Box -->
+                        <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-emerald-600 text-white text-3xl font-extrabold flex items-center justify-center shadow-lg border-4 border-white shrink-0 relative overflow-hidden">
+                            <span id="probBannerInitial">M</span>
+                        </div>
+
+                        <!-- Title, Badge & Subtitle -->
+                        <div class="space-y-1 mb-1">
+                            <div class="flex items-center gap-2.5 flex-wrap">
+                                <h1 id="probBannerWelcome" class="text-xl sm:text-2xl font-bold text-slate-900 leading-tight">My Problem Archive</h1>
+                                <span class="text-xs font-bold uppercase bg-emerald-50 text-emerald-700 px-2.5 py-0.5 rounded-full border border-emerald-100 flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-[14px]">verified</span>
+                                    Personal Archive
+                                </span>
+                            </div>
+                            <p class="text-xs text-slate-500 font-medium">
+                                Track your coursework questions, verify accepted solutions, and measure your resolution velocity.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Right: Quick Banner Actions -->
+                    <div class="flex items-center gap-2.5 pt-2 sm:pt-0">
+                        <button onclick="document.getElementById('createModal').showModal()" class="px-4 py-2 rounded-xl bg-slate-900 hover:bg-black text-white text-xs font-semibold shadow-sm transition-all flex items-center gap-1.5">
+                            <span class="material-symbols-outlined text-[16px]">add_circle</span>
+                            Ask a Query
+                        </button>
+                        <a href="dashboard.html" class="px-3.5 py-2 rounded-xl border border-slate-200 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-all flex items-center gap-1.5 shadow-sm">
+                            <span class="material-symbols-outlined text-[16px]">explore</span>
+                            Community Feed
+                        </a>
+                        <a href="my_profile.html" class="px-3.5 py-2 rounded-xl border border-slate-200 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-all flex items-center gap-1.5 shadow-sm">
+                            <span class="material-symbols-outlined text-[16px]">person</span>
+                            My Profile
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ====== TOP 4-STAT STRIP (WITH HOVER SCALE TOOLTIPS) ====== -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <!-- Stat 1: Total Asked -->
+                <div class="group relative bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center justify-between cursor-pointer hover:border-blue-200 hover:shadow-md transition-all">
+                    <div class="flex items-center gap-3.5">
+                        <div class="w-11 h-11 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                            <span class="material-symbols-outlined text-[22px]">feed</span>
+                        </div>
+                        <div>
+                            <div id="stat-total" class="text-xl font-bold text-slate-900 leading-none">0</div>
+                            <div class="text-xs text-slate-500 font-medium mt-1">Total Asked</div>
+                        </div>
+                    </div>
+                    <span class="material-symbols-outlined text-[16px] text-slate-300 group-hover:text-blue-500 transition-colors">info</span>
+
+                    <!-- Hover Popover Explaining Metric -->
+                    <div class="hidden group-hover:block absolute bottom-full left-0 mb-2 w-64 p-3 bg-slate-900 text-white text-xs rounded-xl shadow-2xl z-50 pointer-events-none border border-slate-700">
+                        <div class="font-bold text-blue-400 text-[10px] uppercase tracking-wider mb-1 flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[13px]">feed</span>
+                            Total Asked Scale
+                        </div>
+                        <p class="text-slate-300 text-[11px] leading-relaxed">
+                            Lifetime count of all academic questions, assignment doubts, and project inquiries you have asked in the community.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Stat 2: Solved -->
+                <div class="group relative bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center justify-between cursor-pointer hover:border-emerald-200 hover:shadow-md transition-all">
+                    <div class="flex items-center gap-3.5">
+                        <div class="w-11 h-11 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+                            <span class="material-symbols-outlined text-[22px]">check_circle</span>
+                        </div>
+                        <div>
+                            <div id="stat-solved" class="text-xl font-bold text-slate-900 leading-none">0</div>
+                            <div class="text-xs text-slate-500 font-medium mt-1">Solved & Resolved</div>
+                        </div>
+                    </div>
+                    <span class="material-symbols-outlined text-[16px] text-slate-300 group-hover:text-emerald-500 transition-colors">info</span>
+
+                    <!-- Hover Popover Explaining Metric -->
+                    <div class="hidden group-hover:block absolute bottom-full left-0 mb-2 w-64 p-3 bg-slate-900 text-white text-xs rounded-xl shadow-2xl z-50 pointer-events-none border border-slate-700">
+                        <div class="font-bold text-emerald-400 text-[10px] uppercase tracking-wider mb-1 flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[13px]">check_circle</span>
+                            Resolved Questions
+                        </div>
+                        <p class="text-slate-300 text-[11px] leading-relaxed">
+                            Questions where you or community moderators verified an answer as accepted, successfully closing the doubt.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Stat 3: Awaiting Solutions -->
+                <div class="group relative bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center justify-between cursor-pointer hover:border-amber-200 hover:shadow-md transition-all">
+                    <div class="flex items-center gap-3.5">
+                        <div class="w-11 h-11 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
+                            <span class="material-symbols-outlined text-[22px]">pending</span>
+                        </div>
+                        <div>
+                            <div id="stat-open" class="text-xl font-bold text-slate-900 leading-none">0</div>
+                            <div class="text-xs text-slate-500 font-medium mt-1">Awaiting Solutions</div>
+                        </div>
+                    </div>
+                    <span class="material-symbols-outlined text-[16px] text-slate-300 group-hover:text-amber-500 transition-colors">info</span>
+
+                    <!-- Hover Popover Explaining Metric -->
+                    <div class="hidden group-hover:block absolute bottom-full right-0 sm:left-0 mb-2 w-64 p-3 bg-slate-900 text-white text-xs rounded-xl shadow-2xl z-50 pointer-events-none border border-slate-700">
+                        <div class="font-bold text-amber-400 text-[10px] uppercase tracking-wider mb-1 flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[13px]">pending</span>
+                            Awaiting Solutions
+                        </div>
+                        <p class="text-slate-300 text-[11px] leading-relaxed">
+                            Questions that are still open, waiting for peer students or seniors to write explanations and code solutions.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Stat 4: Total Responses -->
+                <div class="group relative bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center justify-between cursor-pointer hover:border-purple-200 hover:shadow-md transition-all">
+                    <div class="flex items-center gap-3.5">
+                        <div class="w-11 h-11 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
+                            <span class="material-symbols-outlined text-[22px]">chat_bubble</span>
+                        </div>
+                        <div>
+                            <div id="stat-replies" class="text-xl font-bold text-slate-900 leading-none">0</div>
+                            <div class="text-xs text-slate-500 font-medium mt-1">Replies Received</div>
+                        </div>
+                    </div>
+                    <span class="material-symbols-outlined text-[16px] text-slate-300 group-hover:text-purple-500 transition-colors">info</span>
+
+                    <!-- Hover Popover Explaining Metric -->
+                    <div class="hidden group-hover:block absolute bottom-full right-0 mb-2 w-64 p-3 bg-slate-900 text-white text-xs rounded-xl shadow-2xl z-50 pointer-events-none border border-slate-700">
+                        <div class="font-bold text-purple-400 text-[10px] uppercase tracking-wider mb-1 flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[13px]">chat_bubble</span>
+                            Replies Received Scale
+                        </div>
+                        <p class="text-slate-300 text-[11px] leading-relaxed">
+                            The cumulative number of peer answers, code snippets, and guidance responses posted by other students to your questions.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ====== 2-COLUMN MAIN CONTENT GRID (8 cols Left / 4 cols Right) ====== -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+                <!-- ====== LEFT COLUMN: PROBLEM LIST (~68%) ====== -->
+                <section class="lg:col-span-8 bg-white rounded-2xl border border-slate-200/70 p-6 shadow-sm space-y-5">
+
+                    <!-- Section Header -->
+                    <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                        <div class="flex items-center gap-2">
+                            <h2 class="text-lg font-bold text-slate-900">My Problem Archive</h2>
+                            <span id="queryCountBadge" class="text-xs font-semibold bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full"></span>
+                        </div>
+                    </div>
+
+                    <!-- Filter Tabs: All, Open, Solved -->
+                    <div class="flex flex-wrap gap-1.5 items-center">
+                        <button class="status-tab-btn px-3 py-1 rounded-full text-xs font-semibold bg-blue-600 text-white shadow-sm transition-all" data-status="all">
+                            All Inquiries
+                        </button>
+                        <button class="status-tab-btn px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all" data-status="open">
+                            Awaiting Solutions
+                        </button>
+                        <button class="status-tab-btn px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all" data-status="solved">
+                            Solved & Resolved
+                        </button>
+                    </div>
+
+                    <!-- Problem Feed Container (Stacked Rows identical to Dashboard) -->
+                    <div id="problemFeed" class="divide-y divide-slate-100 space-y-1">
+                        <div class="py-12 text-center text-slate-400 text-sm">Loading your inquiries...</div>
+                    </div>
+
+                </section>
+
+                <!-- ====== RIGHT COLUMN: WIDGETS (~32%) ====== -->
+                <aside class="lg:col-span-4 space-y-6">
+
+                    <!-- Resolution Summary Card (Warm Mint/Emerald Widget with Hover Scale) -->
+                    <div class="group relative bg-[#f0fdf4] border border-[#bbf7d0] rounded-2xl p-5 shadow-sm space-y-3 cursor-pointer hover:shadow-md transition-all">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-1.5 text-emerald-700 font-bold text-[11px] uppercase tracking-wider">
+                                <span class="material-symbols-outlined text-[16px]">verified</span>
+                                <span>Resolution Rate</span>
+                            </div>
+                            <span class="material-symbols-outlined text-[16px] text-emerald-400 group-hover:text-emerald-600 transition-colors">info</span>
+                        </div>
+
+                        <div>
+                            <div id="resolutionRateNumber" class="text-3xl font-extrabold text-emerald-900">0%</div>
+                            <p class="text-xs text-emerald-700 mt-1">of your posted questions have received an accepted solution.</p>
+                        </div>
+                        <div class="w-full bg-emerald-200/70 h-2 rounded-full overflow-hidden">
+                            <div id="resolutionBar" class="bg-emerald-600 h-full rounded-full transition-all duration-500" style="width: 0%;"></div>
+                        </div>
+
+                        <!-- Hover Popover Explaining Resolution Scale -->
+                        <div class="hidden group-hover:block absolute bottom-full left-0 mb-2 w-64 p-3 bg-slate-900 text-white text-xs rounded-xl shadow-2xl z-50 pointer-events-none border border-slate-700">
+                            <div class="font-bold text-emerald-400 text-[10px] uppercase tracking-wider mb-1 flex items-center gap-1">
+                                <span class="material-symbols-outlined text-[13px]">calculate</span>
+                                Resolution Rate Scale
+                            </div>
+                            <p class="text-slate-300 text-[11px] leading-relaxed">
+                                Calculated as: <strong class="text-white">(Solved ÷ Total Asked) × 100%</strong>.<br>
+                                Measures how quickly and effectively your coursework doubts are resolved by fellow students.
+                            </p>
+                        </div>
+                    </div>
+
+                </aside>
+
+            </div>
+
+        </main>
+
+    </div>
+
+    <!-- ====== ASK QUERY MODAL ====== -->
+    <dialog id="createModal" class="rounded-2xl shadow-2xl p-0 w-full max-w-lg bg-white border border-slate-200 overflow-hidden">
+        <div class="p-6">
+            <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
+                <h3 class="text-base font-bold text-slate-900">Ask a Query</h3>
+                <button type="button" onclick="document.getElementById('createModal').close()" class="text-slate-400 hover:text-slate-600">
+                    <span class="material-symbols-outlined text-[20px]">close</span>
+                </button>
+            </div>
+            
+            <form id="createExpForm" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Title</label>
+                    <input type="text" id="expTitle" required placeholder="What's your doubt or question?" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Category</label>
+                    <select id="expCategory" required class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="project">Project</option>
+                        <option value="course">Course</option>
+                        <option value="internship">Internship</option>
+                        <option value="placement">Placement</option>
+                        <option value="tech">Tech</option>
+                        <option value="career">Career</option>
+                        <option value="design">Design</option>
+                        <option value="other">Other</option>
+                        <option value="custom">Custom (type your own)...</option>
+                    </select>
+                </div>
+                <div id="customCategoryContainer" class="hidden">
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Custom Category Name</label>
+                    <input type="text" id="expCustomCategory" placeholder="e.g. #everyone, ai-tools" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Company / College</label>
+                        <input type="text" id="expCompany" placeholder="e.g. DYP, Google" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Semester / Year</label>
+                        <input type="text" id="expSemester" placeholder="e.g. 5, 3rd Sem" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Description</label>
+                    <textarea id="expContent" required rows="4" placeholder="Explain the problem in detail..." class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Attachment (Optional)</label>
+                    <input type="file" id="expFile" class="w-full text-xs text-slate-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200" />
+                </div>
+                <div class="flex justify-end gap-2 pt-2">
+                    <button type="button" onclick="document.getElementById('createModal').close()" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100">Cancel</button>
+                    <button type="submit" id="submitExpBtn" class="px-5 py-2 rounded-xl text-xs font-semibold bg-slate-900 hover:bg-black text-white shadow-sm">Post Query</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
+
+    <!-- ====== QUERY DETAIL & DISCUSSION MODAL ====== -->
+    <dialog id="detailModal" class="rounded-2xl shadow-2xl p-0 w-full max-w-2xl bg-white border border-slate-200 overflow-hidden">
+        <div class="p-6 max-h-[85vh] overflow-y-auto space-y-5">
+            <div class="flex items-start justify-between gap-4 pb-3 border-b border-slate-100">
+                <div>
+                    <span id="detailCategory" class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 capitalize">Category</span>
+                    <h3 id="detailTitle" class="text-xl font-bold text-slate-900 mt-2">Query Title</h3>
+                    <p id="detailMeta" class="text-xs text-slate-500 mt-1">Posted by Author · Date</p>
+                <div class="flex items-center gap-1.5 shrink-0">
+                    <!-- Save / Bookmark in Modal Header -->
+                    <button id="detailSaveBtn" onclick="toggleDetailSave()" class="px-2.5 py-1.5 rounded-xl border border-slate-200 text-slate-500 hover:text-blue-600 hover:border-blue-200 transition-colors flex items-center gap-1 text-xs" title="Save Query">
+                        <span id="detailSaveIcon" class="material-symbols-outlined text-[16px]">bookmark_border</span>
+                        <span id="detailSaveText" class="font-medium">Save</span>
+                    </button>
+                    <button onclick="document.getElementById('detailModal').close()" class="text-slate-400 hover:text-slate-600 p-1.5 rounded-xl hover:bg-slate-100 transition-colors">
+                        <span class="material-symbols-outlined text-[20px]">close</span>
+                    </button>
+                </div>
+            </div>
+
+            <div id="detailContent" class="text-sm text-slate-700 leading-relaxed whitespace-pre-wrap"></div>
+
+            <div id="detailAttachment" class="hidden p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-between text-xs">
+                <span class="text-slate-600 font-medium truncate flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-[16px] text-slate-400">attach_file</span>
+                    <span id="attachmentFileName">Attachment</span>
+                </span>
+                <a id="attachmentDownloadBtn" href="#" target="_blank" class="text-blue-600 font-semibold hover:underline shrink-0">Download</a>
+            </div>
+
+            <div id="detailAcceptedSolution" class="hidden p-4 bg-emerald-50 border border-emerald-200 rounded-xl space-y-1">
+                <div class="flex items-center gap-1.5 text-emerald-700 font-bold text-xs">
+                    <span class="material-symbols-outlined text-[16px]">verified</span>
+                    Accepted Solution
+                </div>
+                <p id="detailAcceptedText" class="text-xs text-emerald-900 leading-relaxed italic"></p>
+            </div>
+
+            <div class="pt-3 border-t border-slate-100 space-y-4">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">Discussion (<span id="commentsCount">0</span>)</h4>
+                <div id="commentsList" class="space-y-3 max-h-60 overflow-y-auto"></div>
+                <form id="addCommentForm" class="flex gap-2 pt-2">
+                    <input type="text" id="commentInput" required placeholder="Write a response or solution..." class="flex-1 px-3.5 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    <button type="submit" class="bg-slate-900 hover:bg-black text-white px-4 py-2 rounded-xl text-xs font-semibold shadow-sm shrink-0">Reply</button>
+                </form>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- ====== JAVASCRIPT LOGIC ====== -->
+    <script src="js/api.js?v=2"></script>
+    <script>
+        requireAuth();
+        populateUserProfile();
+
+        let allQueries = [];
+        let currentFilter = 'all';
+        let currentUserId = null;
+        let currentDetailExpId = null;
+
+        // Custom Category toggle
+        document.getElementById('expCategory').addEventListener('change', (e) => {
+            const container = document.getElementById('customCategoryContainer');
+            if (e.target.value === 'custom') {
+                container.classList.remove('hidden');
+                document.getElementById('expCustomCategory').required = true;
+            } else {
+                container.classList.add('hidden');
+                document.getElementById('expCustomCategory').required = false;
+            }
+        });
+
+        // Search in page
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            const val = e.target.value.toLowerCase().trim();
+            renderQueries(val);
+        });
+
+        // Tab Switching
+        const statusBtns = document.querySelectorAll('.status-tab-btn');
+        statusBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                statusBtns.forEach(b => {
+                    b.classList.remove('bg-blue-600', 'text-white', 'shadow-sm', 'font-semibold');
+                    b.classList.add('bg-slate-100', 'text-slate-600', 'font-medium');
+                });
+                const target = e.currentTarget;
+                target.classList.remove('bg-slate-100', 'text-slate-600', 'font-medium');
+                target.classList.add('bg-blue-600', 'text-white', 'shadow-sm', 'font-semibold');
+
+                currentFilter = target.dataset.status;
+                renderQueries(document.getElementById('searchInput').value.toLowerCase().trim());
+            });
+        });
+
+        // Load user problems
+        async function loadMyProblems() {
+            const userRes = await apiRequest('/auth/me');
+            if (userRes.status !== 200) return;
+            currentUserId = userRes.data.data.user_id || userRes.data.data.id;
+
+            const initial = (userRes.data.data.name || 'U').charAt(0).toUpperCase();
+            const initEl = document.getElementById('userAvatarInitial');
+            if (initEl) initEl.textContent = initial;
+            const bannerInit = document.getElementById('probBannerInitial');
+            if (bannerInit) bannerInit.textContent = initial;
+            const bannerWelcome = document.getElementById('probBannerWelcome');
+            if (bannerWelcome && userRes.data.data.name) {
+                bannerWelcome.textContent = `${userRes.data.data.name.split(' ')[0]}'s Problem Archive`;
+            }
+
+            const res = await apiRequest(`/experiences?author_id=${currentUserId}`);
+            if (res.status === 200 && res.data.success) {
+                allQueries = res.data.data || [];
+
+                // Stats calculation
+                const total = allQueries.length;
+                const solved = allQueries.filter(q => q.is_resolved).length;
+                const open = total - solved;
+                const totalReplies = allQueries.reduce((sum, q) => sum + (q.comments_count || 0), 0);
+
+                document.getElementById('stat-total').textContent = total;
+                document.getElementById('stat-solved').textContent = solved;
+                document.getElementById('stat-open').textContent = open;
+                document.getElementById('stat-replies').textContent = totalReplies;
+
+                // Resolution Rate Widget
+                const rate = total > 0 ? Math.round((solved / total) * 100) : 0;
+                document.getElementById('resolutionRateNumber').textContent = `${rate}%`;
+                document.getElementById('resolutionBar').style.width = `${rate}%`;
+
+                renderQueries();
+            } else {
+                document.getElementById('problemFeed').innerHTML = '<div class="py-12 text-center text-rose-500 text-xs">Failed to load inquiries.</div>';
+            }
+        }
+
+        // Render queries in rows
+        function renderQueries(searchQuery = '') {
+            const feed = document.getElementById('problemFeed');
+            const badge = document.getElementById('queryCountBadge');
+
+            let filtered = allQueries;
+
+            // Status filter
+            if (currentFilter === 'open') {
+                filtered = filtered.filter(q => !q.is_resolved);
+            } else if (currentFilter === 'solved') {
+                filtered = filtered.filter(q => q.is_resolved);
+            }
+
+            // Search filter
+            if (searchQuery) {
+                filtered = filtered.filter(q => 
+                    (q.title && q.title.toLowerCase().includes(searchQuery)) ||
+                    (q.content && q.content.toLowerCase().includes(searchQuery)) ||
+                    (q.category && q.category.toLowerCase().includes(searchQuery))
+                );
+            }
+
+            badge.textContent = `${filtered.length} queries`;
+
+            if (filtered.length === 0) {
+                feed.innerHTML = `
+                    <div class="py-16 text-center text-slate-400 space-y-2">
+                        <span class="material-symbols-outlined text-4xl text-slate-300">search_off</span>
+                        <div class="text-sm font-semibold text-slate-600">No inquiries found</div>
+                        <div class="text-xs text-slate-400">Try adjusting your filter or search terms.</div>
+                    </div>
+                `;
+                return;
+            }
+
+            window.allLoadedExperiences = window.allLoadedExperiences || {};
+            filtered.forEach(e => { window.allLoadedExperiences[e.experience_id] = e; });
+
+            feed.innerHTML = filtered.map(exp => {
+                const authorInitial = (exp.author_name || 'U').charAt(0).toUpperCase();
+                const isSaved = isQuerySaved(exp.experience_id);
+
+                return `
+                    <div onclick="openExperienceDetail(${exp.experience_id})" class="p-4 rounded-xl hover:bg-slate-50/90 transition-colors cursor-pointer group space-y-2">
+                        <div class="flex items-center justify-between text-xs">
+                            <div class="flex items-center gap-2">
+                                <div class="w-6 h-6 rounded-full bg-blue-100 text-blue-700 font-bold text-[10px] flex items-center justify-center">
+                                    ${authorInitial}
+                                </div>
+                                <span class="font-semibold text-slate-800">${exp.author_name || 'You'}</span>
+                                ${exp.semester ? `<span class="bg-slate-100 text-slate-500 font-medium px-1.5 py-0.5 rounded text-[10px]">${exp.semester}</span>` : ''}
+                                <span class="text-slate-400 text-[11px]">· ${new Date(exp.created_at).toLocaleDateString()}</span>
+                            </div>
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold ${exp.is_resolved ? 'bg-emerald-50 text-emerald-700' : 'bg-amber-50 text-amber-700'}">
+                                ${exp.is_resolved ? 'Solved' : 'Open'}
+                            </span>
+                        </div>
+
+                        <h3 class="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors leading-snug">
+                            ${exp.title}
+                        </h3>
+
+                        <p class="text-xs text-slate-500 line-clamp-1">
+                            ${exp.content || ''}
+                        </p>
+
+                        ${exp.accepted_answer ? `
+                            <div class="p-2.5 bg-emerald-50/80 border border-emerald-100 rounded-lg text-xs space-y-0.5">
+                                <div class="text-[10px] font-bold text-emerald-700 flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-[13px]">verified</span>
+                                    Accepted Solution
+                                </div>
+                                <p class="text-emerald-950 line-clamp-1 italic text-[11px]">"${exp.accepted_answer}"</p>
+                            </div>
+                        ` : ''}
+
+                        <div class="flex items-center justify-between pt-1 text-xs">
+                            <div class="flex items-center gap-1.5">
+                                <span class="bg-slate-100 text-slate-600 font-medium px-2 py-0.5 rounded-md text-[10px] capitalize">${exp.category || 'General'}</span>
+                                ${exp.company ? `<span class="bg-slate-50 text-slate-500 border border-slate-200 px-2 py-0.5 rounded-md text-[10px]">${exp.company}</span>` : ''}
+                            </div>
+                            <div class="flex items-center gap-3 text-slate-400 text-[11px]">
+                                <span class="flex items-center gap-1" title="Likes">
+                                    <span class="material-symbols-outlined text-[14px]">favorite</span>
+                                    ${exp.likes_count || 0}
+                                </span>
+                                <span class="flex items-center gap-1" title="Comments">
+                                    <span class="material-symbols-outlined text-[14px]">chat_bubble</span>
+                                    ${exp.comments_count || 0}
+                                </span>
+                                <!-- Save Option Beside Like and Comment -->
+                                <button onclick="event.stopPropagation(); toggleSaveCard(${exp.experience_id})" class="save-btn-${exp.experience_id} flex items-center gap-1 hover:text-blue-600 transition-colors ${isSaved ? 'text-blue-600 font-semibold' : 'text-slate-400'}" title="${isSaved ? 'Saved to Profile' : 'Save Query'}">
+                                    <span class="material-symbols-outlined text-[14px]" style="${isSaved ? 'font-variation-settings: \'FILL\' 1;' : ''}">
+                                        ${isSaved ? 'bookmark' : 'bookmark_border'}
+                                    </span>
+                                    <span class="text-[10px] hidden sm:inline">${isSaved ? 'Saved' : 'Save'}</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Open Detail Modal
+        async function openExperienceDetail(id) {
+            currentDetailExpId = id;
+            const res = await apiRequest(`/experiences/${id}`);
+            if (res.status === 200 && res.data.success) {
+                const exp = res.data.data;
+                document.getElementById('detailCategory').textContent = exp.category || 'General';
+                document.getElementById('detailTitle').textContent = exp.title;
+                document.getElementById('detailMeta').textContent = `Posted on ${new Date(exp.created_at).toLocaleDateString()}`;
+                document.getElementById('detailContent').textContent = exp.content || '';
+
+                const attDiv = document.getElementById('detailAttachment');
+                if (exp.file_url) {
+                    attDiv.classList.remove('hidden');
+                    document.getElementById('attachmentFileName').textContent = exp.file_url.split('/').pop() || 'Attachment';
+                    document.getElementById('attachmentDownloadBtn').href = exp.file_url;
+                } else {
+                    attDiv.classList.add('hidden');
+                }
+
+                const solDiv = document.getElementById('detailAcceptedSolution');
+                if (exp.accepted_answer) {
+                    solDiv.classList.remove('hidden');
+                    document.getElementById('detailAcceptedText').textContent = exp.accepted_answer;
+                } else {
+                    solDiv.classList.add('hidden');
+                }
+
+                loadComments(id, exp.author_id);
+                updateDetailSaveBtn(id);
+                document.getElementById('detailModal').showModal();
+            }
+        }
+
+        async function loadComments(expId, queryAuthorId) {
+            const list = document.getElementById('commentsList');
+            const countEl = document.getElementById('commentsCount');
+            list.innerHTML = '<div class="text-center text-xs text-slate-400 py-4">Loading replies...</div>';
+
+            const res = await apiRequest(`/experiences/${expId}/comments`);
+            if (res.status === 200 && res.data.success) {
+                const comments = res.data.data || [];
+                countEl.textContent = comments.length;
+
+                if (comments.length === 0) {
+                    list.innerHTML = '<div class="text-center text-xs text-slate-400 py-3">No responses yet.</div>';
+                    return;
+                }
+
+                const isOwner = currentUserId && (queryAuthorId === currentUserId);
+
+                list.innerHTML = comments.map(c => `
+                    <div class="p-3 rounded-xl ${c.is_accepted ? 'bg-emerald-50/80 border border-emerald-200' : 'bg-slate-50'} space-y-1 text-xs">
+                        <div class="flex items-center justify-between text-slate-500">
+                            <span class="font-bold text-slate-800">${c.author_name || c.user_name || 'User'}</span>
+                            <span class="text-[10px]">${new Date(c.created_at).toLocaleDateString()}</span>
+                        </div>
+                        <p class="text-slate-700 leading-relaxed">${c.comment || c.content}</p>
+                        <div class="flex items-center justify-between pt-1">
+                            ${c.is_accepted ? `
+                                <span class="text-emerald-700 font-bold text-[10px] flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-[14px]">check_circle</span>
+                                    Accepted Answer
+                                </span>
+                            ` : (isOwner ? `
+                                <button onclick="acceptSolution(${c.comment_id})" class="text-blue-600 hover:text-blue-800 font-semibold text-[11px]">
+                                    Accept as Solution
+                                </button>
+                            ` : '<span></span>')}
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Add Comment
+        document.getElementById('addCommentForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const input = document.getElementById('commentInput');
+            const content = input.value.trim();
+            if (!content || !currentDetailExpId) return;
+
+            const res = await apiRequest(`/experiences/${currentDetailExpId}/comments`, {
+                method: 'POST',
+                body: { comment: content, content: content }
+            });
+
+            if (res.status === 200 || res.status === 201) {
+                input.value = '';
+                openExperienceDetail(currentDetailExpId);
+                loadMyProblems();
+            } else {
+                let errorMsg = res.data.message || 'Failed to submit response';
+                if (res.data.errors) {
+                    errorMsg += ':\n• ' + Object.values(res.data.errors).join('\n• ');
+                }
+                alert(errorMsg);
+            }
+        });
+
+        // Accept Solution
+        async function acceptSolution(commentId) {
+            const res = await apiRequest(`/comments/${commentId}/accept`, { method: 'PUT' });
+            if (res.status === 200 && res.data.success) {
+                openExperienceDetail(currentDetailExpId);
+                loadMyProblems();
+            } else {
+                alert(res.data.message || 'Failed to accept solution');
+            }
+        }
+
+        // Create Query
+        document.getElementById('createExpForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('submitExpBtn');
+            btn.disabled = true;
+            btn.textContent = 'Posting...';
+
+            let category = document.getElementById('expCategory').value;
+            if (category === 'custom') {
+                category = document.getElementById('expCustomCategory').value.trim();
+            }
+
+            const body = {
+                title: document.getElementById('expTitle').value.trim(),
+                category: category,
+                content: document.getElementById('expContent').value.trim(),
+                company: document.getElementById('expCompany').value.trim(),
+                semester: document.getElementById('expSemester').value.trim(),
+            };
+
+            const res = await apiRequest('/experiences', {
+                method: 'POST',
+                body: body
+            });
+
+            if (res.status === 200 || res.status === 201) {
+                const expId = res.data.data.experience_id;
+                const fileInput = document.getElementById('expFile');
+                if (fileInput.files.length > 0) {
+                    const formData = new FormData();
+                    formData.append('file', fileInput.files[0]);
+                    await apiRequest(`/experiences/${expId}/upload`, {
+                        method: 'POST',
+                        body: formData,
+                        isFormData: true
+                    });
+                }
+                document.getElementById('createModal').close();
+                e.target.reset();
+                document.getElementById('customCategoryContainer').classList.add('hidden');
+                loadMyProblems();
+            } else {
+                let errorMsg = res.data.message || 'Failed to post query';
+                if (res.data.errors) {
+                    errorMsg += ':\n• ' + Object.values(res.data.errors).join('\n• ');
+                }
+                alert(errorMsg);
+            }
+            btn.disabled = false;
+            btn.textContent = 'Post Query';
+        });
+
+        // ====== SAVED QUERIES HANDLERS ======
+        function toggleSaveCard(expId) {
+            const exp = (window.allLoadedExperiences && window.allLoadedExperiences[expId]) || { experience_id: expId };
+            const isNowSaved = toggleSaveQuery(exp);
+            updateSaveButtons(expId, isNowSaved);
+            if (currentDetailExpId === expId) {
+                updateDetailSaveBtn(expId);
+            }
+        }
+
+        function toggleDetailSave() {
+            if (!currentDetailExpId) return;
+            const exp = (window.allLoadedExperiences && window.allLoadedExperiences[currentDetailExpId]) || { experience_id: currentDetailExpId };
+            const isNowSaved = toggleSaveQuery(exp);
+            updateSaveButtons(currentDetailExpId, isNowSaved);
+            updateDetailSaveBtn(currentDetailExpId);
+        }
+
+        function updateDetailSaveBtn(expId) {
+            const isSaved = isQuerySaved(expId);
+            const icon = document.getElementById('detailSaveIcon');
+            const text = document.getElementById('detailSaveText');
+            const btn = document.getElementById('detailSaveBtn');
+            if (btn && icon && text) {
+                if (isSaved) {
+                    btn.className = 'px-2.5 py-1.5 rounded-xl border border-blue-200 bg-blue-50 text-blue-600 font-semibold transition-colors flex items-center gap-1 text-xs';
+                    icon.textContent = 'bookmark';
+                    icon.style.fontVariationSettings = "'FILL' 1";
+                    text.textContent = 'Saved';
+                } else {
+                    btn.className = 'px-2.5 py-1.5 rounded-xl border border-slate-200 text-slate-500 hover:text-blue-600 hover:border-blue-200 transition-colors flex items-center gap-1 text-xs';
+                    icon.textContent = 'bookmark_border';
+                    icon.style.fontVariationSettings = '';
+                    text.textContent = 'Save';
+                }
+            }
+        }
+
+        function updateSaveButtons(expId, isSaved) {
+            const btns = document.querySelectorAll(`.save-btn-${expId}`);
+            btns.forEach(btn => {
+                if (isSaved) {
+                    btn.className = `save-btn-${expId} flex items-center gap-1 text-blue-600 font-semibold transition-colors`;
+                    btn.title = 'Saved to Profile';
+                    btn.innerHTML = `
+                        <span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+                        <span class="text-[10px] hidden sm:inline">Saved</span>
+                    `;
+                } else {
+                    btn.className = `save-btn-${expId} flex items-center gap-1 text-slate-400 hover:text-blue-600 transition-colors`;
+                    btn.title = 'Save Query';
+                    btn.innerHTML = `
+                        <span class="material-symbols-outlined text-[14px]">bookmark_border</span>
+                        <span class="text-[10px] hidden sm:inline">Save</span>
+                    `;
+                }
+            });
+        }
+
+        window.addEventListener('savedQueriesUpdated', (e) => {
+            if (e.detail && e.detail.experienceId) {
+                updateSaveButtons(e.detail.experienceId, e.detail.isSaved);
+                if (currentDetailExpId === e.detail.experienceId) {
+                    updateDetailSaveBtn(e.detail.experienceId);
+                }
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', loadMyProblems);
+    </script>
+</body>
+</html>

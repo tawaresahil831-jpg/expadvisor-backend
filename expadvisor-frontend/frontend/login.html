@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EXPadviser · Sign In</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts & Material Symbols -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..24,400..600,0..1,0&display=swap" rel="stylesheet" />
+
+    <style>
+        ::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+
+<body class="bg-[#f8fafc] text-slate-800 antialiased font-sans min-h-screen flex items-center justify-center p-4 sm:p-6 lg:p-10">
+
+    <!-- ====== AUTH CONTAINER (SPLIT SHOWPIECE) ====== -->
+    <div class="w-full max-w-5xl bg-white rounded-3xl shadow-2xl border border-slate-200/80 overflow-hidden grid grid-cols-1 lg:grid-cols-12 min-h-[640px]">
+
+        <!-- ====== LEFT HERO / BRAND SHOWPIECE (~46%) ====== -->
+        <div class="hidden lg:flex lg:col-span-5 bg-[#0b1329] text-white p-10 flex-col justify-between relative overflow-hidden">
+            <!-- Subtle decorative background glows -->
+            <div class="absolute -top-24 -left-24 w-80 h-80 bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-24 -right-24 w-80 h-80 bg-indigo-600/20 rounded-full blur-3xl pointer-events-none"></div>
+
+            <!-- Top Brand Badge -->
+            <div class="relative z-10 flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold text-xl shadow-lg">
+                    e
+                </div>
+                <div>
+                    <div class="font-extrabold text-lg tracking-tight leading-none text-white">EXPadviser</div>
+                    <div class="text-[11px] text-slate-400 font-medium mt-0.5">Campus Knowledge Hub</div>
+                </div>
+            </div>
+
+            <!-- Middle Value Proposition & Floating Preview Widget -->
+            <div class="relative z-10 space-y-6 my-auto py-8">
+                <div class="space-y-3">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                        <span class="material-symbols-outlined text-[14px]">school</span>
+                        Academic Session 2026–27
+                    </span>
+                    <h1 class="text-3xl font-extrabold tracking-tight text-white leading-snug">
+                        Ask questions. Share solutions. Elevate your engineering journey.
+                    </h1>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Connect with fellow engineering students across semesters, solve coursework doubts, and prepare for placements together.
+                    </p>
+                </div>
+
+                <!-- Floating Glass Mini-Cards Preview -->
+                <div class="space-y-3 pt-2">
+                    <!-- Mini Card 1: Trending Query -->
+                    <div class="bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl p-3.5 space-y-2">
+                        <div class="flex items-center justify-between text-[10px]">
+                            <span class="text-orange-400 font-bold uppercase tracking-wider flex items-center gap-1">
+                                <span class="material-symbols-outlined text-[13px]">local_fire_department</span>
+                                Trending Discussion
+                            </span>
+                            <span class="text-slate-400">Just now</span>
+                        </div>
+                        <div class="text-xs font-bold text-slate-100">
+                            How to optimize React rendering performance?
+                        </div>
+                        <div class="flex items-center justify-between pt-1">
+                            <div class="flex -space-x-1.5">
+                                <div class="w-5 h-5 rounded-full bg-blue-600 text-white font-bold text-[8px] flex items-center justify-center border border-slate-900">A</div>
+                                <div class="w-5 h-5 rounded-full bg-indigo-600 text-white font-bold text-[8px] flex items-center justify-center border border-slate-900">B</div>
+                                <div class="w-5 h-5 rounded-full bg-purple-600 text-white font-bold text-[8px] flex items-center justify-center border border-slate-900">C</div>
+                            </div>
+                            <span class="text-[10px] text-blue-400 font-semibold flex items-center gap-0.5">
+                                Active <span class="material-symbols-outlined text-[12px]">arrow_forward</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Mini Card 2: Verified Solution -->
+                    <div class="bg-emerald-500/10 border border-emerald-500/20 backdrop-blur-md rounded-2xl p-3 flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+                            <span class="material-symbols-outlined text-[18px]">verified</span>
+                        </div>
+                        <div>
+                            <div class="text-xs font-bold text-emerald-300">Accepted Solution Verified</div>
+                            <div class="text-[11px] text-slate-400">Stokes' Theorem proof marked as answered</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Footnote -->
+            <div class="relative z-10 pt-4 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-500 font-medium">
+                <span>© 2026 EXPadviser</span>
+                <span class="flex items-center gap-1 text-slate-400">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                    Community Live
+                </span>
+            </div>
+        </div>
+
+        <!-- ====== RIGHT LOGIN FORM (~54%) ====== -->
+        <div class="lg:col-span-7 p-8 sm:p-12 flex flex-col justify-center max-w-lg mx-auto w-full">
+
+            <!-- Mobile Brand Header (Visible only on small screens) -->
+            <div class="lg:hidden flex items-center gap-2.5 mb-8">
+                <div class="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center font-bold text-base shadow-sm">
+                    e
+                </div>
+                <span class="font-extrabold text-slate-900 text-lg tracking-tight">EXPadviser</span>
+            </div>
+
+            <!-- Header Title -->
+            <div class="space-y-1.5 mb-6">
+                <h2 class="text-2xl font-bold text-slate-900 tracking-tight">Welcome Back</h2>
+                <p class="text-xs text-slate-500">Sign in to your account to continue to the community dashboard.</p>
+            </div>
+
+            <!-- Error Banner -->
+            <div id="errorMessage" class="hidden mb-4 p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-medium flex items-center gap-2">
+                <span class="material-symbols-outlined text-[16px] shrink-0">error</span>
+                <span id="errorText">Invalid credentials. Please try again.</span>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" class="space-y-4">
+                <!-- Email -->
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1.5" for="email">Email Address</label>
+                    <div class="relative">
+                        <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-[18px]">mail</span>
+                        <input type="email" id="email" required placeholder="student@university.edu" class="w-full bg-slate-50/80 border border-slate-200/90 rounded-xl pl-10 pr-4 py-2.5 text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all" />
+                    </div>
+                </div>
+
+                <!-- Password -->
+                <div>
+                    <div class="flex items-center justify-between mb-1.5">
+                        <label class="text-xs font-semibold text-slate-700" for="password">Password</label>
+                        <a href="forgot_pass.html" class="text-xs font-semibold text-blue-600 hover:underline">Forgot Password?</a>
+                    </div>
+                    <div class="relative">
+                        <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-[18px]">lock</span>
+                        <input type="password" id="password" required placeholder="••••••••" class="w-full bg-slate-50/80 border border-slate-200/90 rounded-xl pl-10 pr-10 py-2.5 text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all" />
+                        <button type="button" id="togglePasswordBtn" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1 flex items-center justify-center">
+                            <span id="togglePasswordIcon" class="material-symbols-outlined text-[18px]">visibility</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" id="submitBtn" class="w-full bg-slate-900 hover:bg-black text-white font-semibold py-2.5 rounded-xl text-sm shadow-md hover:shadow transition-all flex items-center justify-center gap-2 mt-2">
+                    <span>Sign In</span>
+                    <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                </button>
+            </form>
+
+            <!-- Divider -->
+            <div class="relative my-6 text-center">
+                <div class="absolute inset-0 flex items-center">
+                    <div class="w-full border-t border-slate-200"></div>
+                </div>
+                <span class="relative bg-white px-3 text-[11px] font-bold text-slate-400 uppercase tracking-wider">Or continue with</span>
+            </div>
+
+            <!-- Google One-Tap / Sign-In Button -->
+            <div class="flex justify-center w-full">
+                <div id="googleBtnContainer"></div>
+            </div>
+
+            <!-- Bottom Register Link -->
+            <div class="mt-8 text-center text-xs text-slate-500">
+                Don't have an account yet? 
+                <a href="register.html" class="font-bold text-blue-600 hover:underline ml-1">Create an Account</a>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ====== 6-DIGIT EMAIL OTP VERIFICATION MODAL ====== -->
+    <dialog id="otpModal" class="rounded-3xl shadow-2xl p-0 w-full max-w-md bg-white border border-slate-200 overflow-hidden backdrop:bg-slate-950/60 backdrop:backdrop-blur-md">
+        <div class="p-7 space-y-6 text-center">
+            <!-- Brand Icon Badge -->
+            <div class="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center mx-auto shadow-sm ring-8 ring-blue-50/50">
+                <span class="material-symbols-outlined text-[32px]">mark_email_read</span>
+            </div>
+
+            <div class="space-y-1.5">
+                <h3 class="text-lg font-extrabold text-slate-900 tracking-tight">Verify Your Email Address</h3>
+                <p class="text-xs text-slate-500 leading-relaxed max-w-xs mx-auto">
+                    We've sent a 6-digit verification code to<br>
+                    <strong id="otpTargetEmail" class="text-slate-900 font-semibold">user@email.com</strong>
+                </p>
+            </div>
+
+            <!-- Dev Hint (shown if dev_otp provided for viva / testing reliability) -->
+            <div id="devOtpBadge" class="hidden p-2 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-[11px] font-mono">
+                <span class="font-bold">Dev/Test OTP:</span> <span id="devOtpCode" class="font-extrabold tracking-widest text-amber-950">123456</span>
+            </div>
+
+            <!-- 6 Digit Input Boxes -->
+            <div class="space-y-3">
+                <div class="flex items-center justify-center gap-2 sm:gap-2.5" id="otpInputsContainer">
+                    <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]*" class="otp-box w-11 h-12 text-center text-xl font-extrabold text-slate-900 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-blue-600 focus:ring-4 focus:ring-blue-100 transition-all outline-none" />
+                    <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]*" class="otp-box w-11 h-12 text-center text-xl font-extrabold text-slate-900 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-blue-600 focus:ring-4 focus:ring-blue-100 transition-all outline-none" />
+                    <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]*" class="otp-box w-11 h-12 text-center text-xl font-extrabold text-slate-900 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-blue-600 focus:ring-4 focus:ring-blue-100 transition-all outline-none" />
+                    <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]*" class="otp-box w-11 h-12 text-center text-xl font-extrabold text-slate-900 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-blue-600 focus:ring-4 focus:ring-blue-100 transition-all outline-none" />
+                    <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]*" class="otp-box w-11 h-12 text-center text-xl font-extrabold text-slate-900 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-blue-600 focus:ring-4 focus:ring-blue-100 transition-all outline-none" />
+                    <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]*" class="otp-box w-11 h-12 text-center text-xl font-extrabold text-slate-900 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-blue-600 focus:ring-4 focus:ring-blue-100 transition-all outline-none" />
+                </div>
+                <!-- Error notice inside modal -->
+                <div id="otpError" class="hidden text-xs font-semibold text-rose-600"></div>
+            </div>
+
+            <!-- Action Button -->
+            <button id="verifyOtpBtn" onclick="submitOtpVerification()" class="w-full py-3 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 active:scale-[0.99] text-white text-xs font-bold shadow-md shadow-blue-500/25 transition-all flex items-center justify-center gap-2">
+                <span>Verify & Sign In</span>
+                <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+            </button>
+
+            <!-- Footer: Resend Timer & Close -->
+            <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                <button id="resendOtpBtn" onclick="resendOtpCode()" class="font-semibold text-slate-400 hover:text-blue-600 transition-colors disabled:opacity-50 disabled:pointer-events-none" disabled>
+                    Resend code in <span id="resendCountdown">60s</span>
+                </button>
+                <button onclick="closeOtpModal()" class="font-semibold text-slate-400 hover:text-slate-700 transition-colors">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- ====== SCRIPTS ====== -->
+    <script src="js/api.js?v=2"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script>
+        // Redirect if already logged in
+        if (getToken()) {
+            window.location.href = 'dashboard.html';
+        }
+
+        // Toggle Password Visibility
+        const toggleBtn = document.getElementById('togglePasswordBtn');
+        const pwdInput = document.getElementById('password');
+        const pwdIcon = document.getElementById('togglePasswordIcon');
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', () => {
+                if (pwdInput.type === 'password') {
+                    pwdInput.type = 'text';
+                    pwdIcon.textContent = 'visibility_off';
+                } else {
+                    pwdInput.type = 'password';
+                    pwdIcon.textContent = 'visibility';
+                }
+            });
+        }
+
+        // ====== OTP MODAL & INPUTS UX ======
+        let activeLoginEmail = '';
+        let resendTimer = null;
+        let resendSeconds = 60;
+
+        const otpBoxes = Array.from(document.querySelectorAll('.otp-box'));
+
+        otpBoxes.forEach((box, index) => {
+            box.addEventListener('input', (e) => {
+                const val = e.target.value;
+                if (!/^[0-9]$/.test(val)) {
+                    e.target.value = '';
+                    return;
+                }
+                if (index < otpBoxes.length - 1) {
+                    otpBoxes[index + 1].focus();
+                } else {
+                    const code = otpBoxes.map(b => b.value).join('');
+                    if (code.length === 6) {
+                        submitOtpVerification();
+                    }
+                }
+            });
+
+            box.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && !box.value && index > 0) {
+                    otpBoxes[index - 1].focus();
+                } else if (e.key === 'Enter') {
+                    submitOtpVerification();
+                }
+            });
+
+            box.addEventListener('paste', (e) => {
+                e.preventDefault();
+                const text = (e.clipboardData || window.clipboardData).getData('text').trim();
+                const digits = text.replace(/\D/g, '').slice(0, 6);
+                if (digits.length > 0) {
+                    digits.split('').forEach((d, i) => {
+                        if (otpBoxes[i]) otpBoxes[i].value = d;
+                    });
+                    const targetFocus = Math.min(digits.length, otpBoxes.length - 1);
+                    otpBoxes[targetFocus].focus();
+                    if (digits.length === 6) {
+                        submitOtpVerification();
+                    }
+                }
+            });
+        });
+
+        function openOtpModal(email, devOtp) {
+            activeLoginEmail = email;
+            document.getElementById('otpTargetEmail').textContent = email;
+
+            otpBoxes.forEach(b => b.value = '');
+            const errEl = document.getElementById('otpError');
+            errEl.classList.add('hidden');
+            errEl.textContent = '';
+
+            const devBadge = document.getElementById('devOtpBadge');
+            const devCode = document.getElementById('devOtpCode');
+            if (devOtp) {
+                devCode.textContent = devOtp;
+                devBadge.classList.remove('hidden');
+            } else {
+                devBadge.classList.add('hidden');
+            }
+
+            startResendCountdown();
+            document.getElementById('otpModal').showModal();
+            setTimeout(() => otpBoxes[0].focus(), 150);
+        }
+
+        function closeOtpModal() {
+            document.getElementById('otpModal').close();
+            if (resendTimer) clearInterval(resendTimer);
+            document.getElementById('email').focus();
+        }
+
+        function startResendCountdown() {
+            if (resendTimer) clearInterval(resendTimer);
+            resendSeconds = 60;
+            const resendBtn = document.getElementById('resendOtpBtn');
+            const countdownSpan = document.getElementById('resendCountdown');
+            resendBtn.disabled = true;
+            countdownSpan.textContent = `${resendSeconds}s`;
+
+            resendTimer = setInterval(() => {
+                resendSeconds--;
+                if (resendSeconds <= 0) {
+                    clearInterval(resendTimer);
+                    resendBtn.disabled = false;
+                    resendBtn.textContent = 'Resend verification code';
+                } else {
+                    countdownSpan.textContent = `${resendSeconds}s`;
+                }
+            }, 1000);
+        }
+
+        async function resendOtpCode() {
+            if (!activeLoginEmail) return;
+            const resendBtn = document.getElementById('resendOtpBtn');
+            resendBtn.disabled = true;
+            resendBtn.textContent = 'Sending...';
+
+            const res = await apiRequest('/auth/resend-otp', {
+                method: 'POST',
+                body: { email: activeLoginEmail }
+            });
+
+            if (res.status === 200 && res.data.success) {
+                if (res.data.data && res.data.data.dev_otp) {
+                    document.getElementById('devOtpCode').textContent = res.data.data.dev_otp;
+                    document.getElementById('devOtpBadge').classList.remove('hidden');
+                }
+                showToast('Fresh verification code sent!');
+                startResendCountdown();
+            } else {
+                alert(res.data.message || 'Failed to resend code');
+                resendBtn.disabled = false;
+                resendBtn.textContent = 'Resend verification code';
+            }
+        }
+
+        async function submitOtpVerification() {
+            const code = otpBoxes.map(b => b.value).join('').trim();
+            const errEl = document.getElementById('otpError');
+            const verifyBtn = document.getElementById('verifyOtpBtn');
+
+            if (code.length !== 6) {
+                errEl.textContent = 'Please enter the complete 6-digit verification code.';
+                errEl.classList.remove('hidden');
+                return;
+            }
+
+            errEl.classList.add('hidden');
+            verifyBtn.disabled = true;
+            verifyBtn.innerHTML = `<span class="material-symbols-outlined text-[16px] animate-spin">sync</span><span>Verifying...</span>`;
+
+            const res = await apiRequest('/auth/verify-otp', {
+                method: 'POST',
+                body: {
+                    email: activeLoginEmail,
+                    otp: code
+                }
+            });
+
+            if (res.status === 200 && res.data.success) {
+                if (res.data.data && res.data.data.token) {
+                    setToken(res.data.data.token);
+                }
+                if (res.data.data && res.data.data.user) {
+                    try {
+                        localStorage.setItem('expadvisor_user', JSON.stringify(res.data.data.user));
+                    } catch(e) {}
+                }
+                verifyBtn.innerHTML = `<span class="material-symbols-outlined text-[16px]">check_circle</span><span>Verified! Redirecting...</span>`;
+                verifyBtn.classList.replace('bg-blue-600', 'bg-emerald-600');
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 800);
+            } else {
+                errEl.textContent = res.data.message || 'Invalid or expired verification code.';
+                errEl.classList.remove('hidden');
+                verifyBtn.disabled = false;
+                verifyBtn.innerHTML = `<span>Verify & Sign In</span><span class="material-symbols-outlined text-[16px]">arrow_forward</span>`;
+                otpBoxes.forEach(b => b.value = '');
+                otpBoxes[0].focus();
+            }
+        }
+
+        // Login Form Submission
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const errorBanner = document.getElementById('errorMessage');
+            const errorText = document.getElementById('errorText');
+            const submitBtn = document.getElementById('submitBtn');
+
+            errorBanner.classList.add('hidden');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<span>Signing in...</span>`;
+
+            const res = await apiRequest('/auth/login', {
+                method: 'POST',
+                body: { email, password }
+            });
+
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = `<span>Sign In</span><span class="material-symbols-outlined text-[16px]">arrow_forward</span>`;
+
+            if (res.status === 200 && res.data.success) {
+                setToken(res.data.data.token);
+                if (res.data.data.user) {
+                    try {
+                        localStorage.setItem('expadvisor_user', JSON.stringify(res.data.data.user));
+                    } catch(e) {}
+                }
+                window.location.href = 'dashboard.html';
+            } else if (res.data && res.data.requires_verification) {
+                // Email is not verified yet! Automatically open the OTP verification modal!
+                const devOtp = (res.data.data && res.data.data.dev_otp) ? res.data.data.dev_otp : null;
+                openOtpModal(email, devOtp);
+            } else {
+                errorText.textContent = res.data.message || 'Invalid email or password. Please try again.';
+                errorBanner.classList.remove('hidden');
+            }
+        });
+
+        // Google Authentication Callback
+        function handleGoogleLogin(response) {
+            const errorBanner = document.getElementById('errorMessage');
+            const errorText = document.getElementById('errorText');
+            const submitBtn = document.getElementById('submitBtn');
+            if (errorBanner) errorBanner.classList.add('hidden');
+
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = `<span class="material-symbols-outlined text-[16px] animate-spin">refresh</span><span>Verifying with Google...</span>`;
+            }
+
+            apiRequest('/auth/google', {
+                method: 'POST',
+                body: { credential: response.credential, token: response.credential }
+            }).then(res => {
+                if (res.status === 200 || res.status === 201) {
+                    if (res.data.data && res.data.data.token) {
+                        setToken(res.data.data.token);
+                    }
+                    if (res.data.data && res.data.data.user) {
+                        try {
+                            localStorage.setItem('expadvisor_user', JSON.stringify(res.data.data.user));
+                        } catch(e) {}
+                    }
+                    if (submitBtn) {
+                        submitBtn.innerHTML = `<span class="material-symbols-outlined text-[16px]">check_circle</span><span>Authenticated! Opening Dashboard...</span>`;
+                        submitBtn.classList.replace('bg-slate-900', 'bg-emerald-600');
+                    }
+                    setTimeout(() => {
+                        window.location.replace('dashboard.html');
+                    }, 500);
+                } else {
+                    if (submitBtn) {
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = `<span>Sign In</span><span class="material-symbols-outlined text-[16px]">arrow_forward</span>`;
+                    }
+                    if (errorText) errorText.textContent = 'Google Sign In failed: ' + (res.data ? res.data.message : 'Unknown error');
+                    if (errorBanner) errorBanner.classList.remove('hidden');
+                }
+            }).catch(err => {
+                console.error(err);
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = `<span>Sign In</span><span class="material-symbols-outlined text-[16px]">arrow_forward</span>`;
+                }
+                if (errorText) errorText.textContent = 'Network error during Google Sign In. Please try again.';
+                if (errorBanner) errorBanner.classList.remove('hidden');
+            });
+        }
+
+        // Initialize Google Sign In
+        window.addEventListener('load', () => {
+            if (window.google && google.accounts) {
+                google.accounts.id.initialize({
+                    client_id: "264177546521-l4f6okrlas9sk890h9elaj17ce6ok5h7.apps.googleusercontent.com",
+                    callback: handleGoogleLogin
+                });
+
+                const btnContainer = document.getElementById("googleBtnContainer");
+                if (btnContainer) {
+                    google.accounts.id.renderButton(
+                        btnContainer,
+                        { theme: "outline", size: "large", width: 340, shape: "pill" }
+                    );
+                }
+            }
+        });
+    </script>
+</body>
+</html>

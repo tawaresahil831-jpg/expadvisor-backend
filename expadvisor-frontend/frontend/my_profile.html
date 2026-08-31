@@ -1,0 +1,1518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>EXPadviser · My Profile</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts & Material Symbols -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..24,400..600,0..1,0&display=swap" rel="stylesheet" />
+
+    <style>
+        ::-webkit-scrollbar { display: none; }
+        .line-clamp-1 { display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+        .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        dialog::backdrop { background-color: rgba(15, 23, 42, 0.55); backdrop-filter: blur(6px); }
+
+        /* Dark mode overrides */
+        html.dark, html.dark body {
+            background-color: #0b1329 !important;
+            color: #f1f5f9 !important;
+        }
+        html.dark .bg-white {
+            background-color: #111827 !important;
+            border-color: #1f2937 !important;
+            color: #f1f5f9 !important;
+        }
+        html.dark .bg-slate-50, 
+        html.dark .bg-slate-50\/80, 
+        html.dark .bg-slate-50\/90, 
+        html.dark .bg-slate-50\/40, 
+        html.dark .bg-slate-50\/60, 
+        html.dark .bg-slate-50\/70 {
+            background-color: #1e293b !important;
+            border-color: #334155 !important;
+        }
+        html.dark .bg-slate-100, 
+        html.dark .bg-slate-100\/70 {
+            background-color: #1f2937 !important;
+            color: #e2e8f0 !important;
+            border-color: #374151 !important;
+        }
+        /* CRITICAL: Fix hover states so cards NEVER flash white on hover in dark mode! */
+        html.dark .hover\:bg-slate-50:hover, 
+        html.dark .hover\:bg-slate-50\/90:hover,
+        html.dark .hover\:bg-slate-50\/80:hover,
+        html.dark .hover\:bg-slate-100:hover,
+        html.dark .hover\:bg-slate-200:hover {
+            background-color: #1e293b !important;
+        }
+        html.dark .text-slate-900 { color: #f8fafc !important; }
+        html.dark .text-slate-800 { color: #f1f5f9 !important; }
+        html.dark .text-slate-700 { color: #cbd5e1 !important; }
+        html.dark .text-slate-600 { color: #94a3b8 !important; }
+        html.dark .text-slate-500 { color: #94a3b8 !important; }
+        html.dark .text-slate-400 { color: #64748b !important; }
+        html.dark .border-slate-100, 
+        html.dark .border-slate-200, 
+        html.dark .border-slate-200\/60,
+        html.dark .border-slate-200\/70, 
+        html.dark .border-slate-200\/80, 
+        html.dark .border-slate-200\/90 {
+            border-color: #1f2937 !important;
+        }
+        html.dark .divide-slate-100 > * + * {
+            border-color: #1f2937 !important;
+        }
+        html.dark header {
+            background-color: #111827 !important;
+            border-color: #1f2937 !important;
+        }
+        html.dark dialog {
+            background-color: #111827 !important;
+            color: #f1f5f9 !important;
+            border-color: #374151 !important;
+        }
+        html.dark input, html.dark select, html.dark textarea {
+            background-color: #1e293b !important;
+            color: #f8fafc !important;
+            border-color: #374151 !important;
+        }
+        html.dark .profile-tab-btn.bg-slate-100 {
+            background-color: #1e293b !important;
+            color: #cbd5e1 !important;
+        }
+        html.dark .border-white {
+            border-color: #111827 !important;
+        }
+    </style>
+</head>
+
+<body class="bg-[#f8fafc] text-slate-800 antialiased font-sans flex min-h-screen">
+
+    <!-- ====== SLIM DARK ICON RAIL (LEFT NAVIGATION) ====== -->
+    <aside class="w-16 bg-[#111827] flex flex-col items-center py-4 shrink-0 fixed top-0 bottom-0 left-0 z-50 border-r border-slate-800">
+        <!-- Logo -->
+        <a href="dashboard.html" class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold text-xl mb-6 shadow-md hover:scale-105 transition-transform" title="EXPadviser">
+            e
+        </a>
+
+        <!-- Navigation Links -->
+        <nav class="flex flex-col gap-3 w-full items-center">
+            <!-- Dashboard -->
+            <a href="dashboard.html" class="w-10 h-10 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 flex items-center justify-center transition-colors" title="Dashboard">
+                <span class="material-symbols-outlined text-[22px]">widgets</span>
+            </a>
+
+            <!-- My Problems -->
+            <a href="my_problems.html" class="w-10 h-10 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 flex items-center justify-center transition-colors" title="My Problems">
+                <span class="material-symbols-outlined text-[22px]">assignment</span>
+            </a>
+
+            <!-- My Profile (Active) -->
+            <a href="my_profile.html" class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-sm" title="My Profile">
+                <span class="material-symbols-outlined text-[22px]">person</span>
+            </a>
+        </nav>
+
+        <!-- Bottom Logout -->
+        <div class="mt-auto">
+            <button onclick="logout()" class="w-10 h-10 rounded-xl text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 flex items-center justify-center transition-colors" title="Logout">
+                <span class="material-symbols-outlined text-[22px]">logout</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- ====== MAIN CONTENT WRAPPER ====== -->
+    <div class="pl-16 flex-1 flex flex-col min-w-0">
+
+        <!-- ====== TOP APP BAR ====== -->
+        <header class="h-16 bg-white border-b border-slate-200/80 px-8 flex items-center justify-between sticky top-0 z-40">
+            <!-- Brand Title -->
+            <div class="flex items-center gap-3">
+                <a href="dashboard.html" class="font-extrabold text-slate-900 text-lg tracking-tight hover:text-blue-600 transition-colors">EXPadviser</a>
+                <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-medium">Profile</span>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="w-full max-w-md mx-6">
+                <div class="relative flex items-center">
+                    <span class="material-symbols-outlined absolute left-3.5 text-slate-400 text-[18px]">search</span>
+                    <input id="searchInput" type="text" placeholder="Search for problems..." class="w-full bg-slate-50/80 border border-slate-200/90 rounded-full pl-9 pr-4 py-1.5 text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all" />
+                </div>
+            </div>
+
+            <!-- Right Header Actions -->
+            <div class="flex items-center gap-4">
+                <!-- Academic Session Pill -->
+                <span class="text-xs font-semibold text-slate-500 bg-slate-100 px-3 py-1 rounded-full hidden sm:inline-block">
+                    Session 2026–27
+                </span>
+
+                <!-- Dark Mode Quick Toggle Button in Header -->
+                <button id="headerThemeToggle" class="w-9 h-9 rounded-full text-slate-600 hover:bg-slate-100 flex items-center justify-center transition-colors" title="Toggle Theme">
+                    <span id="headerThemeIcon" class="material-symbols-outlined text-[20px]">dark_mode</span>
+                </button>
+
+                <!-- Notifications -->
+                <div class="relative">
+                    <button id="notificationBtn" class="w-9 h-9 rounded-full text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center justify-center transition-colors relative" title="Notifications">
+                        <span class="material-symbols-outlined text-[20px]">notifications</span>
+                        <span id="notifDot" class="absolute top-2 right-2 w-2 h-2 rounded-full bg-rose-500 hidden ring-2 ring-white dark:ring-slate-900"></span>
+                    </button>
+                    <!-- Notification Dropdown -->
+                    <div id="notificationDropdown" class="hidden absolute right-0 mt-2 w-80 sm:w-96 bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-800 py-2 z-50 overflow-hidden">
+                        <div class="px-4 py-2.5 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <span class="font-bold text-xs uppercase tracking-wider text-slate-700 dark:text-slate-200">Notifications</span>
+                                <span id="notifUnreadBadge" class="hidden text-[10px] font-bold bg-blue-100 text-blue-700 dark:bg-blue-900/60 dark:text-blue-300 px-1.5 py-0.2 rounded-full">0 new</span>
+                            </div>
+                            <button id="markAllReadBtn" onclick="markAllNotificationsRead()" class="text-[11px] text-blue-600 dark:text-blue-400 font-semibold cursor-pointer hover:underline flex items-center gap-1">
+                                <span class="material-symbols-outlined text-[14px]">done_all</span>
+                                <span>Mark all read</span>
+                            </button>
+                        </div>
+                        <div id="notifList" class="max-h-80 overflow-y-auto divide-y divide-slate-100 dark:divide-slate-800">
+                            <div class="p-6 text-center text-xs text-slate-400">Loading notifications...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Profile Avatar Circle -->
+                <a href="my_profile.html" class="flex items-center gap-2 group">
+                    <div id="headerAvatarContainer" class="w-8 h-8 rounded-full bg-blue-600 text-white font-bold text-xs flex items-center justify-center shadow-sm group-hover:ring-2 group-hover:ring-blue-500 transition-all">
+                        <span id="headerAvatarInitial">M</span>
+                    </div>
+                </a>
+            </div>
+        </header>
+
+        <!-- ====== MAIN BODY ====== -->
+        <main class="p-8 max-w-7xl mx-auto w-full space-y-6">
+
+            <!-- ====== PROFILE BANNER & IDENTITY CARD ====== -->
+            <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden">
+                <!-- Purple/Indigo Accent Banner -->
+                <div class="h-20 sm:h-24 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 w-full relative">
+                    <div class="absolute inset-0 bg-black/10"></div>
+                </div>
+
+                <!-- Profile Info Row -->
+                <div class="px-6 sm:px-8 pb-6 pt-3 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                    
+                    <!-- Left: Avatar + Details -->
+                    <div class="flex items-end gap-4 -mt-10 sm:-mt-12">
+                        <!-- Big Avatar Square/Circle -->
+                        <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-blue-600 text-white text-3xl font-extrabold flex items-center justify-center shadow-lg border-4 border-white shrink-0 relative overflow-hidden">
+                            <span id="profileAvatarInitial">M</span>
+                        </div>
+
+                        <!-- Name, Year Badge & College Subtitle -->
+                        <div class="space-y-1 mb-1">
+                            <div class="flex items-center gap-2.5 flex-wrap">
+                                <h1 id="profileName" class="text-xl sm:text-2xl font-bold text-slate-900 leading-tight">Loading Name...</h1>
+                                <span id="profileYearBadge" class="text-xs font-bold uppercase bg-indigo-50 text-indigo-700 px-2.5 py-0.5 rounded-full border border-indigo-100">
+                                    1st Year
+                                </span>
+                            </div>
+                            <div class="flex items-center gap-2 flex-wrap">
+                                <p id="profileSubtitle" class="text-xs text-slate-500 font-medium">
+                                    @username · College of Engineering
+                                </p>
+                                <div id="heroSocialBadges" class="flex items-center gap-1.5"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Action Buttons -->
+                    <div class="flex items-center gap-2.5 pt-2 sm:pt-0">
+                        <!-- Theme Toggle Button (Icon only, text removed) -->
+                        <button id="themeToggleBtn" class="w-9 h-9 rounded-xl border border-slate-200 text-slate-700 hover:bg-slate-50 transition-all flex items-center justify-center shadow-sm" title="Toggle Dark / Light Mode">
+                            <span id="themeToggleIcon" class="material-symbols-outlined text-[18px]">dark_mode</span>
+                        </button>
+
+                        <!-- Edit Profile Button -->
+                        <button onclick="openEditModal()" class="px-4 py-2 rounded-xl bg-slate-900 hover:bg-black text-white text-xs font-semibold shadow-sm transition-all flex items-center gap-1.5">
+                            <span class="material-symbols-outlined text-[16px]">edit</span>
+                            Edit Profile
+                        </button>
+
+                        <!-- Share Button -->
+                        <button onclick="shareProfile()" class="px-3.5 py-2 rounded-xl border border-slate-200 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-all flex items-center gap-1.5 shadow-sm">
+                            <span class="material-symbols-outlined text-[16px]">share</span>
+                            Share
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ====== TOP 4-STAT STRIP (WITH INTERACTIVE HOVER SCALES) ====== -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <!-- Stat 1: Queries Asked -->
+                <div class="group relative bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center justify-between cursor-pointer hover:border-blue-200 hover:shadow-md transition-all">
+                    <div class="flex items-center gap-3.5">
+                        <div class="w-11 h-11 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                            <span class="material-symbols-outlined text-[22px]">feed</span>
+                        </div>
+                        <div>
+                            <div id="stat-queries-asked" class="text-xl font-bold text-slate-900 leading-none">0</div>
+                            <div class="text-xs text-slate-500 font-medium mt-1">Queries Asked</div>
+                        </div>
+                    </div>
+                    <span class="material-symbols-outlined text-[16px] text-slate-300 group-hover:text-blue-500 transition-colors">info</span>
+
+                    <!-- Hover Popover Explaining Measurement Scale -->
+                    <div class="hidden group-hover:block absolute bottom-full left-0 mb-2 w-64 p-3 bg-slate-900 text-white text-xs rounded-xl shadow-2xl z-50 pointer-events-none border border-slate-700 animate-fadeIn">
+                        <div class="font-bold text-blue-400 text-[10px] uppercase tracking-wider mb-1 flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[13px]">straighten</span>
+                            Scale Measurement
+                        </div>
+                        <p class="text-slate-300 text-[11px] leading-relaxed">
+                            <strong class="text-white font-bold">+1 point</strong> for every coursework doubt, discussion topic, or inquiry you publish to the campus community.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Stat 2: Answers Given -->
+                <div class="group relative bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center justify-between cursor-pointer hover:border-indigo-200 hover:shadow-md transition-all">
+                    <div class="flex items-center gap-3.5">
+                        <div class="w-11 h-11 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0">
+                            <span class="material-symbols-outlined text-[22px]">check_circle</span>
+                        </div>
+                        <div>
+                            <div id="stat-answers-given" class="text-xl font-bold text-slate-900 leading-none">0</div>
+                            <div class="text-xs text-slate-500 font-medium mt-1">Answers Given</div>
+                        </div>
+                    </div>
+                    <span class="material-symbols-outlined text-[16px] text-slate-300 group-hover:text-indigo-500 transition-colors">info</span>
+
+                    <!-- Hover Popover Explaining Measurement Scale -->
+                    <div class="hidden group-hover:block absolute bottom-full left-0 mb-2 w-64 p-3 bg-slate-900 text-white text-xs rounded-xl shadow-2xl z-50 pointer-events-none border border-slate-700 animate-fadeIn">
+                        <div class="font-bold text-indigo-400 text-[10px] uppercase tracking-wider mb-1 flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[13px]">straighten</span>
+                            Scale Measurement
+                        </div>
+                        <p class="text-slate-300 text-[11px] leading-relaxed">
+                            <strong class="text-white font-bold">+1 point</strong> for each helpful answer, coursework solution, or collaborative reply given to peer questions.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Stat 3: Reputation -->
+                <div class="group relative bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center justify-between cursor-pointer hover:border-purple-200 hover:shadow-md transition-all">
+                    <div class="flex items-center gap-3.5">
+                        <div class="w-11 h-11 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
+                            <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                        </div>
+                        <div>
+                            <div id="stat-reputation" class="text-xl font-bold text-slate-900 leading-none">0</div>
+                            <div class="text-xs text-slate-500 font-medium mt-1">Reputation</div>
+                        </div>
+                    </div>
+                    <span class="material-symbols-outlined text-[16px] text-slate-300 group-hover:text-purple-500 transition-colors">info</span>
+
+                    <!-- Hover Popover Explaining Measurement Scale -->
+                    <div class="hidden group-hover:block absolute bottom-full right-0 sm:left-0 mb-2 w-64 p-3 bg-slate-900 text-white text-xs rounded-xl shadow-2xl z-50 pointer-events-none border border-slate-700 animate-fadeIn">
+                        <div class="font-bold text-purple-400 text-[10px] uppercase tracking-wider mb-1 flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[13px]">calculate</span>
+                            Reputation Calculation Scale
+                        </div>
+                        <ul class="text-slate-300 text-[11px] space-y-1 pl-3.5 list-disc leading-relaxed">
+                            <li><strong class="text-white">+10 pts</strong> for each query asked</li>
+                            <li><strong class="text-white">+15 pts</strong> for each like received</li>
+                            <li><strong class="text-white">+25 pts</strong> for accepted solutions</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Stat 4: Badges (Clickable to view full achievements) -->
+                <div onclick="switchTab('badges')" class="group relative bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center justify-between cursor-pointer hover:border-violet-300 hover:shadow-md transition-all">
+                    <div class="flex items-center gap-3.5">
+                        <div class="w-11 h-11 rounded-xl bg-violet-50 text-violet-600 flex items-center justify-center shrink-0">
+                            <span class="material-symbols-outlined text-[22px]">military_tech</span>
+                        </div>
+                        <div>
+                            <div id="stat-badges" class="text-xl font-bold text-slate-900 leading-none">0</div>
+                            <div class="text-xs text-slate-500 font-medium mt-1 flex items-center gap-1">
+                                <span>Badges</span>
+                                <span class="text-[10px] text-violet-600 font-bold bg-violet-50 px-1.5 py-0.2 rounded">View</span>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="material-symbols-outlined text-[16px] text-slate-300 group-hover:text-violet-500 transition-colors">info</span>
+
+                    <!-- Hover Popover Explaining Measurement Scale -->
+                    <div class="hidden group-hover:block absolute bottom-full right-0 mb-2 w-64 p-3 bg-slate-900 text-white text-xs rounded-xl shadow-2xl z-50 pointer-events-none border border-slate-700 animate-fadeIn">
+                        <div class="font-bold text-violet-400 text-[10px] uppercase tracking-wider mb-1 flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[13px]">military_tech</span>
+                            Badge Milestone Tiers (Click to View)
+                        </div>
+                        <ul class="text-slate-300 text-[11px] space-y-1 pl-3.5 list-disc leading-relaxed">
+                            <li><strong>First Question:</strong> Post 1st question</li>
+                            <li><strong>Community Helper:</strong> Answer 1+ questions</li>
+                            <li><strong>Master Mentor:</strong> Answer 10+ questions</li>
+                            <li><strong>Verified Solver:</strong> Accepted solution</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ====== 2-COLUMN MAIN CONTENT GRID (8 cols Left / 4 cols Right) ====== -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+                <!-- ====== LEFT COLUMN: ACTIVITY TABS (~66%) ====== -->
+                <section class="lg:col-span-8 bg-white rounded-2xl border border-slate-200/70 p-6 shadow-sm space-y-5">
+                    
+                    <!-- Tabs Header -->
+                    <div class="flex items-center gap-2 border-b border-slate-100 pb-3 flex-wrap">
+                        <button id="tabBtnQueries" onclick="switchTab('queries')" class="profile-tab-btn px-4 py-1.5 rounded-full text-xs font-bold bg-blue-600 text-white shadow-sm transition-all">
+                            My Queries
+                        </button>
+                        <button id="tabBtnAnswers" onclick="switchTab('answers')" class="profile-tab-btn px-4 py-1.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">
+                            My Answers
+                        </button>
+                        <button id="tabBtnBadges" onclick="switchTab('badges')" class="profile-tab-btn px-4 py-1.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all flex items-center gap-1.5">
+                            <span class="material-symbols-outlined text-[15px] text-amber-500">military_tech</span>
+                            <span>Badges (<span id="tabBadgesCounter">2/8</span>)</span>
+                        </button>
+                        <button id="tabBtnSaved" onclick="switchTab('saved')" class="profile-tab-btn px-4 py-1.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all flex items-center gap-1.5">
+                            <span class="material-symbols-outlined text-[15px] text-blue-500">bookmark</span>
+                            <span>Saved (<span id="savedTabCounter">0</span>)</span>
+                        </button>
+                    </div>
+
+                    <!-- Tab 1: Queries Feed -->
+                    <div id="tabContentQueries" class="divide-y divide-slate-100 space-y-1">
+                        <div class="py-12 text-center text-slate-400 text-sm">Loading queries...</div>
+                    </div>
+
+                    <!-- Tab 2: Answers Feed -->
+                    <div id="tabContentAnswers" class="divide-y divide-slate-100 space-y-1 hidden">
+                        <div class="py-12 text-center text-slate-400 text-sm">Loading answers...</div>
+                    </div>
+
+                    <!-- Tab 3: Full Badges Showcase Feed -->
+                    <div id="tabContentBadges" class="space-y-4 hidden">
+                        <div class="p-4 rounded-2xl bg-gradient-to-r from-blue-500/10 via-indigo-500/10 to-purple-500/10 border border-blue-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                            <div class="space-y-1">
+                                <h4 class="text-sm font-bold text-slate-900 flex items-center gap-1.5">
+                                    <span class="material-symbols-outlined text-amber-500 text-[18px]">workspace_premium</span>
+                                    Community Achievement Badges
+                                </h4>
+                                <p class="text-xs text-slate-500">
+                                    Earn recognition, unlock profile flairs, and climb the campus leaderboard by helping peers and asking questions!
+                                </p>
+                            </div>
+                            <a href="dashboard.html" class="px-3.5 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-semibold shadow-xs shrink-0 self-start sm:self-center transition-colors flex items-center gap-1">
+                                <span>Contribute Now</span>
+                                <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+                            </a>
+                        </div>
+
+                        <!-- 8 Badges Grid -->
+                        <div id="fullBadgesGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                            <!-- Populated dynamically with all 8 badges -->
+                        </div>
+                    </div>
+
+                    <!-- Tab 4: Saved Feed -->
+                    <div id="tabContentSaved" class="divide-y divide-slate-100 space-y-1 hidden">
+                        <!-- Populated dynamically with saved queries -->
+                    </div>
+
+                </section>
+
+                <!-- ====== RIGHT COLUMN: ABOUT WIDGETS (~34%) ====== -->
+                <aside class="lg:col-span-4 space-y-6">
+
+                    <!-- Card 1: Academic Details -->
+                    <div class="bg-white rounded-2xl border border-slate-200/70 p-5 shadow-sm space-y-4">
+                        <h3 class="text-[11px] font-bold text-slate-400 tracking-wider uppercase">Academic Details</h3>
+                        
+                        <div class="space-y-3.5 text-xs">
+                            <!-- College -->
+                            <div class="flex items-start gap-3">
+                                <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-[18px]">school</span>
+                                </div>
+                                <div>
+                                    <div class="text-[10px] font-bold uppercase text-slate-400">College</div>
+                                    <div id="academicCollege" class="font-bold text-slate-900 mt-0.5">DYP College of Engineering</div>
+                                </div>
+                            </div>
+
+                            <!-- Branch / Year -->
+                            <div class="flex items-start gap-3">
+                                <div class="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-[18px]">badge</span>
+                                </div>
+                                <div>
+                                    <div class="text-[10px] font-bold uppercase text-slate-400">Branch / Year</div>
+                                    <div id="academicBranchYear" class="font-bold text-slate-900 mt-0.5">Computer Eng., 1st Yr</div>
+                                </div>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="flex items-start gap-3">
+                                <div class="w-8 h-8 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-[18px]">mail</span>
+                                </div>
+                                <div>
+                                    <div class="text-[10px] font-bold uppercase text-slate-400">Email</div>
+                                    <div id="academicEmail" class="font-bold text-slate-900 mt-0.5 truncate max-w-[200px]">student@dyp.edu.in</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Links -->
+                    <div class="bg-white rounded-2xl border border-slate-200/70 p-5 shadow-sm space-y-3">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-[11px] font-bold text-slate-400 tracking-wider uppercase">Links & Profiles</h3>
+                            <button onclick="openEditModal()" class="text-[11px] font-bold text-blue-600 hover:underline flex items-center gap-0.5">
+                                <span class="material-symbols-outlined text-[13px]">edit</span>
+                                Edit
+                            </button>
+                        </div>
+                        
+                        <div class="space-y-2.5">
+                            <!-- GitHub -->
+                            <a id="linkGithub" href="#" target="_blank" class="w-full bg-slate-50 hover:bg-slate-100/80 border border-slate-200 rounded-xl p-2.5 text-xs font-semibold text-slate-800 flex items-center justify-between transition-colors group">
+                                <div class="flex items-center gap-2.5 min-w-0">
+                                    <div class="w-8 h-8 rounded-lg bg-slate-200/80 text-slate-800 flex items-center justify-center shrink-0">
+                                        <span class="material-symbols-outlined text-[18px]">code</span>
+                                    </div>
+                                    <div class="min-w-0 text-left">
+                                        <div class="text-[11px] font-bold text-slate-900 leading-tight">GitHub</div>
+                                        <div id="linkGithubValue" class="text-[10px] text-slate-400 font-normal truncate max-w-[170px] sm:max-w-[200px]">Not connected</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-1.5 shrink-0">
+                                    <span id="linkGithubBadge" class="hidden text-[9px] font-bold bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full border border-emerald-200/70">Linked</span>
+                                    <span class="material-symbols-outlined text-[15px] text-slate-400 group-hover:translate-x-0.5 transition-transform">open_in_new</span>
+                                </div>
+                            </a>
+
+                            <!-- LinkedIn -->
+                            <a id="linkLinkedin" href="#" target="_blank" class="w-full bg-slate-50 hover:bg-slate-100/80 border border-slate-200 rounded-xl p-2.5 text-xs font-semibold text-slate-800 flex items-center justify-between transition-colors group">
+                                <div class="flex items-center gap-2.5 min-w-0">
+                                    <div class="w-8 h-8 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center shrink-0">
+                                        <span class="material-symbols-outlined text-[18px]">badge</span>
+                                    </div>
+                                    <div class="min-w-0 text-left">
+                                        <div class="text-[11px] font-bold text-slate-900 leading-tight">LinkedIn</div>
+                                        <div id="linkLinkedinValue" class="text-[10px] text-slate-400 font-normal truncate max-w-[170px] sm:max-w-[200px]">Not connected</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-1.5 shrink-0">
+                                    <span id="linkLinkedinBadge" class="hidden text-[9px] font-bold bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full border border-emerald-200/70">Linked</span>
+                                    <span class="material-symbols-outlined text-[15px] text-slate-400 group-hover:translate-x-0.5 transition-transform">open_in_new</span>
+                                </div>
+                            </a>
+
+                            <!-- Portfolio -->
+                            <a id="linkPortfolio" href="#" target="_blank" class="w-full bg-slate-50 hover:bg-slate-100/80 border border-slate-200 rounded-xl p-2.5 text-xs font-semibold text-slate-800 flex items-center justify-between transition-colors group">
+                                <div class="flex items-center gap-2.5 min-w-0">
+                                    <div class="w-8 h-8 rounded-lg bg-indigo-100 text-indigo-700 flex items-center justify-center shrink-0">
+                                        <span class="material-symbols-outlined text-[18px]">public</span>
+                                    </div>
+                                    <div class="min-w-0 text-left">
+                                        <div class="text-[11px] font-bold text-slate-900 leading-tight">Portfolio</div>
+                                        <div id="linkPortfolioValue" class="text-[10px] text-slate-400 font-normal truncate max-w-[170px] sm:max-w-[200px]">Not connected</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-1.5 shrink-0">
+                                    <span id="linkPortfolioBadge" class="hidden text-[9px] font-bold bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full border border-emerald-200/70">Linked</span>
+                                    <span class="material-symbols-outlined text-[15px] text-slate-400 group-hover:translate-x-0.5 transition-transform">open_in_new</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Skills -->
+                    <div class="bg-white rounded-2xl border border-slate-200/70 p-5 shadow-sm space-y-3">
+                        <h3 class="text-[11px] font-bold text-slate-400 tracking-wider uppercase">Skills</h3>
+                        
+                        <div id="skillsPillContainer" class="flex flex-wrap gap-2 pt-0.5">
+                            <span class="text-xs text-slate-400">Loading skills...</span>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: Community Badges & Milestones Showcase -->
+                    <div class="bg-white rounded-2xl border border-slate-200/70 p-5 shadow-sm space-y-3.5">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-[18px] text-amber-500">military_tech</span>
+                                <h3 class="text-[11px] font-bold text-slate-400 tracking-wider uppercase">Achievements</h3>
+                            </div>
+                            <span id="rightBadgesProgress" class="text-[10px] font-bold bg-amber-50 text-amber-700 px-2 py-0.5 rounded-full border border-amber-100">
+                                0 / 8 Unlocked
+                            </span>
+                        </div>
+                        
+                        <!-- Badges preview list -->
+                        <div id="badgesPillContainer" class="space-y-2 max-h-[300px] overflow-y-auto pr-1">
+                            <div class="p-3 text-center text-xs text-slate-400">Loading achievements...</div>
+                        </div>
+
+                        <!-- Button to open full badges tab -->
+                        <button onclick="switchTab('badges')" class="w-full py-2 px-3 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700 text-xs font-bold transition-colors flex items-center justify-center gap-1.5 border border-slate-200/80">
+                            <span>Explore All 8 Badges & Perks</span>
+                            <span class="material-symbols-outlined text-[15px]">arrow_forward</span>
+                        </button>
+                    </div>
+
+                </aside>
+
+            </div>
+
+        </main>
+
+    </div>
+
+    <!-- ====== EDIT PROFILE MODAL ====== -->
+    <dialog id="editProfileModal" class="rounded-2xl shadow-2xl p-0 w-full max-w-lg bg-white border border-slate-200 overflow-hidden">
+        <div class="p-6 max-h-[85vh] overflow-y-auto space-y-4">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                <h3 class="text-base font-bold text-slate-900">Edit Profile Details</h3>
+                <button type="button" onclick="document.getElementById('editProfileModal').close()" class="text-slate-400 hover:text-slate-600">
+                    <span class="material-symbols-outlined text-[20px]">close</span>
+                </button>
+            </div>
+            
+            <form id="editProfileForm" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Full Name</label>
+                    <input type="text" id="editName" required class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">College</label>
+                        <input type="text" id="editCollege" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Branch</label>
+                        <input type="text" id="editBranch" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Year of Study</label>
+                        <select id="editYear" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="1">1st Year</option>
+                            <option value="2">2nd Year</option>
+                            <option value="3">3rd Year</option>
+                            <option value="4">4th Year</option>
+                            <option value="5">5th Year / Other</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Skills (comma-separated)</label>
+                        <input type="text" id="editSkills" placeholder="Web Dev, Python, UI/UX" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">About / Bio</label>
+                    <textarea id="editBio" rows="3" placeholder="Tell others about yourself..." class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                </div>
+
+                <div class="space-y-2 pt-2 border-t border-slate-100">
+                    <div class="text-[11px] font-bold text-slate-400 uppercase">Social & Portfolio Links</div>
+                    <input type="url" id="editGithub" placeholder="GitHub URL (https://github.com/...)" class="w-full px-3.5 py-1.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    <input type="url" id="editLinkedin" placeholder="LinkedIn URL (https://linkedin.com/in/...)" class="w-full px-3.5 py-1.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    <input type="url" id="editPortfolio" placeholder="Portfolio URL (https://...)" class="w-full px-3.5 py-1.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                </div>
+
+                <div class="flex justify-end gap-2 pt-3">
+                    <button type="button" onclick="document.getElementById('editProfileModal').close()" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100">Cancel</button>
+                    <button type="submit" id="saveProfileBtn" class="px-5 py-2 rounded-xl text-xs font-semibold bg-slate-900 hover:bg-black text-white shadow-sm">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
+
+    <!-- ====== SHARE PROFILE MODAL ====== -->
+    <dialog id="shareModal" class="rounded-3xl shadow-2xl p-0 w-full max-w-md bg-white border border-slate-200 overflow-hidden backdrop:bg-slate-900/50 backdrop:backdrop-blur-sm">
+        <div class="p-6 space-y-5">
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-[20px]">share</span>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-bold text-slate-900">Share Profile</h3>
+                        <p class="text-[11px] text-slate-500">Share to WhatsApp, social apps, or copy link</p>
+                    </div>
+                </div>
+                <button onclick="document.getElementById('shareModal').close()" class="text-slate-400 hover:text-slate-600 p-1.5 rounded-xl hover:bg-slate-100 transition-colors">
+                    <span class="material-symbols-outlined text-[20px]">close</span>
+                </button>
+            </div>
+
+            <!-- Supported Apps Grid (WhatsApp, Telegram, LinkedIn, X/Twitter) -->
+            <div class="grid grid-cols-4 gap-2.5 text-center">
+                <!-- WhatsApp -->
+                <button onclick="shareToApp('whatsapp')" class="flex flex-col items-center gap-1.5 p-3 rounded-2xl bg-emerald-50/70 hover:bg-emerald-100/80 border border-emerald-100 transition-all group">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-500 text-white flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
+                        <span class="material-symbols-outlined text-[22px]">chat</span>
+                    </div>
+                    <span class="text-[11px] font-bold text-slate-700">WhatsApp</span>
+                </button>
+
+                <!-- Telegram -->
+                <button onclick="shareToApp('telegram')" class="flex flex-col items-center gap-1.5 p-3 rounded-2xl bg-sky-50/70 hover:bg-sky-100/80 border border-sky-100 transition-all group">
+                    <div class="w-10 h-10 rounded-xl bg-sky-500 text-white flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
+                        <span class="material-symbols-outlined text-[22px]">send</span>
+                    </div>
+                    <span class="text-[11px] font-bold text-slate-700">Telegram</span>
+                </button>
+
+                <!-- LinkedIn -->
+                <button onclick="shareToApp('linkedin')" class="flex flex-col items-center gap-1.5 p-3 rounded-2xl bg-blue-50/70 hover:bg-blue-100/80 border border-blue-100 transition-all group">
+                    <div class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
+                        <span class="material-symbols-outlined text-[22px]">badge</span>
+                    </div>
+                    <span class="text-[11px] font-bold text-slate-700">LinkedIn</span>
+                </button>
+
+                <!-- Twitter / X -->
+                <button onclick="shareToApp('twitter')" class="flex flex-col items-center gap-1.5 p-3 rounded-2xl bg-slate-100/70 hover:bg-slate-200/80 border border-slate-200 transition-all group">
+                    <div class="w-10 h-10 rounded-xl bg-slate-900 text-white flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
+                        <span class="material-symbols-outlined text-[20px]">flutter</span>
+                    </div>
+                    <span class="text-[11px] font-bold text-slate-700">X / Twitter</span>
+                </button>
+            </div>
+
+            <!-- Native Device Share Button (Triggers device system share sheet on iOS/Android/Mac) -->
+            <button id="deviceShareBtn" onclick="triggerNativeShare()" class="w-full py-2.5 px-4 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 text-xs font-semibold flex items-center justify-center gap-2 transition-colors">
+                <span class="material-symbols-outlined text-[18px] text-blue-600">devices</span>
+                <span>More Apps (Device Share Sheet)</span>
+            </button>
+
+            <!-- Copy Link Bar -->
+            <div class="space-y-1.5 pt-1">
+                <label class="block text-[11px] font-bold text-slate-400 uppercase">Profile Link</label>
+                <div class="flex items-center gap-2 p-1.5 pl-3 rounded-xl border border-slate-200 bg-slate-50/80">
+                    <span class="material-symbols-outlined text-[16px] text-slate-400 shrink-0">link</span>
+                    <input type="text" id="shareUrlInput" readonly class="w-full text-xs text-slate-600 bg-transparent border-none focus:outline-none truncate font-mono" />
+                    <button id="copyShareLinkBtn" onclick="copyShareLink()" class="px-3.5 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold shadow-xs shrink-0 transition-colors flex items-center gap-1">
+                        <span id="copyShareIcon" class="material-symbols-outlined text-[14px]">content_copy</span>
+                        <span id="copyShareText">Copy</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- ====== JAVASCRIPT LOGIC ====== -->
+    <script src="js/api.js?v=2"></script>
+    <script>
+        requireAuth();
+        populateUserProfile();
+
+        let currentUser = null;
+        let userQueries = [];
+        let userComments = [];
+
+        // ====== THEME (DARK MODE) CONTROLLER ======
+        function initTheme() {
+            initGlobalTheme();
+        }
+
+        function applyTheme(theme) {
+            applyGlobalTheme(theme);
+        }
+
+        // Initialize Theme immediately
+        initTheme();
+
+        // ====== LOAD PROFILE DATA ======
+        async function loadProfile() {
+            const meRes = await apiRequest('/auth/me');
+            if (meRes.status !== 200 || !meRes.data.success) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            currentUser = meRes.data.data;
+            const userId = currentUser.user_id || currentUser.id;
+
+            // Fetch full profile details
+            const userRes = await apiRequest(`/users/${userId}`);
+            if (userRes.status === 200 && userRes.data.success) {
+                currentUser = userRes.data.data;
+            }
+
+            renderProfileHeader();
+            loadUserActivity(userId);
+        }
+
+        function renderProfileHeader() {
+            const u = currentUser;
+            const initial = (u.name || 'U').charAt(0).toUpperCase();
+
+            // Avatars
+            document.getElementById('profileAvatarInitial').textContent = initial;
+            document.getElementById('headerAvatarInitial').textContent = initial;
+
+            // Name & Year Badge
+            document.getElementById('profileName').textContent = u.name || 'Student';
+            const yearNum = u.year || 1;
+            const yearOrd = yearNum === 1 ? '1ST' : yearNum === 2 ? '2ND' : yearNum === 3 ? '3RD' : `${yearNum}TH`;
+            document.getElementById('profileYearBadge').textContent = `${yearOrd} YEAR`;
+
+            // Subtitle
+            const cleanUser = (u.email || '').split('@')[0];
+            const college = u.college || 'Engineering College';
+            const branch = u.branch || '';
+            document.getElementById('profileSubtitle').textContent = `@${cleanUser} · ${college} ${branch ? '· ' + branch : ''}`;
+
+            // Academic Details Widget
+            document.getElementById('academicCollege').textContent = college;
+            document.getElementById('academicBranchYear').textContent = `${branch || 'Engineering'}, ${yearOrd} Yr`;
+            document.getElementById('academicEmail').textContent = u.email || '';
+
+            // Links Widget
+            setupLink('linkGithub', 'linkGithubValue', 'linkGithubBadge', u.github, 'GitHub');
+            setupLink('linkLinkedin', 'linkLinkedinValue', 'linkLinkedinBadge', u.linkedin, 'LinkedIn');
+            setupLink('linkPortfolio', 'linkPortfolioValue', 'linkPortfolioBadge', u.portfolio, 'Portfolio');
+
+            // Hero Social Badges
+            const heroBadges = document.getElementById('heroSocialBadges');
+            if (heroBadges) {
+                let badgesHtml = '';
+                if (u.github) {
+                    const ghUser = u.github.replace(/^https?:\/\/(www\.)?github\.com\//, '').replace(/\/$/, '');
+                    badgesHtml += `
+                        <a href="${u.github.startsWith('http') ? u.github : 'https://' + u.github}" target="_blank" class="inline-flex items-center gap-1 text-[10px] font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-0.5 rounded-full border border-slate-200 transition-colors" title="GitHub: @${ghUser}">
+                            <span class="material-symbols-outlined text-[12px]">code</span>
+                            <span>@${ghUser}</span>
+                        </a>
+                    `;
+                }
+                if (u.linkedin) {
+                    badgesHtml += `
+                        <a href="${u.linkedin.startsWith('http') ? u.linkedin : 'https://' + u.linkedin}" target="_blank" class="inline-flex items-center gap-1 text-[10px] font-semibold bg-blue-50 hover:bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full border border-blue-200 transition-colors" title="View LinkedIn">
+                            <span class="material-symbols-outlined text-[12px]">badge</span>
+                            <span>LinkedIn</span>
+                        </a>
+                    `;
+                }
+                if (u.portfolio) {
+                    badgesHtml += `
+                        <a href="${u.portfolio.startsWith('http') ? u.portfolio : 'https://' + u.portfolio}" target="_blank" class="inline-flex items-center gap-1 text-[10px] font-semibold bg-emerald-50 hover:bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full border border-emerald-200 transition-colors" title="View Portfolio">
+                            <span class="material-symbols-outlined text-[12px]">public</span>
+                            <span>Portfolio</span>
+                        </a>
+                    `;
+                }
+                heroBadges.innerHTML = badgesHtml;
+            }
+
+            // Skills Widget
+            const skillsContainer = document.getElementById('skillsPillContainer');
+            const skillsList = parseSkills(u.skills);
+            if (skillsList.length > 0) {
+                skillsContainer.innerHTML = skillsList.map(s => `
+                    <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold border border-slate-200/60 shadow-xs">
+                        ${s}
+                    </span>
+                `).join('');
+            } else {
+                skillsContainer.innerHTML = '<span class="text-xs text-slate-400">No skills added yet.</span>';
+            }
+
+            // Render badges system across both main tab and sidebar widget
+            renderBadgesSystem();
+            updateSavedCounter();
+        }
+
+        // ====== ALL 8 COMMUNITY ACHIEVEMENT BADGES & GAMIFICATION SYSTEM ======
+        const ALL_COMMUNITY_BADGES = [
+            {
+                id: 'first_query',
+                name: 'First Question',
+                tier: 'Bronze',
+                tierBadge: 'bg-amber-100 text-amber-800 border-amber-200',
+                icon: 'star',
+                iconColor: 'bg-amber-50 text-amber-600',
+                desc: 'Post your first academic doubt or coursework inquiry in the community.',
+                scale: '+10 Reputation upon unlock. Awarded for 1 question.',
+                target: 1,
+                unit: 'question',
+                actionText: 'Ask a Question',
+                actionUrl: 'dashboard.html',
+                checkUnlocked: (u, q) => q.length >= 1 || (u.stats && u.stats.problems_solved >= 1),
+                getProgress: (u, q) => Math.min(q.length || (u.stats && u.stats.problems_solved) || 0, 1)
+            },
+            {
+                id: 'inquiry_leader',
+                name: 'Inquiry Leader',
+                tier: 'Silver',
+                tierBadge: 'bg-slate-100 text-slate-800 border-slate-200',
+                icon: 'help_center',
+                iconColor: 'bg-blue-50 text-blue-600',
+                desc: 'Publish 5 coursework questions to drive active peer discussions.',
+                scale: '+50 Reputation. Awarded upon asking 5 questions.',
+                target: 5,
+                unit: 'questions',
+                actionText: 'Ask a Question',
+                actionUrl: 'dashboard.html',
+                checkUnlocked: (u, q) => q.length >= 5 || (u.stats && u.stats.problems_solved >= 5),
+                getProgress: (u, q) => Math.min(q.length || (u.stats && u.stats.problems_solved) || 0, 5)
+            },
+            {
+                id: 'community_helper',
+                name: 'Community Helper',
+                tier: 'Bronze',
+                tierBadge: 'bg-blue-100 text-blue-800 border-blue-200',
+                icon: 'handshake',
+                iconColor: 'bg-indigo-50 text-indigo-600',
+                desc: 'Provide your first helpful answer or solution to a student in need.',
+                scale: '+15 Reputation. Awarded for answering 1 peer question.',
+                target: 1,
+                unit: 'answer',
+                actionText: 'Help a Peer',
+                actionUrl: 'dashboard.html',
+                checkUnlocked: (u, q) => (u.stats && u.stats.peers_helped >= 1) || (u.achievements && u.achievements.includes('Helper')),
+                getProgress: (u, q) => Math.min((u.stats && u.stats.peers_helped) || 0, 1)
+            },
+            {
+                id: 'master_mentor',
+                name: 'Master Mentor',
+                tier: 'Gold',
+                tierBadge: 'bg-amber-100 text-amber-800 border-amber-300',
+                icon: 'military_tech',
+                iconColor: 'bg-purple-50 text-purple-600',
+                desc: 'Contribute 10 or more solutions across branch discussions.',
+                scale: '+100 Reputation & Master Mentor status. Awarded for 10 answers.',
+                target: 10,
+                unit: 'answers',
+                actionText: 'Browse Open Questions',
+                actionUrl: 'dashboard.html',
+                checkUnlocked: (u, q) => (u.stats && u.stats.peers_helped >= 10) || (u.achievements && u.achievements.includes('Master Mentor')),
+                getProgress: (u, q) => Math.min((u.stats && u.stats.peers_helped) || 0, 10)
+            },
+            {
+                id: 'verified_solver',
+                name: 'Verified Solver',
+                tier: 'Diamond',
+                tierBadge: 'bg-emerald-100 text-emerald-800 border-emerald-300',
+                icon: 'verified',
+                iconColor: 'bg-emerald-50 text-emerald-600',
+                desc: 'Have your solution marked as verified and accepted by the question author.',
+                scale: '+150 Reputation. Awarded for verified accepted solutions.',
+                target: 1,
+                unit: 'solution',
+                actionText: 'Solve Queries',
+                actionUrl: 'dashboard.html',
+                checkUnlocked: (u, q) => (u.achievements && u.achievements.some(a => a.includes('Solver'))),
+                getProgress: (u, q) => (u.achievements && u.achievements.some(a => a.includes('Solver'))) ? 1 : 0
+            },
+            {
+                id: 'rising_star',
+                name: 'Rising Star',
+                tier: 'Gold',
+                tierBadge: 'bg-orange-100 text-orange-800 border-orange-200',
+                icon: 'local_fire_department',
+                iconColor: 'bg-orange-50 text-orange-600',
+                desc: 'Receive 5 or more likes/upvotes from fellow students on your posts.',
+                scale: '+75 Reputation. Awarded for community upvotes.',
+                target: 5,
+                unit: 'likes',
+                actionText: 'Share Solutions',
+                actionUrl: 'dashboard.html',
+                checkUnlocked: (u, q) => {
+                    const totalLikes = q.reduce((s, item) => s + (item.likes_count || 0), 0);
+                    return totalLikes >= 5;
+                },
+                getProgress: (u, q) => {
+                    const totalLikes = q.reduce((s, item) => s + (item.likes_count || 0), 0);
+                    return Math.min(totalLikes, 5);
+                }
+            },
+            {
+                id: 'campus_regular',
+                name: 'Active Scholar',
+                tier: 'Silver',
+                tierBadge: 'bg-indigo-100 text-indigo-800 border-indigo-200',
+                icon: 'calendar_month',
+                iconColor: 'bg-sky-50 text-sky-600',
+                desc: 'Contribute active queries or solutions across 3 distinct days.',
+                scale: '+40 Reputation. Encourages regular daily learning.',
+                target: 3,
+                unit: 'days',
+                actionText: 'Daily Activity',
+                actionUrl: 'dashboard.html',
+                checkUnlocked: (u, q) => q.length >= 3,
+                getProgress: (u, q) => Math.min(q.length, 3)
+            },
+            {
+                id: 'campus_legend',
+                name: 'Campus Legend',
+                tier: 'Platinum',
+                tierBadge: 'bg-purple-100 text-purple-800 border-purple-300',
+                icon: 'workspace_premium',
+                iconColor: 'bg-yellow-50 text-yellow-600',
+                desc: 'Amass 100+ Reputation points to become a recognized campus engineering leader.',
+                scale: 'Unlocks the Elite Gold flair and verified peer mentor status.',
+                target: 100,
+                unit: 'reputation pts',
+                actionText: 'Climb Leaderboard',
+                actionUrl: 'dashboard.html',
+                checkUnlocked: (u, q) => {
+                    const totalLikes = q.reduce((s, item) => s + (item.likes_count || 0), 0);
+                    const rep = (q.length * 10) + (totalLikes * 15) + 5;
+                    return rep >= 100;
+                },
+                getProgress: (u, q) => {
+                    const totalLikes = q.reduce((s, item) => s + (item.likes_count || 0), 0);
+                    const rep = (q.length * 10) + (totalLikes * 15) + 5;
+                    return Math.min(rep, 100);
+                }
+            }
+        ];
+
+        function renderBadgesSystem() {
+            const u = currentUser || {};
+            const q = userQueries || [];
+            let unlockedCount = 0;
+
+            // 1. Render Full Badges Grid (Left Column Tab)
+            const fullGrid = document.getElementById('fullBadgesGrid');
+            if (fullGrid) {
+                fullGrid.innerHTML = ALL_COMMUNITY_BADGES.map(b => {
+                    const isUnlocked = b.checkUnlocked(u, q);
+                    const currentProgress = b.getProgress(u, q);
+                    const pct = Math.min(Math.round((currentProgress / b.target) * 100), 100);
+                    if (isUnlocked) unlockedCount++;
+
+                    return `
+                        <div class="p-4 rounded-2xl border ${isUnlocked ? 'bg-white border-blue-200/80 shadow-sm' : 'bg-slate-50/70 border-slate-200/60 opacity-80'} space-y-3 transition-all hover:shadow-md">
+                            <div class="flex items-start justify-between gap-3">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-12 h-12 rounded-2xl ${isUnlocked ? b.iconColor : 'bg-slate-200/70 text-slate-400'} flex items-center justify-center shrink-0 text-2xl font-bold shadow-xs">
+                                        <span class="material-symbols-outlined text-[26px]">${b.icon}</span>
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center gap-2">
+                                            <h4 class="font-bold text-slate-900 text-sm leading-tight">${b.name}</h4>
+                                            <span class="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full border ${b.tierBadge}">${b.tier}</span>
+                                        </div>
+                                        <p class="text-xs text-slate-500 mt-0.5 line-clamp-2">${b.desc}</p>
+                                    </div>
+                                </div>
+                                <span class="text-xs font-bold shrink-0 ${isUnlocked ? 'text-emerald-600 bg-emerald-50 border border-emerald-200' : 'text-slate-500 bg-slate-100'} px-2.5 py-1 rounded-full flex items-center gap-1">
+                                    ${isUnlocked ? '<span class="material-symbols-outlined text-[14px]">check_circle</span> Unlocked' : '🔒 Locked'}
+                                </span>
+                            </div>
+
+                            <!-- Progress Bar -->
+                            <div class="space-y-1 pt-1 border-t border-slate-100">
+                                <div class="flex justify-between text-[11px] font-medium text-slate-500">
+                                    <span>${b.scale}</span>
+                                    <span class="font-bold text-slate-700">${currentProgress} / ${b.target} ${b.unit}</span>
+                                </div>
+                                <div class="w-full h-2 rounded-full bg-slate-200/80 overflow-hidden">
+                                    <div class="h-full rounded-full ${isUnlocked ? 'bg-emerald-500' : 'bg-blue-600'} transition-all duration-500" style="width: ${pct}%"></div>
+                                </div>
+                            </div>
+
+                            <!-- Action Button to stimulate input & traffic -->
+                            <div class="pt-1 flex items-center justify-between">
+                                <span class="text-[10px] text-slate-400 font-medium">${isUnlocked ? 'Badge earned' : 'Complete action to unlock:'}</span>
+                                <a href="${b.actionUrl}" class="text-xs font-bold ${isUnlocked ? 'text-slate-600 hover:text-blue-600' : 'text-blue-600 hover:underline'} flex items-center gap-1">
+                                    <span>${b.actionText}</span>
+                                    <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            // 2. Render Sidebar Badges Preview (Right Column Widget)
+            const sidebarContainer = document.getElementById('badgesPillContainer');
+            if (sidebarContainer) {
+                sidebarContainer.innerHTML = ALL_COMMUNITY_BADGES.map(b => {
+                    const isUnlocked = b.checkUnlocked(u, q);
+                    const currentProgress = b.getProgress(u, q);
+
+                    return `
+                        <div onclick="switchTab('badges')" class="p-2.5 rounded-xl border ${isUnlocked ? 'bg-blue-50/40 border-blue-200/70' : 'bg-slate-50/60 border-slate-200/60'} flex items-center justify-between gap-2.5 cursor-pointer hover:scale-[1.01] transition-all group/badge"
+                             title="${b.name}: ${b.desc} (${isUnlocked ? 'Unlocked' : currentProgress + '/' + b.target + ' ' + b.unit})">
+                            <div class="flex items-center gap-2.5 min-w-0">
+                                <div class="w-8 h-8 rounded-lg ${isUnlocked ? b.iconColor : 'bg-slate-200/60 text-slate-400'} flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-[18px]">${b.icon}</span>
+                                </div>
+                                <div class="min-w-0">
+                                    <div class="text-xs font-bold text-slate-800 truncate">${b.name}</div>
+                                    <div class="text-[10px] text-slate-400 truncate">${isUnlocked ? b.tier + ' Tier Earned' : currentProgress + '/' + b.target + ' ' + b.unit}</div>
+                                </div>
+                            </div>
+                            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full shrink-0 ${isUnlocked ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-500'}">
+                                ${isUnlocked ? 'Earned' : '🔒'}
+                            </span>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            // Update badge counters across the page
+            const countText = `${unlockedCount} / 8`;
+            const tabCounter = document.getElementById('tabBadgesCounter');
+            const rightProgress = document.getElementById('rightBadgesProgress');
+            const statBadges = document.getElementById('stat-badges');
+
+            if (tabCounter) tabCounter.textContent = countText;
+            if (rightProgress) rightProgress.textContent = `${countText} Unlocked`;
+            if (statBadges) statBadges.textContent = unlockedCount;
+        }
+
+        function setupLink(elementId, valueId, badgeId, rawUrl, typeName) {
+            const el = document.getElementById(elementId);
+            const valEl = document.getElementById(valueId);
+            const badgeEl = document.getElementById(badgeId);
+            if (!el) return;
+
+            let url = (rawUrl || '').trim();
+            if (url && !url.startsWith('http://') && !url.startsWith('https://')) {
+                url = 'https://' + url;
+            }
+
+            if (url && (url.startsWith('http://') || url.startsWith('https://')) && url.length > 10) {
+                el.href = url;
+                el.target = '_blank';
+                el.removeAttribute('onclick');
+                el.classList.remove('opacity-60', 'opacity-70');
+
+                // Format clean handle for display
+                let displayHandle = url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
+                if (typeName === 'GitHub' && displayHandle.includes('github.com/')) {
+                    const handle = displayHandle.split('github.com/')[1] || '';
+                    displayHandle = handle ? `@${handle}` : displayHandle;
+                } else if (typeName === 'LinkedIn' && displayHandle.includes('linkedin.com/in/')) {
+                    const handle = displayHandle.split('linkedin.com/in/')[1] || '';
+                    displayHandle = handle ? `in/${handle}` : displayHandle;
+                }
+
+                if (valEl) {
+                    valEl.textContent = displayHandle;
+                    valEl.className = 'text-[10px] text-blue-600 font-semibold truncate max-w-[170px] sm:max-w-[200px]';
+                }
+                if (badgeEl) {
+                    badgeEl.classList.remove('hidden');
+                }
+            } else {
+                el.href = 'javascript:void(0);';
+                el.target = '';
+                el.setAttribute('onclick', 'openEditModal()');
+                el.classList.add('opacity-70');
+                if (valEl) {
+                    valEl.textContent = '+ Add link';
+                    valEl.className = 'text-[10px] text-slate-400 font-normal truncate max-w-[170px] sm:max-w-[200px]';
+                }
+                if (badgeEl) {
+                    badgeEl.classList.add('hidden');
+                }
+            }
+        }
+
+        function parseSkills(skills) {
+            if (!skills) return ['Web Dev', 'Python'];
+            if (Array.isArray(skills)) return skills;
+            try {
+                const parsed = JSON.parse(skills);
+                if (Array.isArray(parsed)) return parsed;
+            } catch (e) {}
+            return skills.split(',').map(s => s.trim()).filter(Boolean);
+        }
+
+        // ====== LOAD USER QUERIES & ANSWERS ======
+        async function loadUserActivity(userId) {
+            // Fetch Queries
+            const qRes = await apiRequest(`/experiences?author_id=${userId}`);
+            if (qRes.status === 200 && qRes.data.success) {
+                userQueries = qRes.data.data || [];
+                document.getElementById('stat-queries-asked').textContent = userQueries.length;
+                renderQueriesFeed();
+            }
+
+            // Calculate Reputation & Answers
+            let totalAnswers = 0;
+            let totalLikes = userQueries.reduce((sum, q) => sum + (q.likes_count || 0), 0);
+            
+            userQueries.forEach(q => {
+                totalAnswers += (q.comments_count || 0);
+            });
+
+            const reputation = (userQueries.length * 10) + (totalLikes * 15) + 5;
+            document.getElementById('stat-reputation').textContent = reputation;
+            document.getElementById('stat-answers-given').textContent = totalAnswers;
+
+            // Recalculate badges with live queries and activity
+            renderBadgesSystem();
+        }
+
+        function renderQueriesFeed() {
+            const container = document.getElementById('tabContentQueries');
+            if (userQueries.length === 0) {
+                container.innerHTML = `
+                    <div class="py-12 text-center text-slate-400 text-xs">
+                        No queries posted yet. <a href="dashboard.html" class="text-blue-600 font-bold hover:underline">Ask a Query</a>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = userQueries.map(exp => {
+                const initial = (currentUser.name || 'U').charAt(0).toUpperCase();
+                return `
+                    <div onclick="window.location.href='dashboard.html'" class="p-4 rounded-xl hover:bg-slate-50 transition-colors cursor-pointer group space-y-1.5">
+                        <div class="flex items-center justify-between text-xs">
+                            <div class="flex items-center gap-2">
+                                <div class="w-6 h-6 rounded-full bg-blue-600 text-white font-bold text-[10px] flex items-center justify-center">
+                                    ${initial}
+                                </div>
+                                <span class="text-slate-400 text-[11px]">${new Date(exp.created_at).toLocaleDateString()}</span>
+                            </div>
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold ${exp.is_resolved ? 'bg-emerald-50 text-emerald-700' : 'bg-amber-50 text-amber-700'}">
+                                ${exp.is_resolved ? 'Solved' : 'Open'}
+                            </span>
+                        </div>
+                        <h4 class="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors leading-snug">
+                            ${exp.title}
+                        </h4>
+                        <p class="text-xs text-slate-500 line-clamp-1">${exp.content || ''}</p>
+                        <div class="flex items-center gap-1.5 pt-1 text-xs">
+                            <span class="bg-slate-100 text-slate-600 font-medium px-2 py-0.5 rounded text-[10px] capitalize">${exp.category || 'General'}</span>
+                            ${exp.company ? `<span class="bg-slate-100 text-slate-600 font-medium px-2 py-0.5 rounded text-[10px]">${exp.company}</span>` : ''}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Tab Switching
+        function switchTab(tab) {
+            const tabs = ['queries', 'answers', 'badges', 'saved'];
+            tabs.forEach(t => {
+                const btn = document.getElementById(`tabBtn${t.charAt(0).toUpperCase() + t.slice(1)}`);
+                const content = document.getElementById(`tabContent${t.charAt(0).toUpperCase() + t.slice(1)}`);
+                if (btn && content) {
+                    if (t === tab) {
+                        btn.className = 'profile-tab-btn px-4 py-1.5 rounded-full text-xs font-bold bg-blue-600 text-white shadow-sm transition-all flex items-center gap-1.5';
+                        content.classList.remove('hidden');
+                    } else {
+                        btn.className = 'profile-tab-btn px-4 py-1.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all flex items-center gap-1.5';
+                        content.classList.add('hidden');
+                    }
+                }
+            });
+
+            if (tab === 'answers') {
+                renderAnswersFeed();
+            } else if (tab === 'badges') {
+                renderBadgesSystem();
+            } else if (tab === 'saved') {
+                renderSavedFeed();
+            }
+        }
+
+        function renderAnswersFeed() {
+            const container = document.getElementById('tabContentAnswers');
+            container.innerHTML = `
+                <div class="py-8 text-center text-slate-400 text-xs">
+                    <span class="material-symbols-outlined text-3xl text-slate-300 mb-1">forum</span>
+                    <div>Answers and solutions given to community questions appear here.</div>
+                </div>
+            `;
+        }
+
+        // ====== SAVED QUERIES SYNC & FEED ======
+        function renderSavedFeed() {
+            const container = document.getElementById('tabContentSaved');
+            const saved = getSavedQueries();
+            updateSavedCounter(saved.length);
+
+            if (saved.length === 0) {
+                container.innerHTML = `
+                    <div class="py-16 text-center text-slate-400 space-y-2">
+                        <span class="material-symbols-outlined text-4xl text-slate-300">bookmark_border</span>
+                        <div class="text-sm font-semibold text-slate-600">No saved queries yet</div>
+                        <div class="text-xs text-slate-400">Bookmark questions from the Community Dashboard to quickly review and reference them here.</div>
+                        <div class="pt-2">
+                            <a href="dashboard.html" class="inline-flex items-center gap-1 text-xs font-bold text-blue-600 hover:underline">
+                                Browse Community Queries →
+                            </a>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = saved.map(exp => {
+                const authorInitial = (exp.author_name || 'U').charAt(0).toUpperCase();
+
+                return `
+                    <div onclick="window.location.href='dashboard.html'" class="p-4 rounded-xl hover:bg-slate-50 transition-colors cursor-pointer group space-y-2">
+                        <!-- Top Metadata -->
+                        <div class="flex items-center justify-between text-xs">
+                            <div class="flex items-center gap-2">
+                                <div class="w-6 h-6 rounded-full bg-blue-100 text-blue-700 font-bold text-[10px] flex items-center justify-center">
+                                    ${authorInitial}
+                                </div>
+                                <span class="font-semibold text-slate-800">${exp.author_name || 'Anonymous'}</span>
+                                <span class="text-slate-400 text-[11px]">· ${new Date(exp.created_at).toLocaleDateString()}</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold ${exp.is_resolved ? 'bg-emerald-50 text-emerald-700' : 'bg-amber-50 text-amber-700'}">
+                                    ${exp.is_resolved ? 'Solved' : 'Open'}
+                                </span>
+                                <button onclick="event.stopPropagation(); removeSavedQuery(${exp.experience_id})" class="text-slate-400 hover:text-rose-600 p-1 transition-colors rounded-lg hover:bg-rose-50" title="Remove from Saved">
+                                    <span class="material-symbols-outlined text-[16px]">bookmark_remove</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Query Title -->
+                        <h4 class="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors leading-snug">
+                            ${exp.title}
+                        </h4>
+
+                        <!-- Snippet -->
+                        ${exp.content ? `<p class="text-xs text-slate-500 line-clamp-1">${exp.content}</p>` : ''}
+
+                        <!-- Bottom Details -->
+                        <div class="flex items-center justify-between pt-1 text-xs">
+                            <div class="flex items-center gap-1.5">
+                                <span class="bg-slate-100 text-slate-600 font-medium px-2 py-0.5 rounded text-[10px] capitalize">${exp.category || 'General'}</span>
+                                ${exp.company ? `<span class="bg-slate-50 text-slate-500 border border-slate-200 px-2 py-0.5 rounded text-[10px]">${exp.company}</span>` : ''}
+                            </div>
+                            <div class="flex items-center gap-3 text-slate-400 text-[11px]">
+                                <span class="flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-[14px]">favorite</span>
+                                    ${exp.likes_count || 0}
+                                </span>
+                                <span class="flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-[14px]">chat_bubble</span>
+                                    ${exp.comments_count || 0}
+                                </span>
+                                <span class="text-[11px] text-blue-600 font-semibold flex items-center gap-0.5 group-hover:underline">
+                                    <span>View on Dashboard</span>
+                                    <span class="material-symbols-outlined text-[13px]">arrow_forward</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function removeSavedQuery(id) {
+            toggleSaveQuery({ experience_id: id });
+            renderSavedFeed();
+        }
+
+        function updateSavedCounter(count) {
+            const counter = document.getElementById('savedTabCounter');
+            if (counter) counter.textContent = count !== undefined ? count : getSavedQueries().length;
+        }
+
+        window.addEventListener('savedQueriesUpdated', () => {
+            updateSavedCounter();
+            const savedContent = document.getElementById('tabContentSaved');
+            if (savedContent && !savedContent.classList.contains('hidden')) {
+                renderSavedFeed();
+            }
+        });
+
+        // ====== SHARE PROFILE & APP INTEGRATION ======
+        let currentShareData = { name: '', url: '', text: '' };
+
+        async function shareProfile() {
+            const name = (currentUser && currentUser.name) ? currentUser.name : 'Engineering Student';
+            const url = window.location.href;
+            const text = `Connect with ${name} on EXPadviser — check out academic questions, solutions, and engineering projects! 🚀`;
+
+            currentShareData = { name, url, text };
+
+            // If user device supports Web Share API, try native share sheet first (gives WhatsApp, AirDrop, Messages, etc.)
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: `${name} | EXPadviser Profile`,
+                        text: text,
+                        url: url
+                    });
+                    return;
+                } catch(err) {
+                    if (err.name === 'AbortError') return; // User dismissed
+                }
+            }
+
+            // Fallback or desktop: open rich Share Modal with direct app buttons
+            openShareModal();
+        }
+
+        function openShareModal() {
+            const input = document.getElementById('shareUrlInput');
+            if (input) input.value = currentShareData.url || window.location.href;
+
+            const copyIcon = document.getElementById('copyShareIcon');
+            const copyText = document.getElementById('copyShareText');
+            if (copyIcon) copyIcon.textContent = 'content_copy';
+            if (copyText) copyText.textContent = 'Copy';
+
+            const devBtn = document.getElementById('deviceShareBtn');
+            if (devBtn) {
+                devBtn.style.display = navigator.share ? 'flex' : 'none';
+            }
+
+            document.getElementById('shareModal').showModal();
+        }
+
+        function shareToApp(platform) {
+            const url = encodeURIComponent(currentShareData.url || window.location.href);
+            const text = encodeURIComponent(currentShareData.text || 'Check out my profile on EXPadviser! 🚀');
+
+            let targetUrl = '';
+            switch(platform) {
+                case 'whatsapp':
+                    targetUrl = `https://api.whatsapp.com/send?text=${text}%20${url}`;
+                    break;
+                case 'telegram':
+                    targetUrl = `https://t.me/share/url?url=${url}&text=${text}`;
+                    break;
+                case 'linkedin':
+                    targetUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+                    break;
+                case 'twitter':
+                    targetUrl = `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
+                    break;
+            }
+
+            if (targetUrl) {
+                window.open(targetUrl, '_blank', 'noopener,noreferrer');
+            }
+        }
+
+        function triggerNativeShare() {
+            if (navigator.share) {
+                navigator.share({
+                    title: `${currentShareData.name} | EXPadviser Profile`,
+                    text: currentShareData.text,
+                    url: currentShareData.url
+                }).catch(() => {});
+            }
+        }
+
+        function copyShareLink() {
+            const url = currentShareData.url || window.location.href;
+            navigator.clipboard.writeText(url).then(() => {
+                const copyIcon = document.getElementById('copyShareIcon');
+                const copyText = document.getElementById('copyShareText');
+                if (copyIcon) copyIcon.textContent = 'check';
+                if (copyText) copyText.textContent = 'Copied!';
+                showToast('Profile link copied to clipboard!');
+                setTimeout(() => {
+                    if (copyIcon) copyIcon.textContent = 'content_copy';
+                    if (copyText) copyText.textContent = 'Copy';
+                }, 2500);
+            }).catch(() => {
+                showToast('Copied to clipboard');
+            });
+        }
+
+        // Edit Profile Modal
+        function openEditModal() {
+            const u = currentUser || {};
+            document.getElementById('editName').value = u.name || '';
+            document.getElementById('editCollege').value = u.college || '';
+            document.getElementById('editBranch').value = u.branch || '';
+            document.getElementById('editYear').value = u.year || 1;
+            document.getElementById('editSkills').value = parseSkills(u.skills).join(', ');
+            document.getElementById('editBio').value = u.bio || '';
+            document.getElementById('editGithub').value = u.github || '';
+            document.getElementById('editLinkedin').value = u.linkedin || '';
+            document.getElementById('editPortfolio').value = u.portfolio || '';
+
+            document.getElementById('editProfileModal').showModal();
+        }
+
+        document.getElementById('editProfileForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('saveProfileBtn');
+            btn.disabled = true;
+            btn.textContent = 'Saving...';
+
+            const payload = {
+                name: document.getElementById('editName').value.trim(),
+                college: document.getElementById('editCollege').value.trim(),
+                branch: document.getElementById('editBranch').value.trim(),
+                year: parseInt(document.getElementById('editYear').value) || 1,
+                skills: document.getElementById('editSkills').value.trim(),
+                bio: document.getElementById('editBio').value.trim(),
+                github: document.getElementById('editGithub').value.trim() || null,
+                linkedin: document.getElementById('editLinkedin').value.trim() || null,
+                portfolio: document.getElementById('editPortfolio').value.trim() || null,
+            };
+
+            const res = await apiRequest('/users/me', {
+                method: 'PUT',
+                body: payload
+            });
+
+            if (res.status === 200 && res.data.success) {
+                currentUser = res.data.data;
+                try {
+                    const stored = JSON.parse(localStorage.getItem('expadvisor_user') || '{}');
+                    localStorage.setItem('expadvisor_user', JSON.stringify({ ...stored, ...res.data.data }));
+                } catch(e) {}
+                renderProfileHeader();
+                document.getElementById('editProfileModal').close();
+                showToast('Profile & links updated!');
+            } else {
+                alert(res.data.message || 'Failed to update profile');
+            }
+
+            btn.disabled = false;
+            btn.textContent = 'Save Changes';
+        });
+
+        document.addEventListener('DOMContentLoaded', loadProfile);
+    </script>
+</body>
+</html>
