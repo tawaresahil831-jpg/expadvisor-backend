@@ -37,5 +37,5 @@
 - [x] **TEST-02**: Setup continuous integration workflow (GitHub Actions).
 
 ### Frontend Production Hardening
-- [ ] **FE-01**: Eliminate runtime Tailwind CDN script in favor of a modern build or pre-compiled bundle.
-- [ ] **FE-02**: Standardize shared navigation, headers, and modals across all HTML pages.
+- [x] **FE-01**: Eliminate runtime Tailwind CDN script in favor of a modern build or pre-compiled bundle.
+- [x] **FE-02**: Standardize shared navigation, headers, and modals across all HTML pages.
