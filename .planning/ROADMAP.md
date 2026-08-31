@@ -52,3 +52,17 @@ Plans:
 Plans:
 - [x] 03-01: Setup Tailwind CLI build process, compile minified output.css, and integrate into HTML pages
 - [x] 03-02: Implement shared ui-layout.js for navigation, drawer menus, and modal dialogs
+
+### Phase 4: Feature Enhancements & Engagement
+**Goal**: Elevate community engagement with unread notification workflows and multi-filter discovery.
+**Depends on**: Phase 3
+**Requirements**: [ENG-01, ENG-02, ENG-03]
+**Success Criteria**:
+  1. Live notification badge counter and mark-as-read integration in UI header.
+  2. Experience bookmarks API and client-side saved list.
+  3. Search and category/company multi-filtering across feed views.
+**Plans**: 2 plans
+
+Plans:
+- [ ] 04-01: Notification badge count, mark-read integration, and notification unit tests
+- [ ] 04-02: Bookmarks/Saved experiences API and client feed filtering
