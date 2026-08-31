@@ -5,6 +5,7 @@ backend/.env
 
 # Python Virtual Environments & Cache
 venv/
+.venv/
 backend/venv/
 __pycache__/
 *.pyc
@@ -21,6 +22,10 @@ __pycache__/
 ehthumbs.db
 Thumbs.db
 
+# Database
+instance/
+*.db
+
 # Vercel & Deployments
 .vercel/
 .vercelignore
@@ -30,4 +35,3 @@ Thumbs.db
 .idea/
 .claude/
 node_modules/
-.vercel
