@@ -6,7 +6,7 @@ ExpAdvisor has an existing, functional core featuring user authentication, exper
 
 ## Phases
 
-- [ ] **Phase 1: Codebase Hygiene & Repository Consolidation** - Clean up ad-hoc patch scripts, eliminate external hardcoded paths, and unify git tracking.
+- [x] **Phase 1: Codebase Hygiene & Repository Consolidation** - Clean up ad-hoc patch scripts, eliminate external hardcoded paths, and unify git tracking.
 - [ ] **Phase 2: Automated Testing Infrastructure** - Implement isolated pytest test suites with test DB fixtures, deprecating script-only regression checks.
 - [ ] **Phase 3: Frontend Build & Asset Modernization** - Replace client-side Tailwind CDN with an optimized build system and clean up repetitive template code.
 - [ ] **Phase 4: Feature Enhancements & Engagement** - Expand notification workflows, user bookmarks, and advanced search filters.
@@ -24,8 +24,8 @@ ExpAdvisor has an existing, functional core featuring user authentication, exper
 **Plans**: 2 plans
 
 Plans:
-- [ ] 01-01: Synchronize missing models, routes, runner from expadvisor-backend into backend/ and eliminate external path references
-- [ ] 01-02: Purge ad-hoc patch scripts, clean up test clones, and establish unified root Git tracking
+- [x] 01-01: Synchronize missing models, routes, runner from expadvisor-backend into backend/ and eliminate external path references
+- [x] 01-02: Purge ad-hoc patch scripts, clean up test clones, and establish unified root Git tracking
 
 ### Phase 2: Automated Testing Infrastructure
 **Goal**: Provide fast, reliable automated test coverage for Flask API routes and model validation.

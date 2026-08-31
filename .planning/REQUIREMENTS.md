@@ -28,9 +28,9 @@
 ## Brownfield Stabilization & Next Phase Requirements
 
 ### Codebase Hygiene & Consolidation
-- [ ] **HYG-01**: Consolidate backend source files and remove hardcoded absolute paths pointing to external `/Users/sahiltaware415/expadvisor-backend`.
-- [ ] **HYG-02**: Clean up obsolete `patch_*.py` and `temp_script*.js` files from root and frontend.
-- [ ] **HYG-03**: Initialize unified root git repository covering backend and frontend codebases.
+- [x] **HYG-01**: Consolidate backend source files and remove hardcoded absolute paths pointing to external `/Users/sahiltaware415/expadvisor-backend`.
+- [x] **HYG-02**: Clean up obsolete `patch_*.py` and `temp_script*.js` files from root and frontend.
+- [x] **HYG-03**: Initialize unified root git repository covering backend and frontend codebases.
 
 ### Quality Assurance & Automated Testing
 - [ ] **TEST-01**: Establish unit and integration test suite using `pytest` with in-memory SQLite/Postgres test fixtures.
