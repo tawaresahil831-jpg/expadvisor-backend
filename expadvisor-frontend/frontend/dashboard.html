@@ -562,6 +562,11 @@
                     <p id="detailMeta" class="text-xs text-slate-500 mt-1">Posted by Author · Date</p>
                 </div>
                 <div class="flex items-center gap-1.5 shrink-0">
+                    <!-- Edit Query Button (Dynamically shown if author) -->
+                    <button id="detailEditBtn" onclick="editCurrentQuery()" class="hidden px-2.5 py-1.5 rounded-xl border border-slate-200 text-slate-500 hover:text-indigo-600 hover:border-indigo-200 transition-colors items-center gap-1 text-xs" title="Edit Query">
+                        <span class="material-symbols-outlined text-[16px]">edit</span>
+                        <span class="font-medium hidden sm:inline">Edit</span>
+                    </button>
                     <!-- Save / Bookmark in Modal Header -->
                     <button id="detailSaveBtn" onclick="toggleDetailSave()" class="px-2.5 py-1.5 rounded-xl border border-slate-200 text-slate-500 hover:text-blue-600 hover:border-blue-200 transition-colors flex items-center gap-1 text-xs" title="Save Query">
                         <span id="detailSaveIcon" class="material-symbols-outlined text-[16px]">bookmark_border</span>
@@ -853,10 +858,51 @@
                     solDiv.classList.add('hidden');
                 }
 
+                // Show/hide Edit Query button
+                const editBtn = document.getElementById('detailEditBtn');
+                if (currentUserId && exp.author_id === currentUserId) {
+                    editBtn.classList.remove('hidden');
+                    editBtn.classList.add('flex');
+                } else {
+                    editBtn.classList.add('hidden');
+                    editBtn.classList.remove('flex');
+                }
+
                 // Comments
                 loadComments(id, exp.author_id);
                 updateDetailSaveBtn(id);
                 document.getElementById('detailModal').showModal();
+            }
+        }
+
+        async function editCurrentQuery() {
+            if (!currentDetailExpId || !window.allLoadedExperiences[currentDetailExpId]) return;
+            const exp = window.allLoadedExperiences[currentDetailExpId];
+            
+            const newTitle = prompt("Edit your query title:", exp.title);
+            if (newTitle === null) return;
+            
+            const newContent = prompt("Edit your query details:", exp.content);
+            if (newContent === null) return;
+            
+            if (!newTitle.trim() || !newContent.trim()) {
+                alert("Title and content cannot be empty.");
+                return;
+            }
+
+            const res = await apiRequest(`/experiences/${currentDetailExpId}`, {
+                method: 'PUT',
+                body: { title: newTitle.trim(), content: newContent.trim() }
+            });
+
+            if (res.status === 200 && res.data.success) {
+                // Update local memory and re-open
+                window.allLoadedExperiences[currentDetailExpId].title = newTitle.trim();
+                window.allLoadedExperiences[currentDetailExpId].content = newContent.trim();
+                openExperienceDetail(currentDetailExpId);
+                loadExperiences();
+            } else {
+                alert(res.data.message || "Failed to update query.");
             }
         }
 
@@ -877,27 +923,44 @@
 
                 const isOwner = currentUserId && (queryAuthorId === currentUserId);
 
-                list.innerHTML = comments.map(c => `
-                    <div class="p-3 rounded-xl ${c.is_accepted ? 'bg-emerald-50/80 border border-emerald-200' : 'bg-slate-50'} space-y-1 text-xs">
+                list.innerHTML = comments.map(c => {
+                    const isCommentOwner = currentUserId && (c.user_id === currentUserId);
+                    const safeContent = escapeNotifHtml(c.content).replace(/\\n/g, '\\n').replace(/'/g, "\\'");
+                    
+                    return `
+                    <div class="p-3 rounded-xl ${c.is_accepted ? 'bg-emerald-50/80 border border-emerald-200' : 'bg-slate-50'} space-y-1 text-xs relative group">
                         <div class="flex items-center justify-between text-slate-500">
                             <span class="font-bold text-slate-800">${c.author_name || 'User'}</span>
                             <span class="text-[10px]">${new Date(c.created_at).toLocaleDateString()}</span>
                         </div>
-                        <p class="text-slate-700 leading-relaxed">${c.content}</p>
+                        <p class="text-slate-700 leading-relaxed whitespace-pre-wrap">${c.content}</p>
+                        
                         <div class="flex items-center justify-between pt-1">
                             ${c.is_accepted ? `
                                 <span class="text-emerald-700 font-bold text-[10px] flex items-center gap-1">
                                     <span class="material-symbols-outlined text-[14px]">check_circle</span>
                                     Accepted Answer
                                 </span>
-                            ` : (isOwner ? `
+                            ` : (isOwner && !isCommentOwner ? `
                                 <button onclick="acceptSolution(${c.comment_id})" class="text-blue-600 hover:text-blue-800 font-semibold text-[11px]">
                                     Accept as Solution
                                 </button>
                             ` : '<span></span>')}
+                            
+                            <!-- Comment Actions for Owner -->
+                            ${isCommentOwner ? `
+                                <div class="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity absolute top-2 right-2 bg-white/80 p-1 rounded-lg shadow-sm border border-slate-100 backdrop-blur-sm">
+                                    <button onclick="editComment(${c.comment_id}, '${safeContent}')" class="text-slate-400 hover:text-blue-600 p-1 rounded hover:bg-blue-50 transition-colors" title="Edit">
+                                        <span class="material-symbols-outlined text-[14px]">edit</span>
+                                    </button>
+                                    <button onclick="deleteComment(${c.comment_id})" class="text-slate-400 hover:text-rose-600 p-1 rounded hover:bg-rose-50 transition-colors" title="Delete">
+                                        <span class="material-symbols-outlined text-[14px]">delete</span>
+                                    </button>
+                                </div>
+                            ` : ''}
                         </div>
                     </div>
-                `).join('');
+                `}).join('');
             }
         }
 
@@ -926,6 +989,33 @@
                 alert(errorMsg);
             }
         });
+
+        // Edit / Delete Comment
+        async function editComment(commentId, currentContent) {
+            const newContent = prompt("Edit your comment:", currentContent);
+            if (newContent === null || !newContent.trim()) return;
+            
+            const res = await apiRequest(`/comments/${commentId}`, {
+                method: 'PUT',
+                body: { content: newContent.trim() }
+            });
+            if (res.status === 200 && res.data.success) {
+                openExperienceDetail(currentDetailExpId);
+            } else {
+                alert(res.data.message || 'Failed to edit comment');
+            }
+        }
+
+        async function deleteComment(commentId) {
+            if (!confirm("Are you sure you want to delete this comment?")) return;
+            
+            const res = await apiRequest(`/comments/${commentId}`, { method: 'DELETE' });
+            if (res.status === 200 && res.data.success) {
+                openExperienceDetail(currentDetailExpId);
+            } else {
+                alert(res.data.message || 'Failed to delete comment');
+            }
+        }
 
         // Accept Solution
         async function acceptSolution(commentId) {
