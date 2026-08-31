@@ -445,42 +445,11 @@
                 <!-- ====== RIGHT COLUMN: WIDGETS (~32%) ====== -->
                 <aside class="lg:col-span-4 space-y-6">
 
-                    <!-- Trending Card (Warm Peach/Coral Style) -->
-                    <div id="trendingCard" class="relative bg-[#fff3ed] border border-[#ffdfd2] rounded-2xl p-5 shadow-sm hover:shadow-md transition-all cursor-pointer group">
-                        <div class="flex items-center justify-between mb-2">
-                            <div class="flex items-center gap-1.5 text-orange-600 font-bold text-[11px] uppercase tracking-wider">
-                                <span class="material-symbols-outlined text-[16px]">local_fire_department</span>
-                                <span>Trending</span>
-                                <span class="text-orange-300">·</span>
-                                <span id="trendingCategory" class="text-orange-700">Loading...</span>
-                            </div>
-
-                            <!-- Info (i) Button with Hover Popover -->
-                            <div class="relative group/info">
-                                <span class="material-symbols-outlined text-[16px] text-orange-400 group-hover/info:text-orange-600 transition-colors">info</span>
-
-                                <!-- Hover Popover Explaining Trending Topic -->
-                                <div class="hidden group-hover/info:block absolute bottom-full right-0 mb-2 w-64 p-3 bg-slate-900 text-white text-xs rounded-xl shadow-2xl z-50 pointer-events-none border border-slate-700 text-left normal-case">
-                                    <div class="font-bold text-orange-400 text-[10px] uppercase tracking-wider mb-1 flex items-center gap-1">
-                                        <span class="material-symbols-outlined text-[13px]">local_fire_department</span>
-                                        Trending Discussion Scale
-                                    </div>
-                                    <p class="text-slate-300 text-[11px] leading-relaxed font-normal">
-                                        Highlights the hottest academic discussion in real-time, measured by recent comment velocity, active peer replies, and student upvotes.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <h3 id="trendingTitle" class="text-sm font-bold text-slate-900 leading-snug my-2 line-clamp-2 group-hover:text-orange-600 transition-colors">
-                            Loading trending discussion...
-                        </h3>
-                        <div class="flex items-center justify-between pt-2">
-                            <!-- Overlapping Avatar Initial Circles -->
-                            <div id="trendingAvatars" class="flex -space-x-1.5">
-                            </div>
-                            <button id="trendingBtn" class="text-xs font-bold text-slate-900 hover:text-orange-600 flex items-center gap-1">
-                                Join <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
-                            </button>
+                    <!-- Trending Queries Container -->
+                    <div id="trendingContainer" class="space-y-4">
+                        <!-- Trending cards will be injected here by JS -->
+                        <div class="relative bg-[#fff3ed] border border-[#ffdfd2] rounded-2xl p-5 shadow-sm">
+                            <div class="text-sm font-bold text-orange-600 mb-2">Loading trending topics...</div>
                         </div>
                     </div>
 
@@ -1123,57 +1092,94 @@
             }
         }
 
-        // ====== LOAD TRENDING QUERY ======
+        // ====== LOAD TRENDING QUERIES ======
         async function loadTrendingQuery() {
-            const card = document.getElementById('trendingCard');
-            if (!card) return;
-
-            const catEl = document.getElementById('trendingCategory');
-            const titleEl = document.getElementById('trendingTitle');
-            const avatarsEl = document.getElementById('trendingAvatars');
-            const btnEl = document.getElementById('trendingBtn');
+            const container = document.getElementById('trendingContainer');
+            if (!container) return;
 
             const res = await apiRequest('/experiences/trending');
-            if (res.status === 200 && res.data.success && res.data.data) {
-                const exp = res.data.data;
-                if (catEl) catEl.textContent = exp.category || 'General';
-                if (titleEl) titleEl.innerHTML = formatHashtags(exp.title);
+            if (res.status === 200 && res.data.success && res.data.data && res.data.data.length > 0) {
+                const trends = res.data.data;
+                const colors = ['bg-blue-600', 'bg-indigo-600', 'bg-purple-600'];
 
-                if (avatarsEl) {
-                    const colors = ['bg-blue-600 text-white', 'bg-indigo-600 text-white', 'bg-purple-600 text-white'];
+                container.innerHTML = trends.map((exp, index) => {
                     const participants = exp.participants || [];
+                    let avatarsHtml = '';
                     if (participants.length > 0) {
-                        avatarsEl.innerHTML = participants.map((p, idx) => `
-                            <div class="w-6 h-6 rounded-full border-2 border-white flex items-center justify-center font-bold text-[9px] ${colors[idx % colors.length]}" title="${p.name}">
+                        avatarsHtml = participants.map((p, idx) => `
+                            <div class="w-6 h-6 rounded-full border-2 border-white flex items-center justify-center font-bold text-[9px] ${colors[idx % colors.length]} text-white" title="${p.name}">
                                 ${p.initial}
                             </div>
                         `).join('');
                     } else {
-                        avatarsEl.innerHTML = `
+                        avatarsHtml = `
                             <div class="w-6 h-6 rounded-full border-2 border-white flex items-center justify-center font-bold text-[9px] bg-blue-600 text-white">
                                 ${(exp.author_name || 'U')[0].toUpperCase()}
                             </div>
                         `;
                     }
-                }
 
-                card.onclick = () => openExperienceDetail(exp.experience_id);
-                if (btnEl) btnEl.onclick = (e) => {
-                    e.stopPropagation();
-                    openExperienceDetail(exp.experience_id);
-                };
+                    return `
+                    <div onclick="openExperienceDetail(${exp.experience_id})" class="relative bg-[#fff3ed] border border-[#ffdfd2] rounded-2xl p-5 shadow-sm hover:shadow-md transition-all cursor-pointer group">
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center gap-1.5 text-orange-600 font-bold text-[11px] uppercase tracking-wider">
+                                <span class="material-symbols-outlined text-[16px]">local_fire_department</span>
+                                <span>Trending #${index + 1}</span>
+                                <span class="text-orange-300">·</span>
+                                <span class="text-orange-700 capitalize">${exp.category || 'General'}</span>
+                            </div>
+
+                            <!-- Info (i) Button with Hover Popover -->
+                            <div class="relative group/info">
+                                <span class="material-symbols-outlined text-[16px] text-orange-400 group-hover/info:text-orange-600 transition-colors">info</span>
+                                <div class="hidden group-hover/info:block absolute bottom-full right-0 mb-2 w-64 p-3 bg-slate-900 text-white text-xs rounded-xl shadow-2xl z-50 pointer-events-none border border-slate-700 text-left normal-case">
+                                    <div class="font-bold text-orange-400 text-[10px] uppercase tracking-wider mb-1 flex items-center gap-1">
+                                        <span class="material-symbols-outlined text-[13px]">local_fire_department</span>
+                                        Trending Discussion Scale
+                                    </div>
+                                    <p class="text-slate-300 text-[11px] leading-relaxed font-normal">
+                                        Highlights the hottest academic discussion in real-time, measured by recent comment velocity, active peer replies, and student upvotes.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <h3 class="text-sm font-bold text-slate-900 leading-snug my-2 line-clamp-2 group-hover:text-orange-600 transition-colors">
+                            ${formatHashtags(exp.title)}
+                        </h3>
+                        <div class="flex items-center justify-between pt-2">
+                            <!-- Overlapping Avatar Initial Circles -->
+                            <div class="flex -space-x-1.5">
+                                ${avatarsHtml}
+                            </div>
+                            <button onclick="event.stopPropagation(); openExperienceDetail(${exp.experience_id})" class="text-xs font-bold text-slate-900 hover:text-orange-600 flex items-center gap-1">
+                                Join <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+                            </button>
+                        </div>
+                    </div>
+                    `;
+                }).join('');
             } else {
-                if (catEl) catEl.textContent = 'General';
-                if (titleEl) titleEl.textContent = 'Start the first trending discussion!';
-                if (avatarsEl) avatarsEl.innerHTML = '';
-                if (btnEl) {
-                    btnEl.innerHTML = 'Ask a Query <span class="material-symbols-outlined text-[14px]">add</span>';
-                    btnEl.onclick = (e) => {
-                        e.stopPropagation();
-                        document.getElementById('createModal').showModal();
-                    };
-                }
-                card.onclick = () => document.getElementById('createModal').showModal();
+                container.innerHTML = `
+                    <div onclick="document.getElementById('createModal').showModal()" class="relative bg-[#fff3ed] border border-[#ffdfd2] rounded-2xl p-5 shadow-sm hover:shadow-md transition-all cursor-pointer group">
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center gap-1.5 text-orange-600 font-bold text-[11px] uppercase tracking-wider">
+                                <span class="material-symbols-outlined text-[16px]">local_fire_department</span>
+                                <span>Trending</span>
+                                <span class="text-orange-300">·</span>
+                                <span class="text-orange-700">General</span>
+                            </div>
+                        </div>
+                        <h3 class="text-sm font-bold text-slate-900 leading-snug my-2 line-clamp-2 group-hover:text-orange-600 transition-colors">
+                            Start the first trending discussion!
+                        </h3>
+                        <div class="flex items-center justify-between pt-2">
+                            <div class="flex -space-x-1.5"></div>
+                            <button class="text-xs font-bold text-slate-900 hover:text-orange-600 flex items-center gap-1">
+                                Ask a Query <span class="material-symbols-outlined text-[14px]">add</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
             }
         }
 
