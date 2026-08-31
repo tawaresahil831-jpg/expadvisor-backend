@@ -29,6 +29,18 @@ def get_notifications(current_user):
         "data": [n.to_dict() for n in notifications]
     }), 200
 
+@notification_bp.route("/notifications/unread-count", methods=["GET"])
+@token_required
+def get_unread_count(current_user):
+    count = Notification.query.filter_by(user_id=current_user.user_id, is_read=False).count()
+    return jsonify({
+        "success": True,
+        "message": "Unread count fetched successfully",
+        "data": {
+            "unread_count": count
+        }
+    }), 200
+
 @notification_bp.route("/notifications/<int:notif_id>/read", methods=["PUT"])
 @token_required
 def read_notification(current_user, notif_id):

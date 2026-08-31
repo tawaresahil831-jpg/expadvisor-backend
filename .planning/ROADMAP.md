@@ -9,7 +9,7 @@ ExpAdvisor has an existing, functional core featuring user authentication, exper
 - [x] **Phase 1: Codebase Hygiene & Repository Consolidation** - Clean up ad-hoc patch scripts, eliminate external hardcoded paths, and unify git tracking.
 - [x] **Phase 2: Automated Testing Infrastructure** - Implement isolated pytest test suites with test DB fixtures, deprecating script-only regression checks.
 - [x] **Phase 3: Frontend Build & Asset Modernization** - Replace client-side Tailwind CDN with an optimized build system and clean up repetitive template code.
-- [ ] **Phase 4: Feature Enhancements & Engagement** - Expand notification workflows, user bookmarks, and advanced search filters.
+- [x] **Phase 4: Feature Enhancements & Engagement** - Expand notification workflows, user bookmarks, and advanced search filters.
 
 ## Phase Details
 
@@ -64,5 +64,5 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 04-01: Notification badge count, mark-read integration, and notification unit tests
-- [ ] 04-02: Bookmarks/Saved experiences API and client feed filtering
+- [x] 04-01: Notification badge count, mark-read integration, and notification unit tests
+- [x] 04-02: Bookmarks/Saved experiences API and client feed filtering

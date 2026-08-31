@@ -51,4 +51,7 @@ def create_app(config_class=Config):
     from .routes.notification import notification_bp
     app.register_blueprint(notification_bp)
     
+    from app.routes.bookmark import bookmark_bp
+    app.register_blueprint(bookmark_bp)
+
     return app

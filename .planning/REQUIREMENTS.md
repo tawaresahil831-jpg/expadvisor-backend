@@ -41,6 +41,6 @@
 - [x] **FE-02**: Standardize shared navigation, headers, and modals across all HTML pages.
 
 ### Feature Enhancements & Engagement (Phase 4)
-- [ ] **ENG-01**: Complete notification workflows with live header unread badge counter and mark-as-read integration.
-- [ ] **ENG-02**: Saved experiences / bookmarks API and client-side bookmarking actions.
-- [ ] **ENG-03**: Multi-filter search (category, company, semester, keyword) integration across feeds.
+- [x] **ENG-01**: Complete notification workflows with live header unread badge counter and mark-as-read integration.
+- [x] **ENG-02**: Saved experiences / bookmarks API and client-side bookmarking actions.
+- [x] **ENG-03**: Multi-filter search (category, company, semester, keyword) integration across feeds.

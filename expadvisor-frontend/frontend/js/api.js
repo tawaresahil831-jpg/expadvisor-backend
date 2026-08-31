@@ -100,9 +100,39 @@ async function populateUserProfile() {
             });
         }
         
+        updateNotificationBadge();
         return user;
     }
     return null;
+}
+
+async function updateNotificationBadge() {
+    if (!getToken()) return;
+    try {
+        const res = await apiRequest('/notifications/unread-count');
+        if (res.status === 200 && res.data.success) {
+            const count = res.data.data.unread_count || 0;
+            const badgeEls = document.querySelectorAll('#notificationBadge, .notification-badge, [data-notification-badge]');
+            badgeEls.forEach(el => {
+                if (count > 0) {
+                    el.textContent = count > 99 ? '99+' : count;
+                    el.classList.remove('hidden');
+                } else {
+                    el.classList.add('hidden');
+                }
+            });
+        }
+    } catch (e) {
+        console.error('Error updating notification badge:', e);
+    }
+}
+
+async function toggleBookmark(experienceId) {
+    return await apiRequest(`/experiences/${experienceId}/bookmark`, { method: 'POST' });
+}
+
+async function fetchBookmarks() {
+    return await apiRequest('/bookmarks', { method: 'GET' });
 }
 
 function logout() {
