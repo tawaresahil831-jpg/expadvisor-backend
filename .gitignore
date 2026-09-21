@@ -35,3 +35,4 @@ instance/
 .idea/
 .claude/
 node_modules/
+app/static/uploads/*
