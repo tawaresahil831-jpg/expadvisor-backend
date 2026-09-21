@@ -49,7 +49,31 @@ def upload_file(current_user, experience_id):
     supabase_key = current_app.config.get("SUPABASE_KEY")
     
     if not supabase_url or not supabase_key:
-        return jsonify({"success": False, "message": "Supabase credentials not configured on the server"}), 500
+        # Fallback to local storage if Supabase is not configured
+        if "." in file.filename:
+            ext = file.filename.rsplit(".", 1)[1].lower()
+            unique_filename = f"{uuid.uuid4().hex}.{ext}"
+        else:
+            unique_filename = f"{uuid.uuid4().hex}"
+
+        upload_dir = os.path.join(current_app.root_path, "static", "uploads")
+        os.makedirs(upload_dir, exist_ok=True)
+
+        file_path = os.path.join(upload_dir, unique_filename)
+
+        with open(file_path, "wb") as f_out:
+            f_out.write(file.read())
+
+        public_url = f"/static/uploads/{unique_filename}"
+
+        experience.file_url = public_url
+        db.session.commit()
+
+        return jsonify({
+            "success": True,
+            "message": "File uploaded successfully (local fallback)",
+            "data": experience.to_dict()
+        }), 200
         
     supabase: Client = create_client(supabase_url, supabase_key)
     
@@ -111,7 +135,31 @@ def upload_avatar(current_user):
     supabase_key = current_app.config.get("SUPABASE_KEY")
     
     if not supabase_url or not supabase_key:
-        return jsonify({"success": False, "message": "Supabase credentials not configured"}), 500
+        # Fallback to local storage if Supabase is not configured
+        if "." in file.filename:
+            ext = file.filename.rsplit(".", 1)[1].lower()
+            unique_filename = f"avatars_{uuid.uuid4().hex}.{ext}"
+        else:
+            unique_filename = f"avatars_{uuid.uuid4().hex}"
+
+        upload_dir = os.path.join(current_app.root_path, "static", "uploads")
+        os.makedirs(upload_dir, exist_ok=True)
+
+        file_path = os.path.join(upload_dir, unique_filename)
+
+        with open(file_path, "wb") as f_out:
+            f_out.write(file.read())
+
+        public_url = f"/static/uploads/{unique_filename}"
+
+        current_user.avatar_url = public_url
+        db.session.commit()
+
+        return jsonify({
+            "success": True,
+            "message": "Avatar uploaded successfully (local fallback)",
+            "data": current_user.to_dict()
+        }), 200
         
     supabase: Client = create_client(supabase_url, supabase_key)
     file_bytes = file.read()
