@@ -734,6 +734,7 @@
                 const countEl = document.getElementById(`like-count-${id}`);
                 if (countEl) countEl.textContent = res.data.data.like_count;
                 if (btn) btn.classList.add('text-rose-500');
+                loadTrendingQuery();
             }
         }
 
@@ -827,8 +828,17 @@
             const btnEl = document.getElementById('trendingBtn');
 
             const res = await apiRequest('/experiences/trending');
-            if (res.status === 200 && res.data.success && res.data.data) {
-                const exp = res.data.data;
+            let trends = [];
+            if (res.status === 200 && res.data && res.data.success && res.data.data) {
+                if (Array.isArray(res.data.data)) {
+                    trends = res.data.data;
+                } else if (typeof res.data.data === 'object') {
+                    trends = [res.data.data];
+                }
+            }
+
+            if (trends.length > 0) {
+                const exp = trends[0];
                 if (catEl) catEl.textContent = exp.category || 'General';
                 if (titleEl) titleEl.innerHTML = formatHashtags(exp.title);
 

@@ -291,10 +291,39 @@ def logout():
 @auth_bp.route("/me", methods=["GET"])
 @token_required
 def get_me(current_user):
+    from app.models import Experience, Comment
+    user_data = current_user.to_dict()
+    
+    user_experiences = Experience.query.filter_by(author_id=current_user.user_id).all()
+    experiences_count = len(user_experiences)
+    solved_count = sum(1 for exp in user_experiences if exp.is_resolved)
+    open_count = experiences_count - solved_count
+    total_likes_received = sum(len(exp.likes) if hasattr(exp, 'likes') and exp.likes else 0 for exp in user_experiences)
+    total_replies_received = sum(len(exp.comments) if hasattr(exp, 'comments') and exp.comments else 0 for exp in user_experiences)
+
+    user_comments = Comment.query.filter_by(user_id=current_user.user_id).all()
+    comments_count = len(user_comments)
+    accepted_solutions_count = sum(1 for c in user_comments if getattr(c, 'is_accepted', False))
+    
+    reputation = (experiences_count * 10) + (total_likes_received * 15) + (comments_count * 5) + 5
+
+    user_data["stats"] = {
+        "problems_solved": experiences_count,
+        "total_queries": experiences_count,
+        "solved_queries": solved_count,
+        "open_queries": open_count,
+        "peers_helped": comments_count,
+        "total_answers": comments_count,
+        "accepted_solutions": accepted_solutions_count,
+        "total_likes_received": total_likes_received,
+        "total_replies_received": total_replies_received,
+        "reputation": reputation
+    }
+
     return jsonify({
         "success": True,
         "message": "User fetched successfully",
-        "data": current_user.to_dict()
+        "data": user_data
     }), 200
 
 

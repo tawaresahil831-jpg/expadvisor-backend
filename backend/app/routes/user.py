@@ -13,10 +13,21 @@ def get_user_profile(user_id):
     if not user:
         return jsonify({"success": False, "message": "User not found"}), 404
         
-    # Calculate stats
-    experiences_count = Experience.query.filter_by(author_id=user_id).count()
-    comments_count = Comment.query.filter_by(user_id=user_id).count()
+    # Calculate detailed stats
+    user_experiences = Experience.query.filter_by(author_id=user_id).all()
+    experiences_count = len(user_experiences)
+    solved_count = sum(1 for exp in user_experiences if exp.is_resolved)
+    open_count = experiences_count - solved_count
+    total_likes_received = sum(len(exp.likes) if hasattr(exp, 'likes') and exp.likes else 0 for exp in user_experiences)
+    total_replies_received = sum(len(exp.comments) if hasattr(exp, 'comments') and exp.comments else 0 for exp in user_experiences)
+
+    user_comments = Comment.query.filter_by(user_id=user_id).all()
+    comments_count = len(user_comments)
+    accepted_solutions_count = sum(1 for c in user_comments if getattr(c, 'is_accepted', False))
     
+    # Calculate reputation
+    reputation = (experiences_count * 10) + (total_likes_received * 15) + (comments_count * 5) + 5
+
     # Simple achievements logic
     achievements = []
     if experiences_count >= 1:
@@ -27,11 +38,21 @@ def get_user_profile(user_id):
         achievements.append("Master Mentor")
     if comments_count >= 1:
         achievements.append("Helper")
+    if accepted_solutions_count >= 1:
+        achievements.append("Verified Solver")
         
     user_data = user.to_dict()
     user_data["stats"] = {
         "problems_solved": experiences_count,
-        "peers_helped": comments_count
+        "total_queries": experiences_count,
+        "solved_queries": solved_count,
+        "open_queries": open_count,
+        "peers_helped": comments_count,
+        "total_answers": comments_count,
+        "accepted_solutions": accepted_solutions_count,
+        "total_likes_received": total_likes_received,
+        "total_replies_received": total_replies_received,
+        "reputation": reputation
     }
     user_data["achievements"] = achievements
 
@@ -123,4 +144,26 @@ def get_user_activity(user_id):
         "success": True,
         "message": "Activity fetched",
         "data": activity_map
+    }), 200
+
+@user_bp.route("/<int:user_id>/comments", methods=["GET"])
+def get_user_comments(user_id):
+    user = User.query.get(user_id)
+    if not user:
+        return jsonify({"success": False, "message": "User not found"}), 404
+        
+    comments = Comment.query.filter_by(user_id=user_id).order_by(Comment.created_at.desc()).all()
+    results = []
+    for c in comments:
+        c_dict = c.to_dict()
+        if c.experience:
+            c_dict["experience_title"] = c.experience.title
+            c_dict["experience_category"] = c.experience.category
+            c_dict["is_experience_resolved"] = c.experience.is_resolved
+        results.append(c_dict)
+        
+    return jsonify({
+        "success": True,
+        "message": "User comments fetched successfully",
+        "data": results
     }), 200

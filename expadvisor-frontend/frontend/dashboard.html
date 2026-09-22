@@ -125,6 +125,62 @@
         html.dark .border-white {
             border-color: #111827 !important;
         }
+
+        /* Colored badges and icon containers in dark mode */
+        html.dark .bg-blue-50, html.dark .bg-blue-100 {
+            background-color: rgba(37, 99, 235, 0.16) !important;
+            color: #93c5fd !important;
+            border-color: rgba(59, 130, 246, 0.28) !important;
+        }
+        html.dark .bg-indigo-50, html.dark .bg-indigo-100 {
+            background-color: rgba(99, 102, 241, 0.16) !important;
+            color: #a5b4fc !important;
+            border-color: rgba(99, 102, 241, 0.28) !important;
+        }
+        html.dark .bg-purple-50, html.dark .bg-purple-100 {
+            background-color: rgba(168, 85, 247, 0.16) !important;
+            color: #d8b4fe !important;
+            border-color: rgba(168, 85, 247, 0.28) !important;
+        }
+        html.dark .bg-violet-50, html.dark .bg-violet-100 {
+            background-color: rgba(139, 92, 246, 0.16) !important;
+            color: #c4b5fd !important;
+            border-color: rgba(139, 92, 246, 0.28) !important;
+        }
+        html.dark .bg-emerald-50, html.dark .bg-emerald-100 {
+            background-color: rgba(16, 185, 129, 0.16) !important;
+            color: #6ee7b7 !important;
+            border-color: rgba(16, 185, 129, 0.28) !important;
+        }
+        html.dark .bg-amber-50, html.dark .bg-amber-100 {
+            background-color: rgba(245, 158, 11, 0.16) !important;
+            color: #fcd34d !important;
+            border-color: rgba(245, 158, 11, 0.28) !important;
+        }
+        html.dark .bg-rose-50, html.dark .bg-rose-100 {
+            background-color: rgba(244, 63, 94, 0.16) !important;
+            color: #fda4af !important;
+            border-color: rgba(244, 63, 94, 0.28) !important;
+        }
+        html.dark .bg-sky-50, html.dark .bg-sky-100 {
+            background-color: rgba(14, 165, 233, 0.16) !important;
+            color: #7dd3fc !important;
+            border-color: rgba(14, 165, 233, 0.28) !important;
+        }
+        html.dark .bg-slate-200, html.dark .bg-slate-200\/70, html.dark .bg-slate-200\/80 {
+            background-color: #334155 !important;
+            color: #cbd5e1 !important;
+            border-color: #475569 !important;
+        }
+
+        /* Text colors for badges in dark mode */
+        html.dark .text-indigo-700, html.dark .text-indigo-600 { color: #a5b4fc !important; }
+        html.dark .text-blue-700, html.dark .text-blue-600 { color: #93c5fd !important; }
+        html.dark .text-emerald-700, html.dark .text-emerald-600 { color: #6ee7b7 !important; }
+        html.dark .text-purple-700, html.dark .text-purple-600 { color: #d8b4fe !important; }
+        html.dark .text-violet-700, html.dark .text-violet-600 { color: #c4b5fd !important; }
+        html.dark .text-amber-700, html.dark .text-amber-600 { color: #fcd34d !important; }
+        html.dark .text-rose-700, html.dark .text-rose-600 { color: #fda4af !important; }
     </style>
 
     <script>
@@ -1010,6 +1066,7 @@
                 const countEl = document.getElementById(`like-count-${id}`);
                 if (countEl) countEl.textContent = res.data.data.like_count;
                 if (btn) btn.classList.add('text-rose-500');
+                loadTrendingQuery();
             }
         }
 
@@ -1098,8 +1155,16 @@
             if (!container) return;
 
             const res = await apiRequest('/experiences/trending');
-            if (res.status === 200 && res.data.success && res.data.data && res.data.data.length > 0) {
-                const trends = res.data.data;
+            let trends = [];
+            if (res.status === 200 && res.data && res.data.success && res.data.data) {
+                if (Array.isArray(res.data.data)) {
+                    trends = res.data.data;
+                } else if (typeof res.data.data === 'object') {
+                    trends = [res.data.data];
+                }
+            }
+
+            if (trends.length > 0) {
                 const colors = ['bg-blue-600', 'bg-indigo-600', 'bg-purple-600'];
 
                 container.innerHTML = trends.map((exp, index) => {
@@ -1124,7 +1189,7 @@
                         <div class="flex items-center justify-between mb-2">
                             <div class="flex items-center gap-1.5 text-orange-600 font-bold text-[11px] uppercase tracking-wider">
                                 <span class="material-symbols-outlined text-[16px]">local_fire_department</span>
-                                <span>Trending #${index + 1}</span>
+                                <span>Trending ${trends.length > 1 ? '#' + (index + 1) : ''}</span>
                                 <span class="text-orange-300">·</span>
                                 <span class="text-orange-700 capitalize">${exp.category || 'General'}</span>
                             </div>
@@ -1138,7 +1203,7 @@
                                         Trending Discussion Scale
                                     </div>
                                     <p class="text-slate-300 text-[11px] leading-relaxed font-normal">
-                                        Highlights the hottest academic discussion in real-time, measured by recent comment velocity, active peer replies, and student upvotes.
+                                        Highlights the hottest academic discussion in real-time, measured by student upvotes, replies, and community engagement.
                                     </p>
                                 </div>
                             </div>

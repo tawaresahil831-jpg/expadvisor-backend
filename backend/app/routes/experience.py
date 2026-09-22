@@ -32,15 +32,19 @@ def get_trending_experience():
     try:
         all_experiences = Experience.query.all()
         if not all_experiences:
-            return jsonify({"success": True, "data": None}), 200
+            return jsonify({"success": True, "data": []}), 200
 
         def score(exp):
             views = exp.views or 0
             comments = len(exp.comments) if hasattr(exp, 'comments') and exp.comments else 0
             likes = len(exp.likes) if hasattr(exp, 'likes') and exp.likes else 0
-            return views + (comments * 3) + (likes * 2)
+            return (likes * 4) + (comments * 3) + views
 
-        sorted_experiences = sorted(all_experiences, key=score, reverse=True)
+        sorted_experiences = sorted(
+            all_experiences,
+            key=lambda exp: (score(exp), exp.created_at.timestamp() if exp.created_at else 0),
+            reverse=True
+        )
         top_trending = sorted_experiences[:3]
 
         trending_list = []
@@ -90,7 +94,7 @@ def get_experiences():
     try:
         per_page = int(request.args.get("per_page", 10))
         if per_page < 1: per_page = 10
-        if per_page > 50: per_page = 50
+        if per_page > 200: per_page = 200
     except ValueError:
         per_page = 10
 

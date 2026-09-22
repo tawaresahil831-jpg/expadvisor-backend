@@ -124,6 +124,62 @@
         html.dark .border-white {
             border-color: #111827 !important;
         }
+
+        /* Colored badges and icon containers in dark mode */
+        html.dark .bg-blue-50, html.dark .bg-blue-100 {
+            background-color: rgba(37, 99, 235, 0.16) !important;
+            color: #93c5fd !important;
+            border-color: rgba(59, 130, 246, 0.28) !important;
+        }
+        html.dark .bg-indigo-50, html.dark .bg-indigo-100 {
+            background-color: rgba(99, 102, 241, 0.16) !important;
+            color: #a5b4fc !important;
+            border-color: rgba(99, 102, 241, 0.28) !important;
+        }
+        html.dark .bg-purple-50, html.dark .bg-purple-100 {
+            background-color: rgba(168, 85, 247, 0.16) !important;
+            color: #d8b4fe !important;
+            border-color: rgba(168, 85, 247, 0.28) !important;
+        }
+        html.dark .bg-violet-50, html.dark .bg-violet-100 {
+            background-color: rgba(139, 92, 246, 0.16) !important;
+            color: #c4b5fd !important;
+            border-color: rgba(139, 92, 246, 0.28) !important;
+        }
+        html.dark .bg-emerald-50, html.dark .bg-emerald-100 {
+            background-color: rgba(16, 185, 129, 0.16) !important;
+            color: #6ee7b7 !important;
+            border-color: rgba(16, 185, 129, 0.28) !important;
+        }
+        html.dark .bg-amber-50, html.dark .bg-amber-100 {
+            background-color: rgba(245, 158, 11, 0.16) !important;
+            color: #fcd34d !important;
+            border-color: rgba(245, 158, 11, 0.28) !important;
+        }
+        html.dark .bg-rose-50, html.dark .bg-rose-100 {
+            background-color: rgba(244, 63, 94, 0.16) !important;
+            color: #fda4af !important;
+            border-color: rgba(244, 63, 94, 0.28) !important;
+        }
+        html.dark .bg-sky-50, html.dark .bg-sky-100 {
+            background-color: rgba(14, 165, 233, 0.16) !important;
+            color: #7dd3fc !important;
+            border-color: rgba(14, 165, 233, 0.28) !important;
+        }
+        html.dark .bg-slate-200, html.dark .bg-slate-200\/70, html.dark .bg-slate-200\/80 {
+            background-color: #334155 !important;
+            color: #cbd5e1 !important;
+            border-color: #475569 !important;
+        }
+
+        /* Text colors for badges in dark mode */
+        html.dark .text-indigo-700, html.dark .text-indigo-600 { color: #a5b4fc !important; }
+        html.dark .text-blue-700, html.dark .text-blue-600 { color: #93c5fd !important; }
+        html.dark .text-emerald-700, html.dark .text-emerald-600 { color: #6ee7b7 !important; }
+        html.dark .text-purple-700, html.dark .text-purple-600 { color: #d8b4fe !important; }
+        html.dark .text-violet-700, html.dark .text-violet-600 { color: #c4b5fd !important; }
+        html.dark .text-amber-700, html.dark .text-amber-600 { color: #fcd34d !important; }
+        html.dark .text-rose-700, html.dark .text-rose-600 { color: #fda4af !important; }
     </style>
 
     <script>
@@ -638,7 +694,7 @@
                 bannerWelcome.textContent = `${userRes.data.data.name.split(' ')[0]}'s Problem Archive`;
             }
 
-            const res = await apiRequest(`/experiences?author_id=${currentUserId}`);
+            const res = await apiRequest(`/experiences?author_id=${currentUserId}&per_page=200`);
             if (res.status === 200 && res.data.success) {
                 allQueries = res.data.data || [];
 
@@ -661,6 +717,16 @@
                 renderQueries();
             } else {
                 document.getElementById('problemFeed').innerHTML = '<div class="py-12 text-center text-rose-500 text-xs">Failed to load inquiries.</div>';
+            }
+        }
+
+        async function deleteMyProblem(id) {
+            if (!confirm('Are you sure you want to delete this query?')) return;
+            const res = await apiRequest(`/experiences/${id}`, { method: 'DELETE' });
+            if (res.status === 200 && res.data.success) {
+                loadMyProblems();
+            } else {
+                alert(res.data.message || 'Failed to delete query');
             }
         }
 
@@ -718,9 +784,14 @@
                                 ${exp.semester ? `<span class="bg-slate-100 text-slate-500 font-medium px-1.5 py-0.5 rounded text-[10px]">${exp.semester}</span>` : ''}
                                 <span class="text-slate-400 text-[11px]">· ${new Date(exp.created_at).toLocaleDateString()}</span>
                             </div>
-                            <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold ${exp.is_resolved ? 'bg-emerald-50 text-emerald-700' : 'bg-amber-50 text-amber-700'}">
-                                ${exp.is_resolved ? 'Solved' : 'Open'}
-                            </span>
+                            <div class="flex items-center gap-1.5">
+                                <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold ${exp.is_resolved ? 'bg-emerald-50 text-emerald-700' : 'bg-amber-50 text-amber-700'}">
+                                    ${exp.is_resolved ? 'Solved' : 'Open'}
+                                </span>
+                                <button onclick="event.stopPropagation(); deleteMyProblem(${exp.experience_id})" class="text-slate-400 hover:text-rose-600 p-1" title="Delete">
+                                    <span class="material-symbols-outlined text-[16px]">delete</span>
+                                </button>
+                            </div>
                         </div>
 
                         <h3 class="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors leading-snug">
