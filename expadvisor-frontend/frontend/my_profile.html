@@ -292,18 +292,48 @@
                         </div>
 
                         <!-- Name, Year Badge & College Subtitle cleanly below banner -->
-                        <div class="space-y-1.5 pb-0.5">
+                        <div class="space-y-2 pb-0.5">
                             <div class="flex items-center gap-2.5 flex-wrap">
                                 <h1 id="profileName" class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white leading-tight">Loading Name...</h1>
-                                <span id="profileYearBadge" class="text-xs font-bold uppercase bg-indigo-50 text-indigo-700 px-2.5 py-0.5 rounded-full border border-indigo-100">
+                                <span id="profileYearBadge" class="text-xs font-bold uppercase bg-indigo-50 text-indigo-700 dark:bg-indigo-900/50 dark:text-indigo-300 px-2.5 py-0.5 rounded-full border border-indigo-100 dark:border-indigo-800">
                                     1st Year
                                 </span>
                             </div>
-                            <div class="flex items-center gap-2 flex-wrap text-xs text-slate-500 font-medium">
+                            <div class="flex items-center gap-2 flex-wrap text-xs text-slate-500 dark:text-slate-400 font-medium">
                                 <p id="profileSubtitle">
                                     @username · College of Engineering
                                 </p>
                                 <div id="heroSocialBadges" class="flex items-center gap-1.5"></div>
+                            </div>
+
+                            <!-- Quick Stat Pills in Hero (Reputation & Achievements) -->
+                            <div class="flex items-center gap-2 pt-0.5 flex-wrap">
+                                <!-- Reputation Pill with Tooltip -->
+                                <div class="group/rep relative inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-purple-50 dark:bg-purple-950/60 border border-purple-200/80 dark:border-purple-800 text-purple-700 dark:text-purple-300 text-xs font-bold shadow-2xs cursor-pointer hover:bg-purple-100 dark:hover:bg-purple-900/60 transition-colors">
+                                    <span class="material-symbols-outlined text-[16px] text-purple-600 dark:text-purple-400" style="font-variation-settings: 'FILL' 1;">star</span>
+                                    <span><span id="hero-stat-reputation">0</span> Reputation</span>
+                                    <span class="material-symbols-outlined text-[14px] text-purple-400 dark:text-purple-500">info</span>
+
+                                    <!-- Hover Tooltip -->
+                                    <div class="hidden group-hover/rep:block absolute bottom-full left-0 mb-2 w-64 p-3 bg-slate-900 text-white text-xs rounded-xl shadow-2xl z-50 pointer-events-none border border-slate-700 animate-fadeIn">
+                                        <div class="font-bold text-purple-400 text-[10px] uppercase tracking-wider mb-1 flex items-center gap-1">
+                                            <span class="material-symbols-outlined text-[13px]">calculate</span>
+                                            Reputation Scale
+                                        </div>
+                                        <ul class="text-slate-300 text-[11px] space-y-1 pl-3.5 list-disc leading-relaxed">
+                                            <li><strong class="text-white">+10 pts</strong> for each query asked</li>
+                                            <li><strong class="text-white">+15 pts</strong> for each like received</li>
+                                            <li><strong class="text-white">+5 pts</strong> for each answer given</li>
+                                            <li><strong class="text-white">+25 pts</strong> for accepted solutions</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <!-- Badges Pill (Clickable) -->
+                                <button onclick="switchTab('badges')" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-amber-50 dark:bg-amber-950/60 border border-amber-200/80 dark:border-amber-800 text-amber-700 dark:text-amber-300 text-xs font-bold shadow-2xs hover:bg-amber-100 dark:hover:bg-amber-900/60 cursor-pointer transition-colors" title="View unlocked achievements">
+                                    <span class="material-symbols-outlined text-[16px] text-amber-600 dark:text-amber-400">military_tech</span>
+                                    <span><span id="hero-stat-badges">0</span> / 8 Badges</span>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -331,136 +361,27 @@
                 </div>
             </div>
 
-            <!-- ====== TOP 4-STAT STRIP (WITH INTERACTIVE HOVER SCALES) ====== -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <!-- Stat 1: Queries Asked -->
-                <div class="group relative bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center justify-between cursor-pointer hover:border-blue-200 hover:shadow-md transition-all">
-                    <div class="flex items-center gap-3.5">
-                        <div class="w-11 h-11 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
-                            <span class="material-symbols-outlined text-[22px]">feed</span>
-                        </div>
-                        <div>
-                            <div id="stat-queries-asked" class="text-xl font-bold text-slate-900 leading-none">0</div>
-                            <div class="text-xs text-slate-500 font-medium mt-1">Queries Asked</div>
-                        </div>
-                    </div>
-                    <span class="material-symbols-outlined text-[16px] text-slate-300 group-hover:text-blue-500 transition-colors">info</span>
-
-                    <!-- Hover Popover Explaining Measurement Scale -->
-                    <div class="hidden group-hover:block absolute bottom-full left-0 mb-2 w-64 p-3 bg-slate-900 text-white text-xs rounded-xl shadow-2xl z-50 pointer-events-none border border-slate-700 animate-fadeIn">
-                        <div class="font-bold text-blue-400 text-[10px] uppercase tracking-wider mb-1 flex items-center gap-1">
-                            <span class="material-symbols-outlined text-[13px]">straighten</span>
-                            Scale Measurement
-                        </div>
-                        <p class="text-slate-300 text-[11px] leading-relaxed">
-                            <strong class="text-white font-bold">+1 point</strong> for every coursework doubt, discussion topic, or inquiry you publish to the campus community.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Stat 2: Answers Given -->
-                <div class="group relative bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center justify-between cursor-pointer hover:border-indigo-200 hover:shadow-md transition-all">
-                    <div class="flex items-center gap-3.5">
-                        <div class="w-11 h-11 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0">
-                            <span class="material-symbols-outlined text-[22px]">check_circle</span>
-                        </div>
-                        <div>
-                            <div id="stat-answers-given" class="text-xl font-bold text-slate-900 leading-none">0</div>
-                            <div class="text-xs text-slate-500 font-medium mt-1">Answers Given</div>
-                        </div>
-                    </div>
-                    <span class="material-symbols-outlined text-[16px] text-slate-300 group-hover:text-indigo-500 transition-colors">info</span>
-
-                    <!-- Hover Popover Explaining Measurement Scale -->
-                    <div class="hidden group-hover:block absolute bottom-full left-0 mb-2 w-64 p-3 bg-slate-900 text-white text-xs rounded-xl shadow-2xl z-50 pointer-events-none border border-slate-700 animate-fadeIn">
-                        <div class="font-bold text-indigo-400 text-[10px] uppercase tracking-wider mb-1 flex items-center gap-1">
-                            <span class="material-symbols-outlined text-[13px]">straighten</span>
-                            Scale Measurement
-                        </div>
-                        <p class="text-slate-300 text-[11px] leading-relaxed">
-                            <strong class="text-white font-bold">+1 point</strong> for each helpful answer, coursework solution, or collaborative reply given to peer questions.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Stat 3: Reputation -->
-                <div class="group relative bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center justify-between cursor-pointer hover:border-purple-200 hover:shadow-md transition-all">
-                    <div class="flex items-center gap-3.5">
-                        <div class="w-11 h-11 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
-                            <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">star</span>
-                        </div>
-                        <div>
-                            <div id="stat-reputation" class="text-xl font-bold text-slate-900 leading-none">0</div>
-                            <div class="text-xs text-slate-500 font-medium mt-1">Reputation</div>
-                        </div>
-                    </div>
-                    <span class="material-symbols-outlined text-[16px] text-slate-300 group-hover:text-purple-500 transition-colors">info</span>
-
-                    <!-- Hover Popover Explaining Measurement Scale -->
-                    <div class="hidden group-hover:block absolute bottom-full right-0 sm:left-0 mb-2 w-64 p-3 bg-slate-900 text-white text-xs rounded-xl shadow-2xl z-50 pointer-events-none border border-slate-700 animate-fadeIn">
-                        <div class="font-bold text-purple-400 text-[10px] uppercase tracking-wider mb-1 flex items-center gap-1">
-                            <span class="material-symbols-outlined text-[13px]">calculate</span>
-                            Reputation Calculation Scale
-                        </div>
-                        <ul class="text-slate-300 text-[11px] space-y-1 pl-3.5 list-disc leading-relaxed">
-                            <li><strong class="text-white">+10 pts</strong> for each query asked</li>
-                            <li><strong class="text-white">+15 pts</strong> for each like received</li>
-                            <li><strong class="text-white">+25 pts</strong> for accepted solutions</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Stat 4: Badges (Clickable to view full achievements) -->
-                <div onclick="switchTab('badges')" class="group relative bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center justify-between cursor-pointer hover:border-violet-300 hover:shadow-md transition-all">
-                    <div class="flex items-center gap-3.5">
-                        <div class="w-11 h-11 rounded-xl bg-violet-50 text-violet-600 flex items-center justify-center shrink-0">
-                            <span class="material-symbols-outlined text-[22px]">military_tech</span>
-                        </div>
-                        <div>
-                            <div id="stat-badges" class="text-xl font-bold text-slate-900 leading-none">0</div>
-                            <div class="text-xs text-slate-500 font-medium mt-1 flex items-center gap-1">
-                                <span>Badges</span>
-                                <span class="text-[10px] text-violet-600 font-bold bg-violet-50 px-1.5 py-0.2 rounded">View</span>
-                            </div>
-                        </div>
-                    </div>
-                    <span class="material-symbols-outlined text-[16px] text-slate-300 group-hover:text-violet-500 transition-colors">info</span>
-
-                    <!-- Hover Popover Explaining Measurement Scale -->
-                    <div class="hidden group-hover:block absolute bottom-full right-0 mb-2 w-64 p-3 bg-slate-900 text-white text-xs rounded-xl shadow-2xl z-50 pointer-events-none border border-slate-700 animate-fadeIn">
-                        <div class="font-bold text-violet-400 text-[10px] uppercase tracking-wider mb-1 flex items-center gap-1">
-                            <span class="material-symbols-outlined text-[13px]">military_tech</span>
-                            Badge Milestone Tiers (Click to View)
-                        </div>
-                        <ul class="text-slate-300 text-[11px] space-y-1 pl-3.5 list-disc leading-relaxed">
-                            <li><strong>First Question:</strong> Post 1st question</li>
-                            <li><strong>Community Helper:</strong> Answer 1+ questions</li>
-                            <li><strong>Master Mentor:</strong> Answer 10+ questions</li>
-                            <li><strong>Verified Solver:</strong> Accepted solution</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
             <!-- ====== 2-COLUMN MAIN CONTENT GRID (8 cols Left / 4 cols Right) ====== -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
                 <!-- ====== LEFT COLUMN: ACTIVITY TABS (~66%) ====== -->
-                <section class="lg:col-span-8 bg-white rounded-2xl border border-slate-200/70 p-6 shadow-sm space-y-5">
+                <section class="lg:col-span-8 bg-white dark:bg-[#111827] rounded-2xl border border-slate-200/70 dark:border-slate-800 p-6 shadow-sm space-y-5">
                     
                     <!-- Tabs Header -->
-                    <div class="flex items-center gap-2 border-b border-slate-100 pb-3 flex-wrap">
-                        <button id="tabBtnQueries" onclick="switchTab('queries')" class="profile-tab-btn px-4 py-1.5 rounded-full text-xs font-bold bg-blue-600 text-white shadow-sm transition-all">
-                            My Queries
+                    <div class="flex items-center gap-2 border-b border-slate-100 dark:border-slate-800 pb-3 flex-wrap">
+                        <button id="tabBtnQueries" onclick="switchTab('queries')" class="profile-tab-btn px-4 py-1.5 rounded-full text-xs font-bold bg-blue-600 text-white shadow-sm transition-all flex items-center gap-1.5">
+                            <span>My Queries</span>
+                            <span id="tabCountQueries" class="px-1.5 py-0.2 rounded-full text-[10px] bg-white/20 text-white font-bold">0</span>
                         </button>
-                        <button id="tabBtnAnswers" onclick="switchTab('answers')" class="profile-tab-btn px-4 py-1.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">
-                            My Answers
+                        <button id="tabBtnAnswers" onclick="switchTab('answers')" class="profile-tab-btn px-4 py-1.5 rounded-full text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all flex items-center gap-1.5">
+                            <span>My Answers</span>
+                            <span id="tabCountAnswers" class="px-1.5 py-0.2 rounded-full text-[10px] bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 font-bold">0</span>
                         </button>
-                        <button id="tabBtnBadges" onclick="switchTab('badges')" class="profile-tab-btn px-4 py-1.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all flex items-center gap-1.5">
+                        <button id="tabBtnBadges" onclick="switchTab('badges')" class="profile-tab-btn px-4 py-1.5 rounded-full text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all flex items-center gap-1.5">
                             <span class="material-symbols-outlined text-[15px] text-amber-500">military_tech</span>
-                            <span>Badges (<span id="tabBadgesCounter">2/8</span>)</span>
+                            <span>Badges (<span id="tabBadgesCounter">0/8</span>)</span>
                         </button>
-                        <button id="tabBtnSaved" onclick="switchTab('saved')" class="profile-tab-btn px-4 py-1.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all flex items-center gap-1.5">
+                        <button id="tabBtnSaved" onclick="switchTab('saved')" class="profile-tab-btn px-4 py-1.5 rounded-full text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all flex items-center gap-1.5">
                             <span class="material-symbols-outlined text-[15px] text-blue-500">bookmark</span>
                             <span>Saved (<span id="savedTabCounter">0</span>)</span>
                         </button>
@@ -507,54 +428,95 @@
 
                 </section>
 
-                <!-- ====== RIGHT COLUMN: ABOUT WIDGETS (~34%) ====== -->
+                <!-- ====== RIGHT COLUMN: ABOUT & REPUTATION WIDGETS (~34%) ====== -->
                 <aside class="lg:col-span-4 space-y-6">
 
-                    <!-- Card 1: Academic Details -->
-                    <div class="bg-white rounded-2xl border border-slate-200/70 p-5 shadow-sm space-y-4">
-                        <h3 class="text-[11px] font-bold text-slate-400 tracking-wider uppercase">Academic Details</h3>
-                        
-                        <div class="space-y-3.5 text-xs">
-                            <!-- College -->
-                            <div class="flex items-start gap-3">
-                                <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
-                                    <span class="material-symbols-outlined text-[18px]">school</span>
+                    <!-- Card 1: Campus Reputation & Standing -->
+                    <div class="bg-white dark:bg-[#111827] rounded-2xl border border-slate-200/70 dark:border-slate-800 p-5 shadow-sm space-y-3.5">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-10 h-10 rounded-xl bg-purple-50 dark:bg-purple-950/70 text-purple-600 dark:text-purple-400 flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">star</span>
                                 </div>
                                 <div>
-                                    <div class="text-[10px] font-bold uppercase text-slate-400">College</div>
-                                    <div id="academicCollege" class="font-bold text-slate-900 mt-0.5">DYP College of Engineering</div>
+                                    <h3 class="text-xs font-bold text-slate-900 dark:text-white leading-tight">Campus Reputation</h3>
+                                    <div class="text-[10px] text-purple-600 dark:text-purple-400 font-semibold" id="reputationStandingBadge">Active Contributor</div>
                                 </div>
                             </div>
-
-                            <!-- Branch / Year -->
-                            <div class="flex items-start gap-3">
-                                <div class="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0">
-                                    <span class="material-symbols-outlined text-[18px]">badge</span>
-                                </div>
-                                <div>
-                                    <div class="text-[10px] font-bold uppercase text-slate-400">Branch / Year</div>
-                                    <div id="academicBranchYear" class="font-bold text-slate-900 mt-0.5">Computer Eng., 1st Yr</div>
-                                </div>
+                            <div class="text-right">
+                                <div id="stat-reputation" class="text-2xl font-black text-slate-900 dark:text-white leading-none">0</div>
+                                <div class="text-[9px] text-slate-400 uppercase font-bold tracking-wider mt-0.5">Points</div>
                             </div>
+                        </div>
 
-                            <!-- Email -->
-                            <div class="flex items-start gap-3">
-                                <div class="w-8 h-8 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
-                                    <span class="material-symbols-outlined text-[18px]">mail</span>
+                        <!-- Points breakdown scale -->
+                        <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800 space-y-2">
+                            <div class="flex items-center justify-between text-[10px] font-bold uppercase text-slate-400">
+                                <span>Scoring Rules</span>
+                                <span class="text-purple-600 dark:text-purple-400 font-semibold">Live Breakdown</span>
+                            </div>
+                            <div class="grid grid-cols-3 gap-1.5 text-center">
+                                <div class="bg-white dark:bg-slate-900 p-2 rounded-lg border border-slate-200/60 dark:border-slate-700/60">
+                                    <div class="font-bold text-slate-900 dark:text-white text-xs">+10</div>
+                                    <div class="text-[9px] text-slate-400 mt-0.5">Query</div>
                                 </div>
-                                <div>
-                                    <div class="text-[10px] font-bold uppercase text-slate-400">Email</div>
-                                    <div id="academicEmail" class="font-bold text-slate-900 mt-0.5 truncate max-w-[200px]">student@dyp.edu.in</div>
+                                <div class="bg-white dark:bg-slate-900 p-2 rounded-lg border border-slate-200/60 dark:border-slate-700/60">
+                                    <div class="font-bold text-slate-900 dark:text-white text-xs">+15</div>
+                                    <div class="text-[9px] text-slate-400 mt-0.5">Like</div>
+                                </div>
+                                <div class="bg-white dark:bg-slate-900 p-2 rounded-lg border border-slate-200/60 dark:border-slate-700/60">
+                                    <div class="font-bold text-slate-900 dark:text-white text-xs">+5</div>
+                                    <div class="text-[9px] text-slate-400 mt-0.5">Answer</div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Card 2: Links -->
-                    <div class="bg-white rounded-2xl border border-slate-200/70 p-5 shadow-sm space-y-3">
+                    <!-- Card 2: Academic Details -->
+                    <div class="bg-white dark:bg-[#111827] rounded-2xl border border-slate-200/70 dark:border-slate-800 p-5 shadow-sm space-y-4">
+                        <h3 class="text-[11px] font-bold text-slate-400 tracking-wider uppercase">Academic Details</h3>
+                        
+                        <div class="space-y-3.5 text-xs">
+                            <!-- College -->
+                            <div class="flex items-start gap-3">
+                                <div class="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-[18px]">school</span>
+                                </div>
+                                <div>
+                                    <div class="text-[10px] font-bold uppercase text-slate-400">College</div>
+                                    <div id="academicCollege" class="font-bold text-slate-900 dark:text-white mt-0.5">DYP College of Engineering</div>
+                                </div>
+                            </div>
+
+                            <!-- Branch / Year -->
+                            <div class="flex items-start gap-3">
+                                <div class="w-8 h-8 rounded-lg bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-[18px]">badge</span>
+                                </div>
+                                <div>
+                                    <div class="text-[10px] font-bold uppercase text-slate-400">Branch / Year</div>
+                                    <div id="academicBranchYear" class="font-bold text-slate-900 dark:text-white mt-0.5">Computer Eng., 1st Yr</div>
+                                </div>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="flex items-start gap-3">
+                                <div class="w-8 h-8 rounded-lg bg-purple-50 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-[18px]">mail</span>
+                                </div>
+                                <div>
+                                    <div class="text-[10px] font-bold uppercase text-slate-400">Email</div>
+                                    <div id="academicEmail" class="font-bold text-slate-900 dark:text-white mt-0.5 truncate max-w-[200px]">student@dyp.edu.in</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Links -->
+                    <div class="bg-white dark:bg-[#111827] rounded-2xl border border-slate-200/70 dark:border-slate-800 p-5 shadow-sm space-y-3">
                         <div class="flex items-center justify-between">
                             <h3 class="text-[11px] font-bold text-slate-400 tracking-wider uppercase">Links & Profiles</h3>
-                            <button onclick="openEditModal()" class="text-[11px] font-bold text-blue-600 hover:underline flex items-center gap-0.5">
+                            <button onclick="openEditModal()" class="text-[11px] font-bold text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-0.5">
                                 <span class="material-symbols-outlined text-[13px]">edit</span>
                                 Edit
                             </button>
@@ -562,60 +524,60 @@
                         
                         <div class="space-y-2.5">
                             <!-- GitHub -->
-                            <a id="linkGithub" href="#" target="_blank" class="w-full bg-slate-50 hover:bg-slate-100/80 border border-slate-200 rounded-xl p-2.5 text-xs font-semibold text-slate-800 flex items-center justify-between transition-colors group">
+                            <a id="linkGithub" href="#" target="_blank" class="w-full bg-slate-50 dark:bg-slate-800/60 hover:bg-slate-100/80 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700/80 rounded-xl p-2.5 text-xs font-semibold text-slate-800 dark:text-slate-200 flex items-center justify-between transition-colors group">
                                 <div class="flex items-center gap-2.5 min-w-0">
-                                    <div class="w-8 h-8 rounded-lg bg-slate-200/80 text-slate-800 flex items-center justify-center shrink-0">
+                                    <div class="w-8 h-8 rounded-lg bg-slate-200/80 dark:bg-slate-700 text-slate-800 dark:text-slate-200 flex items-center justify-center shrink-0">
                                         <span class="material-symbols-outlined text-[18px]">code</span>
                                     </div>
                                     <div class="min-w-0 text-left">
-                                        <div class="text-[11px] font-bold text-slate-900 leading-tight">GitHub</div>
+                                        <div class="text-[11px] font-bold text-slate-900 dark:text-white leading-tight">GitHub</div>
                                         <div id="linkGithubValue" class="text-[10px] text-slate-400 font-normal truncate max-w-[170px] sm:max-w-[200px]">Not connected</div>
                                     </div>
                                 </div>
                                 <div class="flex items-center gap-1.5 shrink-0">
-                                    <span id="linkGithubBadge" class="hidden text-[9px] font-bold bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full border border-emerald-200/70">Linked</span>
+                                    <span id="linkGithubBadge" class="hidden text-[9px] font-bold bg-emerald-50 text-emerald-700 dark:bg-emerald-900/60 dark:text-emerald-300 px-2 py-0.5 rounded-full border border-emerald-200/70 dark:border-emerald-700">Linked</span>
                                     <span class="material-symbols-outlined text-[15px] text-slate-400 group-hover:translate-x-0.5 transition-transform">open_in_new</span>
                                 </div>
                             </a>
 
                             <!-- LinkedIn -->
-                            <a id="linkLinkedin" href="#" target="_blank" class="w-full bg-slate-50 hover:bg-slate-100/80 border border-slate-200 rounded-xl p-2.5 text-xs font-semibold text-slate-800 flex items-center justify-between transition-colors group">
+                            <a id="linkLinkedin" href="#" target="_blank" class="w-full bg-slate-50 dark:bg-slate-800/60 hover:bg-slate-100/80 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700/80 rounded-xl p-2.5 text-xs font-semibold text-slate-800 dark:text-slate-200 flex items-center justify-between transition-colors group">
                                 <div class="flex items-center gap-2.5 min-w-0">
-                                    <div class="w-8 h-8 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center shrink-0">
+                                    <div class="w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-950/80 text-blue-700 dark:text-blue-300 flex items-center justify-center shrink-0">
                                         <span class="material-symbols-outlined text-[18px]">badge</span>
                                     </div>
                                     <div class="min-w-0 text-left">
-                                        <div class="text-[11px] font-bold text-slate-900 leading-tight">LinkedIn</div>
+                                        <div class="text-[11px] font-bold text-slate-900 dark:text-white leading-tight">LinkedIn</div>
                                         <div id="linkLinkedinValue" class="text-[10px] text-slate-400 font-normal truncate max-w-[170px] sm:max-w-[200px]">Not connected</div>
                                     </div>
                                 </div>
                                 <div class="flex items-center gap-1.5 shrink-0">
-                                    <span id="linkLinkedinBadge" class="hidden text-[9px] font-bold bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full border border-emerald-200/70">Linked</span>
+                                    <span id="linkLinkedinBadge" class="hidden text-[9px] font-bold bg-emerald-50 text-emerald-700 dark:bg-emerald-900/60 dark:text-emerald-300 px-2 py-0.5 rounded-full border border-emerald-200/70 dark:border-emerald-700">Linked</span>
                                     <span class="material-symbols-outlined text-[15px] text-slate-400 group-hover:translate-x-0.5 transition-transform">open_in_new</span>
                                 </div>
                             </a>
 
                             <!-- Portfolio -->
-                            <a id="linkPortfolio" href="#" target="_blank" class="w-full bg-slate-50 hover:bg-slate-100/80 border border-slate-200 rounded-xl p-2.5 text-xs font-semibold text-slate-800 flex items-center justify-between transition-colors group">
+                            <a id="linkPortfolio" href="#" target="_blank" class="w-full bg-slate-50 dark:bg-slate-800/60 hover:bg-slate-100/80 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700/80 rounded-xl p-2.5 text-xs font-semibold text-slate-800 dark:text-slate-200 flex items-center justify-between transition-colors group">
                                 <div class="flex items-center gap-2.5 min-w-0">
-                                    <div class="w-8 h-8 rounded-lg bg-indigo-100 text-indigo-700 flex items-center justify-center shrink-0">
+                                    <div class="w-8 h-8 rounded-lg bg-indigo-100 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 flex items-center justify-center shrink-0">
                                         <span class="material-symbols-outlined text-[18px]">public</span>
                                     </div>
                                     <div class="min-w-0 text-left">
-                                        <div class="text-[11px] font-bold text-slate-900 leading-tight">Portfolio</div>
+                                        <div class="text-[11px] font-bold text-slate-900 dark:text-white leading-tight">Portfolio</div>
                                         <div id="linkPortfolioValue" class="text-[10px] text-slate-400 font-normal truncate max-w-[170px] sm:max-w-[200px]">Not connected</div>
                                     </div>
                                 </div>
                                 <div class="flex items-center gap-1.5 shrink-0">
-                                    <span id="linkPortfolioBadge" class="hidden text-[9px] font-bold bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full border border-emerald-200/70">Linked</span>
+                                    <span id="linkPortfolioBadge" class="hidden text-[9px] font-bold bg-emerald-50 text-emerald-700 dark:bg-emerald-900/60 dark:text-emerald-300 px-2 py-0.5 rounded-full border border-emerald-200/70 dark:border-emerald-700">Linked</span>
                                     <span class="material-symbols-outlined text-[15px] text-slate-400 group-hover:translate-x-0.5 transition-transform">open_in_new</span>
                                 </div>
                             </a>
                         </div>
                     </div>
 
-                    <!-- Card 3: Skills -->
-                    <div class="bg-white rounded-2xl border border-slate-200/70 p-5 shadow-sm space-y-3">
+                    <!-- Card 4: Skills -->
+                    <div class="bg-white dark:bg-[#111827] rounded-2xl border border-slate-200/70 dark:border-slate-800 p-5 shadow-sm space-y-3">
                         <h3 class="text-[11px] font-bold text-slate-400 tracking-wider uppercase">Skills</h3>
                         
                         <div id="skillsPillContainer" class="flex flex-wrap gap-2 pt-0.5">
@@ -623,14 +585,14 @@
                         </div>
                     </div>
 
-                    <!-- Card 4: Community Badges & Milestones Showcase -->
-                    <div class="bg-white rounded-2xl border border-slate-200/70 p-5 shadow-sm space-y-3.5">
+                    <!-- Card 5: Community Badges & Milestones Showcase -->
+                    <div class="bg-white dark:bg-[#111827] rounded-2xl border border-slate-200/70 dark:border-slate-800 p-5 shadow-sm space-y-3.5">
                         <div class="flex items-center justify-between">
                             <div class="flex items-center gap-1.5">
                                 <span class="material-symbols-outlined text-[18px] text-amber-500">military_tech</span>
                                 <h3 class="text-[11px] font-bold text-slate-400 tracking-wider uppercase">Achievements</h3>
                             </div>
-                            <span id="rightBadgesProgress" class="text-[10px] font-bold bg-amber-50 text-amber-700 px-2 py-0.5 rounded-full border border-amber-100">
+                            <span id="rightBadgesProgress" class="text-[10px] font-bold bg-amber-50 text-amber-700 dark:bg-amber-900/60 dark:text-amber-300 px-2 py-0.5 rounded-full border border-amber-100 dark:border-amber-800">
                                 0 / 8 Unlocked
                             </span>
                         </div>
@@ -641,7 +603,7 @@
                         </div>
 
                         <!-- Button to open full badges tab -->
-                        <button onclick="switchTab('badges')" class="w-full py-2 px-3 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700 text-xs font-bold transition-colors flex items-center justify-center gap-1.5 border border-slate-200/80">
+                        <button onclick="switchTab('badges')" class="w-full py-2 px-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-bold transition-colors flex items-center justify-center gap-1.5 border border-slate-200/80 dark:border-slate-700">
                             <span>Explore All 8 Badges & Perks</span>
                             <span class="material-symbols-outlined text-[15px]">arrow_forward</span>
                         </button>
@@ -1155,10 +1117,12 @@
             const tabCounter = document.getElementById('tabBadgesCounter');
             const rightProgress = document.getElementById('rightBadgesProgress');
             const statBadges = document.getElementById('stat-badges');
+            const heroBadges = document.getElementById('hero-stat-badges');
 
             if (tabCounter) tabCounter.textContent = countText;
             if (rightProgress) rightProgress.textContent = `${countText} Unlocked`;
             if (statBadges) statBadges.textContent = unlockedCount;
+            if (heroBadges) heroBadges.textContent = unlockedCount;
         }
 
         function setupLink(elementId, valueId, badgeId, rawUrl, typeName) {
@@ -1226,7 +1190,10 @@
             const qRes = await apiRequest(`/experiences?author_id=${userId}&per_page=200`);
             if (qRes.status === 200 && qRes.data.success) {
                 userQueries = qRes.data.data || [];
-                document.getElementById('stat-queries-asked').textContent = userQueries.length;
+                const qStat = document.getElementById('stat-queries-asked');
+                if (qStat) qStat.textContent = userQueries.length;
+                const tabQ = document.getElementById('tabCountQueries');
+                if (tabQ) tabQ.textContent = userQueries.length;
                 renderQueriesFeed();
             }
 
@@ -1243,8 +1210,23 @@
             // Reputation: 10 pts per query, 15 pts per like received, 5 pts per answer given
             const reputation = (userQueries.length * 10) + (totalLikes * 15) + (totalAnswers * 5) + 5;
             
-            document.getElementById('stat-reputation').textContent = reputation;
-            document.getElementById('stat-answers-given').textContent = totalAnswers;
+            const repEl = document.getElementById('stat-reputation');
+            if (repEl) repEl.textContent = reputation;
+            const heroRepEl = document.getElementById('hero-stat-reputation');
+            if (heroRepEl) heroRepEl.textContent = reputation;
+
+            const repBadge = document.getElementById('reputationStandingBadge');
+            if (repBadge) {
+                if (reputation >= 150) repBadge.textContent = 'Senior Mentor';
+                else if (reputation >= 75) repBadge.textContent = 'Campus Mentor';
+                else if (reputation >= 25) repBadge.textContent = 'Rising Contributor';
+                else repBadge.textContent = 'Active Scholar';
+            }
+
+            const aStat = document.getElementById('stat-answers-given');
+            if (aStat) aStat.textContent = totalAnswers;
+            const tabA = document.getElementById('tabCountAnswers');
+            if (tabA) tabA.textContent = totalAnswers;
 
             // Recalculate badges with live queries and activity
             renderBadgesSystem();
@@ -1264,7 +1246,7 @@
             container.innerHTML = userQueries.map(exp => {
                 const initial = (currentUser.name || 'U').charAt(0).toUpperCase();
                 return `
-                    <div onclick="window.location.href='dashboard.html'" class="p-4 rounded-xl hover:bg-slate-50 transition-colors cursor-pointer group space-y-1.5">
+                    <div onclick="window.location.href='dashboard.html'" class="p-4 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-colors cursor-pointer group space-y-1.5">
                         <div class="flex items-center justify-between text-xs">
                             <div class="flex items-center gap-2">
                                 <div class="w-6 h-6 rounded-full bg-blue-600 text-white font-bold text-[10px] flex items-center justify-center">
@@ -1272,18 +1254,18 @@
                                 </div>
                                 <span class="text-slate-400 text-[11px]">${new Date(exp.created_at).toLocaleDateString()}</span>
                             </div>
-                            <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold ${exp.is_resolved ? 'bg-emerald-50 text-emerald-700' : 'bg-amber-50 text-amber-700'}">
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold ${exp.is_resolved ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300' : 'bg-amber-50 text-amber-700 dark:bg-amber-950/60 dark:text-amber-300'}">
                                 ${exp.is_resolved ? 'Solved' : 'Open'}
                             </span>
                         </div>
-                        <h4 class="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors leading-snug">
+                        <h4 class="text-sm font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-snug">
                             ${exp.title}
                         </h4>
-                        <p class="text-xs text-slate-500 line-clamp-1">${exp.content || ''}</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-1">${exp.content || ''}</p>
                         <div class="flex items-center justify-between pt-1 text-xs">
                             <div class="flex items-center gap-1.5">
-                                <span class="bg-slate-100 text-slate-600 font-medium px-2 py-0.5 rounded text-[10px] capitalize">${exp.category || 'General'}</span>
-                                ${exp.company ? `<span class="bg-slate-100 text-slate-600 font-medium px-2 py-0.5 rounded text-[10px]">${exp.company}</span>` : ''}
+                                <span class="bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-medium px-2 py-0.5 rounded text-[10px] capitalize">${exp.category || 'General'}</span>
+                                ${exp.company ? `<span class="bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-medium px-2 py-0.5 rounded text-[10px]">${exp.company}</span>` : ''}
                             </div>
                             <div class="flex items-center gap-3 text-slate-400 text-[11px]">
                                 <span class="flex items-center gap-1" title="Views">
@@ -1315,9 +1297,17 @@
                     if (t === tab) {
                         btn.className = 'profile-tab-btn px-4 py-1.5 rounded-full text-xs font-bold bg-blue-600 text-white shadow-sm transition-all flex items-center gap-1.5';
                         content.classList.remove('hidden');
+                        const badgePill = btn.querySelector('span[id^="tabCount"]');
+                        if (badgePill) {
+                            badgePill.className = 'px-1.5 py-0.2 rounded-full text-[10px] bg-white/20 text-white font-bold';
+                        }
                     } else {
-                        btn.className = 'profile-tab-btn px-4 py-1.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all flex items-center gap-1.5';
+                        btn.className = 'profile-tab-btn px-4 py-1.5 rounded-full text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all flex items-center gap-1.5';
                         content.classList.add('hidden');
+                        const badgePill = btn.querySelector('span[id^="tabCount"]');
+                        if (badgePill) {
+                            badgePill.className = 'px-1.5 py-0.2 rounded-full text-[10px] bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 font-bold';
+                        }
                     }
                 }
             });
