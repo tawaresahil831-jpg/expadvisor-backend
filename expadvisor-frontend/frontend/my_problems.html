@@ -345,17 +345,17 @@
                 </div>
             </div>
 
-            <!-- ====== TOP 4-STAT STRIP (WITH HOVER SCALE TOOLTIPS) ====== -->
+            <!-- ====== TOP 4-STAT STRIP (INTERACTIVE FILTER BUTTON CARDS) ====== -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <!-- Stat 1: Total Asked -->
-                <div class="group relative bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center justify-between cursor-pointer hover:border-blue-200 hover:shadow-md transition-all">
+                <!-- Stat 1: Queries Asked (Filters All) -->
+                <div id="statCardTotal" onclick="filterByStat('all')" class="stat-card group relative bg-white rounded-2xl p-4 border border-blue-500 ring-2 ring-blue-500/20 shadow-sm flex items-center justify-between cursor-pointer hover:shadow-md transition-all" title="Click to filter: All Queries">
                     <div class="flex items-center gap-3.5">
                         <div class="w-11 h-11 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
                             <span class="material-symbols-outlined text-[22px]">feed</span>
                         </div>
                         <div>
                             <div id="stat-total" class="text-xl font-bold text-slate-900 leading-none">0</div>
-                            <div class="text-xs text-slate-500 font-medium mt-1">Total Asked</div>
+                            <div class="text-xs text-slate-500 font-medium mt-1">Queries Asked</div>
                         </div>
                     </div>
                     <span class="material-symbols-outlined text-[16px] text-slate-300 group-hover:text-blue-500 transition-colors">info</span>
@@ -364,16 +364,16 @@
                     <div class="hidden group-hover:block absolute bottom-full left-0 mb-2 w-64 p-3 bg-slate-900 text-white text-xs rounded-xl shadow-2xl z-50 pointer-events-none border border-slate-700">
                         <div class="font-bold text-blue-400 text-[10px] uppercase tracking-wider mb-1 flex items-center gap-1">
                             <span class="material-symbols-outlined text-[13px]">feed</span>
-                            Total Asked Scale
+                            Queries Asked Scale
                         </div>
                         <p class="text-slate-300 text-[11px] leading-relaxed">
-                            Lifetime count of all academic questions, assignment doubts, and project inquiries you have asked in the community.
+                            Lifetime count of all coursework questions, assignment inquiries, and discussions you have posted.
                         </p>
                     </div>
                 </div>
 
-                <!-- Stat 2: Solved -->
-                <div class="group relative bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center justify-between cursor-pointer hover:border-emerald-200 hover:shadow-md transition-all">
+                <!-- Stat 2: Solved & Resolved (Filters Solved) -->
+                <div id="statCardSolved" onclick="filterByStat('solved')" class="stat-card group relative bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center justify-between cursor-pointer hover:border-emerald-300 hover:shadow-md transition-all" title="Click to filter: Solved Queries">
                     <div class="flex items-center gap-3.5">
                         <div class="w-11 h-11 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
                             <span class="material-symbols-outlined text-[22px]">check_circle</span>
@@ -392,13 +392,13 @@
                             Resolved Questions
                         </div>
                         <p class="text-slate-300 text-[11px] leading-relaxed">
-                            Questions where you or community moderators verified an answer as accepted, successfully closing the doubt.
+                            Questions where an answer was marked and verified as the accepted solution.
                         </p>
                     </div>
                 </div>
 
-                <!-- Stat 3: Awaiting Solutions -->
-                <div class="group relative bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center justify-between cursor-pointer hover:border-amber-200 hover:shadow-md transition-all">
+                <!-- Stat 3: Awaiting Solutions (Filters Open) -->
+                <div id="statCardOpen" onclick="filterByStat('open')" class="stat-card group relative bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center justify-between cursor-pointer hover:border-amber-300 hover:shadow-md transition-all" title="Click to filter: Awaiting Queries">
                     <div class="flex items-center gap-3.5">
                         <div class="w-11 h-11 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
                             <span class="material-symbols-outlined text-[22px]">pending</span>
@@ -417,20 +417,23 @@
                             Awaiting Solutions
                         </div>
                         <p class="text-slate-300 text-[11px] leading-relaxed">
-                            Questions that are still open, waiting for peer students or seniors to write explanations and code solutions.
+                            Questions that are currently open, waiting for peer explanations and code solutions.
                         </p>
                     </div>
                 </div>
 
-                <!-- Stat 4: Total Responses -->
-                <div class="group relative bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center justify-between cursor-pointer hover:border-purple-200 hover:shadow-md transition-all">
+                <!-- Stat 4: Reputation (Matching Profile) -->
+                <div id="statCardReputation" onclick="window.location.href='my_profile.html'" class="stat-card group relative bg-white rounded-2xl p-4 border border-slate-200/70 shadow-sm flex items-center justify-between cursor-pointer hover:border-purple-300 hover:shadow-md transition-all" title="View profile & badges">
                     <div class="flex items-center gap-3.5">
                         <div class="w-11 h-11 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
-                            <span class="material-symbols-outlined text-[22px]">chat_bubble</span>
+                            <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">star</span>
                         </div>
                         <div>
-                            <div id="stat-replies" class="text-xl font-bold text-slate-900 leading-none">0</div>
-                            <div class="text-xs text-slate-500 font-medium mt-1">Replies Received</div>
+                            <div id="stat-reputation" class="text-xl font-bold text-slate-900 leading-none">0</div>
+                            <div class="text-xs text-slate-500 font-medium mt-1 flex items-center gap-1">
+                                <span>Reputation</span>
+                                <span class="text-[9px] text-purple-600 font-bold bg-purple-50 px-1.5 py-0.2 rounded">Profile</span>
+                            </div>
                         </div>
                     </div>
                     <span class="material-symbols-outlined text-[16px] text-slate-300 group-hover:text-purple-500 transition-colors">info</span>
@@ -438,11 +441,11 @@
                     <!-- Hover Popover Explaining Metric -->
                     <div class="hidden group-hover:block absolute bottom-full right-0 mb-2 w-64 p-3 bg-slate-900 text-white text-xs rounded-xl shadow-2xl z-50 pointer-events-none border border-slate-700">
                         <div class="font-bold text-purple-400 text-[10px] uppercase tracking-wider mb-1 flex items-center gap-1">
-                            <span class="material-symbols-outlined text-[13px]">chat_bubble</span>
-                            Replies Received Scale
+                            <span class="material-symbols-outlined text-[13px]">calculate</span>
+                            Reputation Points
                         </div>
                         <p class="text-slate-300 text-[11px] leading-relaxed">
-                            The cumulative number of peer answers, code snippets, and guidance responses posted by other students to your questions.
+                            Your cumulative campus score calculated from queries posted (+10), likes received (+15), and peer solutions (+25).
                         </p>
                     </div>
                 </div>
@@ -454,25 +457,25 @@
                 <!-- ====== LEFT COLUMN: PROBLEM LIST (~68%) ====== -->
                 <section class="lg:col-span-8 bg-white rounded-2xl border border-slate-200/70 p-6 shadow-sm space-y-5">
 
-                    <!-- Section Header -->
-                    <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                    <!-- Section Header with Minimal Integrated Filter Tabs -->
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
                         <div class="flex items-center gap-2">
-                            <h2 class="text-lg font-bold text-slate-900">My Problem Archive</h2>
+                            <h2 class="text-base sm:text-lg font-bold text-slate-900">My Problem Archive</h2>
                             <span id="queryCountBadge" class="text-xs font-semibold bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full"></span>
                         </div>
-                    </div>
 
-                    <!-- Filter Tabs: All, Open, Solved -->
-                    <div class="flex flex-wrap gap-1.5 items-center">
-                        <button class="status-tab-btn px-3 py-1 rounded-full text-xs font-semibold bg-blue-600 text-white shadow-sm transition-all" data-status="all">
-                            All Inquiries
-                        </button>
-                        <button class="status-tab-btn px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all" data-status="open">
-                            Awaiting Solutions
-                        </button>
-                        <button class="status-tab-btn px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all" data-status="solved">
-                            Solved & Resolved
-                        </button>
+                        <!-- Minimal Matching Segmented Filter Tabs -->
+                        <div class="inline-flex items-center p-1 bg-slate-100 dark:bg-slate-800 rounded-xl gap-1 shrink-0">
+                            <button id="tabBtnAll" onclick="filterByStat('all')" class="status-tab-btn px-3 py-1 rounded-lg text-xs font-semibold bg-blue-600 text-white shadow-xs transition-all" data-status="all">
+                                All (<span id="tabCountAll">0</span>)
+                            </button>
+                            <button id="tabBtnOpen" onclick="filterByStat('open')" class="status-tab-btn px-3 py-1 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all" data-status="open">
+                                Awaiting (<span id="tabCountOpen">0</span>)
+                            </button>
+                            <button id="tabBtnSolved" onclick="filterByStat('solved')" class="status-tab-btn px-3 py-1 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all" data-status="solved">
+                                Solved (<span id="tabCountSolved">0</span>)
+                            </button>
+                        </div>
                     </div>
 
                     <!-- Problem Feed Container (Stacked Rows identical to Dashboard) -->
@@ -661,22 +664,48 @@
             renderQueries(val);
         });
 
-        // Tab Switching
-        const statusBtns = document.querySelectorAll('.status-tab-btn');
-        statusBtns.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                statusBtns.forEach(b => {
-                    b.classList.remove('bg-blue-600', 'text-white', 'shadow-sm', 'font-semibold');
-                    b.classList.add('bg-slate-100', 'text-slate-600', 'font-medium');
-                });
-                const target = e.currentTarget;
-                target.classList.remove('bg-slate-100', 'text-slate-600', 'font-medium');
-                target.classList.add('bg-blue-600', 'text-white', 'shadow-sm', 'font-semibold');
-
-                currentFilter = target.dataset.status;
-                renderQueries(document.getElementById('searchInput').value.toLowerCase().trim());
+        // Tab & Stat Card Filter Switching
+        function filterByStat(status) {
+            currentFilter = status;
+            
+            // Update segmented button pills in section header
+            const statusBtns = document.querySelectorAll('.status-tab-btn');
+            statusBtns.forEach(btn => {
+                if (btn.dataset.status === status) {
+                    btn.className = 'status-tab-btn px-3 py-1 rounded-lg text-xs font-semibold bg-blue-600 text-white shadow-xs transition-all';
+                } else {
+                    btn.className = 'status-tab-btn px-3 py-1 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all';
+                }
             });
-        });
+
+            // Update active ring on top stat cards
+            updateActiveStatCard(status);
+            renderQueries(document.getElementById('searchInput').value.toLowerCase().trim());
+        }
+
+        function updateActiveStatCard(status) {
+            const cardTotal = document.getElementById('statCardTotal');
+            const cardSolved = document.getElementById('statCardSolved');
+            const cardOpen = document.getElementById('statCardOpen');
+
+            [cardTotal, cardSolved, cardOpen].forEach(c => {
+                if (c) {
+                    c.classList.remove('border-blue-500', 'ring-2', 'ring-blue-500/20', 'border-emerald-500', 'ring-emerald-500/20', 'border-amber-500', 'ring-amber-500/20');
+                    c.classList.add('border-slate-200/70');
+                }
+            });
+
+            if (status === 'all' && cardTotal) {
+                cardTotal.classList.remove('border-slate-200/70');
+                cardTotal.classList.add('border-blue-500', 'ring-2', 'ring-blue-500/20');
+            } else if (status === 'solved' && cardSolved) {
+                cardSolved.classList.remove('border-slate-200/70');
+                cardSolved.classList.add('border-emerald-500', 'ring-2', 'ring-emerald-500/20');
+            } else if (status === 'open' && cardOpen) {
+                cardOpen.classList.remove('border-slate-200/70');
+                cardOpen.classList.add('border-amber-500', 'ring-2', 'ring-amber-500/20');
+            }
+        }
 
         // Load user problems
         async function loadMyProblems() {
@@ -702,12 +731,23 @@
                 const total = allQueries.length;
                 const solved = allQueries.filter(q => q.is_resolved).length;
                 const open = total - solved;
-                const totalReplies = allQueries.reduce((sum, q) => sum + (q.comments_count || 0), 0);
+                const totalLikes = allQueries.reduce((sum, q) => sum + (q.likes_count || 0), 0);
+                const peersHelped = userRes.data.data.stats ? (userRes.data.data.stats.peers_helped || userRes.data.data.stats.total_answers || 0) : 0;
+                const reputation = userRes.data.data.stats && userRes.data.data.stats.reputation ? userRes.data.data.stats.reputation : (total * 10 + totalLikes * 15 + peersHelped * 5 + 5);
 
                 document.getElementById('stat-total').textContent = total;
                 document.getElementById('stat-solved').textContent = solved;
                 document.getElementById('stat-open').textContent = open;
-                document.getElementById('stat-replies').textContent = totalReplies;
+                const repEl = document.getElementById('stat-reputation');
+                if (repEl) repEl.textContent = reputation;
+
+                // Sync counts on minimal segmented tab buttons
+                const cntAll = document.getElementById('tabCountAll');
+                const cntOpen = document.getElementById('tabCountOpen');
+                const cntSolved = document.getElementById('tabCountSolved');
+                if (cntAll) cntAll.textContent = total;
+                if (cntOpen) cntOpen.textContent = open;
+                if (cntSolved) cntSolved.textContent = solved;
 
                 // Resolution Rate Widget
                 const rate = total > 0 ? Math.round((solved / total) * 100) : 0;
