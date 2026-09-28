@@ -28,7 +28,6 @@ instance/
 
 # Vercel & Deployments
 .vercel/
-.vercelignore
 
 # IDE & Editor Files
 .vscode/

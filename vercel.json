@@ -1,0 +1,20 @@
+{
+  "framework": null,
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/", "destination": "/expadvisor-frontend/frontend/login.html" },
+    { "source": "/login", "destination": "/expadvisor-frontend/frontend/login.html" },
+    { "source": "/register", "destination": "/expadvisor-frontend/frontend/register.html" },
+    { "source": "/dashboard", "destination": "/expadvisor-frontend/frontend/dashboard.html" },
+    { "source": "/my_problems", "destination": "/expadvisor-frontend/frontend/my_problems.html" },
+    { "source": "/my_profile", "destination": "/expadvisor-frontend/frontend/my_profile.html" },
+    { "source": "/forgot_pass", "destination": "/expadvisor-frontend/frontend/forgot_pass.html" },
+    { "source": "/reset_password", "destination": "/expadvisor-frontend/frontend/reset_password.html" },
+    { "source": "/solve", "destination": "/expadvisor-frontend/frontend/solve.html" },
+    { "source": "/student_directory", "destination": "/expadvisor-frontend/frontend/student_directory.html" },
+    { "source": "/frontend/css/(.*)", "destination": "/expadvisor-frontend/frontend/css/$1" },
+    { "source": "/frontend/js/(.*)", "destination": "/expadvisor-frontend/frontend/js/$1" },
+    { "source": "/frontend/(.*)", "destination": "/expadvisor-frontend/frontend/$1" },
+    { "source": "/(.*)", "destination": "/expadvisor-frontend/$1" }
+  ]
+}
