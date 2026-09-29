@@ -1,3 +1,5 @@
+import math
+from datetime import datetime
 from flask import Blueprint, request, jsonify
 from sqlalchemy import or_
 from app.extensions import db
@@ -34,15 +36,45 @@ def get_trending_experience():
         if not all_experiences:
             return jsonify({"success": True, "data": []}), 200
 
+        now = datetime.utcnow()
+
         def score(exp):
             views = exp.views or 0
-            comments = len(exp.comments) if hasattr(exp, 'comments') and exp.comments else 0
-            likes = len(exp.likes) if hasattr(exp, 'likes') and exp.likes else 0
-            return (likes * 4) + (comments * 3) + views
+            comments_count = len(exp.comments) if hasattr(exp, 'comments') and exp.comments else 0
+            likes_count = len(exp.likes) if hasattr(exp, 'likes') and exp.likes else 0
 
+            # Calculate genuine engagement timestamp (creation, comments, likes - NOT passive page views)
+            activity_times = [exp.created_at] if exp.created_at else []
+            if hasattr(exp, 'comments') and exp.comments:
+                for c in exp.comments:
+                    if getattr(c, 'created_at', None):
+                        activity_times.append(c.created_at)
+            if hasattr(exp, 'likes') and exp.likes:
+                for l in exp.likes:
+                    if getattr(l, 'created_at', None):
+                        activity_times.append(l.created_at)
+
+            last_active = max(activity_times) if activity_times else (exp.created_at or now)
+
+            # Age in hours since last genuine community activity
+            age_hours = max(0.1, (now - last_active).total_seconds() / 3600.0)
+
+            # Log-scaled views to prevent runaway view loops from drowning out likes/comments
+            scaled_views = math.log1p(views) * 1.5
+
+            # Engagement points (Likes & Comments carry high community weight)
+            engagement = (likes_count * 5.0) + (comments_count * 4.0) + scaled_views
+
+            # Time decay (7-day half-life: 168 hours)
+            decay = 0.5 ** (age_hours / 168.0)
+            trending_score = engagement * decay
+
+            return (trending_score, last_active.timestamp() if last_active else 0)
+
+        # Sort by trending score desc, then by last_active desc
         sorted_experiences = sorted(
             all_experiences,
-            key=lambda exp: (score(exp), exp.created_at.timestamp() if exp.created_at else 0),
+            key=lambda exp: score(exp),
             reverse=True
         )
         top_trending = sorted_experiences[:3]

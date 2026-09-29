@@ -114,8 +114,11 @@
             background-color: #1a1625 !important;
             border-color: #4a2818 !important;
         }
-        html.dark #trendingTitle {
+        html.dark #trendingTitle, html.dark .bg-\[\#fff3ed\] h3 {
             color: #fed7aa !important;
+        }
+        html.dark .bg-\[\#fff3ed\] button {
+            color: #f1f5f9 !important;
         }
         html.dark .filter-cat-btn.bg-slate-100,
         html.dark .filter-status-btn.bg-slate-100 {
@@ -959,6 +962,8 @@
             const res = await apiRequest(`/experiences/${id}`);
             if (res.status === 200 && res.data.success) {
                 const exp = res.data.data;
+                window.allLoadedExperiences = window.allLoadedExperiences || {};
+                window.allLoadedExperiences[id] = exp;
                 document.getElementById('detailCategory').textContent = exp.category || 'General';
                 document.getElementById('detailTitle').innerHTML = formatHashtags(exp.title);
                 document.getElementById('detailMeta').textContent = `Posted by ${exp.author_name || 'Anonymous'} on ${new Date(exp.created_at).toLocaleDateString()}`;
@@ -1265,6 +1270,8 @@
             }
 
             if (trends.length > 0) {
+                window.allLoadedExperiences = window.allLoadedExperiences || {};
+                trends.forEach(e => { window.allLoadedExperiences[e.experience_id] = e; });
                 const colors = ['bg-blue-600', 'bg-indigo-600', 'bg-purple-600'];
 
                 container.innerHTML = trends.map((exp, index) => {

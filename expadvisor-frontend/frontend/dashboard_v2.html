@@ -713,6 +713,8 @@
             const res = await apiRequest(`/experiences/${id}`);
             if (res.status === 200 && res.data.success) {
                 const exp = res.data.data;
+                window.allLoadedExperiences = window.allLoadedExperiences || {};
+                window.allLoadedExperiences[id] = exp;
                 document.getElementById('detailCategory').textContent = exp.category || 'General';
                 document.getElementById('detailTitle').innerHTML = formatHashtags(exp.title);
                 document.getElementById('detailMeta').textContent = `Posted by ${exp.author_name || 'Anonymous'} on ${new Date(exp.created_at).toLocaleDateString()}`;
@@ -939,6 +941,8 @@
 
             if (trends.length > 0) {
                 const exp = trends[0];
+                window.allLoadedExperiences = window.allLoadedExperiences || {};
+                window.allLoadedExperiences[exp.experience_id] = exp;
                 if (catEl) catEl.textContent = exp.category || 'General';
                 if (titleEl) titleEl.innerHTML = formatHashtags(exp.title);
 
